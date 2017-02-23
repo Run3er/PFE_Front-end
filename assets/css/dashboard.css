@@ -7,9 +7,15 @@
 /** General **/
 
 	/* Miscellaneous */
+	html {
+		/*font-size: 6.25%;*/
+		/* TODO: Using pixels here because of external frameworks
+		 (bootstrap) using it, or dunno (chrome v56 disastrous display) */
+		font-size: 1px;
+	}
 	body {
 		/* Take navbar height into account with padding-top */
-		padding-top: 55px;
+		padding-top: 55rem;
 		background-color: #FDFCFC;
 	}
 	.navbar-fixed-top {
@@ -28,36 +34,25 @@
 	.glyphicon {
 		cursor: default;
 	}
-    .page-footer {
-		  /*padding: 2.5rem 0;*/
-		  color: #999;
-		  text-align: center;
-		  background-color: #f9f9f9;
-		  border-top: .05rem solid #e5e5e5;/*
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		left: 0;*/
-	}
 
-	/* Custom breakpoints (ExtraSmaller: smr-lv1 & Smaller: smr & ExtraLarge: xlg) */
+	/* Custom breakpoints (Smaller: smr (3 levels) & ExtraLarge: xlg) */
 	@media (min-width: 420px) and (max-width: 767px) {
 		.col-smr-lv1-6 {
 			width: 50%;
 			float: left;
 			position: relative;
-			min-height: 1px;
-			padding-right: 15px;
-			padding-left: 15px;	
+			min-height: 1rem;
+			padding-right: 15rem;
+			padding-left: 15rem;	
 		}
 	}
 	@media (min-width: 460px) and (max-width: 767px) {
 		.col-smr-lv2-4, .col-smr-lv2-8 {
 			float: left;
 			position: relative;
-			min-height: 1px;    
-			padding-right: 15px;
-			padding-left: 15px;				
+			min-height: 1rem;    
+			padding-right: 15rem;
+			padding-left: 15rem;				
 		}
 		.col-smr-lv2-4 {
 			width: 33.33333333%;		
@@ -71,18 +66,18 @@
 			width: 50%;
 			float: left;
 			position: relative;
-			min-height: 1px;  
-			padding-right: 15px;
-			padding-left: 15px;	  			
+			min-height: 1rem;  
+			padding-right: 15rem;
+			padding-left: 15rem;	  			
 		}
 	}
 	@media (min-width: 1605px) {
 		.col-xlg-3, .col-xlg-4, .col-xlg-6, .col-xlg-8, .col-xlg-9, .col-xlg-12 {
 			float: left;
 			position: relative;
-			min-height: 1px;
-			padding-right: 15px;
-			padding-left: 15px;	
+			min-height: 1rem;
+			padding-right: 15rem;
+			padding-left: 15rem;	
 		}
 		.col-xlg-3 {
 			width: 25%;
@@ -111,26 +106,26 @@
 	@media (min-width: 768px) {
 		.sidebar {
 			position: fixed;
-			top: 51px;
+			top: 51rem;
 			bottom: 0;
 			left: 0;
 			z-index: 1000;
 			display: block;
-			padding: 20px;
+			padding: 20rem;
 			overflow-x: hidden;
 			overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 			background-color: #323232;
-			border-right: 1px solid #303030;
+			border-right: 1rem solid #303030;
 		}
 	}
 	.sidebar .nav-sidebar {
-		margin-right: -21px; /* 20px padding + 1px border */
-		margin-bottom: 20px;
-		margin-left: -20px;
+		margin-right: -21rem; /* 20rem padding + 1rem border */
+		margin-bottom: 20rem;
+		margin-left: -20rem;
 	}
 	.sidebar .nav-sidebar > li > a {
-		padding-right: 20px;
-		padding-left: 20px;
+		padding-right: 20rem;
+		padding-left: 20rem;
 		color: #a4a4a4;
 	}
 	.sidebar .nav-sidebar > li > a:hover {
@@ -146,14 +141,14 @@
 
 	/* Main content view */
 	#main {
-		padding-top: 13px;
-		padding-left: 15px;
-		padding-right: : 15px;
+		padding-top: 13rem;
+		padding-left: 15rem;
+		padding-right: : 15rem;
 	}
 	@media (min-width: 768px) {
 		#main {
-			padding-right: 20px;
-			padding-left: 20px;
+			padding-right: 20rem;
+			padding-left: 20rem;
 		}
 	}
 
@@ -161,23 +156,23 @@
 	.panel.panel-indicator {
 		text-align: center;
 		border-radius: 0;
-		margin-bottom: 25px;
-		box-shadow: 0 5px 5px rgba(0,0,0,.05);
-		border-top: 2px solid #D5D5D5;
+		margin-bottom: 25rem;
+		box-shadow: 0 5rem 5rem rgba(0,0,0,.05);
+		border-top: 2rem solid #D5D5D5;
 	}
 	.panel.panel-indicator .panel-body {
-		margin-bottom: 20px;
+		margin-bottom: 20rem;
     	padding-top: 0;
     	padding-bottom: 0;
     }
     .panel.panel-indicator > h3:first-of-type {
-    	font-size: 1.35em;
-    	margin-top: 15px;
+    	font-size: 19rem;
+    	margin-top: 15rem;
     	color: #909090;
     }
 	@media (max-width: 767px) {
         .panel.panel-indicator > h3:first-of-type {
-        	font-size: 1.25em;
+        	font-size: 17rem;
         }
 	}
 	@media (min-width: 992px) and (max-width: 1150px),
@@ -192,21 +187,21 @@
 
 /** First Row & Measures **/
     #firstRow .panel.panel-indicator {
-    	height: 120px;
+    	height: 120rem;
     }
     #firstRow .panel.panel-indicator .panel-body {
-    	margin-top: -5px;
-    	margin-bottom: 15px;
+    	margin-top: -5rem;
+    	margin-bottom: 15rem;
     }
     #firstRow .indicator-measure {
-    	font-size: 3.5em;
+    	font-size: 49rem;
     }
     #firstRow #status-light {
-    	width: 50px;
-    	height: 50px;
+    	width: 50rem;
+    	height: 50rem;
     	border-radius: 50%;
     	background-color: #64CF6F;
-    	margin: 8px auto 0;
+    	margin: 8rem auto 0;
     	opacity: 0.87;
     	transition: opacity 250ms linear;
     }
@@ -215,26 +210,26 @@
     }
 	@media (max-width: 767px) {
 		#firstRow .panel.panel-indicator {
-			height: 90px;
+			height: 90rem;
 		}
         #firstRow .panel.panel-indicator > h3:first-of-type {
-        	margin-top: 7px;
-			margin-bottom: 0px;
+        	margin-top: 7rem;
+			margin-bottom: 0rem;
 		}
         #firstRow .panel.panel-indicator .panel-body {
         	margin-bottom: 0;
         }
         #firstRow .indicator-measure {
-        	font-size: 3.1em;
+        	font-size: 43rem;
         }
     	#firstRow #status-light {
-        	width: 47px;
-        	height: 47px;
+        	width: 47rem;
+        	height: 47rem;
     	}
 	}
 	@media (min-width: 992px) and (max-width: 1150px) {
         #firstRow .panel.panel-indicator > h3:first-of-type {
-        	margin-bottom: 2px;
+        	margin-bottom: 2rem;
         }    		
 	}
 
@@ -250,7 +245,7 @@
     	}
     	#firstRow .text-muted div {
     		display: block; /* TODO: How to make initial / default ??? */
-		 	margin-top: -15px;
+		 	margin-top: -15rem;
     	}
 	}
 	@media (min-width: 420px) and (max-width: 475px) {
@@ -259,15 +254,15 @@
     	}
     	#firstRow .text-muted div {
     		display: block; /* TODO: How to make initial / default ??? */
-		 	margin-top: -15px;
+		 	margin-top: -15rem;
     	}
 		#firstRow #last-update-indicator .panel, 
 		#firstRow #charge-consumed-indicator .panel {
-			height: 95px;
+			height: 95rem;
 		}
 		#firstRow #last-update-indicator .panel-body, 
 		#firstRow #charge-consumed-indicator .panel-body {
-			margin-top: -4px;
+			margin-top: -4rem;
 		}
 	}
 
@@ -276,26 +271,26 @@
 
 /** Advancement & SubProjects **/ 
 	#advancement-indicators .panel.panel-indicator {			
-    	height: 210px;
+    	height: 210rem;
 	} 	  	
 	#advancement-indicators .panel.panel-indicator .panel-body {
 		margin-bottom: 0;
 	}
 
     #advancement-indicators #advancement-measure {
-        height: 200px;
-        /*width: 200px !important;*/
-        margin-top: -30px;
+        height: 200rem;
+        /*width: 200rem !important;*/
+        margin-top: -30rem;
     }
     #advancement-indicators #advancement-measure svg {
-    	width: 190px;
-    	height: 190px;
+    	width: 190rem;
+    	height: 190rem;
         overflow: visible;
         display: inline;
         text-align: center;
     }
     #advancement-indicators #advancement-measure .nvd3.nv-pie .nv-pie-title {
-    	font-size: 43px !important;
+    	font-size: 43rem !important;
         /* TODO: beware maybe for there are many in inherited (could be wrong guess here) */
         font-family: inherit;
         fill: rgb(51, 51, 51);
@@ -309,14 +304,14 @@
 	}
 	@media (max-width: 430px) {
     	#advancement-indicators #advancement-chart {
-    		margin-left: -36px;
-    		padding-right: 6px;
+    		margin-left: -36rem;
+    		padding-right: 6rem;
     	}
 	}
 	#advancement-indicators #advancement-chart svg {
-		height: 185px;
-		margin-left: 20px;
-        margin-top: -8px;
+		height: 185rem;
+		margin-left: 20rem;
+        margin-top: -8rem;
 	}
     #advancement-indicators #advancement-chart .tick.zero text {
         fill: rgb(33, 33, 33);
@@ -330,13 +325,13 @@
 
 	@media (max-width: 767px) {  
 		#advancement-indicators .panel.panel-indicator {			
-        	height: 346px;
+        	height: 346rem;
 		}
         #advancement-indicators #advancement-measure {
-            margin-top: -26px;
+            margin-top: -26rem;
         }
     	#advancement-indicators #advancement-chart svg {
-            margin-top: -44px;
+            margin-top: -44rem;
     	}
 	}
 	@media (min-width: 460px) and (max-width: 560px) {	
@@ -344,8 +339,8 @@
         	margin-left: 1%;
 		} 	  	
         #advancement-indicators #advancement-measure {
-            margin-left: -24px;
-            margin-right: 15px;
+            margin-left: -24rem;
+            margin-right: 15rem;
             padding: 0;
         }
     	#advancement-indicators #advancement-chart {
@@ -355,21 +350,21 @@
 	}
 	@media (min-width: 460px) and (max-width: 767px) {
 		#advancement-indicators .panel.panel-indicator {			
-        	height: 210px;
+        	height: 210rem;
 		} 	  	
         #advancement-indicators #advancement-measure {
-            margin-top: -24px;
+            margin-top: -24rem;
         }
     	#advancement-indicators #advancement-chart svg {
-            margin-top: -8px;
+            margin-top: -8rem;
     	}
 	}
 	@media (min-width: 1605px) {
 		#advancement-indicators .panel.panel-indicator {			
-        	height: 416px;
+        	height: 416rem;
 		} 	  	
         #advancement-indicators #advancement-measure {
-            margin-top: -10px;
+            margin-top: -10rem;
         }
     	#advancement-indicators #advancement-chart svg {
             /*margin-top: px;*/
@@ -381,7 +376,7 @@
 		padding: 0;
 	}
 	#piesRow .panel.panel-indicator {
-		height: 126px;
+		height: 126rem;
 	}
 	*/
 
@@ -393,7 +388,7 @@
 		padding: 0;
 	}
 	#piesRow .panel.panel-indicator div {
-		height: 126px;
+		height: 126rem;
 	}
 	#piesRow .panel.panel-indicator .panel-body {
 		position: relative;
@@ -406,9 +401,9 @@
 	}
 
 	#piesRow svg {
-		width: 280px;
-		height: 170px;
-		margin-top: -32px;
+		width: 280rem;
+		height: 170rem;
+		margin-top: -32rem;
 	}
 	#piesRow .nvd3.nv-pie path {
 		  stroke: none;
@@ -423,9 +418,9 @@
 		  fill-opacity: 1;
 	}
 	#piesRow .nv-pieLabels .nv-label text {
-		transform: translate(0, 6px);
+		transform: translate(0, 6rem);
 		font-family: "Helvetica Neue", Helvetica, Arial ,"sans-serif";
-		font-size: 19px;
+		font-size: 19rem;
 		fill: rgb(51, 51, 51) !important;
 	}
 	#piesRow .nv-legend-text {
@@ -438,7 +433,7 @@
 		  top: 93%;
 		  color: #d9d9d9;	
 		  opacity: .9;
-		  font-size: 12px;
+		  font-size: 12rem;
 		  right: 9%;
 	}
 
@@ -447,35 +442,35 @@
 
 /** Dates & Milestones **/
 	#dates-col .panel.panel-indicator {
-		/*padding: 0 7px;*/
+		/*padding: 0 7rem;*/
 	}
 	@media (min-width: 1605px) {
 		#dates-col .panel.panel-indicator {
-			height: 561px;
+			height: 561rem;
 		}
 	}
 	#dates-col .panel.panel-indicator .panel-wrapper {
-		height: 355px;
-		margin-top: 16px;
-		margin-bottom: 20px;
-		padding: 0 15px 0 25px;
+		height: 355rem;
+		margin-top: 16rem;
+		margin-bottom: 20rem;
+		padding: 0 15rem 0 25rem;
 		overflow-x: unset;
 		overflow-y: auto;
 	}
 	#dates-col .panel.panel-indicator .panel-wrapper .panel-body {
-		border-left: 8px solid #eee9dc;
-		margin-left: 135px;
+		border-left: 8rem solid #eee9dc;
+		margin-left: 135rem;
 	}
 	@media (max-width: 991px) {
 		#dates-col .panel.panel-indicator .panel-wrapper {
 			height: auto;
-			max-height: 356px;
+			max-height: 356rem;
 		}
 	}
 	@media (max-width: 767px) {
 		#dates-col .panel.panel-indicator .panel-wrapper {
 			height: auto;
-			max-height: 326px;
+			max-height: 326rem;
 		}
 	}
 	#dates-col table {
@@ -483,7 +478,7 @@
 	}
 	#dates-col table td {
 		/*display: block;*/
-		padding: 2px 0;
+		padding: 2rem 0;
 	}
 	/*#dates-col table.hyphenate tr > td.text-left div {*/
 	#dates-col .hyphenate {
@@ -503,25 +498,35 @@
 		word-break: break-all;
 	}
 
+	#dates-col tr > td *:not(.circle) {
+		opacity: .87;
+    	transition: opacity 250ms linear;
+	}
+	#dates-col tr:hover > td *:not(.circle) {
+		opacity: 1;
+	}
+	#dates-col tr:first-of-type > td *:not(.circle) {
+		opacity: 1;
+	}
 	#dates-col .circle {
 		display: block;	
 		border-radius: 50%;
 	 	background-color: #7DD786;
     	transition: background-color 200ms linear;
     	position: absolute;/*
-		border: 4px solid #e7dfcc;
-		width: 17px;
-		height: 17px;
-    	top: 13px;*/
-		border: 3px solid #e7dfcc;
-		width: 16px;
-		height: 16px;
-    	top: 12px;
-    	left: -11px;
+		border: 4rem solid #e7dfcc;
+		width: 17rem;
+		height: 17rem;
+    	top: 13rem;*/
+		border: 3rem solid #e7dfcc;
+		width: 16rem;
+		height: 16rem;
+    	top: 12rem;
+    	left: -11rem;
 	}
 	@-moz-document url-prefix() {    		
     	#dates-col .circle {
-        	left: -14px;
+        	left: -14rem;
     	}
 	}
 	#dates-col tr:hover .circle {
@@ -536,78 +541,67 @@
 	}
 
 	#dates-col tr > td.text-left.year-block {
-		/*padding: 2px 0 1px;*/
+		/*padding: 2rem 0 1rem;*/
 	}
 	#dates-col tr > td.text-left.year-block div {
 		  display: block;
 		  border-radius: 16%;
 		  color: #999999;
 		  font-weight: bold;
-		  margin-left: -21px;
+		  margin-left: -21rem;
 		  background-color: #e7dfcc;
 		  opacity: 1;/*
-		  border: 1px solid #e7dfcc;
-		  font-size: 14px;
-		  padding: 0 0 0 3px;
-		  width: 40px;*/
-		  border: 1px solid #e7dfcc;
-		  font-size: 12px;
+		  border: 1rem solid #e7dfcc;
+		  font-size: 14rem;
+		  padding: 0 0 0 3rem;
+		  width: 40rem;*/
+		  border: 1rem solid #e7dfcc;
+		  font-size: 12rem;
 		  text-align: center;
-		  line-height: 14px;
-		  width: 36px;
+		  line-height: 14rem;
+		  width: 36rem;
 	}
 
 	#dates-col tr > td.text-left {
-        font-size: 1.35em;
+        font-size: 19rem;
 		color: #444;
-		border-left: 6px solid #e7dfcc; /* e9e3d2 */
+		border-left: 6rem solid #e7dfcc; /* e9e3d2 */
 		position: relative;
 	}
 	@media (min-width: 1605px) {
 		#dates-col tr > td.text-left {
-		    font-size: 1.4em;
+		    font-size: 19rem;
 		}
 	}
 	#dates-col tr:first-of-type > td.text-left::before, 
 	#dates-col tr:last-of-type > td.text-left::before {
 		content: "";
 		/* width large enough to resolve X-browser discrepancies */
-		width: 18px;
+		width: 18rem;
 		background-color: #fff;
 		position: absolute;
-		left: -12px;
+		left: -12rem;
 	}
 	#dates-col tr:first-of-type > td.text-left::before {
-		height: 14px;
+		height: 14rem;
 		top: 0;
 	}
 	#dates-col tr:last-of-type > td.text-left::before {
-		height: calc(100% - 26px);
+		height: calc(100% - 26rem);
 		bottom: 0;
 	}
 	#dates-col td.text-left div {
-	 	margin-top: 4px;
-	 	margin-left: 15px;
+	 	margin-top: 4rem;
+	 	margin-left: 15rem;
 	}
 
 	#dates-col td.text-muted div {
 		/* correct IE display explicitly needs following */
-		width: 44px;
+		min-width: 48rem;
 	}
 	#dates-col td.text-muted {
 		display: block;
-		font-size: 1.25em;
-		margin-top: 5px;
-		margin-right: 15px;
-	}
-
-	#dates-col tr > td *:not(.circle) {
-		opacity: .87;
-    	transition: opacity 250ms linear;
-	}
-	#dates-col tr:hover > td *:not(.circle) {
-		opacity: 1;
-	}
-	#dates-col tr:first-of-type > td *:not(.circle) {
-		opacity: 1;
+		font-size: 18rem;
+		margin-top: 5rem;
+		margin-right: 15rem;
 	}

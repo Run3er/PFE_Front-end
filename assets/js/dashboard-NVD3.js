@@ -174,7 +174,7 @@ nv.addGraph(function() {
         .call(chart);
 
     // LISTEN TO WINDOW RESIZE
-    // nv.utils.windowResize(chart1.update);
+    // nv.utils.windowResize(chart.update);
     // LISTEN TO CLICK EVENTS ON SLICES OF THE PIE/DONUT
     // chart.pie.dispatch.on('elementClick', function() {
     //     code...
@@ -192,7 +192,7 @@ nv.addGraph(function() {
     // });
     // OTHER EVENTS DISPATCHED BY THE PIE INCLUDE: elementMouseover, elementMouseout, elementMousemove
     // @see nv.models.pie
-    return chart1;
+    return chart;
 });
 
 
