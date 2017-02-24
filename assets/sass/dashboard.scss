@@ -1,0 +1,544 @@
+/*
+ *	Dashboard styling
+ *
+ */
+
+// Global variables
+$body-bg-color: #FDFCFC;
+
+
+
+
+/*=============== General ===============*/
+	
+	/* Navbar & Sidebar */
+	@import 'navbar-sidebar';
+
+	/* Miscellaneous */
+	html {
+		font-size: 62.5%;
+		/* TODO: Using pixels here because of external 
+				frameworks (bootstrap) using it */
+		/*font-size: 1px;*/
+	}
+	body {
+		/* Take navbar height into account with padding-top */
+		padding-top: 5.5rem;
+		background-color: $body-bg-color;
+	}
+	.nvd3 text {
+		font: inherit {
+			family: calibri;
+		}
+	}
+	#measure-chart-indicators-col {
+		padding: 0;
+	}
+	#chart-indicators {
+		padding: 0;
+	}
+	.glyphicon {
+		cursor: default;
+	}
+
+	/* Custom breakpoints (Smaller: smr (3 levels) & ExtraLarge: xlg) */
+	$breakpoint-styled-with-width-of: "
+			float: left;
+			position: relative;
+			min-height: 1rem;
+			padding-right: 1.5rem;
+			padding-left: 1.5rem; 
+			width";
+	@media (min-width: 420px) and (max-width: 767px) {
+		.col-smr-lv1-6 {
+			#{$breakpoint-styled-with-width-of}: 50%;
+		}
+	}
+	@media (min-width: 460px) and (max-width: 767px) {
+		// .col-smr-lv2-4, .col-smr-lv2-8 {
+		//	 float: left;
+		//	 position: relative;
+		//	 min-height: 1rem;		
+		//	 padding-right: 15rem;
+		//	 padding-left: 15rem;				
+		// }
+		.col-smr-lv2-4 {
+			#{$breakpoint-styled-with-width-of}: 33.33333333%;		
+		}
+		.col-smr-lv2-8 {
+			#{$breakpoint-styled-with-width-of}: 66.66666666%;		
+		}
+	}
+	@media (min-width: 590px) and (max-width: 767px) {
+		.col-smr-lv3-6 {
+			#{$breakpoint-styled-with-width-of}: 50%;
+		}
+	}
+	@media (min-width: 1605px) {
+		// .col-xlg-3, .col-xlg-4, .col-xlg-6, .col-xlg-8, .col-xlg-9, .col-xlg-12 {
+		//	 float: left;
+		//	 position: relative;
+		//	 min-height: 1rem;
+		//	 padding-right: 15rem;
+		//	 padding-left: 15rem;	
+		// }
+		.col-xlg-3 {
+			#{$breakpoint-styled-with-width-of}: 25%;
+		}
+		.col-xlg-4 {
+			#{$breakpoint-styled-with-width-of}: 33.33333333%;
+		} 
+		.col-xlg-6 {
+			#{$breakpoint-styled-with-width-of}: 50%;
+		} 
+		.col-xlg-8 {
+			#{$breakpoint-styled-with-width-of}: 66.66666666%;
+		} 
+		.col-xlg-9 {
+			#{$breakpoint-styled-with-width-of}: 75%;
+		}
+		.col-xlg-12 {
+			#{$breakpoint-styled-with-width-of}: 100%;
+		}
+	}
+	
+	/* Main content view */
+	#main {
+		padding: {
+			top: 1.3rem;
+			left: 1.5rem;
+			right: 1.5rem;
+		}
+		@media (min-width: 768px) {
+			padding-right: 2.0rem;
+			padding-left: 2.0rem;
+		}
+	}
+
+	/* Panel Indicators */
+	.panel.panel-indicator {
+		text-align: center;
+		border-radius: 0;
+		margin-bottom: 2.5rem;
+		box-shadow: 0 0.5rem 0.5rem rgba(0,0,0,.05);
+		border-top: 0.2rem solid #D5D5D5;
+		.panel-body {
+			margin-bottom: 2.0rem;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+    }
+    .indicator-title {
+        font-size: 1.9rem;
+        margin-top: 1.5rem;
+        color: #909090;
+        @media (max-width: 767px) {
+            font-size: 1.7rem;
+        }
+        @media (min-width: 992px) and (max-width: 1150px),
+                (min-width: 420px) and (max-width: 500px) {
+            & span {
+                display: none;
+            }
+        }
+    }
+
+
+
+
+/*=============== First Row & Measures ===============*/
+	#firstRow {
+		.panel.panel-indicator {
+			height: 12.0rem;
+            @media (max-width: 767px) {
+                height: 9.0rem;
+            }
+			.panel-body {
+				margin-top: -0.5rem;
+				margin-bottom: 1.5rem;
+                @media (max-width: 767px) {
+                    margin-bottom: 0;
+                }
+			}
+        }
+        #last-update-indicator, #charge-consumed-indicator {
+            @media (min-width: 420px) and (max-width: 475px) {
+                .panel {
+                    height: 9.5rem;
+                }
+                .panel-body {
+                    margin-top: -.4rem;
+                }
+            }
+        }
+        .indicator-title {
+            @media (max-width: 767px) {
+                margin-top: 0.7rem;
+                margin-bottom: 0.0rem;
+            }
+            @media (min-width: 992px) and (max-width: 1150px) {
+                margin-bottom: 0.2rem;
+            }
+        }
+		.indicator-measure {
+			font-size: 4.9rem;
+            @media (max-width: 767px) {
+                font-size: 4.3rem;
+            }
+		}
+		#status-light {
+			width: 5.0rem;
+			height: 5.0rem;
+			border-radius: 50%;
+			background-color: #64CF6F;
+			margin: 0.8rem auto 0;
+			opacity: 0.87;
+			transition: opacity 250ms linear;
+			&:hover {
+				opacity: 1;
+			}
+            @media (max-width: 767px) {
+                width: 4.7rem;
+                height: 4.7rem;
+            }
+		}
+
+    	.indicator-measure-minor {
+            span {
+        		display: visible;
+                @media (min-width: 992px) and (max-width: 1150px), 
+                        (min-width: 420px) and (max-width: 475px) {
+                    display: none;
+                }
+            }
+            div {
+        		display: none;
+                @media (min-width: 992px) and (max-width: 1150px), 
+                        (min-width: 420px) and (max-width: 475px) {
+                    display: block; /* TODO: How to make initial / default ??? */
+                    margin-top: -1.5rem;
+                }
+            }
+    	}
+    }
+
+
+
+
+/*=============== Advancement & SubProjects ===============*/ 
+    #advancement-indicators {
+    	.panel.panel-indicator {			
+            height: 21.0rem;
+            @media (max-width: 767px) { 
+                height: 34.6rem;
+            }
+            @media (min-width: 460px) and (max-width: 767px) {
+                height: 21.0rem;
+            }       
+            @media (min-width: 1605px) {
+                height: 41.6rem;
+            }       
+            .panel-body {
+                margin-bottom: 0;
+                @media (min-width: 460px) and (max-width: 560px) {  
+                    margin-left: 1%;
+                }            
+            }
+    	}
+		#advancement-measure {
+			height: 20.0rem;
+			/*width: 20.0rem !important;*/
+			margin-top: -3.0rem;
+            @media (max-width: 767px) { 
+                margin-top: -2.6rem;
+            }
+            @media (min-width: 460px) and (max-width: 560px) {
+                margin-left: -2.4rem;
+                margin-right: 1.5rem;
+                padding: 0;
+            }       
+            @media (min-width: 460px) and (max-width: 767px) {
+                margin-top: -2.4rem;                
+            }
+            @media (min-width: 1605px) {
+                margin-top: -1.0rem;
+            }       
+            svg {
+                width: 19.0rem;
+                height: 19.0rem;
+                    overflow: visible;
+                    display: inline;
+                    text-align: center;
+    		}
+            .nvd3.nv-pie {
+                .nv-pie-title {
+                    font-size: 4.3rem !important;
+                    /* TODO: beware maybe for there are many in inherited (could be wrong guess here) */
+                    font-family: inherit;
+                    fill: rgb(51, 51, 51);
+                }
+                path {
+                        /*stroke: none;*/
+                }
+            }
+		}
+    	#advancement-chart {
+    		/*overflow: hidden;*/
+            @media (max-width: 430px) {
+                margin-left: -3.6rem;
+                padding-right: 0.6rem;
+            }
+            @media (min-width: 460px) and (max-width: 560px) {
+                padding: 0;
+            }   
+            svg {
+                height: 18.5rem;
+                margin-left: 2.0rem;
+                margin-top: -.8rem;
+                @media (max-width: 767px) { 
+                    margin-top: -4.4rem;
+                }    
+                @media (min-width: 460px) and (max-width: 767px) {
+                    margin-top: -0.8rem;              
+                }
+                @media (min-width: 1605px) {
+                    /*margin-top: px;*/
+                }       
+            }
+            .nvd3 .nv-axis {
+                &.nv-x text {
+                    fill: rgb(33, 33, 33);
+                    font-weight: bold;
+                }
+                /* &.nv-x line,  */
+                &.nv-y line {
+                    display: none;
+                }
+        	}
+    	}
+    }
+
+
+
+/*=============== Pies' Row ===============*/
+	#piesRow {
+		padding: 0;
+	}
+	#piesRow .panel.panel-indicator div {
+		height: 12.6rem;
+	}
+	#piesRow .panel.panel-indicator .panel-body {
+		position: relative;
+	}
+	#piesRow .panel.panel-indicator .panel-body > div {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	#piesRow svg {
+		width: 28.0rem;
+		height: 17.0rem;
+		margin-top: -3.2rem;
+	}
+	#piesRow .nvd3.nv-pie path {
+			stroke: none;
+	}
+	#piesRow .nvd3.nv-pie .nv-slice path {
+			fill-opacity: .87;
+	}/*
+	#piesRow .nvd3.nv-pie:hover path {
+			fill-opacity: .87;
+	}*/
+	#piesRow .nvd3.nv-pie .nv-slice.hover path {
+			fill-opacity: 1;
+	}
+	#piesRow .nv-pieLabels .nv-label text {
+		transform: translate(0, 0.6rem);
+		font-family: "Helvetica Neue", Helvetica, Arial ,"sans-serif";
+		font-size: 1.9rem;
+		fill: rgb(51, 51, 51) !important;
+	}
+	#piesRow .nv-legend-text {
+		font-size: 100%;
+		fill: rgb(65, 65, 65);
+	}
+
+	#piesRow .glyphicon.glyphicon-filter {
+			position: absolute;
+			top: 93%;
+			color: #d9d9d9; 
+			opacity: .9;
+			font-size: 1.2rem;
+			right: 9%;
+	}
+
+
+
+
+/*=============== Dates & Milestones ===============*/
+	#dates-col .panel.panel-indicator {
+		/*padding: 0 0.7rem;*/
+	}
+	@media (min-width: 1605px) {
+		#dates-col .panel.panel-indicator {
+			height: 56.1rem;
+		}
+	}
+	#dates-col .panel.panel-indicator .panel-wrapper {
+		height: 35.5rem;
+		margin-top: 1.6rem;
+		margin-bottom: 2.0rem;
+		padding: 0 1.5rem 0 2.5rem;
+		overflow-x: unset;
+		overflow-y: auto;
+	}
+	#dates-col .panel.panel-indicator .panel-wrapper .panel-body {
+		border-left: 0.8rem solid #eee9dc;
+		margin-left: 13.5rem;
+	}
+	@media (max-width: 991px) {
+		#dates-col .panel.panel-indicator .panel-wrapper {
+			height: auto;
+			max-height: 35.6rem;
+		}
+	}
+	@media (max-width: 767px) {
+		#dates-col .panel.panel-indicator .panel-wrapper {
+			height: auto;
+			max-height: 32.6rem;
+		}
+	}
+	#dates-col table {
+		margin: auto;
+	}
+	#dates-col table td {
+		/*display: block;*/
+		padding: 0.2rem 0;
+	}
+	/*#dates-col table.hyphenate tr > td.text-left div {*/
+	#dates-col .hyphenate {
+		overflow-wrap: break-word;
+		word-wrap: break-word;
+		-ms-word-break: break-all;
+		word-break: break-word;
+		-ms-hyphens: auto;
+		-moz-hyphens: auto;
+		-webkit-hyphens: auto;
+		hyphens: auto;
+	}
+	/* Restrict targetting to Edge */
+	_:-ms-lang(x), _::-webkit-meter-bar,
+	#dates-col .hyphenate {
+		/* Avoid Edge hyphenation (overflow prob.) */
+		word-break: break-all;
+	}
+
+	#dates-col tr > td *:not(.circle) {
+		opacity: .87;
+			transition: opacity 250ms linear;
+	}
+	#dates-col tr:hover > td *:not(.circle) {
+		opacity: 1;
+	}
+	#dates-col tr:first-of-type > td *:not(.circle) {
+		opacity: 1;
+	}
+	#dates-col .circle {
+		display: block; 
+		border-radius: 50%;
+		background-color: #7DD786;
+			transition: background-color 200ms linear;
+			position: absolute;/*
+		border: 0.4rem solid #e7dfcc;
+		width: 1.7rem;
+		height: 1.7rem;
+			top: 1.3rem;*/
+		border: 0.3rem solid #e7dfcc;
+		width: 1.6rem;
+		height: 1.6rem;
+			top: 1.2rem;
+			left: -1.1rem;
+	}
+	@-moz-document url-prefix() {			 
+			#dates-col .circle {
+					left: -1.4rem;
+			}
+	}
+	#dates-col tr:hover .circle {
+		background-color: #64CF6F;
+	}
+	#dates-col tr:first-of-type .circle {
+		background-color: rgba(254, 189, 85, .8);
+			transition: background-color 200ms linear;
+	}
+	#dates-col tr:first-of-type:hover .circle {
+		background-color: rgb(254, 189, 85);
+	}
+
+	#dates-col tr > td.text-left.year-block {
+		/*padding: 0.2rem 0 0.1rem;*/
+	}
+	#dates-col tr > td.text-left.year-block div {
+			display: block;
+			border-radius: 16%;
+			color: #999999;
+			font-weight: bold;
+			margin-left: -2.1rem;
+			background-color: #e7dfcc;
+			opacity: 1;/*
+			border: 0.1rem solid #e7dfcc;
+			font-size: 1.4rem;
+			padding: 0 0 0 0.3rem;
+			width: 4.0rem;*/
+			border: 0.1rem solid #e7dfcc;
+			font-size: 1.2rem;
+			text-align: center;
+			line-height: 1.4rem;
+			width: 3.6rem;
+	}
+
+	#dates-col tr > td.text-left {
+				font-size: 1.9rem;
+		color: #444;
+		border-left: 0.6rem solid #e7dfcc; /* e9e3d2 */
+		position: relative;
+	}
+	@media (min-width: 1605px) {
+		#dates-col tr > td.text-left {
+				font-size: 1.9rem;
+		}
+	}
+	#dates-col tr:first-of-type > td.text-left::before, 
+	#dates-col tr:last-of-type > td.text-left::before {
+		content: "";
+		/* width large enough to resolve X-browser discrepancies */
+		width: 1.8rem;
+		background-color: #fff;
+		position: absolute;
+		left: -1.2rem;
+	}
+	#dates-col tr:first-of-type > td.text-left::before {
+		height: 1.4rem;
+		top: 0;
+	}
+	#dates-col tr:last-of-type > td.text-left::before {
+		height: calc(100% - 2.6rem);
+		bottom: 0;
+	}
+	#dates-col td.text-left div {
+		margin-top: 0.4rem;
+		margin-left: 1.5rem;
+	}
+
+	#dates-col td.text-muted div {
+		/* correct IE display explicitly needs following */
+		min-width: 4.8rem;
+	}
+	#dates-col td.text-muted {
+		display: block;
+		font-size: 1.8rem;
+		margin-top: 0.5rem;
+		margin-right: 1.5rem;
+	}

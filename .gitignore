@@ -1,3 +1,9 @@
+# Sass generated css files directory
+assets/css/
+
+
+### Node.gitignore ###
+
 # Logs
 logs
 *.log
