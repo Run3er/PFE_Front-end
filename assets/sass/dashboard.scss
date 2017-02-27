@@ -33,13 +33,17 @@ $advancement-indicators-abreast-pos1-max-width: 560px;
 $advancement-indicators-stacked-max-width: $advancement-indicators-abreast-pos1-min-width - 1; 
 $advancement-indicators-abreast-pos2-min-width: $advancement-indicators-abreast-pos1-max-width + 1; 
 $advancement-indicators-abreast-pos2-max-width: $bootstrap-sm-max-width; 
+// Timeline dot properties
+$timeline-dot-square-size: 1.6rem;
+$timeline-dot-top-offset: 1.1rem;
+$timeline-dot-right-offset: -1.1rem;
+$timeline-dot-border-width: 0.3rem;
+$timeline-dots-light-color: hsl(126, 53%, 63%);
+$timeline-first-dot-light-color: hsl(37, 99%, 71%);
+$timeline-piping-color: #e7dfcc;
 
 
-
-
-
-/*=============== General ===============*/ 
-	 
+/*=============== General ===============*/ 	 
 	/* Navbar & Sidebar */ 
 	@import 'navbar-sidebar'; 
 
@@ -258,8 +262,6 @@ $advancement-indicators-abreast-pos2-max-width: $bootstrap-sm-max-width;
     }
 
 
-
-
 /*=============== Advancement & SubProjects ===============*/ 
     #advancement-indicators {
     	.panel.panel-indicator {			 
@@ -351,7 +353,6 @@ $advancement-indicators-abreast-pos2-max-width: $bootstrap-sm-max-width;
     }
 
 
-
 /*=============== Pies' Row ===============*/ 
 	#piesRow {
 		padding: 0; 
@@ -400,167 +401,140 @@ $advancement-indicators-abreast-pos2-max-width: $bootstrap-sm-max-width;
 	}
 
 
-
-
 /*=============== Dates & Milestones ===============*/
-	#dates-col {
-		.panel.panel-indicator {
-			/*padding: 0 0.7rem;*/ 
-			@media (min-width: 1605px) {
-				height: 56.1rem; 
+	#milestones-col {
+		.panel.panel-indicator .panel-body {
+			height: auto;
+			max-height: 32.6rem;
+			margin-top: 1.6rem;
+			margin-bottom: 2.0rem;
+			padding: 0 1.5rem 0 2.5rem;
+			overflow-x: unset;
+			overflow-y: auto;
+			@media (min-width: $bootstrap-sm-min-width) {
+				height: auto;
+				max-height: 35.6rem;
 			}
-			.panel-wrapper {
-				height: 35.5rem; 
-				margin-top: 1.6rem; 
-				margin-bottom: 2.0rem; 
-				padding: 0 1.5rem 0 2.5rem; 
-				overflow-x: unset; 
-				overflow-y: auto; 
-				@media (max-width: 767px) {
-					height: auto; 
-					max-height: 32.6rem; 
-				}
-				@media (max-width: 991px) {
-					height: auto; 
-					max-height: 35.6rem; 
-				}
-				.panel-body {
-					border-left: 0.8rem solid #eee9dc; 
-					margin-left: 13.5rem; 
-				}
+			@media (min-width: $bootstrap-md-min-width) {
+				height: 35.5rem;
+				max-height: unset;
+			}
+			@media (min-width: $custom-xlg-min-width) {
+				height: 48.5rem;
+				max-height: unset;
 			}
 		}
-
-		table {
-			margin: auto; 
-		}
-		table td {
-			/*display: block;*/ 
-			padding: 0.2rem 0; 
-		}
-		/*table.hyphenate tr > td.text-left div {*/ 
-		.hyphenate {
-			overflow-wrap: break-word; 
-			word-wrap: break-word; 
-			-ms-word-break: break-all; 
-			word-break: break-word; 
-			-ms-hyphens: auto; 
-			-moz-hyphens: auto; 
-			-webkit-hyphens: auto; 
-			hyphens: auto; 
-		}
-		/* Restrict targetting to Edge */ 
-		_:-ms-lang(x), _::-webkit-meter-bar, 
-		.hyphenate {
-			/* Avoid Edge hyphenation (overflow prob.) */ 
-			word-break: break-all; 
-		}
-
-		tr > td *:not(.circle) {
-			opacity: .87; 
-				transition: opacity 250ms linear; 
-		}
-		tr:hover > td *:not(.circle) {
-			opacity: 1; 
-		}
-		tr:first-of-type > td *:not(.circle) {
-			opacity: 1; 
-		}
-		.circle {
-			display: block; 
-			border-radius: 50%; 
-			background-color: #7DD786; 
-				transition: background-color 200ms linear; 
-				position: absolute;/* 
-			border: 0.4rem solid #e7dfcc; 
-			width: 1.7rem; 
-			height: 1.7rem; 
-				top: 1.3rem;*/ 
-			border: 0.3rem solid #e7dfcc; 
-			width: 1.6rem; 
-			height: 1.6rem; 
-				top: 1.2rem; 
-				left: -1.1rem; 
-		}
-		@-moz-document url-prefix() {			 
-				.circle {
-						left: -1.4rem; 
-				}
-		}
-		tr:hover .circle {
-			background-color: #64CF6F; 
-		}
-		tr:first-of-type .circle {
-			background-color: rgba(254, 189, 85, .8); 
-				transition: background-color 200ms linear; 
-		}
-		tr:first-of-type:hover .circle {
-			background-color: rgb(254, 189, 85); 
-		}
-
-		tr > td.text-left.year-block {
-			/*padding: 0.2rem 0 0.1rem;*/ 
-		}
-		tr > td.text-left.year-block div {
-				display: block; 
-				border-radius: 16%; 
-				color: #999999; 
-				font-weight: bold; 
-				margin-left: -2.1rem; 
-				background-color: #e7dfcc; 
-				opacity: 1;/* 
-				border: 0.1rem solid #e7dfcc; 
-				font-size: 1.4rem; 
-				padding: 0 0 0 0.3rem; 
-				width: 4.0rem;*/ 
-				border: 0.1rem solid #e7dfcc; 
-				font-size: 1.2rem; 
-				text-align: center; 
-				line-height: 1.4rem; 
-				width: 3.6rem; 
-		}
-
-		tr > td.text-left {
-					font-size: 1.9rem; 
-			color: #444; 
-			border-left: 0.6rem solid #e7dfcc; /* e9e3d2 */ 
-			position: relative; 
-		}
-		@media (min-width: 1605px) {
-			tr > td.text-left {
-					font-size: 1.9rem; 
+    	& ul {
+    		display: table;
+    		table-layout: fixed; /* <^TODO: for IE only */
+			width: 100%; /* <^TODO: for IE only */
+    		padding-left: 0.0rem;
+    		margin: auto; 
+    		list-style: none;
+    		text-align: left;
+    		transition: background-color 250ms linear;
+			@media (min-width: $custom-xlg-min-width) {
+    			padding-left: 0.5rem;
 			}
-		}
-		tr:first-of-type > td.text-left::before, 
-		tr:last-of-type > td.text-left::before {
-			content: ""; 
-			/* width large enough to resolve X-browser discrepancies */ 
-			width: 1.8rem; 
-			background-color: #fff; 
-			position: absolute; 
-			left: -1.2rem; 
-		}
-		tr:first-of-type > td.text-left::before {
-			height: 1.4rem; 
-			top: 0; 
-		}
-		tr:last-of-type > td.text-left::before {
-			height: calc(100% - 2.6rem); 
-			bottom: 0; 
-		}
-		td.text-left div {
-			margin-top: 0.4rem; 
-			margin-left: 1.5rem; 
-		}
-
-		td.text-muted div {
-			/* correct IE display explicitly needs following */ 
-			min-width: 4.8rem; 
-		}
-		td.text-muted {
-			display: block; 
-			font-size: 1.8rem; 
-			margin-top: 0.5rem; 
-			margin-right: 1.5rem; 
+	    	& > li {
+	    		display: table-row;
+	    	}
+	    }
+    	.milestone {
+    		&-date, 
+	    	&-title {
+	    		display: table-cell;
+				padding-top: 0.5rem; 
+				padding-bottom: 0.5rem; 
+	    	}
+	    	&-date {
+	    		position: relative;
+	    		width: 6.0rem; /* <^TODO: for IE only */
+	    		padding-right: 1.5rem;
+				font-size: 1.8rem;
+	    	}
+	    	&-title {
+	    		padding-left: 1.5rem;
+	    		border-left: 6px solid $timeline-piping-color;
+		        font-size: 1.8rem;
+				color: #444;
+				@media (min-width: $custom-xlg-min-width) {
+				    font-size: 2.0rem;
+				}
+	    	}
+	    	&-year {
+	    		display: table-cell;
+	    		border-left: 6px solid $timeline-piping-color;
+		    	span {
+		    		display: block;
+					width: 3.6rem;
+					margin-top: 0.4rem;
+					margin-bottom: 0.3rem;
+					margin-left: -2.1rem;
+					border: 0.1rem solid $timeline-piping-color;
+					border-radius: 16%;
+					line-height: 1.4rem;
+					font-size: 1.2rem;
+					font-weight: bold;
+					color: #999999;
+					text-align: center;
+					background-color: $timeline-piping-color;
+					opacity: 1;
+		    	}
+		    }
+    	}
+    	li {
+    		.milestone-date > span::after {
+			    content: "";
+			    display: block;
+			    position: absolute;
+			    top: $timeline-dot-top-offset;
+			    right: $timeline-dot-right-offset;
+			    width: $timeline-dot-square-size;
+			    height: $timeline-dot-square-size;
+			    border: $timeline-dot-border-width solid $timeline-piping-color;
+			    border-radius: 50%;
+	    		transition: background-color 200ms linear;
+			    background-color: $timeline-dots-light-color;
+			}
+	    	&:first-of-type .milestone-date > span::after {
+			    background-color: $timeline-first-dot-light-color;
+			}
+			// Timeline start & end Dots' linking-excess pruning
+			&:first-of-type .milestone-date > span::before, 
+			&:last-of-type .milestone-date > span::before {
+			    content: "";
+			    position: absolute;
+			    right: $timeline-dot-right-offset;
+			    width: $timeline-dot-square-size;
+			    background-color: white;
+			}
+			&:first-of-type .milestone-date > span::before {
+			    top: 0;
+			    height: $timeline-dot-top-offset + $timeline-dot-border-width;
+			}
+			&:last-of-type .milestone-date > span::before {
+			    bottom: 0;
+			    height: calc(100% - #{$timeline-dot-square-size + $timeline-dot-top-offset - $timeline-dot-border-width});
+			}
+	    	// Opacity decoration & animation
+	    	.milestone-text {
+	    		transition: opacity 250ms linear;
+	    		opacity: 0.8;
+	    	}
+	    	&:first-of-type .milestone-text {
+	    		opacity: 1;
+	    	}
+	    	&:hover {
+	    		.milestone-text {
+	    			opacity: 1;
+		    	}
+		    	.milestone-date > span::after {
+				    background-color: darken($timeline-dots-light-color, 7%);
+				}
+		    	&:first-of-type .milestone-date > span::after {
+				    background-color: darken($timeline-first-dot-light-color, 6%);
+				}
+			}
 		}
 	}
