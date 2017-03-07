@@ -35,12 +35,13 @@ $advancement-indicators-abreast-pos2-min-width: $advancement-indicators-abreast-
 $advancement-indicators-abreast-pos2-max-width: $bootstrap-sm-max-width; 
 // Timeline dot properties
 $timeline-dot-square-size: 1.6rem;
-$timeline-dot-top-offset: 1.1rem;
-$timeline-dot-right-offset: -1.1rem;
+$timeline-dot-top-offset: 1.55rem;
+$timeline-dot-left-offset: -1.1rem;
 $timeline-dot-border-width: 0.3rem;
 $timeline-dots-light-color: hsl(126, 53%, 63%);
 $timeline-first-dot-light-color: hsl(37, 99%, 71%);
 $timeline-piping-color: #e7dfcc;
+$timeline-piping-width: 0.6rem;
 
 
 /*=============== General ===============*/ 	 
@@ -72,6 +73,23 @@ $timeline-piping-color: #e7dfcc;
 	}
 	.glyphicon {
 		cursor: default; 
+	}
+
+	.hyphenate {
+		overflow-wrap: break-word;
+		word-wrap: break-word;
+		-ms-word-break: break-all;
+		word-break: break-word;
+		-ms-hyphens: auto;
+		-moz-hyphens: auto;
+		-webkit-hyphens: auto;
+		hyphens: auto;
+	}
+	/* Restrict targetting to Edge */
+	_:-ms-lang(x), _::-webkit-meter-bar,
+	.hyphenate {
+		// Avoid Edge hyphenation (overflow prob.)
+		word-break: break-all;
 	}
 
 	/* Custom breakpoints (Smaller: smr (3 levels) & ExtraLarge: xlg) */ 
@@ -424,117 +442,118 @@ $timeline-piping-color: #e7dfcc;
 				max-height: unset;
 			}
 		}
-    	& ul {
+    	ul#timeline {
     		display: table;
-    		table-layout: fixed; /* <^TODO: for IE only */
-			width: 100%; /* <^TODO: for IE only */
-    		padding-left: 0.0rem;
     		margin: auto; 
+    		padding-left: 0.0rem;
     		list-style: none;
-    		text-align: left;
+			text-align: left;
     		transition: background-color 250ms linear;
-			@media (min-width: $custom-xlg-min-width) {
-    			padding-left: 0.5rem;
-			}
 	    	& > li {
 	    		display: table-row;
 	    	}
-	    }
-    	.milestone {
-    		&-date, 
-	    	&-title {
-	    		display: table-cell;
-				padding-top: 0.5rem; 
-				padding-bottom: 0.5rem; 
-	    	}
-	    	&-date {
-	    		position: relative;
-	    		width: 6.0rem; /* <^TODO: for IE only */
-	    		padding-right: 1.5rem;
-				font-size: 1.8rem;
-	    	}
-	    	&-title {
-	    		padding-left: 1.5rem;
-	    		border-left: 6px solid $timeline-piping-color;
-		        font-size: 1.8rem;
-				color: #444;
-				@media (min-width: $custom-xlg-min-width) {
-				    font-size: 2.0rem;
+	    	.milestone {
+	    		&-date, 
+		    	&-title, 
+		    	&-year {
+		    		display: table-cell;
+		    	}
+	    		&-date, 
+		    	&-title {
+					padding: 0.8rem 0 0.4rem;
+					font-size: 1.8rem;
+		    	}
+		    	&-date {
+		    		padding-right: 1.5rem;
+		    	}
+		    	&-title {
+					position: relative;
+		    		border-left: $timeline-piping-width solid $timeline-piping-color;
+					color: #444;
+					@media (min-width: $custom-xlg-min-width) {
+					    font-size: 2.0rem;
+					}
+					& > * {
+						margin-top: 0.2rem;
+		    			margin-left: 1.4rem;
+					}
+		    	}
+		    	&-year {
+		    		border-left: $timeline-piping-width solid $timeline-piping-color;
+			    	div {
+			    		display: block;
+						width: 3.6rem;
+						margin-top: 0.5rem;
+						// margin-bottom: 0.1rem;
+						margin-left: -2.1rem;
+						border: 0.1rem solid $timeline-piping-color;
+						border-radius: 16%;
+						line-height: 1.4rem;
+						font-size: 1.2rem;
+						font-weight: bold;
+						color: #999999;
+						text-align: center;
+						background-color: $timeline-piping-color;
+						opacity: 1;
+			    	}
+			    }
+			    &-dot {
+					display: block; 
+					position: absolute;
+				    top: $timeline-dot-top-offset;
+					left: $timeline-dot-left-offset;
+				    width: $timeline-dot-square-size;
+				    height: $timeline-dot-square-size;
+				    border: $timeline-dot-border-width solid $timeline-piping-color;
+				    border-radius: 50%;
+				    background-color: $timeline-dots-light-color;
+		    		transition: background-color 200ms linear;
+					@media (min-width: $custom-xlg-min-width) {
+					    top: #{$timeline-dot-top-offset + 0.2rem};
+					}
 				}
 	    	}
-	    	&-year {
-	    		display: table-cell;
-	    		border-left: 6px solid $timeline-piping-color;
-		    	span {
-		    		display: block;
-					width: 3.6rem;
-					margin-top: 0.4rem;
-					margin-bottom: 0.3rem;
-					margin-left: -2.1rem;
-					border: 0.1rem solid $timeline-piping-color;
-					border-radius: 16%;
-					line-height: 1.4rem;
-					font-size: 1.2rem;
-					font-weight: bold;
-					color: #999999;
-					text-align: center;
-					background-color: $timeline-piping-color;
-					opacity: 1;
+	    	// Dynamic decoration
+			& > li {
+				&:first-of-type .milestone-dot {
+					background-color: $timeline-first-dot-light-color;
+				}
+				// Timeline start & end Dots' linking-excess pruning
+				&:first-of-type .milestone-title::before, 
+				&:last-of-type .milestone-title::before {
+				    content: "";
+				    position: absolute;
+				    left: $timeline-dot-left-offset;
+				    width: $timeline-dot-square-size;
+				    background-color: white;
+				}
+				&:first-of-type .milestone-title::before {
+				    top: 0;
+				    height: $timeline-dot-top-offset + $timeline-dot-border-width;
+				}
+				&:last-of-type .milestone-title::before {
+				    bottom: 0;
+				    height: calc(100% - #{$timeline-dot-square-size + $timeline-dot-top-offset - $timeline-dot-border-width});
+				}
+		    	// Opacity decoration & animation
+		    	.milestone-text {
+		    		opacity: 0.8;
+		    		transition: opacity 250ms linear;
 		    	}
+		    	&:first-of-type .milestone-text {
+		    		opacity: 1;
+		    	}
+		    	&:hover {
+		    		.milestone-text {
+		    			opacity: 1;
+			    	}
+			    	.milestone-dot {
+					    background-color: darken($timeline-dots-light-color, 7%);
+					}
+			    	&:first-of-type .milestone-dot {
+					    background-color: darken($timeline-first-dot-light-color, 6%);
+					}
+				}
 		    }
-    	}
-    	li {
-    		.milestone-date > span::after {
-			    content: "";
-			    display: block;
-			    position: absolute;
-			    top: $timeline-dot-top-offset;
-			    right: $timeline-dot-right-offset;
-			    width: $timeline-dot-square-size;
-			    height: $timeline-dot-square-size;
-			    border: $timeline-dot-border-width solid $timeline-piping-color;
-			    border-radius: 50%;
-	    		transition: background-color 200ms linear;
-			    background-color: $timeline-dots-light-color;
-			}
-	    	&:first-of-type .milestone-date > span::after {
-			    background-color: $timeline-first-dot-light-color;
-			}
-			// Timeline start & end Dots' linking-excess pruning
-			&:first-of-type .milestone-date > span::before, 
-			&:last-of-type .milestone-date > span::before {
-			    content: "";
-			    position: absolute;
-			    right: $timeline-dot-right-offset;
-			    width: $timeline-dot-square-size;
-			    background-color: white;
-			}
-			&:first-of-type .milestone-date > span::before {
-			    top: 0;
-			    height: $timeline-dot-top-offset + $timeline-dot-border-width;
-			}
-			&:last-of-type .milestone-date > span::before {
-			    bottom: 0;
-			    height: calc(100% - #{$timeline-dot-square-size + $timeline-dot-top-offset - $timeline-dot-border-width});
-			}
-	    	// Opacity decoration & animation
-	    	.milestone-text {
-	    		transition: opacity 250ms linear;
-	    		opacity: 0.8;
-	    	}
-	    	&:first-of-type .milestone-text {
-	    		opacity: 1;
-	    	}
-	    	&:hover {
-	    		.milestone-text {
-	    			opacity: 1;
-		    	}
-		    	.milestone-date > span::after {
-				    background-color: darken($timeline-dots-light-color, 7%);
-				}
-		    	&:first-of-type .milestone-date > span::after {
-				    background-color: darken($timeline-first-dot-light-color, 6%);
-				}
-			}
 		}
 	}
