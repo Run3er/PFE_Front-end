@@ -1,14 +1,222 @@
+@import "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700";
+@import "http://fonts.googleapis.com/css?family=Fanwood+Text:400,400italic";
+
 body {
 	/* Take navbar height into account with padding-top */
 	padding-top: 5.5rem;
+	font-size: 1.4rem;
 }
-.navbar-fixed-top {
-	border: 0;
+
+//bootstrap override
+.navbar-collapse, .navbar-header {
+	margin: 0 !important;
 }
+.form-control {
+    box-shadow: none;
+    color: #7d8282;
+}
+.form-control:focus {
+    border-color: #3ba0ff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+a {
+	color:#3ba0ff;
+}
+a:focus {
+	outline:none;
+}
+.navbar .navbar-nav > li > .dropdown-menu {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: #3ba0ff;
+    color: #fff;
+}
+.list-group-item {
+    border-color: #e1dddd;
+    border-color: rgba(205,200,200,0.61);
+}
+a.list-group-item:hover, a.list-group-item:focus {
+    background-color: #fcfcfc;
+}
+.navbar li.dropdown.icons-dropdown a.list-group-item i {
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+/*
+.navbar li.dropdown.icons-dropdown .list-group .heading {
+    font-weight: 400;
+    font-size: 16px;
+    border: none;
+    margin-top: -5px;
+    background: #fcfcfc;
+    padding: 7px 15px;
+    min-width: 250px;
+}
+.navbar li.dropdown.icons-dropdown .list-group .heading p {
+    margin-bottom: 3px;
+}
+p {
+    margin-bottom: 8px;
+}
+.navbar li.dropdown.icons-dropdown a.list-group-item {
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 0;
+    padding: 12px 15px;
+}
+.navbar li.dropdown.icons-dropdown a.list-group-item p {
+    display: inline;
+    line-height: 25px;
+}
+ .navbar-right > li {
+    display: inline-block;
+    float: left;
+}
+.navbar .navbar-nav > li > a {
+    color: #7d8282;
+    font-size: 15px;
+}
+.navbar .navbar-nav > li > a {
+    height: 56px;
+    line-height: 28px;
+}*/
+
+
+#navbar-header {
+	margin-left: 0;
+	height: 5.7rem;
+	border-bottom: 1px solid #E9EAEB;
+	background-color: #3ba0ff;
+	@media (min-width: 768px) {
+	    background-color: #fff;
+		padding-right: 1.5rem;
+	}
+	#navbar {
+		float: right;
+		background-color: #fff;
+		@media (max-width: 767px) {
+			float: none;
+		}
+		& > ul > li {
+			& > .dropdown-menu {
+			    right: -1.5rem;
+			    left: auto;
+			    // margin-top: 0px;
+			    background: #fff;
+			    border-radius: 4px;
+			}
+			& > a {
+			    line-height: 30px;
+			    font-size: 15px;
+				padding-top: 1.7rem;
+			    border-color: #ddd;
+				height: 5.6rem;
+				&:hover {
+			    	background: #fcfcfc;
+				}
+				&:focus {
+				    background: #fafafa;
+				}
+			}
+		}
+		.nav-icon {
+		    font-size: 20px;
+		}
+		img.profile-image {
+		    height: 40px;
+		    margin-top: -8px;
+		    cursor: pointer;
+		}
+		.profile-name {
+			margin-top: -3px;
+		}
+	}
+	#outdent-icon {
+		&:hover {
+	    	background: #fcfcfc;
+		}
+		&:focus {
+		    background: #fafafa;
+		}		
+	}
+	ul.nav-icons {
+		display: inline-block;
+		margin: 0;
+		@media (max-width: 767px) {
+			width: 100%;
+		}
+		#navbar li:hover > a {
+			background-color: #FCFCFC;
+		}
+		li {
+			float: left;
+			@media (max-width: 767px) {
+				&:hover, &:focus {
+					background-color: none;
+				}
+			}
+		}
+	}
+	a.nav-icon {
+		line-height: 2.4rem;
+		font-size: 2.1rem;
+		color: #7D8282;
+		height: 5.6rem;
+		@media (max-width: 767px) {
+			font-size: 2.4rem;
+			line-height: 3.8rem; 
+			color: #fff;
+			&:hover {
+				background-color: none;
+			}
+		}
+	}
+	.container-fluid {
+		padding: 0;
+	}
+	.navbar-brand {
+		display: inline-block;
+	    font-family: 'Fanwood Text',serif;
+	    font-style: italic;
+	    font-size: 35px;
+	    color: #fff;
+	    background-color: #3ba0ff;
+	    width: 24rem;
+	    height: 57px;
+	    text-align: center;
+	}
+	.navbar-title {
+		line-height: 20px;
+		width: auto;
+		height: 35px;
+		text-align: center;
+		margin: 15px 15px 0;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    font-family: 'Fanwood Text',serif;
+	    font-style: italic;
+	    font-size: 35px;
+	    color: #fff;
+	}
+	.navbar-search {
+	    width: inherit!important;
+		margin-top: 0.2rem;
+	    display: inline;
+	    border-radius: 2rem;
+	}
+}
+
 
 /* Sidebar */
 	.sidebar {
 		display: none;
+		width: 225px;
 		@media (min-width: 768px) {
 	      position: fixed;
 	      top: 5.1rem;

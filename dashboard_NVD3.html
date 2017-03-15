@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="ress/css/bootstrap.min.css">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug ... -->
     <!-- Custom styles for this template -->
+	<link rel="stylesheet" href="ress/css/font-awesome.min.css">
     <!-- <link href="assets/css/dashboard.css" rel="stylesheet"> -->
     <link href="ress/css/nv.d3.css" rel="stylesheet" type="text/css">
 
@@ -43,34 +44,66 @@
     <!-- Dashboard NVD3 charts code -->
     <script src="assets/js/dashboard-NVD3.js"></script>
 
-    <style>
-    </style>
+	<script>
+		// $(document).on('touchstart click', 'html:not(nav)',function() {
+		// 	$(".navbar-collapse").collapse('hide');
+		// });
+	</script>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav id="navbar-header" class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">MaSociete</a>
-        </div><!-- 
-        <div class="" role="navigation">
-        	<ul class="nav navbar-nav" style="text-align: center;">
-        		<h4 class="navbar-text">Projet X</h4>
-        	</ul>
-        </div> -->
+    	  <a href="#" class="navbar-brand hidden-xs" style="float: left;">dasshy</a>
+
+          <ul class="nav navbar-nav navbar-left nav-icons">
+          	<li>
+      			<a class="nav-icon visible-xs" href="#">
+      				<i class="fa fa-bars"></i>
+      			</a>
+  			</li>
+          	<li>
+      			<a id="outdent-icon" class="nav-icon hidden-xs" href="#">
+      				<i class="fa fa-outdent"></i>
+      			</a>
+  			</li>
+          	<li style="float: right;">
+      			<a class="nav-icon visible-xs" href="#" class="collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      				<i class="fa fa-chevron-down"></i>
+      			</a>
+  			</li>
+          	<li style="float: none;"  class="navbar-title visible-xs">
+	    		<span title="dashy">dashy</span>
+  			</li>
+            <form class="navbar-form navbar-left hidden-xs">
+            	<input type="text" class="form-control navbar-search" placeholder="Rechercher">
+            </form>
+          </ul>
+        </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Configuration</a></li>
-            <li><a href="#">Profil</a></li>
-            <li><a href="#">Aide</a></li>
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="profile-name">Amine</span> <img class="profile-image img-circle" src="assets/img/usr.png" alt="avatar" /> <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#"><i class="fa fa-globe"></i> Notification <span class="label label-danger"> 5</span></a></li>
+	            <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+	            <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
+	            <li><a href="#"><i class="fa fa-share"></i> Logout</a></li>
+	          </ul>
+	        </li><!-- 
+         	<li>
+	          <a href="#"><i class="nav-icon fa fa-question-circle-o"></i></a>
+    		</li> -->
+         	<li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="nav-icon fa fa-gear"></i> <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+				  <li><a href="#" id="fixed-sidebar-link">Fixed sidebar</a></li>
+				  <li><a href="#" id="fixed-navbar-link">Fixed Navbar</a></li>
+	          </ul>
+    		</li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Rechercher...">
+          <form class="navbar-form navbar-right visible-xs">
+            <input type="text" class="form-control navbar-search" placeholder="Rechercher">
           </form>
         </div>
       </div>
@@ -87,7 +120,7 @@
 				<li class="active"><a href="#">Tableau de bord <span class="sr-only">(current)</span></a></li>
 				<li><a href="#">Actions</a></li>
 				<li><a href="#">Risques</a></li>
-				<li><a href="#">Points en suspend</a></li>
+				<li><a href="#">Points en suspens</a></li>
 				<li><a href="#">Demandes de changement</a></li>
 			</ul>
 			<hr style="border-top: 2px solid #888; width: 103%; margin: -10px 0 10px -7px;" />
@@ -100,6 +133,11 @@
 		
         <div id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
 			<!-- <h1 class="page-header">Project X - Dashboard</h1> -->
+			<ol class="breadcrumb" style="margin-left: 15px; margin-right: 15px;">
+			  <li><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+			  <li><a href="#">Projects</a></li>
+			  <li class="active">ImportantProjet</li>
+			</ol>
 
 			<div id="measure-chart-indicators-col" class="col-xlg-9">	
 				<div id="firstRow">
