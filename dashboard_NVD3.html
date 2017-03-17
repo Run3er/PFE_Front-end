@@ -51,10 +51,11 @@
 	</script>
 </head>
 <body>
+	<!-- Header navbar -->
     <nav id="navbar-header" class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-    	  <a href="#" class="navbar-brand hidden-xs" style="float: left;">dasshy</a>
+    	  <a href="#" class="navbar-header-brand hidden-xs" style="float: left;">dasshy</a>
 
           <ul class="nav navbar-nav navbar-left nav-icons">
           	<li>
@@ -109,29 +110,74 @@
       </div>
     </nav>
 
+	<!-- Sidebar -->
+    <div id="sidebar">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#project-tab" data-toggle="tab"><i class="fa fa-th"></i></a></li>
+			<li><a href="#global-tab" data-toggle="tab"><i class="fa fa-globe"></i></a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="project-tab" class="tab-pane active">
+				<ul class="nav">
+				    <li class="tab-content-header">
+				    	<span title="Application de gestion de projets en mode SaaS">Application de gestion de projets en mode SaaS</span>
+			    	</li>
+					<li class="active">
+						<a href="#">
+							<span class="menu-icon"><i class="fa fa-dashboard"></i></span>
+							<span class="menu-title">Tableau de bord</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<span class="menu-icon"><i class="fa fa-tasks"></i></span>
+							<span class="menu-title">Actions</span>
+							<span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right"></i></span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<span class="menu-icon"><i class="fa fa-warning"></i></span>
+							<span class="menu-title">Risques</span>
+							<span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right"></i></span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<span class="menu-icon"><i class="fa fa-pause-circle-o"></i></span>
+							<span class="menu-title">Points en suspens</span>
+							<span class="menu-badge"><i class="fa fa-dashboard"></i></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div id="global-tab" class="tab-pane">
+				<ul class="nav">
+				    <li class="tab-content-header">
+				    	<span title="Global">Global</span>
+			    	</li>
+					<li>
+						<a href="#">
+							<span class="menu-icon"><i class="fa fa-dashboard"></i></span>
+							<span class="menu-title">Points en suspens</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<span class="menu-icon"><i class="fa fa-dashboard"></i></span>
+							<span class="menu-title">Demandes de changement</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+    </div>
+
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar" style="font-weight: bold;">
-			<ul class="nav nav-sidebar" style="border-top: 2px solid #ffffff10;">
-				<li><a href="#" style=" background-color: #ffffff11; border-bottom: 1px solid #ffffff00;">Projets</a></li>
-				<li><a href="#" style=" background-color: #ffffff11; border-bottom: 2px solid #ffffff10;">Ressources</a></li>
-			</ul>
-			<ul class="nav nav-sidebar">
-				<li class="active"><a href="#">Tableau de bord <span class="sr-only">(current)</span></a></li>
-				<li><a href="#">Actions</a></li>
-				<li><a href="#">Risques</a></li>
-				<li><a href="#">Points en suspens</a></li>
-				<li><a href="#">Demandes de changement</a></li>
-			</ul>
-			<hr style="border-top: 2px solid #888; width: 103%; margin: -10px 0 10px -7px;" />
-			<ul class="nav nav-sidebar">
-				<li><a href="#">Ressources</span></a></li>
-				<li><a href="#">Documents</a></li>
-				<li><a href="#">Planning</a></li>
-			</ul>
-        </div>
 		
-        <div id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+        <div id="main" style="width: auto;">
 			<!-- <h1 class="page-header">Project X - Dashboard</h1> -->
 			<ol class="breadcrumb" style="margin-left: 15px; margin-right: 15px;">
 			  <li><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>

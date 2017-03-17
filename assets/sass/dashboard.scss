@@ -161,8 +161,8 @@ $timeline-piping-width: 0.6rem;
 			right: 1.5rem; 
 		}
 		@media (min-width: $bootstrap-sm-min-width) {
-			padding-right: 2.0rem; 
-			padding-left: 2.0rem; 
+			padding-right: 0.5rem; 
+			padding-left: 27rem;  //$sidebar-width
 		}
 	}
 
