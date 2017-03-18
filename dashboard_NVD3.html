@@ -44,11 +44,6 @@
     <!-- Dashboard NVD3 charts code -->
     <script src="assets/js/dashboard-NVD3.js"></script>
 
-	<script>
-		// $(document).on('touchstart click', 'html:not(nav)',function() {
-		// 	$(".navbar-collapse").collapse('hide');
-		// });
-	</script>
 </head>
 <body>
 	<!-- Header navbar -->
@@ -129,25 +124,82 @@
 							<span class="menu-title">Tableau de bord</span>
 						</a>
 					</li>
-					<li>
+					<li class="collapsible-menu">
 						<a href="javascript:void(0);">
 							<span class="menu-icon"><i class="fa fa-tasks"></i></span>
 							<span class="menu-title">Actions</span>
 							<span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right"></i></span>
 						</a>
+						<ul>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+						</ul>
 					</li>
-					<li>
+					<li class="collapsible-menu">
+						<a href="javascript:void(0);">
+							<span class="menu-icon"><i class="fa fa-tasks"></i></span>
+							<span class="menu-title">Actions</span>
+							<span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right"></i></span>
+						</a>
+						<ul>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+						</ul>
+					</li>
+					<li class="collapsible-menu">
 						<a href="javascript:void(0);">
 							<span class="menu-icon"><i class="fa fa-warning"></i></span>
 							<span class="menu-title">Risques</span>
 							<span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right"></i></span>
 						</a>
+						<ul>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+						</ul>
 					</li>
 					<li>
 						<a href="javascript:void(0);">
 							<span class="menu-icon"><i class="fa fa-pause-circle-o"></i></span>
 							<span class="menu-title">Points en suspens</span>
-							<span class="menu-badge"><i class="fa fa-dashboard"></i></span>
 						</a>
 					</li>
 				</ul>
@@ -357,6 +409,69 @@
 		</div>
 	  </div>
     </div>
+
+
+	<script>
+		// Wrongly collappses on any click!
+		// $(document).on('touchstart click', 'html:not(nav)',function() {
+		// 	$(".navbar-collapse").collapse('hide');
+		// });
+		var li_list = document.getElementsByClassName('collapsible-menu');
+		for (var i = 0; i < li_list.length; i++) {
+			li_list[i].children[0].onclick = function () {
+				// TODO: polyfill for children[] property (IE8-)
+			    var ul = this.parentElement.children[1];
+			    var isExpanded = ul.clientHeight;
+
+			    // TODO: replace with specific (.expanded?) class query
+			    //	& replace li_list with css selector on all needed ul
+				for (var j = 0; j < li_list.length; j++) {
+					// select ul element
+					var ul_j = li_list[j].children[1];
+				    if (ul_j.clientHeight) {
+						ul_j.style.height = 0;
+					}
+				}
+
+				if (!isExpanded) {
+					ul.style.height = ul.scrollHeight + "px";
+				}
+			    // TODO
+			    //  Highlight parent link on selection
+			}
+		}
+
+		for (var i = 0; i < li_list.length; i++) {
+			// select ul element
+			var ul_i = li_list[i].children[1];
+		    if (ul_i.clientHeight) {
+				ul_i.style.height = 0;
+			}
+		}
+
+		var subLinks = document.querySelectorAll('#sidebar .tab-content .tab-pane > ul > li > ul > li > a');
+		for (var i = 0; i < subLinks.length; i++) {
+			subLinks[i].onclick = function () {
+				// only one element should match, even across tabs
+				var li_active = document.querySelector('#sidebar .tab-content .tab-pane > ul > li.active');
+				if (li_active) {
+					li_active.classList.remove('active');
+				}
+				// only one element should match, even across tabs
+				var a_active = document.querySelector('#sidebar .tab-content .tab-pane > ul > li > ul > li > a.active');
+				if (a_active) {
+					a_active.classList.remove('active');
+				}
+				// activate clicked on a_link & parent menu entry
+				this.className += " active";
+				var menuEntry = this.parentElement.parentElement.parentElement;
+				menuEntry.className += " active";
+			}
+		}
+
+		// assign active class to clicked on element's parent li
+
+	</script>
 </body>
 </html>
 

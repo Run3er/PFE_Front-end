@@ -213,6 +213,15 @@ a.list-group-item:hover, a.list-group-item:focus {
 	}
 	.tab-content .tab-pane {
 		font-size: 1.3rem;
+		ul {
+			list-style: none;
+		}
+		li {
+			display: block;
+		}
+		a {
+			text-decoration: none;
+		}
 		& > ul > li {
 			&.tab-content-header {
 				color: #fff;
@@ -222,16 +231,20 @@ a.list-group-item:hover, a.list-group-item:focus {
 				white-space: nowrap;
 			}
 			&:not(.tab-content-header) {
-				padding-left: 1rem;
 				& > a {
 					display: inline-block;
 					width: 100%;
 					margin: 0;
-					padding: 1.2rem 0 0.8rem 1.2rem;
+					padding: 1.2rem 0 0.8rem 2.2rem;
 					color: #909090;
 					&:hover, &:focus {
 						background-color: unset;
-						color: #b4b6b4;
+					}
+					&:hover {
+						color: #b4b6b4;						
+					}
+					&:focus:not(:hover) {
+						color: #909090;
 					}
 					.menu-icon {
 						width: 15%;
@@ -256,12 +269,43 @@ a.list-group-item:hover, a.list-group-item:focus {
 						}
 					}
 				}
-				&.active {
+				&.active > a {
+					padding-left: 1.9rem; //15px - 0.3rem
 					border-left: 0.3rem solid #3ba0ff;
+					color: #b4b6b4;
 					background-color: #2e3f50; //lighten
-					& > a {
-						padding-left: 0.9rem; //15px - 0.3rem
-						color: #b4b6b4;
+				}
+				& > ul {
+					height: 0;
+					transition: height 220ms linear;
+					overflow: hidden;
+					background: rgba(19,34,50,0.44); //darken
+					padding-left: 4rem;
+					// TODO: add padding-top to first & lqst elements
+					// padding: 0.1rem 0 0.2rem 4rem;
+					padding-left: 4rem;
+					padding-right: 0;
+					& > li {
+						& > a {
+							display: inline-block;
+							width: 100%;
+							color: #909090;
+							padding: 0.6rem 1.5rem;
+						    border-left: 2px dashed #2e3f50;
+						    &.active {
+						    	color: #e0e0e0;
+						    }
+						}
+						&:hover > a:not(.active) {
+							color: #b4b6b4;
+						}
+
+						&:first-of-type > a {
+							padding-top: 0.7rem;
+						}
+						&:last-of-type > a {
+							padding-bottom: 0.7rem;						
+						}
 					}
 				}
 			}
