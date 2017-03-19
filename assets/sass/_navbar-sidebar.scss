@@ -3,11 +3,15 @@
 
 
 $sidebar-width: 27rem;
+$sidebar-width-shrinked: 6rem;
 
 
 body {
 	font-size: 1.4rem;
 	font-family: "Open Sans", sans-serif;
+}
+#main {
+	margin-left: $sidebar-width;
 }
 a:hover, a:focus {
 	outline:none;
@@ -54,6 +58,9 @@ a:hover, a:focus {
 			color: #7D8282;
 			&:hover {
 				background-color: #FCFCFC; // darken TODO:..more
+			}
+			&:not(:hover):focus {
+				background-color: unset;
 			}
 			@media (max-width: 767px) {
 				font-size: 2.4rem;
@@ -123,8 +130,8 @@ a:hover, a:focus {
 	display: none;
 	width: $sidebar-width;
 	background-color: #253341;
-	overflow-x: hidden;
-	overflow-y: auto;
+	// overflow-x: hidden;
+	// overflow-y: auto;
 	@media (min-width: 768px) {
 		display: initial;
 		position: fixed;
@@ -171,6 +178,8 @@ a:hover, a:focus {
 	}
 	.tab-content .tab-pane {
 		font-size: 1.3rem;
+		overflow-x: hidden;
+		overflow-y: auto;
 		ul {
 			list-style: none;
 		}
@@ -201,7 +210,7 @@ a:hover, a:focus {
 					&:hover {
 						color: #b4b6b4;						
 					}
-					&:focus:not(:hover) {
+					&:not(:hover):focus {
 						color: #909090;
 					}
 					.menu-icon {
@@ -232,6 +241,9 @@ a:hover, a:focus {
 					border-left: 0.3rem solid #3ba0ff;
 					color: #b4b6b4;
 					background-color: #2e3f50; //lighten
+					&:focus {
+						color: #b4b6b4;
+					}
 				}
 				& > ul {
 					height: 0;
@@ -268,6 +280,43 @@ a:hover, a:focus {
 					}
 				}
 			}
+		}
+	}
+}
+body.mini-sidebar {
+	#header-navbar, #main {
+		margin-left: $sidebar-width-shrinked;
+	}
+	#sidebar {
+		width: $sidebar-width-shrinked;
+		#nav-brand {		
+			padding: 1.5rem 1rem;
+			font-size: 2rem;
+		}
+		.nav-tabs  > li {
+			width: 100%;
+		}
+		.tab-content .tab-pane > ul > li {
+			&.tab-content-header {
+				padding: 1.5rem 1.1rem;
+			}
+			&:not(.tab-content-header) {
+				& > a {
+					padding: 1.2rem 2rem 0.8rem 2rem;
+					.menu-icon {
+						width: 100%;
+					}
+					.menu-title {
+						display: none;
+					}
+					.menu-badge {
+						display: none;
+					}
+				}		
+				&.active > a {
+					padding-left: 1.7rem; //2rem - 0.3rem
+				}	
+			}			
 		}
 	}
 }

@@ -127,7 +127,7 @@
 				    <li class="tab-content-header">
 				    	<span title="Application de gestion de projets en mode SaaS">Application de gestion de projets en mode SaaS</span>
 			    	</li>
-					<li class="active">
+					<li class="simple-menu active">
 						<a href="#">
 							<span class="menu-icon"><i class="fa fa-dashboard"></i></span>
 							<span class="menu-title">Tableau de bord</span>
@@ -205,7 +205,7 @@
 							</li>
 						</ul>
 					</li>
-					<li>
+					<li class="simple-menu">
 						<a href="javascript:void(0);">
 							<span class="menu-icon"><i class="fa fa-pause-circle-o"></i></span>
 							<span class="menu-title">Points en suspens</span>
@@ -213,22 +213,40 @@
 					</li>
 				</ul>
 			</div>
+
 			<div id="global-tab" class="tab-pane">
 				<ul class="nav">
 				    <li class="tab-content-header">
 				    	<span title="Global">Global</span>
 			    	</li>
-					<li>
+					<li class="simple-menu">
 						<a href="#">
 							<span class="menu-icon"><i class="fa fa-dashboard"></i></span>
 							<span class="menu-title">Points en suspens</span>
 						</a>
 					</li>
-					<li>
+					<li class="collapsible-menu">
 						<a href="javascript:void(0);">
 							<span class="menu-icon"><i class="fa fa-dashboard"></i></span>
 							<span class="menu-title">Demandes de changement</span>
 						</a>
+						<ul>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</div>
@@ -426,18 +444,20 @@
 		// 	$(".navbar-collapse").collapse('hide');
 		// });
 
-		var li_list = document.getElementsByClassName('collapsible-menu');
-		for (var i = 0; i < li_list.length; i++) {
-			li_list[i].children[0].onclick = function () {
+
+		// On sidebar expandable menu click
+		var li_expandables = document.getElementsByClassName('collapsible-menu');
+		for (var i = 0; i < li_expandables.length; i++) {
+			li_expandables[i].children[0].onclick = function () {
 				// TODO: polyfill for children[] property (IE8-)
 			    var ul = this.parentElement.children[1];
 			    var isExpanded = ul.clientHeight;
 
 			    // TODO: replace with specific (.expanded?) class query
-			    //	& replace li_list with css selector on all needed ul
-				for (var j = 0; j < li_list.length; j++) {
+			    //	& replace li_expandables with css selector on all needed ul
+				for (var j = 0; j < li_expandables.length; j++) {
 					// select ul element
-					var ul_j = li_list[j].children[1];
+					var ul_j = li_expandables[j].children[1];
 				    if (ul_j.clientHeight) {
 						ul_j.style.height = 0;
 					}
@@ -449,14 +469,38 @@
 			}
 		}
 
-		for (var i = 0; i < li_list.length; i++) {
-			// select ul element
-			var ul_i = li_list[i].children[1];
-		    if (ul_i.clientHeight) {
-				ul_i.style.height = 0;
+		// On sidebar simple menu click
+		var li_simples = document.getElementsByClassName('simple-menu');
+		for (var i = 0; i < li_simples.length; i++) {
+			li_simples[i].onclick = function () {
+			    // TODO: replace with specific (.expanded?) class query
+			    //	& replace li_expandables with css selector on all needed ul
+				for (var j = 0; j < li_expandables.length; j++) {
+					// select ul element
+					var ul_j = li_expandables[j].children[1];
+				    if (ul_j.clientHeight) {
+						ul_j.style.height = 0;
+					}
+				}
+
+				// only one element should match, even across tabs
+				var li_active = document.querySelector('#sidebar .tab-content .tab-pane > ul > li.active');
+				if (li_active) {
+					li_active.classList.remove('active');
+				}
+				// only one element should match, even across tabs
+				var a_active = document.querySelector('#sidebar .tab-content .tab-pane > ul > li > ul > li > a.active');
+				if (a_active) {
+					a_active.classList.remove('active');
+				}
+
+				// activate clicked on a_link's parent menu entry
+				this.className += " active";
 			}
 		}
 
+
+		// On sidebar submenu click
 		var subLinks = document.querySelectorAll('#sidebar .tab-content .tab-pane > ul > li > ul > li > a');
 		for (var i = 0; i < subLinks.length; i++) {
 			subLinks[i].onclick = function () {
@@ -477,6 +521,18 @@
 			}
 		}
 
+
+		// In/Out-dent sidebar
+		document.getElementById('outdent-icon').onclick = function () {
+			var body = document.body;
+			// TODO: polyfill for classList (from MDN?)
+			if (body.classList.contains('mini-sidebar')) {
+				body.classList.remove('mini-sidebar');
+			}
+			else {
+				body.className += " mini-sidebar";
+			}
+		}
 	</script>
 </body>
 </html>
