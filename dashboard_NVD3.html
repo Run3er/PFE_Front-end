@@ -47,44 +47,54 @@
 </head>
 <body>
 	<!-- Header navbar -->
-    <nav id="navbar-header" class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
+    <nav id="header-navbar" class="navbar navbar-default">
         <div class="navbar-header">
-    	  <a href="#" class="navbar-header-brand hidden-xs" style="float: left;">dasshy</a>
-
-          <ul class="nav navbar-nav navbar-left nav-icons">
-          	<li>
-      			<a class="nav-icon visible-xs" href="#">
+          <ul class="nav navbar-left">
+          	<li class="visible-xs pull-left">
+      			<a class="nav-icon" href="#">
       				<i class="fa fa-bars"></i>
       			</a>
   			</li>
-          	<li>
-      			<a id="outdent-icon" class="nav-icon hidden-xs" href="#">
-      				<i class="fa fa-outdent"></i>
-      			</a>
-  			</li>
-          	<li style="float: right;">
-      			<a class="nav-icon visible-xs" href="#" class="collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          	<li class="visible-xs pull-right">
+      			<a class="nav-icon" href="#" class="collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
       				<i class="fa fa-chevron-down"></i>
       			</a>
   			</li>
-          	<li style="float: none;"  class="navbar-title visible-xs">
+          	<li class="hidden-xs">
+      			<a id="outdent-icon" class="nav-icon" href="#">
+      				<i class="fa fa-outdent"></i>
+      			</a>
+  			</li>
+          	<li class="visible-xs navbar-title">
 	    		<span title="dashy">dashy</span>
   			</li>
-            <form class="navbar-form navbar-left hidden-xs">
-            	<input type="text" class="form-control navbar-search" placeholder="Rechercher">
-            </form>
           </ul>
         </div>
+
         <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-left">
+            <input type="text" class="form-control navbar-search" placeholder="Rechercher">
+          </form>
           <ul class="nav navbar-nav navbar-right">
 	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="profile-name">Amine</span> <img class="profile-image img-circle" src="assets/img/usr.png" alt="avatar" /> <b class="caret"></b></a>
+	          <a href="#" class="profile-menu dropdown-toggle" data-toggle="dropdown">
+	          	<span>Amine</span>
+	          	<img class="img-circle" src="assets/img/usr.png" alt="avatar" />
+	          	<b class="caret"></b>
+          	  </a>
 	          <ul class="dropdown-menu">
-	            <li><a href="#"><i class="fa fa-globe"></i> Notification <span class="label label-danger"> 5</span></a></li>
-	            <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-	            <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
-	            <li><a href="#"><i class="fa fa-share"></i> Logout</a></li>
+	            <li>
+	            	<a href="#"><i class="fa fa-globe"></i> Notification <span class="label label-danger"> 5</span></a>
+            	</li>
+	            <li>
+	            	<a href="#"><i class="fa fa-user"></i> Profile</a>
+            	</li>
+	            <li>
+	            	<a href="#"><i class="fa fa-gear"></i> Settings</a>
+            	</li>
+	            <li>
+	            	<a href="#"><i class="fa fa-share"></i> Logout</a>
+            	</li>
 	          </ul>
 	        </li><!-- 
          	<li>
@@ -98,15 +108,14 @@
 	          </ul>
     		</li>
           </ul>
-          <form class="navbar-form navbar-right visible-xs">
-            <input type="text" class="form-control navbar-search" placeholder="Rechercher">
-          </form>
         </div>
-      </div>
     </nav>
 
 	<!-- Sidebar -->
     <div id="sidebar">
+  		<a id="nav-brand" href="index.html">
+            dashy
+        </a>
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#project-tab" data-toggle="tab"><i class="fa fa-th"></i></a></li>
 			<li><a href="#global-tab" data-toggle="tab"><i class="fa fa-globe"></i></a></li>
@@ -416,6 +425,7 @@
 		// $(document).on('touchstart click', 'html:not(nav)',function() {
 		// 	$(".navbar-collapse").collapse('hide');
 		// });
+
 		var li_list = document.getElementsByClassName('collapsible-menu');
 		for (var i = 0; i < li_list.length; i++) {
 			li_list[i].children[0].onclick = function () {
@@ -436,8 +446,6 @@
 				if (!isExpanded) {
 					ul.style.height = ul.scrollHeight + "px";
 				}
-			    // TODO
-			    //  Highlight parent link on selection
 			}
 		}
 
@@ -468,8 +476,6 @@
 				menuEntry.className += " active";
 			}
 		}
-
-		// assign active class to clicked on element's parent li
 
 	</script>
 </body>

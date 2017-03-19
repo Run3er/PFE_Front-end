@@ -56,8 +56,6 @@ $timeline-piping-width: 0.6rem;
 		/*font-size: 1px;*/ 
 	}
 	body {
-		/* Take navbar height into account with padding-top */ 
-		padding-top: 5.5rem; 
 		background-color: $body-bg-color; 
 	}
 	.nvd3 text {
