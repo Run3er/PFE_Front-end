@@ -1,576 +1,347 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-	<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 
+	<h2>Todo</h2>
+	<div ng-controller="TodoListController as todoList">
+	  <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining</span>
+	  [ <a href="" ng-click="todoList.archive()">archive</a> ]
+	  <ul class="unstyled">
+		<li ng-repeat="todo in todoList.todos">
+		  <label class="checkbox">
+			<input type="checkbox" ng-model="todo.done">
+			<span class="done-{{todo.done}}">{{todo.text}}</span>
+		  </label>
+		</li>
+	  </ul>
+	  <form ng-submit="todoList.addTodo()">
+		<input type="text" ng-model="todoList.todoText"  size="30"
+			   placeholder="add new todo here">
+		<input class="btn-primary" type="submit" value="add">
+	  </form>
+	</div>	 -->
 
-	<link rel="icon" type="image/png" href="assets/favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="assets/favicon-16x16.png" sizes="16x16" />
-	<meta name="theme-color" content="#ffffff">
-	<title>ProjectDash</title>
-
-	<!-- TODO: Normalize.css already included in bootstrap -->
-	<link rel="stylesheet" href="ress/css/normalize.css">
-	<link rel="stylesheet" href="ress/css/font-awesome.min.css">
-	<!-- Latest compiled and minified CSS -->
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
-	<link rel="stylesheet" href="ress/css/bootstrap.min.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug ... -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script> -->
-
-    <!-- Other styles for this template -->
-    <link href="ress/css/nv.d3.css" rel="stylesheet" type="text/css">
-
-    <!-- Custom styling -->
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-	<!-- Navbar top -->
-    <nav id="navbar-top" class="navbar navbar-default">
-        <div class="navbar-header">
-          <ul class="nav navbar-left">
-          	<li class="visible-xs pull-left">
-      			<a class="nav-icon" href="#">
-      				<i class="fa fa-bars"></i>
-      			</a>
-  			</li>
-          	<li class="visible-xs pull-right">
-      			<a class="nav-icon" href="#" class="collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-      				<i class="fa fa-chevron-down"></i>
-      			</a>
-  			</li>
-          	<li class="hidden-xs">
-      			<a id="outdent-icon" class="nav-icon" href="#">
-      				<i class="fa fa-outdent"></i>
-      			</a>
-  			</li>
-          	<li class="visible-xs navbar-title">
-	    		<span title="dashy">dashy</span>
-  			</li>
-          </ul>
-        </div>
-
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-left">
-            <input type="text" class="form-control navbar-search" placeholder=" Rechercher">
-          </form>
-          <ul class="nav navbar-nav navbar-right">
-	        <li class="dropdown">
-	          <a href="#" class="profile-menu dropdown-toggle" data-toggle="dropdown">
-	          	<span>Amine</span>
-	          	<img class="img-circle" src="assets/img/usr.png" alt="avatar" />
-	          	<b class="caret"></b>
-          	  </a>
-	          <ul class="dropdown-menu">
-	            <li>
-	            	<a href="#"><i class="fa fa-globe"></i> Notification <span class="label label-danger"> 5</span></a>
-            	</li>
-	            <li>
-	            	<a href="#"><i class="fa fa-user"></i> Profile</a>
-            	</li>
-	            <li>
-	            	<a href="#"><i class="fa fa-gear"></i> Settings</a>
-            	</li>
-	            <li>
-	            	<a href="#"><i class="fa fa-share"></i> Logout</a>
-            	</li>
-	          </ul>
-	        </li><!-- 
-         	<li>
-	          <a href="#"><i class="nav-icon fa fa-question-circle-o"></i></a>
-    		</li> -->
-         	<li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="nav-icon fa fa-gear"></i> <b class="caret"></b></a>
-	          <ul class="dropdown-menu">
-				  <li><a href="#" id="fixed-sidebar-link">Fixed sidebar</a></li>
-				  <li><a href="#" id="fixed-navbar-link">Fixed Navbar</a></li>
-	          </ul>
-    		</li>
-          </ul>
-        </div>
-    </nav>
-
-	<!-- Sidebar -->
-    <div id="sidebar">
-  		<a id="nav-brand" href="index.html">
-            dashy
-        </a>
-		<ul class="nav nav-tabs">
-			<li class="active"><a href="#project-tab" data-toggle="tab"><i class="fa fa-th"></i></a></li>
-			<li><a href="#global-tab" data-toggle="tab"><i class="fa fa-globe"></i></a></li>
-		</ul>
-
-		<div class="tab-content">
-			<div id="project-tab" class="tab-pane active">
-				<ul class="nav">
-				    <li class="tab-content-header">
-				    	<span title="Application de gestion de projets en mode SaaS">Application de gestion de projets en mode SaaS</span>
-			    	</li>
-					<li class="simple-menu">
-						<a href="dashboard.html">
-							<span class="menu-icon"><i class="fa fa-dashboard"></i></span>
-							<span class="menu-title">Tableau de bord</span>
-						</a>
-					</li>
-					<li class="simple-menu active">
-						<a href="actions.html">
-							<span class="menu-icon"><i class="fa fa-tasks"></i></span>
-							<span class="menu-title">Actions</span>
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-warning"></i></span>
-							<span class="menu-title">Risques</span>
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-pause-circle-o"></i></span>
-							<span class="menu-title">Points en suspens</span>
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-exchange"></i></span>
-							<span class="menu-title">Demandes de changement</span>
-							<span class="menu-badge"><span class="label label-danger">2</span></span>
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-user-times"></i></span>
-							<span class="menu-title">Ressources</span>
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-file"></i></span>
-							<span class="menu-title">Documents</span>
-							<span class="menu-badge"><span class="label label-danger">1</span></span>
-							<!-- TODO: if more than three numerals (>1000), add title attribute -->
-							<!-- <span class="menu-badge"><span class="label label-danger" title="1000">1000</span></span> -->
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-calendar"></i></span>
-							<span class="menu-title">Planning</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-
-			<div id="global-tab" class="tab-pane">
-				<ul class="nav">
-				    <li class="tab-content-header">
-				    	<span title="Global">Global</span>
-			    	</li>
-					<li class="collapsible-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-th"></i></span>
-							<span class="menu-title">Projets</span>
-							<span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right"></i></span>
-						</a>
-						<ul>
-							<li>
-								<a href="#">Service 5G - Ooredoo</a>
-							</li>
-							<li>
-								<a href="#">SMS Sender - TT</a>
-							</li>
-							<li>
-								<a href="#">Application de gestion de projets en mode SaaS</a>
-							</li>
-							<li>
-								<a href="#">Rénovation Infrastructure</a>
-							</li>
-						</ul>
-					</li>
-					<li class="simple-menu">
-						<a href="#">
-							<span class="menu-icon"><i class="fa fa-user-times"></i></span>
-							<span class="menu-title">Ressources</span>
-						</a>
-					</li>
-				</ul>
+<div id="form-add-action" class="collapse form-collapse">
+	<div class="form-title">
+		<div class="col-sm-offset-2 col-sm-10">
+			<h3>Ajouter une action</h3>
+		</div>
+	</div>
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="titre">Titre:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="titre" placeholder=" Sasir le titre" required="required">
 			</div>
 		</div>
-    </div>
-
-    <section id="main">
-      <!-- <div class="row"> -->
-			
-			<!-- Header -->
-        	<div class="header">
-				<a class="last-update" href="#" title="dernière mise à jour">
-					<i class="icon fa fa-calendar-check-o"></i>
-					&nbsp;<span class="day-month">03/02</span>
-					<span class="year">/2017</span>
-					&nbsp;<i class="icon icon-tiny fa fa-caret-down"></i>
-				</a>
-				<ul class="breadcrumbs-list">
-				  <li>
-				  	<a href="#"><i class="fa fa-th"></i></a>
-			  	  </li>
-				  <li>
-				  	&nbsp;<i class="chevron fa fa-caret-right"></i>
-				  	&nbsp;<a href="#"><span>Projet X</span></a>
-			  	  </li>
-				  <li>
-				  	&nbsp;<i class="chevron fa fa-caret-right"></i>
-				  	&nbsp;<a href="#"><span>Projet X</span></a>
-			  	  </li>
-				  <li>
-				  	&nbsp;<i class="chevron fa fa-caret-right"></i>
-				  	&nbsp;<a href="#"><span>Projet X</span></a>
-			  	  </li>
-				  <li>
-				  	&nbsp;<i class="chevron fa fa-caret-right"></i>
-				  	&nbsp;<a href="#"><span>Projet X</span></a>
-			  	  </li>
-				  <li>
-				  	&nbsp;<i class="chevron fa fa-caret-right"></i>
-				  	&nbsp;<a href="#"><span>Projet X</span></a>
-			  	  </li>
-				  <li>
-				  	&nbsp;<i class="chevron fa fa-caret-right"></i>
-				  	&nbsp;<a href="#"><span>Projet X</span></a>
-			  	  </li>
-				  <li>
-				  	&nbsp;<i class="chevron fa fa-caret-right"></i>
-				  	&nbsp;<a href="#"><span>Projet X</span></a>
-			  	  </li>
-				  <li>
-				  	&nbsp;<i class="chevron fa fa-caret-right"></i>
-				  	&nbsp;<a href="#"><span>Projet X</span></a>
-			  	  </li>
-				</ul>
-        	</div>
-
-			<div id="main-content" class="container-fluid">
-				<div id="form-add-action" class="collapse form-collapse">
-				   <div class="form-title">
-					 <div class="col-sm-offset-2 col-sm-10">
-					  <h3>Ajouter une action</h3>
-					 </div>
-				   </div>
-					<form class="form-horizontal">
-					  <div class="form-group">
-						<label class="control-label col-sm-2" for="titre">Titre:</label>
-						<div class="col-sm-10">
-						  <input type="text" class="form-control" id="titre" placeholder=" Sasir le titre" required="required">
-						</div>
-					  </div>
-				      <div class="form-group">
-						<label class="control-label col-sm-2" for="status">Statut:</label>
-				        <div class="col-sm-10">
-				          <select class="form-control" id="status" required="required">
-				            <option value=""  disabled="disabled" selected="selected" class="hidden">Sélectionner le statut</option>
-				            <option value="En cours">En cours</option>
-				            <option value="En standby">En standby</option>
-				            <option value="Annulée">Annulée</option>
-				            <option value="Clôturée">Clôturée</option>
-				          </select>
-				        </div>
-				      </div>
-				      <div class="form-group">
-						<label class="control-label col-sm-2" for="supervisor">Responsable:</label>
-				        <div class="col-sm-10 sub-form-entry">
-				          <button class="btn btn-default" data-toggle="collapse" data-target="#sub-form-add-supervisor"><i class="fa fa-plus"></i></button>
-				          <div>
-					          <select class="form-control" id="supervisor" required="required">
-					            <option value=""  disabled="disabled" selected="selected" class="hidden">Sélectionner le responsable</option>
-					            <option value="Mohamed">Mohamed</option>
-					            <option value="Salma">Salma</option>
-					          </select>
-				          </div>
-				        </div>
-				      </div>
-				      <div id="sub-form-add-supervisor" class="sub-form collapse">
-						  <div class="form-group">
-							<label class="control-label col-sm-2" for="supervisor-lastname">Nom:</label>
-							<div class="col-sm-10">
-							  <input type="text" class="form-control" id="supervisor-lastname" placeholder="Sasir le nom" required="required" disabled="true">
-							</div>
-						  </div>
-						  <div class="form-group">
-							<label class="control-label col-sm-2" for="supervisor-firstname">Prénom:</label>
-							<div class="col-sm-10">
-							  <input type="text" class="form-control" id="supervisor-firstname" placeholder="Sasir le prénom" required="required" disabled="true">
-							</div>
-						  </div>
-						  <div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-							  <button type="submit" class="btn btn-default">+ Responsable</button>
-							  <button type="reset" class="btn btn-default" data-toggle="collapse" data-target="#sub-form-add-supervisor">Annuler</button>
-							</div>
-						  </div>
-				      </div>
-				      <div class="form-group">
-						<label class="control-label col-sm-2" for="priority">Priorité:</label>
-				        <div class="col-sm-10">
-				          <select class="form-control" id="priority" required="required">
-				            <option value=""  disabled="disabled" selected="selected" class="hidden">Sélectionner la priorité</option>
-				            <option value="1">1</option>
-				            <option value="2">2</option>
-				            <option value="3">3</option>
-				          </select>
-				        </div>
-				      </div>
-					  <div class="form-group">
-						<label class="control-label col-sm-2" for="opening-date">Date de création:</label>
-						<div class="col-sm-10">
-						  <input type="text" class="form-control" id="opening-date" placeholder=" Sasir le titre" required="required">
-						</div>
-					  </div>
-					  <div class="form-group">
-						<label class="control-label col-sm-2" for="closing-date">Date de clôture planifiée:</label>
-						<div class="col-sm-10">
-						  <input type="text" class="form-control" id="closing-date" placeholder=" Sasir le titre" required="required">
-						</div>
-					  </div>
-					  <div class="form-group">
-						<label class="control-label col-sm-2" for="comment">Commentaire:</label>
-						<div class="col-sm-10">
-						  <textarea type="text" class="form-control" id="comment" placeholder=" Entrer un commentaire"></textarea>
-						</div>
-					  </div>
-					  <div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-						  <button type="submit" class="btn btn-primary">Ajouter</button>
-						  <!-- <button type="submit" class="btn btn-danger">Supprimer</button> -->
-						  <button type="reset" class="btn btn-default" data-toggle="collapse" data-target="#form-add-action">Annuler</button>
-						</div>
-					  </div>
-					</form>
-				</div>
-
-				<div class="table-responsive">
-					<table class="main-table table table-striped table-hover"><div>
-						<thead>
-							<tr>
-								<th><button class="btn" data-toggle="collapse" data-target="#form-add-action"><i class="fa fa-plus"></i></button></th>
-								<th>Titre</th>
-								<th>Statut</th>
-								<th>Responsable</th>
-								<th>Priorité</th>
-								<th>Création</th>
-								<th>Clôture Planifiée</th>
-								<th>Retard / Clôture Réelle</th>
-								<th>Commentaires</th>
-							</tr>
-						</thead></div>
-						<tbody>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>Faire Action I</td>
-								<td>En cours</td>
-								<td>Mohamed</td>
-								<td>2</td>
-								<td>01/02/2017</td>
-								<td>29/03/2017</td>
-								<td>20 j</td>
-								<td>Consulter Foulen pour les guides.</td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>Compléter Action II</td>
-								<td>En standby</td>
-								<td>Fatma</td>
-								<td>1</td>
-								<td>02/02/2017</td>
-								<td>17/02/2017</td>
-								<td>3 j</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>S'occuper de Action III</td>
-								<td>En cours</td>
-								<td>Ali</td>
-								<td>3</td>
-								<td>01/02/2017</td>
-								<td>31/03/2017</td>
-								<td></td>
-								<!-- <td>L'action n'est pas trop aisé pour une personne.</td> -->
-								<td>Maîtriser le process avant d'entreprendre l'action.</td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>S'occuper de Action IV</td>
-								<td>Clôturée</td>
-								<td>Mohamed</td>
-								<td>3</td>
-								<td>01/02/2017</td>
-								<td>31/03/2017</td>
-								<td>20/03/2017</td>
-								<td>Une partie du travail a déja été faite par Ammar.</td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>Faire Action I</td>
-								<td>En cours</td>
-								<td>Mohamed</td>
-								<td>2</td>
-								<td>01/02/2017</td>
-								<td>29/03/2017</td>
-								<td>20 j</td>
-								<td>Consulter Foulen pour les guides.</td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>Compléter Action II</td>
-								<td>En standby</td>
-								<td>Fatma</td>
-								<td>1</td>
-								<td>02/02/2017</td>
-								<td>17/02/2017</td>
-								<td>3 j</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>S'occuper de Action III</td>
-								<td>En cours</td>
-								<td>Ali</td>
-								<td>3</td>
-								<td>01/02/2017</td>
-								<td>31/03/2017</td>
-								<td></td>
-								<!-- <td>L'action n'est pas trop aisé pour une personne.</td> -->
-								<td>Maîtriser le process avant d'entreprendre l'action.</td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>S'occuper de Action IV</td>
-								<td>Clôturée</td>
-								<td>Mohamed</td>
-								<td>3</td>
-								<td>01/02/2017</td>
-								<td>31/03/2017</td>
-								<td>20/03/2017</td>
-								<td>Une partie du travail a déja été faite par Ammar.</td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>Faire Action I</td>
-								<td>En cours</td>
-								<td>Mohamed</td>
-								<td>2</td>
-								<td>01/02/2017</td>
-								<td>29/03/2017</td>
-								<td>20 j</td>
-								<td>Consulter Foulen pour les guides.</td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>Compléter Action II</td>
-								<td>En standby</td>
-								<td>Fatma</td>
-								<td>1</td>
-								<td>02/02/2017</td>
-								<td>17/02/2017</td>
-								<td>3 j</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>S'occuper de Action III</td>
-								<td>En cours</td>
-								<td>Ali</td>
-								<td>3</td>
-								<td>01/02/2017</td>
-								<td>31/03/2017</td>
-								<td></td>
-								<!-- <td>L'action n'est pas trop aisé pour une personne.</td> -->
-								<td>Maîtriser le process avant d'entreprendre l'action.</td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>S'occuper de Action IV</td>
-								<td>Clôturée</td>
-								<td>Mohamed</td>
-								<td>3</td>
-								<td>01/02/2017</td>
-								<td>31/03/2017</td>
-								<td>20/03/2017</td>
-								<td>Une partie du travail a déja été faite par Ammar.</td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>Faire Action I</td>
-								<td>En cours</td>
-								<td>Mohamed</td>
-								<td>2</td>
-								<td>01/02/2017</td>
-								<td>29/03/2017</td>
-								<td>20 j</td>
-								<td>Consulter Foulen pour les guides.</td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>Compléter Action II</td>
-								<td>En standby</td>
-								<td>Fatma</td>
-								<td>1</td>
-								<td>02/02/2017</td>
-								<td>17/02/2017</td>
-								<td>3 j</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>S'occuper de Action III</td>
-								<td>En cours</td>
-								<td>Ali</td>
-								<td>3</td>
-								<td>01/02/2017</td>
-								<td>31/03/2017</td>
-								<td></td>
-								<!-- <td>L'action n'est pas trop aisé pour une personne.</td> -->
-								<td>Maîtriser le process avant d'entreprendre l'action.</td>
-							</tr>
-							<tr>
-								<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
-								<td>S'occuper de Action IV</td>
-								<td>Clôturée</td>
-								<td>Mohamed</td>
-								<td>3</td>
-								<td>01/02/2017</td>
-								<td>31/03/2017</td>
-								<td>20/03/2017</td>
-								<td>Une partie du travail a déja été faite par Ammar.</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="status">Statut:</label>
+			<div class="col-sm-10">
+				<select class="form-control" id="status" required="required">
+					<option value=""  disabled="disabled" selected="selected" class="hidden">Sélectionner le statut</option>
+					<option value="En cours">En cours</option>
+					<option value="En standby">En standby</option>
+					<option value="Annulée">Annulée</option>
+					<option value="Clôturée">Clôturée</option>
+				</select>
 			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="supervisor">Responsable:</label>
+			<div class="col-sm-10 sub-form-entry">
+				<button class="btn btn-default" data-toggle="collapse" data-target="#sub-form-add-supervisor"><i class="fa fa-plus"></i></button>
+				<div>
+					<select class="form-control" id="supervisor" required="required">
+						<option value=""  disabled="disabled" selected="selected" class="hidden">Sélectionner le responsable</option>
+						<option value="Mohamed">Mohamed</option>
+						<option value="Salma">Salma</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div id="sub-form-add-supervisor" class="sub-form collapse">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="supervisor-lastname">Nom:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="supervisor-lastname" placeholder="Sasir le nom" required="required" disabled="true">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="supervisor-firstname">Prénom:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="supervisor-firstname" placeholder="Sasir le prénom" required="required" disabled="true">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">+ Responsable</button>
+					<button type="reset" class="btn btn-default" data-toggle="collapse" data-target="#sub-form-add-supervisor">Annuler</button>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+		<label class="control-label col-sm-2" for="priority">Priorité:</label>
+		<div class="col-sm-10">
+			<select class="form-control" id="priority" required="required">
+				<option value=""  disabled="disabled" selected="selected" class="hidden">Sélectionner la priorité</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+		</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="opening-date">Date de création:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="opening-date" placeholder=" Sasir le titre" required="required">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="closing-date">Date de clôture planifiée:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="closing-date" placeholder=" Sasir le titre" required="required">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="comment">Commentaire:</label>
+			<div class="col-sm-10">
+				<textarea type="text" class="form-control" id="comment" placeholder=" Entrer un commentaire"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Ajouter</button>
+				<!-- <button type="submit" class="btn btn-danger">Supprimer</button> -->
+				<button type="reset" class="btn btn-default" data-toggle="collapse" data-target="#form-add-action">Annuler</button>
+			</div>
+		</div>
+	</form>
+</div>
 
-	  <!-- </div> -->
-   </section>
-
-	<script src="assets/js/navbar-sidebar.js"></script>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-    <script src="ress/js/jquery.min.js"></script>
-	<!-- Latest compiled and minified JavaScript -->
-	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
-	<script src="ress/js/bootstrap.min.js"></script>
-</body>
-</html>
-
+<div class="table-responsive">
+	<table class="main-table table table-striped table-hover"><div>
+		<thead>
+			<tr>
+				<th><button class="btn" data-toggle="collapse" data-target="#form-add-action"><i class="fa fa-plus"></i></button></th>
+				<th>Titre</th>
+				<th>Statut</th>
+				<th>Responsable</th>
+				<th>Priorité</th>
+				<th>Création</th>
+				<th>Clôture Planifiée</th>
+				<th>Retard / Clôture Réelle</th>
+				<th>Commentaires</th>
+			</tr>
+		</thead></div>
+		<tbody>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>Faire Action I</td>
+				<td>En cours</td>
+				<td>Mohamed</td>
+				<td>2</td>
+				<td>01/02/2017</td>
+				<td>29/03/2017</td>
+				<td>20 j</td>
+				<td>Consulter Foulen pour les guides.</td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>Compléter Action II</td>
+				<td>En standby</td>
+				<td>Fatma</td>
+				<td>1</td>
+				<td>02/02/2017</td>
+				<td>17/02/2017</td>
+				<td>3 j</td>
+				<td></td>
+			</tr><!-- 
+			<tr>
+			  <form>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>
+					<input type="text" class="form-control" id="titre" placeholder=" Sasir le titre" value="Compléter Action II" required="required">
+				</td>
+				<td>
+					<select class="form-control" id="status" required="required">
+			            <option value="En cours">En cours</option>
+			            <option value="En standby" selected="selected">En standby</option>
+			            <option value="Annulée">Annulée</option>
+			            <option value="Clôturée">Clôturée</option>
+					</select>
+		        </td>
+				<td>Fatma</td>
+				<td>
+					<select class="form-control" id="priority" required="required">
+			            <option value="1" selected="selected">1</option>
+			            <option value="2">2</option>
+			            <option value="3">3</option>
+					</select>
+				</td>
+				<td>02/02/2017</td>
+				<td>17/02/2017</td>
+				<td>3 j</td>
+				<td></td>
+			  </form>
+			</tr> -->
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>S'occuper de Action III</td>
+				<td>En cours</td>
+				<td>Ali</td>
+				<td>3</td>
+				<td>01/02/2017</td>
+				<td>31/03/2017</td>
+				<td></td>
+				<!-- <td>L'action n'est pas trop aisé pour une personne.</td> -->
+				<td>Maîtriser le process avant d'entreprendre l'action.</td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>S'occuper de Action IV</td>
+				<td>Clôturée</td>
+				<td>Mohamed</td>
+				<td>3</td>
+				<td>01/02/2017</td>
+				<td>31/03/2017</td>
+				<td>20/03/2017</td>
+				<td>Une partie du travail a déja été faite par Ammar.</td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>Faire Action I</td>
+				<td>En cours</td>
+				<td>Mohamed</td>
+				<td>2</td>
+				<td>01/02/2017</td>
+				<td>29/03/2017</td>
+				<td>20 j</td>
+				<td>Consulter Foulen pour les guides.</td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>Compléter Action II</td>
+				<td>En standby</td>
+				<td>Fatma</td>
+				<td>1</td>
+				<td>02/02/2017</td>
+				<td>17/02/2017</td>
+				<td>3 j</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>S'occuper de Action III</td>
+				<td>En cours</td>
+				<td>Ali</td>
+				<td>3</td>
+				<td>01/02/2017</td>
+				<td>31/03/2017</td>
+				<td></td>
+				<!-- <td>L'action n'est pas trop aisé pour une personne.</td> -->
+				<td>Maîtriser le process avant d'entreprendre l'action.</td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>S'occuper de Action IV</td>
+				<td>Clôturée</td>
+				<td>Mohamed</td>
+				<td>3</td>
+				<td>01/02/2017</td>
+				<td>31/03/2017</td>
+				<td>20/03/2017</td>
+				<td>Une partie du travail a déja été faite par Ammar.</td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>Faire Action I</td>
+				<td>En cours</td>
+				<td>Mohamed</td>
+				<td>2</td>
+				<td>01/02/2017</td>
+				<td>29/03/2017</td>
+				<td>20 j</td>
+				<td>Consulter Foulen pour les guides.</td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>Compléter Action II</td>
+				<td>En standby</td>
+				<td>Fatma</td>
+				<td>1</td>
+				<td>02/02/2017</td>
+				<td>17/02/2017</td>
+				<td>3 j</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>S'occuper de Action III</td>
+				<td>En cours</td>
+				<td>Ali</td>
+				<td>3</td>
+				<td>01/02/2017</td>
+				<td>31/03/2017</td>
+				<td></td>
+				<!-- <td>L'action n'est pas trop aisé pour une personne.</td> -->
+				<td>Maîtriser le process avant d'entreprendre l'action.</td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>S'occuper de Action IV</td>
+				<td>Clôturée</td>
+				<td>Mohamed</td>
+				<td>3</td>
+				<td>01/02/2017</td>
+				<td>31/03/2017</td>
+				<td>20/03/2017</td>
+				<td>Une partie du travail a déja été faite par Ammar.</td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>Faire Action I</td>
+				<td>En cours</td>
+				<td>Mohamed</td>
+				<td>2</td>
+				<td>01/02/2017</td>
+				<td>29/03/2017</td>
+				<td>20 j</td>
+				<td>Consulter Foulen pour les guides.</td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>Compléter Action II</td>
+				<td>En standby</td>
+				<td>Fatma</td>
+				<td>1</td>
+				<td>02/02/2017</td>
+				<td>17/02/2017</td>
+				<td>3 j</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>S'occuper de Action III</td>
+				<td>En cours</td>
+				<td>Ali</td>
+				<td>3</td>
+				<td>01/02/2017</td>
+				<td>31/03/2017</td>
+				<td></td>
+				<!-- <td>L'action n'est pas trop aisé pour une personne.</td> -->
+				<td>Maîtriser le process avant d'entreprendre l'action.</td>
+			</tr>
+			<tr>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>S'occuper de Action IV</td>
+				<td>Clôturée</td>
+				<td>Mohamed</td>
+				<td>3</td>
+				<td>01/02/2017</td>
+				<td>31/03/2017</td>
+				<td>20/03/2017</td>
+				<td>Une partie du travail a déja été faite par Ammar.</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 
 
 <!--
@@ -578,5 +349,6 @@
 	- Let table's header always be visible, even on scroll	
 	- Tweak or replace bootstrap collapse animation
 	- Dynamically resizing textarea (http://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize)
-	- 
+
+	- Take a look at scattered TODOs
  -->
