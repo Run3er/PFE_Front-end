@@ -1,24 +1,34 @@
+// 
+//	Navbar & Sidebar styling 
+//
+//
+
+
 @import "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700";
 @import "http://fonts.googleapis.com/css?family=Fanwood+Text:400,400italic";
-
 
 $sidebar-width: 27rem;
 $sidebar-width-shrinked: 6rem;
 
 
+/*=============== Navbar-Sidebar ===============*/ 	 
 body {
-	font-size: 1.4rem;
+	font-size: 1.4rem; 
 	font-family: "Open Sans", sans-serif;
 }
 #main {
-	margin-left: $sidebar-width;
+	margin-top: 5.7rem;
+	@media (min-width: 768px) {
+		margin-top: 0	;
+		margin-left: $sidebar-width;
+	}
 }
 a:hover, a:focus {
 	outline:none;
 	text-decoration: none;
 }
 
-//bootstrap override
+// Bootstrap override
 .form-control {
     color: #7d8282;
     -webkit-box-shadow: none;
@@ -30,12 +40,14 @@ a:hover, a:focus {
     box-shadow: none;
 }
 
-#header-navbar {
+//* Navbar *//
+#navbar-top {
 	height: 5.7rem;
-	background-color: #3ba0ff;
+	margin-bottom: 0;
 	// border-top still at 1px by default
 	border-left: none;
 	border-right: none;
+	background-color: #3ba0ff;
 	@media (max-width: 767px) {
 	    position: fixed;
 	    top: 0;
@@ -125,7 +137,7 @@ a:hover, a:focus {
 }
 
 
-/* Sidebar */
+//* Sidebar *//
 #sidebar {
 	display: none;
 	width: $sidebar-width;
@@ -207,11 +219,11 @@ a:hover, a:focus {
 					&:hover, &:focus {
 						background-color: unset;
 					}
-					&:hover {
-						color: #b4b6b4;						
-					}
 					&:not(:hover):focus {
 						color: #909090;
+					}
+					&:hover {
+						color: #b4b6b4;						
 					}
 					.menu-icon {
 						width: 15%;
@@ -233,6 +245,18 @@ a:hover, a:focus {
 						font-size: 1.7rem;
 						.dropdown-arrow {
 							padding-left: 40%;
+						}
+						.label {
+							display: inline-block;
+							position: relative;
+							top: 0.1rem;
+							left: 0.4rem;
+							max-width: 29.1px;
+							padding: 0.4rem 0.6rem;
+							font-size: 1rem;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
 						}
 					}
 				}
@@ -275,7 +299,7 @@ a:hover, a:focus {
 							padding-top: 0.7rem;
 						}
 						&:last-of-type > a {
-							padding-bottom: 0.7rem;						
+							padding-bottom: 0.9rem;						
 						}
 					}
 				}
@@ -284,8 +308,10 @@ a:hover, a:focus {
 	}
 }
 body.mini-sidebar {
-	#header-navbar, #main {
-		margin-left: $sidebar-width-shrinked;
+	#navbar-top, #main {
+		@media (min-width: 768px) {				
+			margin-left: $sidebar-width-shrinked;
+		}
 	}
 	#sidebar {
 		width: $sidebar-width-shrinked;

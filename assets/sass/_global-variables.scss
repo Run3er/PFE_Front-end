@@ -1,0 +1,17 @@
+// 
+//	Global variables
+//
+// 
+
+// Breakpoints 
+// -Bootstrap 
+$bootstrap-lg-min-width: 1200px; 
+$bootstrap-md-max-width: $bootstrap-lg-min-width - 1; 
+$bootstrap-md-min-width: 992px; 
+$bootstrap-sm-max-width: $bootstrap-md-min-width - 1; 
+$bootstrap-sm-min-width: 768px; 
+$bootstrap-xs-max-width: $bootstrap-sm-min-width - 1; 
+// Theme
+$body-bg-color: #FDFCFC; 
+$font-color-dark: #3A4754;
+$color-primary: #3BA0FF;
