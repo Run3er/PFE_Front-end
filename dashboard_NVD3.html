@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="ress/css/bootstrap.min.css">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug ... -->
     <!-- Custom styles for this template -->
+	<link rel="stylesheet" href="ress/css/font-awesome.min.css">
     <!-- <link href="assets/css/dashboard.css" rel="stylesheet"> -->
     <link href="ress/css/nv.d3.css" rel="stylesheet" type="text/css">
 
@@ -43,63 +44,225 @@
     <!-- Dashboard NVD3 charts code -->
     <script src="assets/js/dashboard-NVD3.js"></script>
 
-    <style>
-    </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
+	<!-- Header navbar -->
+    <nav id="header-navbar" class="navbar navbar-default">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">MaSociete</a>
-        </div><!-- 
-        <div class="" role="navigation">
-        	<ul class="nav navbar-nav" style="text-align: center;">
-        		<h4 class="navbar-text">Projet X</h4>
-        	</ul>
-        </div> -->
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Configuration</a></li>
-            <li><a href="#">Profil</a></li>
-            <li><a href="#">Aide</a></li>
+          <ul class="nav navbar-left">
+          	<li class="visible-xs pull-left">
+      			<a class="nav-icon" href="#">
+      				<i class="fa fa-bars"></i>
+      			</a>
+  			</li>
+          	<li class="visible-xs pull-right">
+      			<a class="nav-icon" href="#" class="collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      				<i class="fa fa-chevron-down"></i>
+      			</a>
+  			</li>
+          	<li class="hidden-xs">
+      			<a id="outdent-icon" class="nav-icon" href="#">
+      				<i class="fa fa-outdent"></i>
+      			</a>
+  			</li>
+          	<li class="visible-xs navbar-title">
+	    		<span title="dashy">dashy</span>
+  			</li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Rechercher...">
-          </form>
         </div>
-      </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-left">
+            <input type="text" class="form-control navbar-search" placeholder="Rechercher">
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown">
+	          <a href="#" class="profile-menu dropdown-toggle" data-toggle="dropdown">
+	          	<span>Amine</span>
+	          	<img class="img-circle" src="assets/img/usr.png" alt="avatar" />
+	          	<b class="caret"></b>
+          	  </a>
+	          <ul class="dropdown-menu">
+	            <li>
+	            	<a href="#"><i class="fa fa-globe"></i> Notification <span class="label label-danger"> 5</span></a>
+            	</li>
+	            <li>
+	            	<a href="#"><i class="fa fa-user"></i> Profile</a>
+            	</li>
+	            <li>
+	            	<a href="#"><i class="fa fa-gear"></i> Settings</a>
+            	</li>
+	            <li>
+	            	<a href="#"><i class="fa fa-share"></i> Logout</a>
+            	</li>
+	          </ul>
+	        </li><!-- 
+         	<li>
+	          <a href="#"><i class="nav-icon fa fa-question-circle-o"></i></a>
+    		</li> -->
+         	<li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="nav-icon fa fa-gear"></i> <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+				  <li><a href="#" id="fixed-sidebar-link">Fixed sidebar</a></li>
+				  <li><a href="#" id="fixed-navbar-link">Fixed Navbar</a></li>
+	          </ul>
+    		</li>
+          </ul>
+        </div>
     </nav>
+
+	<!-- Sidebar -->
+    <div id="sidebar">
+  		<a id="nav-brand" href="index.html">
+            dashy
+        </a>
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#project-tab" data-toggle="tab"><i class="fa fa-th"></i></a></li>
+			<li><a href="#global-tab" data-toggle="tab"><i class="fa fa-globe"></i></a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="project-tab" class="tab-pane active">
+				<ul class="nav">
+				    <li class="tab-content-header">
+				    	<span title="Application de gestion de projets en mode SaaS">Application de gestion de projets en mode SaaS</span>
+			    	</li>
+					<li class="simple-menu active">
+						<a href="#">
+							<span class="menu-icon"><i class="fa fa-dashboard"></i></span>
+							<span class="menu-title">Tableau de bord</span>
+						</a>
+					</li>
+					<li class="collapsible-menu">
+						<a href="javascript:void(0);">
+							<span class="menu-icon"><i class="fa fa-tasks"></i></span>
+							<span class="menu-title">Actions</span>
+							<span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right"></i></span>
+						</a>
+						<ul>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+						</ul>
+					</li>
+					<li class="collapsible-menu">
+						<a href="javascript:void(0);">
+							<span class="menu-icon"><i class="fa fa-tasks"></i></span>
+							<span class="menu-title">Actions</span>
+							<span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right"></i></span>
+						</a>
+						<ul>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+						</ul>
+					</li>
+					<li class="collapsible-menu">
+						<a href="javascript:void(0);">
+							<span class="menu-icon"><i class="fa fa-warning"></i></span>
+							<span class="menu-title">Risques</span>
+							<span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right"></i></span>
+						</a>
+						<ul>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+						</ul>
+					</li>
+					<li class="simple-menu">
+						<a href="javascript:void(0);">
+							<span class="menu-icon"><i class="fa fa-pause-circle-o"></i></span>
+							<span class="menu-title">Points en suspens</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div id="global-tab" class="tab-pane">
+				<ul class="nav">
+				    <li class="tab-content-header">
+				    	<span title="Global">Global</span>
+			    	</li>
+					<li class="simple-menu">
+						<a href="#">
+							<span class="menu-icon"><i class="fa fa-dashboard"></i></span>
+							<span class="menu-title">Points en suspens</span>
+						</a>
+					</li>
+					<li class="collapsible-menu">
+						<a href="javascript:void(0);">
+							<span class="menu-icon"><i class="fa fa-dashboard"></i></span>
+							<span class="menu-title">Demandes de changement</span>
+						</a>
+						<ul>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+							<li>
+								<a href="#">General</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+    </div>
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar" style="font-weight: bold;">
-			<ul class="nav nav-sidebar" style="border-top: 2px solid #ffffff10;">
-				<li><a href="#" style=" background-color: #ffffff11; border-bottom: 1px solid #ffffff00;">Projets</a></li>
-				<li><a href="#" style=" background-color: #ffffff11; border-bottom: 2px solid #ffffff10;">Ressources</a></li>
-			</ul>
-			<ul class="nav nav-sidebar">
-				<li class="active"><a href="#">Tableau de bord <span class="sr-only">(current)</span></a></li>
-				<li><a href="#">Actions</a></li>
-				<li><a href="#">Risques</a></li>
-				<li><a href="#">Points en suspend</a></li>
-				<li><a href="#">Demandes de changement</a></li>
-			</ul>
-			<hr style="border-top: 2px solid #888; width: 103%; margin: -10px 0 10px -7px;" />
-			<ul class="nav nav-sidebar">
-				<li><a href="#">Ressources</span></a></li>
-				<li><a href="#">Documents</a></li>
-				<li><a href="#">Planning</a></li>
-			</ul>
-        </div>
 		
-        <div id="main" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+        <div id="main" style="width: auto;">
 			<!-- <h1 class="page-header">Project X - Dashboard</h1> -->
+			<ol class="breadcrumb" style="margin-left: 15px; margin-right: 15px;">
+			  <li><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+			  <li><a href="#">Projects</a></li>
+			  <li class="active">ImportantProjet</li>
+			</ol>
 
 			<div id="measure-chart-indicators-col" class="col-xlg-9">	
 				<div id="firstRow">
@@ -273,6 +436,104 @@
 		</div>
 	  </div>
     </div>
+
+
+	<script>
+		// Wrongly collappses on any click!
+		// $(document).on('touchstart click', 'html:not(nav)',function() {
+		// 	$(".navbar-collapse").collapse('hide');
+		// });
+
+
+		// On sidebar expandable menu click
+		var li_expandables = document.getElementsByClassName('collapsible-menu');
+		for (var i = 0; i < li_expandables.length; i++) {
+			li_expandables[i].children[0].onclick = function () {
+				// TODO: polyfill for children[] property (IE8-)
+			    var ul = this.parentElement.children[1];
+			    var isExpanded = ul.clientHeight;
+
+			    // TODO: replace with specific (.expanded?) class query
+			    //	& replace li_expandables with css selector on all needed ul
+				for (var j = 0; j < li_expandables.length; j++) {
+					// select ul element
+					var ul_j = li_expandables[j].children[1];
+				    if (ul_j.clientHeight) {
+						ul_j.style.height = 0;
+					}
+				}
+
+				if (!isExpanded) {
+					ul.style.height = ul.scrollHeight + "px";
+				}
+			}
+		}
+
+		// On sidebar simple menu click
+		var li_simples = document.getElementsByClassName('simple-menu');
+		for (var i = 0; i < li_simples.length; i++) {
+			li_simples[i].onclick = function () {
+			    // TODO: replace with specific (.expanded?) class query
+			    //	& replace li_expandables with css selector on all needed ul
+				for (var j = 0; j < li_expandables.length; j++) {
+					// select ul element
+					var ul_j = li_expandables[j].children[1];
+				    if (ul_j.clientHeight) {
+						ul_j.style.height = 0;
+					}
+				}
+
+				// only one element should match, even across tabs
+				var li_active = document.querySelector('#sidebar .tab-content .tab-pane > ul > li.active');
+				if (li_active) {
+					li_active.classList.remove('active');
+				}
+				// only one element should match, even across tabs
+				var a_active = document.querySelector('#sidebar .tab-content .tab-pane > ul > li > ul > li > a.active');
+				if (a_active) {
+					a_active.classList.remove('active');
+				}
+
+				// activate clicked on a_link's parent menu entry
+				this.className += " active";
+			}
+		}
+
+
+		// On sidebar submenu click
+		var subLinks = document.querySelectorAll('#sidebar .tab-content .tab-pane > ul > li > ul > li > a');
+		for (var i = 0; i < subLinks.length; i++) {
+			subLinks[i].onclick = function () {
+				// only one element should match, even across tabs
+				var li_active = document.querySelector('#sidebar .tab-content .tab-pane > ul > li.active');
+				if (li_active) {
+					li_active.classList.remove('active');
+				}
+				// only one element should match, even across tabs
+				var a_active = document.querySelector('#sidebar .tab-content .tab-pane > ul > li > ul > li > a.active');
+				if (a_active) {
+					a_active.classList.remove('active');
+				}
+				// activate clicked on a_link & parent menu entry
+				this.className += " active";
+				var menuEntry = this.parentElement.parentElement.parentElement;
+				menuEntry.className += " active";
+			}
+		}
+
+
+		// In/Out-dent sidebar
+		document.getElementById('outdent-icon').onclick = function () {
+			var body = document.body;
+			// TODO: polyfill for classList (from MDN?)
+			if (body.classList.contains('mini-sidebar')) {
+				body.classList.remove('mini-sidebar');
+			}
+			else {
+				body.className += " mini-sidebar";
+			}
+		}
+	</script>
 </body>
 </html>
 
