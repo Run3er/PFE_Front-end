@@ -17,14 +17,14 @@ angular.module('ProjMngmnt', ['ngRoute'])
 		 
 			$routeProvider
 				.when('/', {
-					templateUrl:'void.html'
+					templateUrl:'partials/void.html'
 				})
 				.when('/dashboard', {
-					templateUrl:'dashboard.html', 
+					templateUrl:'partials/dashboard.html', 
 					controller: 'DashboardCtrl'
 				})
 				.when('/actions', {
-					templateUrl:'actions.html'
+					templateUrl:'partials/actions.html'
 				})
 				// .when('/', {
 				//   controller:'ProjectListController as projectList',
@@ -112,6 +112,7 @@ angular.module('ProjMngmnt', ['ngRoute'])
 
 		        return chartHolder.chart;
 		    });
+
 		    return chartHolder;
 		}
 
@@ -132,7 +133,6 @@ angular.module('ProjMngmnt', ['ngRoute'])
 		];
 		// AdvancementRatio chart variables
 		var advancementRatioChartHolder = {};
-		chartHolders.push(advancementRatioChartHolder);
 		var advancementRatio_color = yellowHue; /*"#7FC"*/
 		var advancementRatio_bgColor = "#F2F2F2";
 
@@ -170,110 +170,119 @@ angular.module('ProjMngmnt', ['ngRoute'])
 		    }
 		];
 		// SubProjects chart variables
-		var SubProjectsChartHolder = {};
-		chartHolders.push(SubProjectsChartHolder);
+		var subProjectsChartHolder = {};
 
 
 		// Dashboard charts init function
-		this.initCharts = function (controllerScope) {		
-			// Create Risks & Actions charts & feed them data
-			var risksChartHolder = addSimplePieChart("#risksChart svg", risksData, [greenHue, yellowHue, redHue]);
-			chartHolders.push(risksChartHolder);
-			var actionsChartHolder = addSimplePieChart("#actionsChart svg", actionsData, [greenHue, redHue]);
-			chartHolders.push(actionsChartHolder);
+		this.initCharts = function (controllerScope) {
+			// if (chartHolders.length == 0) {
+				// Chart holders array
+				chartHolders = [];
+				chartHolders.push(advancementRatioChartHolder);
+				chartHolders.push(subProjectsChartHolder);
 
-			// Update Risks & Actions charts on container (svg) resize (ie. on media query change)
-			var mq = window.matchMedia("(min-width: 1605px)");
-			if (matchMedia) {
-				mq.addListener(Width2xlg);
-			}
-			// media query change
-			function Width2xlg(mq) {
-			    // for (var i = 0; i < chartHolders.length; i++) {
-			    //     chartHolders[i].chart.update();
-			    // }
-			    risksChartHolder.chart.update();
-			    actionsChartHolder.chart.update();
-			}
+				// Create Risks & Actions charts & feed them data
+				var risksChartHolder = addSimplePieChart("#risksChart svg", risksData, [greenHue, yellowHue, redHue]);
+				chartHolders.push(risksChartHolder);
+				var actionsChartHolder = addSimplePieChart("#actionsChart svg", actionsData, [greenHue, redHue]);
+				chartHolders.push(actionsChartHolder);
 
-			// remove media query on charts unload (controller/view unload)
-			controllerScope.$on('destroy', function () {
-				mq.removeListener(Width2xlg);
-			})
+				// Update Risks & Actions charts on container (svg) resize (ie. on media query change)
+				var mq = window.matchMedia("(min-width: 1605px)");
+				if (matchMedia) {
+					mq.addListener(Width2xlg);
+				}
+				function Width2xlg(mq) {
+				    risksChartHolder.chart.update();
+				    actionsChartHolder.chart.update();
+				}
 
-
-			// Create AdvancementRatio chart & Feed it data
-			nv.addGraph(function() {
-			    advancementRatioChartHolder.chart = nv.models.pieChart()
-			        .y(function(d) { return d.value })
-			        .donut(true)
-			        .donutRatio(0.75)
-			        .showLabels(false)
-			        .showLegend(false)
-			        .growOnHover(false)
-			        .color([advancementRatio_color, advancementRatio_bgColor]);
-
-			    advancementRatioChartHolder.chart.title(advancementRatioValue * 100+"%")
-			        .tooltip.enabled(false);
-
-			    d3.select("#advancement-measure svg")
-			        .datum(advancementRatioData)
-			        .transition().duration(1200)
-			        .call(advancementRatioChartHolder.chart);
-
-			    // LISTEN TO WINDOW RESIZE
-			    // nv.utils.windowResize(advancementRatioChartHolder.chart.update);
-			    // LISTEN TO CLICK EVENTS ON SLICES OF THE PIE/DONUT
-			    // advancementRatioChartHolder.chart.pie.dispatch.on('elementClick', function() {
-			    //     code...
-			    // });
-			    // advancementRatioChartHolder.chart.pie.dispatch.on('chartClick', function() {
-			    //     code...
-			    // });
-			    // LISTEN TO DOUBLECLICK EVENTS ON SLICES OF THE PIE/DONUT
-			    // advancementRatioChartHolder.chart.pie.dispatch.on('elementDblClick', function() {
-			    //     code...
-			    // });
-			    // LISTEN TO THE renderEnd EVENT OF THE PIE/DONUT
-			    // advancementRatioChartHolder.chart.pie.dispatch.on('renderEnd', function() {
-			    //     code...
-			    // });
-			    // OTHER EVENTS DISPATCHED BY THE PIE INCLUDE: elementMouseover, elementMouseout, elementMousemove
-			    // @see nv.models.pie
-			    return advancementRatioChartHolder.chart;
-			});
+				// remove media query on charts unload (controller/view unload)
+				// controllerScope.$on('destroy', function () {
+				// 	mq.removeListener(Width2xlg);
+				// })
 
 
-			// Create SubProjects chart & Feed it data
-			nv.addGraph(function() {
-			    SubProjectsChartHolder.chart = nv.models.multiBarHorizontalChart()
-			        .x(function(d) { return d.label })
-			        .y(function(d) { return d.value })
-			  	    .barColor([greenHue, greenHue, redHue, redHue, yellowHue])
-			        .showYAxis(false)
-			        .duration(250)
-			        .margin({left: 130})
-			        .yDomain([0, 1])
-			        .showValues(true)
-					.valueFormat(d3.format('.0%'))
-			        .showLegend(false)
-			        .showControls(false);
-				    
-				SubProjectsChartHolder.chart.tooltip.enabled(false);
+				// Create AdvancementRatio chart & Feed it data
+				nv.addGraph(function() {
+				    advancementRatioChartHolder.chart = nv.models.pieChart()
+				        .y(function(d) { return d.value })
+				        .donut(true)
+				        .donutRatio(0.75)
+				        .showLabels(false)
+				        .showLegend(false)
+				        .growOnHover(false)
+				        .color([advancementRatio_color, advancementRatio_bgColor]);
 
-			    d3.select('#advancement-chart svg')
-			        .datum(SubProjectsData)
-			        .call(SubProjectsChartHolder.chart);
+				    advancementRatioChartHolder.chart.title(advancementRatioValue * 100+"%")
+				        .tooltip.enabled(false);
 
-			    nv.utils.windowResize(SubProjectsChartHolder.chart.update);
+				    d3.select("#advancement-measure svg")
+				        .datum(advancementRatioData)
+				        .transition().duration(1200)
+				        .call(advancementRatioChartHolder.chart);
 
-			    // chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
-			    // chart.state.dispatch.on('change', function(state){
-			    //     nv.log('state', JSON.stringify(state));
-			    // });
-			    return SubProjectsChartHolder.chart;
-			});
+				    // LISTEN TO WINDOW RESIZE
+				    // nv.utils.windowResize(advancementRatioChartHolder.chart.update);
+				    // LISTEN TO CLICK EVENTS ON SLICES OF THE PIE/DONUT
+				    // advancementRatioChartHolder.chart.pie.dispatch.on('elementClick', function() {
+				    //     code...
+				    // });
+				    // advancementRatioChartHolder.chart.pie.dispatch.on('chartClick', function() {
+				    //     code...
+				    // });
+				    // LISTEN TO DOUBLECLICK EVENTS ON SLICES OF THE PIE/DONUT
+				    // advancementRatioChartHolder.chart.pie.dispatch.on('elementDblClick', function() {
+				    //     code...
+				    // });
+				    // LISTEN TO THE renderEnd EVENT OF THE PIE/DONUT
+				    // advancementRatioChartHolder.chart.pie.dispatch.on('renderEnd', function() {
+				    //     code...
+				    // });
+				    // OTHER EVENTS DISPATCHED BY THE PIE INCLUDE: elementMouseover, elementMouseout, elementMousemove
+				    // @see nv.models.pie
+				    return advancementRatioChartHolder.chart;
+				});
+
+
+				// Create SubProjects chart & Feed it data
+				nv.addGraph(function() {
+				    subProjectsChartHolder.chart = nv.models.multiBarHorizontalChart()
+				        .x(function(d) { return d.label })
+				        .y(function(d) { return d.value })
+				  	    .barColor([greenHue, greenHue, redHue, redHue, yellowHue])
+				        .showYAxis(false)
+				        .duration(250)
+				        .margin({left: 130})
+				        .yDomain([0, 1])
+				        .showValues(true)
+						.valueFormat(d3.format('.0%'))
+				        .showLegend(false)
+				        .showControls(false);
+					    
+					subProjectsChartHolder.chart.tooltip.enabled(false);
+
+				    d3.select('#advancement-chart svg')
+				        .datum(SubProjectsData)
+				        .call(subProjectsChartHolder.chart);
+
+				    nv.utils.windowResize(subProjectsChartHolder.chart.update);
+
+				    // chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+				    // chart.state.dispatch.on('change', function(state){
+				    //     nv.log('state', JSON.stringify(state));
+				    // });
+				    return subProjectsChartHolder.chart;
+				});
+			// }
 		}
+	
+		// Dashboard charts refresh function
+		// this.refreshCharts = function () {
+		//     for (var i = 0; i < chartHolders.length; i++) {
+		// 		chartHolders[i].chart.update();					
+		//     }
+		// }
 	})
 
 	.controller('DashboardCtrl', [

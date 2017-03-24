@@ -2,9 +2,9 @@
 	<div id="firstRow" class="col-xlg-8">
 		<div class="col-xs-12 col-smr-lv1-4 col-sm-4">
 			<div class="panel panel-default panel-indicator">
-			  <h3 class="indicator-title">Statut <span>Projet</span></h3>
+			  <h3 class="indicator-title">Statut <span>Projet {{ix()}}</span></h3>
 			  <div class="panel-body">
-				  <div id="status-light"></div>
+				  <div id="status-light" ng-click="refreshCharts()"></div>
 			  </div>
 			</div>
 		</div>
@@ -157,6 +157,8 @@
 
 <!--
 		TODO:
+	- Fix media query bug on firefox (52.0.1) on view's switch
+		then going back on different screen size
 	- Fix media queries to integrate with new template
 	- Show sidebar on hamburger bars button click or swipe left 
 		in mobile view

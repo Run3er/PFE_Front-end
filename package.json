@@ -1,8 +1,7 @@
 {
   "name": "proj-mngmnt-saas",
-  "version": "0.0.2-dev",
+  "version": "0.0.6-dev",
   "description": "PFE 2017",
-  "main": "dashboard_NVD3.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +16,7 @@
   "homepage": "https://github.com/Run3er/Proj-Mngmt-SaaS#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
     "gulp-sass": "^3.1.0"
   }
 }

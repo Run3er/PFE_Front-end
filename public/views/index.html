@@ -5,18 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <base href="/Projs/Proj-Mngmt-SaaS/">
+    <base href="/Projs/Proj-Mngmt-SaaS/public/views/">
 	<title>ProjectDash</title>
-	<link rel="icon" type="image/png" href="assets/favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="assets/favicon-16x16.png" sizes="16x16" />
+	<link rel="icon" type="image/png" href="../img/favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="../img/favicon-16x16.png" sizes="16x16" />
 	<meta name="theme-color" content="#ffffff">
 
 	<!-- TODO: Normalize.css already included in bootstrap -->
-	<link rel="stylesheet" href="ress/css/normalize.css">
-	<link rel="stylesheet" href="ress/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../CDN-ress/css/normalize.css">
+	<link rel="stylesheet" href="../CDN-ress/css/font-awesome.min.css">
 	<!-- Latest compiled and minified CSS -->
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
-	<link rel="stylesheet" href="ress/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../CDN-ress/css/bootstrap.min.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -26,18 +26,18 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug ... -->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script> -->
     <!-- Dashboard specific styles -->
-    <link href="ress/css/nv.d3.css" rel="stylesheet" type="text/css">
+    <link href="../CDN-ress/css/nv.d3.css" rel="stylesheet" type="text/css">
     <!-- Custom styling -->
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
 
 <!-- Dashboard NVD3 charts code -->
-<script src="ress/js/d3.min.js" charset="utf-8"></script>
-<script src="ress/js/nv.d3.js"></script>
+<script src="../CDN-ress/js/d3.min.js" charset="utf-8"></script>
+<script src="../CDN-ress/js/nv.d3.js"></script>
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script> -->
-    <script src="ress/js/angular.min.js"></script>
+    <script src="../CDN-ress/js/angular.min.js"></script>
     <!-- <script src="https://http://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-route.js"></script> -->
-    <script src="ress/js/angular-route.min.js"></script>
+    <script src="../CDN-ress/js/angular-route.min.js"></script>
 </head>
 <body>
 	<!-- Navbar top -->
@@ -60,7 +60,7 @@
       			</a>
   			</li>
           	<li class="visible-xs navbar-title">
-	    		<span title="dashy">dashy</span>
+	    		<span title="Projectify">Projectify</span>
   			</li>
           </ul>
         </div>
@@ -73,7 +73,7 @@
 	        <li class="dropdown">
 	          <a href="#" class="profile-menu dropdown-toggle" data-toggle="dropdown">
 	          	<span>Amine</span>
-	          	<img class="img-circle" src="assets/img/usr.png" alt="avatar" />
+	          	<img class="img-circle" src="../img/avatar-m.png" alt="avatar" />
 	          	<b class="caret"></b>
           	  </a>
 	          <ul class="dropdown-menu">
@@ -108,7 +108,7 @@
 	<!-- Sidebar -->
     <div id="sidebar" ng-controller="SidebarCtrl">
   		<a id="nav-brand" href="index.html">
-            dashy
+            Projectify
         </a>
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#project-tab" data-toggle="tab"><i class="fa fa-th"></i></a></li>
@@ -230,11 +230,11 @@
 			  	  </li>
 				  <li>
 				  	&nbsp;<i class="chevron fa fa-caret-right"></i>
-				  	&nbsp;<a href="#"><span>Projet X</span></a>
+				  	&nbsp;<a href="./dashboard"><span>Projet X</span></a>
 			  	  </li>
 				  <li>
 				  	&nbsp;<i class="chevron fa fa-caret-right"></i>
-				  	&nbsp;<a href="#"><span>Projet X</span></a>
+				  	&nbsp;<a href="./actions"><span>Projet X</span></a>
 			  	  </li>
 				  <li>
 				  	&nbsp;<i class="chevron fa fa-caret-right"></i>
@@ -270,14 +270,14 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-    <script src="ress/js/jquery.min.js"></script>
+    <script src="../CDN-ress/js/jquery.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
-	<script src="ress/js/bootstrap.min.js"></script>
+	<script src="../CDN-ress/js/bootstrap.min.js"></script>
 	<!-- Custom scripts -->
 	<!-- <script src="assets/js/navbar-sidebar.js"></script> -->
     <!-- Angular app scripts -->
-    <script src="assets/js/app-ProjMngmnt.js"></script>
+    <script src="../js/app-ProjMngmnt.js"></script>
 </body>
 </html>
 

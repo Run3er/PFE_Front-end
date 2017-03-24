@@ -1,5 +1,6 @@
 # Sass generated css files directory
-assets/css/
+public/css/
+git.ignore/
 
 
 ### Node.gitignore ###

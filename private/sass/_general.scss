@@ -17,6 +17,7 @@ body {
 }
 
 .hyphenate {
+	/*! autoprefixer: off */
 	overflow-wrap: break-word;
 	word-wrap: break-word;
 	-ms-word-break: break-all;

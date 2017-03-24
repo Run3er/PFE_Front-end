@@ -48,6 +48,7 @@ $font-number-indicator: roboto;
 	padding: 0; 
 }
 .nvd3 text {
+	user-select: text;
 	font: inherit {
 		family: calibri; 
 	}
@@ -287,6 +288,7 @@ $font-number-indicator: roboto;
             }
         }
         .nvd3 .nv-axis {
+    		pointer-events: auto;
             &.nv-x text {
                 fill: $font-color-dark; 
                 font-weight: bold; 

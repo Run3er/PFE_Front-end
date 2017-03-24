@@ -84,18 +84,19 @@ a:hover, a:focus {
 			}
 		}
 		.navbar-title {
-			line-height: 20px;
 			width: auto;
-			height: 35px;
-			text-align: center;
-			margin: 15px 15px 0;
-		    white-space: nowrap;
-		    overflow: hidden;
-		    text-overflow: ellipsis;
+			height: auto;
+			padding-top: 0.6rem;
+			margin: 0 1.5rem 0;
 		    font-family: 'Fanwood Text',serif;
+		    font-size: 3.5rem;
+			line-height: 4rem;
 		    font-style: italic;
-		    font-size: 35px;
+			text-align: center;
 		    color: #fff;
+		    overflow: hidden;
+		    white-space: nowrap;
+		    text-overflow: ellipsis;
 		}
 	}
 	#navbar {
@@ -156,10 +157,10 @@ a:hover, a:focus {
 		display: block;
 		height: 5.7rem;
 		width: 100%;
-		padding: 15px;
+		padding: 1.5rem;
 	    font-family: 'Fanwood Text',serif;
-	    font-size: 35px;
-		line-height: 20px;
+	    font-size: 3.5rem;
+		line-height: 2.2rem;
 	    font-style: italic;
 	    color: #fff;
 		text-align: center;
