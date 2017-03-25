@@ -1,0 +1,125 @@
+
+<div id="form-add-entry" class="collapse form-collapse">
+	<div class="form-title">
+		<div class="col-sm-offset-2 col-sm-10">
+			<h3>{{formTitle}}</h3>
+		</div>
+	</div>
+	<form class="form-horizontal">
+		<div ng-repeat="formField in formFields">
+			<div class="form-group" ng-if="formField.subForm === undefined">
+				<label class="control-label col-sm-2" for="{{formField.identifier}}">{{formField.label}}:</label>
+				<div class="col-sm-10" ng-if="formField.choices === undefined">
+					<input type="text" class="form-control" id="{{formField.identifier}}" placeholder=" {{formField.placeholder}}" required="required" ng-if="formField.type == 'input'">
+					<textarea type="text" class="form-control" id="{{formField.identifier}}" placeholder=" {{formField.placeholder}}" ng-if="formField.type == 'textarea'"></textarea>
+				</div>
+				<div class="col-sm-10" ng-if="formField.choices !== undefined">
+					<select class="form-control" id="status" required="required">
+						<option value=""  disabled="disabled" selected="selected" class="hidden">{{formField.placeholder}}</option>
+						<option ng-repeat="choice in formField.choices" value="{{choice.identifier}}" >{{choice.value}}</option>
+					</select>
+				</div>
+			</div>
+			<div ng-if="formField.subForm !== undefined">
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="{{formField.identifier}}">{{formField.label}}:</label>
+					<div class="col-sm-10 sub-form-entry">
+						<button class="btn btn-default" data-toggle="collapse" data-target="#{{formField.subForm.id}}"><i class="fa fa-plus"></i></button>
+						<div>
+							<select class="form-control" id="{{formField.identifier}}" required="required">
+								<option value=""  disabled="disabled" selected="selected" class="hidden">{{formField.placeholder}}</option>
+								<option ng-repeat="choice in formField.choices" value="{{choice.identifier}}" >{{choice.value}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div id="{{formField.subForm.id}}" class="sub-form collapse">
+					<div class="form-group" ng-repeat="subFormField in formField.subForm.fields">
+						<label class="control-label col-sm-2" for="supervisor-lastname">{{subFormField.label}}:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="{{subFormField.identifier}}" placeholder=" {{subFormField.placeholder}}" required="required" disabled="true">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default">+ {{formField.label}}</button>
+							<button type="reset" class="btn btn-default" data-toggle="collapse" data-target="#{{formField.subForm.id}}">Annuler</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Ajouter</button>
+				<!-- <button type="submit" class="btn btn-danger">Supprimer</button> -->
+				<button type="reset" class="btn btn-default" data-toggle="collapse" data-target="#form-add-entry">Annuler</button>
+			</div>
+		</div>
+	</form>
+</div>
+<table id="entriesTable"><tbody><tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr></tbody></table>
+<div class="table-responsive">
+	<table class="main-table table table-striped table-hover"><div>
+		<thead>
+			<tr>
+				<th><button class="btn" data-toggle="collapse" data-target="#form-add-entry"><i class="fa fa-plus"></i></button></th>
+				<th ng-repeat="columnName in entries.keys" ng-bind="columnName"></th>
+			</tr>
+		</thead></div>
+		<tbody>
+			<tr ng-repeat="entry in entries.values track by $index">
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td ng-repeat="columnValue in entry track by $index">
+					<span ng-bind="columnValue"></span>
+				</td>
+			</tr><!-- 
+			<tr>
+			  <form>
+				<td><button class="btn"><i class="fa fa-pencil"></i></button></td>
+				<td>
+					<input type="text" class="form-control" id="titre" placeholder=" Sasir le titre" value="Compléter Action II" required="required">
+				</td>
+				<td>
+					<select class="form-control" id="status" required="required">
+			            <option value="En cours">En cours</option>
+			            <option value="En standby" selected="selected">En standby</option>
+			            <option value="Annulée">Annulée</option>
+			            <option value="Clôturée">Clôturée</option>
+					</select>
+		        </td>
+				<td>Fatma</td>
+				<td>
+					<select class="form-control" id="priority" required="required">
+			            <option value="1" selected="selected">1</option>
+			            <option value="2">2</option>
+			            <option value="3">3</option>
+					</select>
+				</td>
+				<td>02/02/2017</td>
+				<td>17/02/2017</td>
+				<td>3 j</td>
+				<td></td>
+			  </form>
+			</tr> -->
+		</tbody>
+	</table>
+</div>
+
+
+<!--
+		TODO:
+	- Let table's header always be visible, even on scroll	
+	- Tweak or replace bootstrap collapse animation
+	- Dynamically resizing textarea (http://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize)
+
+	- Take a look at scattered TODOs
+ -->

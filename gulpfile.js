@@ -55,6 +55,8 @@ gulp.task('js', function () {
 
 // Default watch task
 gulp.task('default', ['styles', 'js'], function() {
-    gulp.watch(sassSrcPthPtrn, ['styles']);
-    gulp.watch(jsSrcPthPtrn, ['js']);
+	if (inDev) {
+	    gulp.watch(sassSrcPthPtrn, ['styles']);
+	    gulp.watch(jsSrcPthPtrn, ['js']);
+	}
 });
