@@ -55,6 +55,13 @@
 
 	$ng-material-max-width: 328px;
 
+	md-input-container {
+		width: 100%;
+		height: 2.5em;
+		padding: 0;
+		margin: 0;
+		vertical-align: unset;
+	}
 	.md-datepicker-input-container, 
 	input.md-input {
 		width: 100%;
