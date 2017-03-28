@@ -44,6 +44,10 @@
 	overflow: hidden;
 }
 
+.no-fields {
+	margin-top: 2.5rem;
+}
+
 .form-collapse {
 	padding: 1.5rem 2.5rem 2.5rem;
     margin: 0 -1.5rem;
@@ -57,9 +61,8 @@
 
 	md-input-container {
 		width: 100%;
-		height: 2.5em;
 		padding: 0;
-		margin: 0;
+		margin: 0 0 -2.5em;
 		vertical-align: unset;
 	}
 	.md-datepicker-input-container, 

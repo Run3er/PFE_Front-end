@@ -13,14 +13,20 @@
       				<md-input-container ng-if="formField.type == 'input'" id="{{formField.identifier}}" md-no-float>
 						<input ng-model="entry[formField.identifier]" placeholder="{{formField.placeholder}}">
 			        </md-input-container>
+			        <md-input-container ng-if="formField.type == 'textarea'" md-no-float>
+			          <textarea ng-model="entry[formField.identifier]" type="text" rows="1" md-select-on-focus placeholder="{{formField.placeholder}}"></textarea>
+			        </md-input-container>
       				<md-datepicker ng-if="formField.type == 'date'" ng-model="entry[formField.identifier]" md-placeholder="{{formField.placeholder}}" md-open-on-focus md-hide-icons="calendar" required="required"></md-datepicker>
-					<textarea ng-if="formField.type == 'textarea'" type="text" class="form-control" id="{{formField.identifier}}" placeholder=" {{formField.placeholder}}"></textarea>
 				</div>
 				<div class="col-sm-10" ng-if="formField.choices !== undefined">
-					<select class="form-control" id="status" required="required">
-						<option value=""  disabled="disabled" selected="selected" class="hidden">{{formField.placeholder}}</option>
-						<option ng-repeat="choice in formField.choices" value="{{choice.identifier}}" >{{choice.value}}</option>
-					</select>
+		          <md-input-container md-no-float>
+		            <label>{{formField.placeholder}}</label>
+		            <md-select ng-model="entry[formField.identifier]">
+		              <md-option ng-repeat="choice in formField.choices" value="{{choice.identifier}}">
+		                {{choice.value}}
+		              </md-option>
+		            </md-select>
+		          </md-input-container>
 				</div>
 			</div>
 			<div ng-if="formField.subForm !== undefined">
@@ -29,10 +35,15 @@
 					<div class="col-sm-10 sub-form-entry">
 						<button class="btn btn-default" data-toggle="collapse" data-target="#{{formField.subForm.id}}"><i class="fa fa-plus"></i></button>
 						<div>
-							<select class="form-control" id="{{formField.identifier}}" required="required">
-								<option value=""  disabled="disabled" selected="selected" class="hidden">{{formField.placeholder}}</option>
-								<option ng-repeat="choice in formField.choices" value="{{choice.identifier}}" >{{choice.value}}</option>
-							</select>
+				          <md-input-container md-no-float>
+				            <label>{{formField.placeholder}}</label>
+				            <md-select ng-model="entry[formField.identifier]">
+				              <md-option class="hidden" value="" selected="selected" disabled="disabled">{{formField.placeholder}}</md-option>
+				              <md-option ng-repeat="choice in formField.choices" value="{{choice.identifier}}">
+				                {{choice.value}}
+				              </md-option>
+				            </md-select>
+				          </md-input-container>
 						</div>
 					</div>
 				</div>
@@ -40,10 +51,12 @@
 					<div class="form-group" ng-repeat="subFormField in formField.subForm.fields">
 						<label class="control-label col-sm-2" for="supervisor-lastname">{{subFormField.label}}:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="{{subFormField.identifier}}" placeholder=" {{subFormField.placeholder}}" required="required" disabled="true">
+		      				<md-input-container id="{{formField.identifier}}" md-no-float>
+								<input ng-model="entry[formField.identifier]" placeholder="{{subFormField.placeholder}}">
+					        </md-input-container>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group no-fields">
 						<div class="col-sm-offset-2 col-sm-10">
 							<button type="submit" class="btn btn-default">+ {{formField.label}}</button>
 							<button type="reset" class="btn btn-default" data-toggle="collapse" data-target="#{{formField.subForm.id}}">Annuler</button>
@@ -52,7 +65,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group no-fields">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button type="submit" class="btn btn-primary">Ajouter</button>
 				<!-- <button type="submit" class="btn btn-danger">Supprimer</button> -->
