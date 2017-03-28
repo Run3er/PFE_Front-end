@@ -315,13 +315,13 @@ angular.module('ProjMngmnt')
 								identifier: "creation-date", 
 								label: "Date de création", 
 								placeholder: "Spécifier la date de création", 
-								type: 'input'
+								type: 'date'
 							}, 
 							{
 								identifier: "closing-planned-date", 
 								label: "Date de clôture planifiée", 
 								placeholder: "Spécifier la date de clôture planifiée", 
-								type: 'input'
+								type: 'date'
 							}, 
 							{
 								identifier: "delay", 
@@ -334,7 +334,7 @@ angular.module('ProjMngmnt')
 								identifier: "closing-date", 
 								label: "Date de clôture", 
 								placeholder: "Spécifier la date de clôture réelle", 
-								type: 'input'
+								type: 'date'
 							}, 
 							{
 								identifier: "comment", 
@@ -451,19 +451,19 @@ angular.module('ProjMngmnt')
 								identifier: "detectionDate", 
 								label: "Date de détection", 
 								placeholder: "Spécifier la date de détection", 
-								type: 'input'
+								type: 'date'
 							}, 
 							{
 								identifier: "qualificationDate", 
 								label: "Date de qualification", 
 								placeholder: "Spécifier la date de qualification", 
-								type: 'input'
+								type: 'date'
 							}, 
 							{
 								identifier: "closingDate", 
 								label: "Date de clôture", 
 								placeholder: "Spécifier la date de clôture", 
-								type: 'input'
+								type: 'date'
 							}, 
 							{
 								identifier: "comment", 

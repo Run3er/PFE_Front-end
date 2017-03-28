@@ -52,6 +52,31 @@
 		resize: vertical;
 		min-height: 5.6rem;
 	}
+
+	$ng-material-max-width: 328px;
+
+	.md-datepicker-input-container, 
+	input.md-input {
+		width: 100%;
+		// transition: min-width 200ms linear;
+		.md-datepicker-input {
+			width: 100%;
+			max-width: calc(100% - 15px);
+		}
+	}
+	.md-datepicker-open {
+		.md-datepicker-input-container, 
+		input.md-input {
+			width: auto;
+			.md-datepicker-input {
+				max-width: calc(#{$ng-material-max-width} - 7px);
+				width: calc(#{$ng-material-max-width} - 7px);
+			    overflow: hidden;
+			    white-space: nowrap;
+			    text-overflow: ellipsis;
+			}
+		}
+	} 
 }
 
 .sub-form-entry {
