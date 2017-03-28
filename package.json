@@ -2,19 +2,24 @@
   "name": "proj-mngmnt-saas",
   "version": "0.0.6-dev",
   "description": "PFE 2017",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Run3er/Proj-Mngmt-SaaS.git"
   },
+  "private": true, 
   "author": "run3er",
   "bugs": {
     "url": "https://github.com/Run3er/Proj-Mngmt-SaaS/issues"
   },
   "homepage": "https://github.com/Run3er/Proj-Mngmt-SaaS#readme",
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-route": "^1.6.3",
+    "nvd3": "git+https://github.com/novus/nvd3.git#164ce3a"
+  },
   "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-concat": "^2.6.1",
@@ -23,5 +28,24 @@
     "gulp-sourcemaps": "^2.4.1",
     "gulp-uglify": "^2.1.2",
     "gulp-util": "^3.0.8"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "node private/build-process/getAssetsDependencies.js", 
+    "postinstall": "gulp --production"
+  },
+  "pm-assetDependencies": [
+    {
+      "assetsPath": "public/CDN-ress/css/",
+      "assetsURL": [
+      ]
+    },
+    {
+      "assetsPath": "public/CDN-ress/js/",
+      "assetsURL": [
+        "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"
+      ]
+    }
+  ]
 }
