@@ -1,5 +1,5 @@
 
-angular.module('ProjMngmnt', ['ngRoute'])
+angular.module('ProjMngmnt', ['ngRoute', 'ngMaterial'])
 	.config(function($routeProvider, $locationProvider) {
 			var entriesMap = [
 				{
