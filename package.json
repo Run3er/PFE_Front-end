@@ -7,27 +7,29 @@
     "url": "git+https://github.com/Run3er/Proj-Mngmt-SaaS.git"
   },
   "private": true, 
+  "license": "UNLICENSED", 
   "author": "run3er",
+  "main": "public/views/index.html.html", 
   "bugs": {
     "url": "https://github.com/Run3er/Proj-Mngmt-SaaS/issues"
   },
   "homepage": "https://github.com/Run3er/Proj-Mngmt-SaaS#readme",
   "dependencies": {
-    "angular": "^1.6.3",
-    "angular-route": "^1.6.3",
+    "angular": "1.6.3",
+    "angular-route": "1.6.3",
     "nvd3": "git+https://github.com/novus/nvd3.git#164ce3a"
   },
   "devDependencies": {
-    "bootstrap": "^3.3.7",
-    "font-awesome": "^4.7.0",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-ng-annotate": "^2.0.0",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.4.1",
-    "gulp-uglify": "^2.1.2",
-    "gulp-util": "^3.0.8"
+    "bootstrap": "3.3.7",
+    "font-awesome": "4.7.0",
+    "gulp": "3.9.1",
+    "gulp-autoprefixer": "3.1.1",
+    "gulp-concat": "2.6.1",
+    "gulp-ng-annotate": "2.0.0",
+    "gulp-sass": "3.1.0",
+    "gulp-sourcemaps": "2.4.1",
+    "gulp-uglify": "2.1.2",
+    "gulp-util": "3.0.8"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -37,13 +39,12 @@
   "pm-assetDependencies": [
     {
       "assetsPath": "public/CDN-ress/css/",
-      "assetsURL": [
-      ]
+      "assetsURL": []
     },
     {
       "assetsPath": "public/CDN-ress/js/",
       "assetsURL": [
-        "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js",
+        "https://code.jquery.com/jquery-3.2.1.js",
         "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"
       ]
     }

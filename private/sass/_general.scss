@@ -15,6 +15,9 @@ html {
 body {
 	background-color: $body-bg-color; 
 }
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
 
 .hyphenate {
 	/*! autoprefixer: off */
