@@ -1,33 +1,43 @@
 
 angular.module('ProjMngmnt')
 	.controller('EntriesCtrl', function (DB, $scope, entriesSpecifics) {
-		// Get entries type specific characteristic values
-		$scope.formTitle = entriesSpecifics.formTitle;
 		// Get DB layer entries data
-		var tableEntries = DB.entries(entriesSpecifics.type).getAll();
+		var entries = DB.entries(entriesSpecifics.type).getAll();
 		// Get view layer entries data
 		var viewData = DB.entries(entriesSpecifics.type).viewData.getAll();
+		$scope.formTitle = viewData.form.title;
 
 		
 		// Prepare all table data for ng-repeat needs
-		var values = tableEntries.values;
-		if (viewData.generatedValues !== undefined) {
-			for (var i = 0; i < values.length; i++) {
-				for (var j = 0; j < viewData.generatedValues.length; j++) {
-					var position = viewData.generatedValues[j].position;
-					var generatedValue = viewData.generatedValues[j].formula(values[i]);
+		var columnMaps = angular.copy(viewData.table.columnMaps);
+		var values = angular.copy(entries);
+		console.log(values);
+		console.log(columnMaps);
+		if (viewData.table.generatedFields !== undefined) {
+			for (var j = 0; j < viewData.table.generatedFields.length; j++) {
+				// Add to columnMaps
+				var position = viewData.table.generatedFields[j].position;
+				columnMaps.splice(position, 0, {
+					key: viewData.table.generatedFields[j].key, 
+					name: viewData.table.generatedFields[j].columnName
+				});
 
-					values[i].splice(position, 0, generatedValue);
+				// Add to each row
+				for (var i = 0; i < entries.length; i++) {
+					var generatedField = viewData.table.generatedFields[j].formula(entries[i]);
+					values[i][viewData.table.generatedFields[j].key] = generatedField;
 				}
 			}
 		}
-		$scope.entries = {
-			keys: tableEntries.keys, 
-			values: values
+		console.log(values);
+		console.log(columnMaps);
+		$scope.tableEntries = {
+			columnMaps: columnMaps, 
+			rows: values
 		};
 
 		// Initialize form
-		$scope.formFields = viewData.formFields;
+		$scope.formFields = viewData.form.fields;
 		$scope.formEntry = {};
 		$scope.formAlert = {};
 

@@ -43,18 +43,18 @@
 						<i class="fa fa-plus"></i>
 					</button>
 				</th>
-				<th ng-repeat="columnName in entries.keys">{{columnName}}</th>
+				<th ng-repeat="columnMap in tableEntries.columnMaps">{{columnMap.name}}</th>
 			</tr>
 		</thead></div>
 		<tbody>
-			<tr ng-repeat="entry in entries.values track by $index">
+			<tr ng-repeat="entry in tableEntries.rows track by $index">
 				<td>
 					<button class="btn" ng-click="edit(entry)">
 						<i class="fa fa-pencil"></i>
 					</button>
 				</td>
-				<td ng-repeat="columnValue in entry track by $index">
-					<span>{{columnValue}}</span>
+				<td ng-repeat="columnMap in tableEntries.columnMaps track by $index">
+					<span>{{entry[columnMap.key]}}</span>
 				</td>
 			</tr>
 		</tbody>
