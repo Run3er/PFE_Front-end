@@ -5,9 +5,10 @@ angular.module('ProjMngmnt')
 		// Mock data
 		var actionsTenantData = [
 			{
+				"id": 1, 
 				"description": "Faire Action I",
-				"status": "En cours",
-				"supervisor": "Mohamed",
+				"status": "ongoing",
+				"supervisor": "1",
 				"priority": "2",
 				"creationDate": "01/02/2017",
 				"closingPlannedDate": "29/03/2017",
@@ -16,9 +17,10 @@ angular.module('ProjMngmnt')
 				"comment": "Consulter Foulen pour les guides."
 			},
 			{
+				"id": 2,
 				"description": "Compléter Action II",
-				"status": "En standby",
-				"supervisor": "Fatma",
+				"status": "standby",
+				"supervisor": "2",
 				"priority": "1",
 				"creationDate": "02/02/2017",
 				"closingPlannedDate": "17/02/2017",
@@ -27,9 +29,10 @@ angular.module('ProjMngmnt')
 				"comment": ""
 			},
 			{
+				"id": 3,
 				"description": "S'occuper de Action III",
-				"status": "En cours",
-				"supervisor": "Ali",
+				"status": "ongoing",
+				"supervisor": "3",
 				"priority": "3",
 				"creationDate": "01/02/2017",
 				"closingPlannedDate": "31/03/2017",
@@ -38,9 +41,10 @@ angular.module('ProjMngmnt')
 				"comment": "Maîtriser le process avant d'entreprendre l'action."
 			},
 			{
+				"id": 4,
 				"description": "S'occuper de Action IV",
-				"status": "Clôturée",
-				"supervisor": "Mohamed",
+				"status": "closed",
+				"supervisor": "1",
 				"priority": "3",
 				"creationDate": "01/02/2017",
 				"closingPlannedDate": "31/03/2017",
@@ -49,9 +53,10 @@ angular.module('ProjMngmnt')
 				"comment": "Une partie du travail a déja été faite par Ammar."
 			},
 			{
+				"id": 5,
 				"description": "Faire Action I",
-				"status": "En cours",
-				"supervisor": "Mohamed",
+				"status": "ongoing",
+				"supervisor": "1",
 				"priority": "2",
 				"creationDate": "01/02/2017",
 				"closingPlannedDate": "29/03/2017",
@@ -60,9 +65,10 @@ angular.module('ProjMngmnt')
 				"comment": "Consulter Foulen pour les guides."
 			},
 			{
+				"id": 6,
 				"description": "Compléter Action II",
-				"status": "En standby",
-				"supervisor": "Fatma",
+				"status": "standby",
+				"supervisor": "2",
 				"priority": "1",
 				"creationDate": "02/02/2017",
 				"closingPlannedDate": "17/02/2017",
@@ -71,9 +77,10 @@ angular.module('ProjMngmnt')
 				"comment": ""
 			},
 			{
+				"id": 7,
 				"description": "S'occuper de Action III",
-				"status": "En cours",
-				"supervisor": "Ali",
+				"status": "ongoing",
+				"supervisor": "3",
 				"priority": "3",
 				"creationDate": "01/02/2017",
 				"closingPlannedDate": "31/03/2017",
@@ -82,9 +89,10 @@ angular.module('ProjMngmnt')
 				"comment": "Maîtriser le process avant d'entreprendre l'action."
 			},
 			{
+				"id": 8,
 				"description": "S'occuper de Action IV",
-				"status": "Clôturée",
-				"supervisor": "Mohamed",
+				"status": "closed",
+				"supervisor": "1",
 				"priority": "3",
 				"creationDate": "01/02/2017",
 				"closingPlannedDate": "31/03/2017",
@@ -93,9 +101,10 @@ angular.module('ProjMngmnt')
 				"comment": "Une partie du travail a déja été faite par Ammar."
 			},
 			{
+				"id": 9,
 				"description": "Faire Action I",
-				"status": "En cours",
-				"supervisor": "Mohamed",
+				"status": "ongoing",
+				"supervisor": "1",
 				"priority": "2",
 				"creationDate": "01/02/2017",
 				"closingPlannedDate": "29/03/2017",
@@ -104,9 +113,10 @@ angular.module('ProjMngmnt')
 				"comment": "Consulter Foulen pour les guides."
 			},
 			{
+				"id": 10,
 				"description": "Compléter Action II",
-				"status": "En standby",
-				"supervisor": "Fatma",
+				"status": "standby",
+				"supervisor": "2",
 				"priority": "1",
 				"creationDate": "02/02/2017",
 				"closingPlannedDate": "17/02/2017",
@@ -115,9 +125,10 @@ angular.module('ProjMngmnt')
 				"comment": ""
 			},
 			{
+				"id": 11,
 				"description": "S'occuper de Action III",
-				"status": "En cours",
-				"supervisor": "Ali",
+				"status": "ongoing",
+				"supervisor": "3",
 				"priority": "3",
 				"creationDate": "01/02/2017",
 				"closingPlannedDate": "31/03/2017",
@@ -126,9 +137,10 @@ angular.module('ProjMngmnt')
 				"comment": "Maîtriser le process avant d'entreprendre l'action."
 			},
 			{
+				"id": 12,
 				"description": "S'occuper de Action IV",
-				"status": "Clôturée",
-				"supervisor": "Mohamed",
+				"status": "closed",
+				"supervisor": "1",
 				"priority": "3",
 				"creationDate": "01/02/2017",
 				"closingPlannedDate": "31/03/2017",
@@ -137,9 +149,10 @@ angular.module('ProjMngmnt')
 				"comment": "Une partie du travail a déja été faite par Ammar."
 			},
 			{
+				"id": 13,
 				"description": "Faire Action I",
-				"status": "En cours",
-				"supervisor": "Mohamed",
+				"status": "ongoing",
+				"supervisor": "1",
 				"priority": "2",
 				"creationDate": "01/02/2017",
 				"closingPlannedDate": "29/03/2017",
@@ -148,9 +161,10 @@ angular.module('ProjMngmnt')
 				"comment": "Consulter Foulen pour les guides."
 			},
 			{
+				"id": 14,
 				"description": "Compléter Action II",
-				"status": "En standby",
-				"supervisor": "Fatma",
+				"status": "standby",
+				"supervisor": "2",
 				"priority": "1",
 				"creationDate": "02/02/2017",
 				"closingPlannedDate": "17/02/2017",
@@ -159,9 +173,10 @@ angular.module('ProjMngmnt')
 				"comment": ""
 			},
 			{
+				"id": 15,
 				"description": "S'occuper de Action III",
-				"status": "En cours",
-				"supervisor": "Ali",
+				"status": "ongoing",
+				"supervisor": "3",
 				"priority": "3",
 				"creationDate": "01/02/2017",
 				"closingPlannedDate": "31/03/2017",
@@ -170,9 +185,10 @@ angular.module('ProjMngmnt')
 				"comment": "Maîtriser le process avant d'entreprendre l'action."
 			},
 			{
+				"id": 16,
 				"description": "S'occuper de Action IV",
-				"status": "Clôturée",
-				"supervisor": "Mohamed",
+				"status": "closed",
+				"supervisor": "1",
 				"priority": "3",
 				"creationDate": "01/02/2017",
 				"closingPlannedDate": "31/03/2017",
@@ -225,20 +241,12 @@ angular.module('ProjMngmnt')
 					}
 				]
 			}, 
-			form_table_Mapping: {
-				// tenantDataKey_formField_mapping
-				"description" : "description",
-				"status" : "status", 
-				"supervisor" : "supervisor", 
-				"priority" : "priority", 
-				"creationDate" : "creation-date", 
-				"closingPlannedDate" : "closing-planned-date", 
-				"delay" : "delay", 
-				"closingDate" : "closing-date", 
-				"comment" : "comment"
-			}, 
 			form: {
-				title: "Ajouter une action", 
+				title: {
+					add: "Ajouter une action", 
+					edit: "Modifier une action"
+				},
+				defaultSortingField: "creationDate", 
 				fields: [
 					// labels are taken from DB_getAll().keys
 					{
@@ -280,13 +288,13 @@ angular.module('ProjMngmnt')
 						]
 					}, 
 					{
-						identifier: "creation-date", 
+						identifier: "creationDate", 
 						label: "Date de création", 
 						placeholder: "Spécifier la date de création", 
 						type: 'input'
 					}, 
 					{
-						identifier: "closing-planned-date", 
+						identifier: "closingPlannedDate", 
 						label: "Date de clôture planifiée", 
 						placeholder: "Spécifier la date de clôture planifiée", 
 						type: 'input'
@@ -299,7 +307,7 @@ angular.module('ProjMngmnt')
 						type: 'input'
 					}, 
 					{
-						identifier: "closing-date", 
+						identifier: "closingDate", 
 						label: "Date de clôture", 
 						placeholder: "Spécifier la date de clôture réelle", 
 						type: 'input'
@@ -316,28 +324,56 @@ angular.module('ProjMngmnt')
 
 		var risksTenantData = [
 			{
-				"description": "Panne de Y",
+				"id": 1, 
+				"description": "Panne de X",
 				"probability": "2",
 				"impact": "4",
 				"actionPlan": "Mettre en place X",
-				"status": "Décision prise",
+				"status": "decidedUpon",
 				"decision": "Go",
-				"detectionDate": "01/02/2017",
+				"detectionDate": "02/02/2017",
 				"qualificationDate": "05/02/2017",
 				"closingDate": "",
-				"comment": "Consulter Foulen pour avant la mise en place"
+				"comment": "Consulter FoulenX pour avant la mise en place"
 			}, 
 			{
+				"id": 2, 
 				"description": "Panne de Y",
 				"probability": "2",
 				"impact": "4",
-				"actionPlan": "Mettre en place X",
-				"status": "Décision prise",
+				"actionPlan": "Imposer Y",
+				"status": "decidedUpon",
+				"decision": "Go",
+				"detectionDate": "03/02/2017",
+				"qualificationDate": "05/02/2017",
+				"closingDate": "",
+				"comment": "Consulter FoulenY pour avant la mise en place"
+			}, 
+			{
+				"id": 3, 
+				"description": "Z absent",
+				"probability": "3",
+				"impact": "5",
+				"actionPlan": "Prendre mesure Z",
+				"status": "detected",
+				"decision": "Go",
+				"detectionDate": "01/03/2017",
+				"qualificationDate": "",
+				"closingDate": "05/02/2017",
+				"comment": "Consulter FoulenZ pour avant la mise en place"
+			}, 
+			{
+				"id": 4, 
+				"description": "Panne de W",
+				"probability": "3",
+				"impact": "1",
+				"actionPlan": "Imposer W",
+				"status": "decidedUpon",
 				"decision": "Go",
 				"detectionDate": "01/02/2017",
 				"qualificationDate": "05/02/2017",
 				"closingDate": "",
-				"comment": "Consulter Foulen pour avant la mise en place"
+				"comment": "Consulter FoulenW pour avant la mise en place"
 			}
 		];
 
@@ -437,21 +473,12 @@ angular.module('ProjMngmnt')
 					}
 				]
 			}, 
-			form_table_Mapping: {
-				// tenantDataKey_formField_mapping
-				"description" : "description",
-				"probability" : "probability", 
-				"impact" : "impact", 
-				"actionPlan" : "action-plan", 
-				"status" : "status", 
-				"decision" : "decision", 
-				"detectionDate" : "creation-date", 
-				"qualificationDate" : "qualification-date", 
-				"closingDate" : "closing-date", 
-				"comment" : "comment"
-			}, 
 			form: {
-				title: "Ajouter un risque", 
+				title: {
+					add: "Ajouter un risque", 
+					edit: "Modifier un risque"
+				},
+				defaultSortingField: "detectionDate", 
 				fields: [
 					{
 						identifier: "description", 
@@ -482,7 +509,7 @@ angular.module('ProjMngmnt')
 						]
 					}, 
 					{
-						identifier: "action-plan", 
+						identifier: "actionPlan", 
 						label: "Plan d'action", 
 						placeholder: "Saisir le plan d'action", 
 						type: 'textarea'
@@ -494,9 +521,9 @@ angular.module('ProjMngmnt')
 						choices: [
 							{ identifier: "detected", value: "Détecté"}, 
 							{ identifier: "toStudy", value: "À étudier"}, 
-							{ identifier: "qualified", value: "Qualifié"}, 
+							{ identifier: "qualified", value: "qualifié"}, 
 							{ identifier: "decidedUpon", value: "Décision prise"}, 
-							{ identifier: "actionPlanOngoing", value: "Plan d'action en cours"}, 
+							{ identifier: "actionPlanOngoing", value: "Plan d'action ongoing"}, 
 							{ identifier: "mastered", value: "Maîtrisé"}, 
 							{ identifier: "closed", value: "Clôturé"}
 						]
@@ -535,6 +562,7 @@ angular.module('ProjMngmnt')
 			}
 		};
 
+var serverOn = false;
 
 		// Object entriesProps supposed property
 		var entryType;
@@ -558,21 +586,23 @@ angular.module('ProjMngmnt')
 			}, 
 			add: function (entry) {
 				// Entry addition logic
-				console.log("FAKE_SERVER--adding: " + JSON.stringify(entry));
+				console.log("FAKE_SERVER--adding... " + JSON.stringify(entry));
 				
 				// Return promise
 				return $q(function (resolve, reject) {
 					// Simulate request timelaps
 					setTimeout(function () {
 						// Simulate addtion operation result
-						var didSucceed = Math.random() > 0.5;
+						serverOn = !serverOn;
 
-						if (didSucceed) {
-							resolve('FAKE_SERVER--Success.');
+						if (serverOn) {
+							// Get unique ID from DB ... 
+							var id = new Date().getTime(); //[mockup]
+							resolve(id);
 							console.log('FAKE_SERVER--Success.');
 						}
 						else {
-							reject('FAKE_SERVER--Failure.');
+							reject();
 							console.log('FAKE_SERVER--Failure.');
 						}
 					}, 1500);
@@ -580,21 +610,21 @@ angular.module('ProjMngmnt')
 			}, 
 			update: function (entry) {
 				// Entry updating logic
-				console.log("FAKE_SERVER--updating: " + JSON.stringify(entry));
+				console.log("FAKE_SERVER--updating... " + JSON.stringify(entry));
 				
 				// Return promise
 				return $q(function (resolve, reject) {
 					// Simulate request timelaps
 					setTimeout(function () {
 						// Simulate addtion operation result
-						var didSucceed = Math.random() > 0.5;
+						serverOn = !serverOn;
 
-						if (didSucceed) {
-							resolve('FAKE_SERVER--Success.');
+						if (serverOn) {
+							resolve();
 							console.log('FAKE_SERVER--Success.');
 						}
 						else {
-							reject('FAKE_SERVER--Failure.');
+							reject();
 							console.log('FAKE_SERVER--Failure.');
 						}
 					}, 1500);
@@ -602,21 +632,21 @@ angular.module('ProjMngmnt')
 			}, 
 			delete: function (entry) {
 				// Entry deletion logic
-				console.log("FAKE_SERVER--deleting: " + JSON.stringify(entry));
+				console.log("FAKE_SERVER--deleting... " + JSON.stringify(entry));
 				
 				// Return promise
 				return $q(function (resolve, reject) {
 					// Simulate request timelaps
 					setTimeout(function () {
 						// Simulate addtion operation result
-						var didSucceed = Math.random() > 0.5;
+						serverOn = !serverOn;
 
-						if (didSucceed) {
-							resolve('FAKE_SERVER--Success.');
+						if (serverOn) {
+							resolve();
 							console.log('FAKE_SERVER--Success.');
 						}
 						else {
-							reject('FAKE_SERVER--Failure.');
+							reject();
 							console.log('FAKE_SERVER--Failure.');
 						}
 					}, 1500);

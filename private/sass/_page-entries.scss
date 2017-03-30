@@ -97,7 +97,6 @@ table.main-table {
 	tr > td , tr > th {
 		& > button.btn {
 			padding: 0.1rem 0.6rem;
-		    background-color: #eee;
 			border: 0;
 			user-select:none;
 			&, &:hover, &:focus, &:active {
@@ -109,7 +108,8 @@ table.main-table {
 		}
 	}
 	tr > th {
-		& > button.btn {
+		& > button.btn-default {
+		    background-color: #eee;
 			color: lighten($color-primary, 5%);
 			&:hover {
 				color: darken($color-primary, 5%);
@@ -120,13 +120,23 @@ table.main-table {
 		}
 	}
 	tr > td {
-		& > button.btn {
+		& > button.btn-default {
+		    background-color: #eee;
 			color: #777;
 			&:hover {
 				color: darken(#777, 25%);
 			}
 			&:not(:hover):focus {
 				color: #777;
+			}
+		}
+	}
+	tr {
+		transition : background-color 250ms linear;
+		&#on-edit-entry {
+			background-color: #e5e5e5;
+			&:hover {
+				background-color: lighten(#d7d7d7, 5%);
 			}
 		}
 	}

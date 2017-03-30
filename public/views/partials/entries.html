@@ -1,23 +1,24 @@
+
 <div class="alert alert-{{formAlert.didSucceed ? 'success' : 'danger'}} alert-dismissable" ng-if="formAlert && formAlert.active">
-	<a href="#" class="close" data-dismiss="alert" aria-label="close" ng-click="alertDismiss()">&times;</a>
+	<a class="close" href="#" data-dismiss="alert" aria-label="close" ng-click="alertDismiss()">&times;</a>
 	<strong>{{formAlert.didSucceed ? 'Success' : 'Failure'}}.&nbsp;</strong>{{formAlert.msg}}
 </div>
 <div class="collapse in form-collapse" id="form-add-entry">
 	<div class="form-title">
 		<div class="col-sm-offset-2 col-sm-10">
-			<h3>{{formTitle}}</h3>
+			<h3>{{formAction.title}}</h3>
 		</div>
 	</div>
-	<form class="form-horizontal" name="form" novalidate>
+	<form class="form-horizontal" name="form" novalidate ng-submit="formAction.submit()">
 		<div ng-repeat="formField in formFields">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="{{formField.identifier}}">{{formField.label}}:</label>
 				<div class="col-sm-10" ng-if="formField.choices === undefined">
-					<input class="form-control" id="{{formField.identifier}}" placeholder=" {{formField.placeholder}}" required="required" ng-if="formField.type == 'input'" ng-model="formEntry[formField.identifier]" type="text">
-					<textarea class="form-control" id="{{formField.identifier}}" placeholder=" {{formField.placeholder}}" ng-if="formField.type == 'textarea'" ng-model="formEntry[formField.identifier]" type="text"></textarea>
+					<input id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'input'" ng-model="formEntry[formField.identifier]">
+					<textarea id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'textarea'" ng-model="formEntry[formField.identifier]"></textarea>
 				</div>
 				<div class="col-sm-10" ng-if="formField.choices !== undefined">
-					<select class="form-control" id="status" required="required" ng-model="formEntry[formField.identifier]">
+					<select id="status" class="form-control" required ng-model="formEntry[formField.identifier]">
 						<option class="hidden" value=""  disabled="disabled" selected="selected">{{formField.placeholder}}</option>
 						<option ng-repeat="choice in formField.choices" value="{{choice.identifier}}">{{choice.value}}</option>
 					</select>
@@ -26,20 +27,18 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button class="btn btn-primary" type="submit" ng-click="submit(formEntry)">Ajouter</button>
-				<!-- <button class="btn btn-danger" type="submit">Supprimer</button> -->
-				<button class="btn btn-default" data-toggle="collapse" data-target="#form-add-entry" type="button" ng-click="reset(form)">Annuler</button>
+				<button class="btn btn-primary" type="submit" ng-disabled="!formSubmitEnabled">{{formAction.submitBtnText}}</button>
+				<button class="btn btn-default" type="reset" ng-click="formCancel()" ng-disabled="!formSubmitEnabled">Annuler</button>
 			</div>
 		</div>
 	</form>
 </div>
-
 <div class="table-responsive">
 	<table class="main-table table table-striped table-hover"><div>
 		<thead>
 			<tr>
 				<th>
-					<button class="btn" data-toggle="collapse" data-target="#form-add-entry">
+					<button class="btn btn-default" data-toggle="collapse" data-target="#form-add-entry">
 						<i class="fa fa-plus"></i>
 					</button>
 				</th>
@@ -47,10 +46,13 @@
 			</tr>
 		</thead></div>
 		<tbody>
-			<tr ng-repeat="entry in tableEntries.rows track by $index">
+			<tr id="{{entry.onEdit ? 'on-edit-entry' : ''}}" ng-repeat="entry in tableEntries.rows | orderBy:defaultSortingField track by entry.id">
 				<td>
-					<button class="btn" ng-click="edit(entry)">
+					<button class="btn btn-default" ng-click="edit(entry.index)">
 						<i class="fa fa-pencil"></i>
+					</button>
+					<button ng-disabled="entry.onDelete" class="btn btn-danger" ng-click="delete(entry.index)">
+						<i class="fa fa-remove"></i>
 					</button>
 				</td>
 				<td ng-repeat="columnMap in tableEntries.columnMaps track by $index">
