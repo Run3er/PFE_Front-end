@@ -6,6 +6,8 @@ var sourcemaps = require('gulp-sourcemaps')
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
+var spawn = require('child_process').spawn;
+
 
 // get production -argument
 var inDev = !util.env.p && !util.env.prod && !util.env.production;
@@ -53,8 +55,32 @@ gulp.task('js', function () {
 });
 
 
+//** live-server launching
+var lsrvCmd = "npm run live-server";
+
+gulp.task('lsrv', function () {
+	console.log(lsrvCmd);	
+	var lsrv = spawn(lsrvCmd, { shell: true });
+
+	lsrv.on('error', function (err) {
+		console.log(err + "\nlive-server: Failed to start npm package. " +
+			"Be sure to have it installed and available in your path.");
+	});
+
+	lsrv.stdout.on( 'data', function (data) {
+	    console.log( 'live-server: ' + data );
+	});
+	lsrv.stderr.on( 'data', function (data) {
+	    console.log( 'live-server: ' + data );
+	});
+	lsrv.on( 'close', function (code) {
+	    console.log( 'live-server: EXIT' + code );
+	});
+});
+
+
 // Default watch task
-gulp.task('default', ['styles', 'js'], function() {
+gulp.task('default', ['styles', 'js', 'lsrv'], function() {
 	if (inDev) {
 	    gulp.watch(sassSrcPthPtrn, ['styles']);
 	    gulp.watch(jsSrcPthPtrn, ['js']);

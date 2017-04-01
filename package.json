@@ -29,12 +29,14 @@
     "gulp-sass": "3.1.0",
     "gulp-sourcemaps": "2.4.1",
     "gulp-uglify": "2.1.2",
-    "gulp-util": "3.0.8"
+    "gulp-util": "3.0.8", 
+    "live-server": "1.2.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "preinstall": "node private/build-process/getAssetsDependencies.js", 
-    "postinstall": "gulp --production"
+    "postinstall": "node private/build-process/updateLiveServer.js && gulp --production", 
+    "live-server": "live-server --port=8181 --host=0.0.0.0 --entry-file=public/views/index.html --browser=FIREFOX --watch=./private,./public --mount=/:./public/views"
   },
   "pm-assetDependencies": [
     {
