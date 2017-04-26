@@ -12,7 +12,7 @@ angular.module('ProjMngmnt')
 			    else {
 			        body.className += " mini-sidebar";
 			    }
-			}
+			};
 
 			// On sidebar expandable menu click
 			var li_expandables = document.getElementsByClassName('collapsible-menu');

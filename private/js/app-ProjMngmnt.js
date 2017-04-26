@@ -6,8 +6,7 @@ angular.module('ProjMngmnt', ['ngRoute'])
 					url: "/actions", 
 					resolveFn: function () {
 						return {
-							type: "action", 
-							formTitle: "Ajouter une action"					
+							type: "action"
 						};
 					}
 				}, 
@@ -15,8 +14,7 @@ angular.module('ProjMngmnt', ['ngRoute'])
 					url: "/risks", 
 					resolveFn: function () {
 						return {
-							type: "risk", 
-							formTitle: "Ajouter un risque"					
+							type: "risk"
 						};
 					}
 				}
