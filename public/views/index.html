@@ -22,7 +22,7 @@
     <!-- Custom styling -->
     <link rel="stylesheet" href="public/css/style.css">
 </head>
-<body>
+<body class="{{miniSidebarToggle ? 'mini-sidebar' : ''}}">
 	<!-- Navbar top -->
     <nav id="navbar-top" class="navbar navbar-default">
         <div class="navbar-header">
@@ -38,7 +38,8 @@
       			</a>
   			</li>
           	<li class="hidden-xs">
-      			<a id="outdent-icon" class="nav-icon" href="#">
+      			<a id="outdent-icon" href="#" class="nav-icon"
+				   ng-init="miniSidebarToggle = false" ng-click="miniSidebarToggle = !miniSidebarToggle">
       				<i class="fa fa-outdent"></i>
       			</a>
   			</li>
@@ -89,116 +90,89 @@
     </nav>
 
 	<!-- Sidebar -->
-    <div id="sidebar" ng-controller="SidebarCtrl">
+    <div id="sidebar" ng-controller="SidebarCtrl" ng-cloak>
   		<a id="nav-brand" href="index.html">
             Projectify
         </a>
-		<ul class="nav nav-tabs">
-			<li class="active"><a href="#project-tab" data-toggle="tab"><i class="fa fa-th"></i></a></li>
-			<li><a href="#global-tab" data-toggle="tab"><i class="fa fa-globe"></i></a></li>
-		</ul>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#project-tab" data-toggle="tab"><i class="fa fa-th"></i></a></li>
+            <li><a href="#global-tab" data-toggle="tab"><i class="fa fa-globe"></i></a></li>
+        </ul>
 
-		<div class="tab-content">
-			<div id="project-tab" class="tab-pane active">
-				<ul class="nav">
-				    <li class="tab-content-header">
-				    	<span title="Application de gestion de projets en mode SaaS">Application de gestion de projets en mode SaaS</span>
-			    	</li>
-					<li class="simple-menu active">
-						<a href="./dashboard">
-							<span class="menu-icon"><i class="fa fa-dashboard"></i></span>
-							<span class="menu-title">Tableau de bord</span>
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="./actions">
-							<span class="menu-icon"><i class="fa fa-tasks"></i></span>
-							<span class="menu-title">Actions</span>
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="./risks">
-							<span class="menu-icon"><i class="fa fa-warning"></i></span>
-							<span class="menu-title">Risques</span>
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-pause-circle-o"></i></span>
-							<span class="menu-title">Points en suspens</span>
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-exchange"></i></span>
-							<span class="menu-title">Demandes de changement</span>
-							<span class="menu-badge"><span class="label label-danger">2</span></span>
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-user-times"></i></span>
-							<span class="menu-title">Ressources</span>
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-file"></i></span>
-							<span class="menu-title">Documents</span>
-							<span class="menu-badge"><span class="label label-danger">1</span></span>
-							<!-- TODO: if more than three numerals (>1000), add title attribute -->
-							<!-- <span class="menu-badge"><span class="label label-danger" title="1000">1000</span></span> -->
-						</a>
-					</li>
-					<li class="simple-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-calendar"></i></span>
-							<span class="menu-title">Planning</span>
-						</a>
-					</li>
-				</ul>
-			</div>
+        <div class="tab-content">
+            <div id="project-tab" class="tab-pane active">
+                <ul class="nav">
+                    <li class="tab-content-header">
+                        <span title="{{menu.title}}">{{menu.title}}</span>
+                    </li>
+                    <li class="simple-menu {{menu.menuActive == index ? 'active' : ''}}" ng-repeat-start="(index, entry) in menu.entries"
+                        ng-if="entry.entries == void(0)" ng-click="menu.menuActive = index; menu.menuExpanded = void(0)">
+                        <a href="{{entry.url}}">
+                            <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
+                            <span class="menu-title">{{entry.title}}</span>
+                            <span class="menu-badge" ng-if="entry.notifsNb">
+                                <span class="label label-danger" ng-if="entry.notifsNb">{{entry.notifsNb}}</span>
+                                <!-- TODO: if more than three numerals (>1000), add title attribute -->
+                                <!-- <span class="menu-badge"><span class="label label-danger" title="1000">1000</span></span> -->
+                            </span>
+                        </a>
+                    </li>
+                    <li class="collapsible-menu {{menu.menuActive == index ? 'active' : ''}}" ng-repeat-end ng-if="entry.entries != void(0)">
+                        <a href="{{entry.url}}" ng-click="menu.menuExpanded = (menu.menuExpanded == index) ? void(0) : index">
+                            <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
+                            <span class="menu-title">{{entry.title}}</span>
+                            <span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right" ng-if="entry.entries"></i></span>
+                        </a>
+                        <ul ng-show="menu.menuExpanded == index || menu.menuActive == index">
+                            <li ng-repeat="(subIndex, subEntry) in entry.entries">
+                                <a href="{{subEntry.url}}" class="{{menu.menuActive == index && menu.subMenuActive == subIndex ? 'active' : ''}}"
+                                   ng-click="menu.subMenuActive = subIndex; menu.menuActive = index">{{subEntry.title}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
 
-			<div id="global-tab" class="tab-pane">
-				<ul class="nav">
-				    <li class="tab-content-header">
-				    	<span title="Global">Global</span>
-			    	</li>
-					<li class="collapsible-menu">
-						<a href="javascript:void(0);">
-							<span class="menu-icon"><i class="fa fa-th"></i></span>
-							<span class="menu-title">Projets</span>
-							<span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right"></i></span>
-						</a>
-						<ul>
-							<li>
-								<a href="#">Service 5G - Ooredoo</a>
-							</li>
-							<li>
-								<a href="#">SMS Sender - TT</a>
-							</li>
-							<li>
-								<a href="#">Application de gestion de projets en mode SaaS</a>
-							</li>
-							<li>
-								<a href="#">Rénovation Infrastructure</a>
-							</li>
-						</ul>
-					</li>
-					<li class="simple-menu">
-						<a href="#">
-							<span class="menu-icon"><i class="fa fa-user-times"></i></span>
-							<span class="menu-title">Ressources</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+            <div id="global-tab" class="tab-pane">
+                <ul class="nav">
+                    <li class="tab-content-header">
+                        <span title="Global">Global</span>
+                    </li>
+                    <li class="collapsible-menu">
+                        <a href="javascript:void(0);">
+                            <span class="menu-icon"><i class="fa fa-th"></i></span>
+                            <span class="menu-title">Projets</span>
+                            <span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right"></i></span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#">Service 5G - Ooredoo</a>
+                            </li>
+                            <li>
+                                <a href="#">SMS Sender - TT</a>
+                            </li>
+                            <li>
+                                <a href="#">Application de gestion de projets en mode SaaS</a>
+                            </li>
+                            <li>
+                                <a href="#">Rénovation Infrastructure</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="simple-menu">
+                        <a href="#">
+                            <span class="menu-icon"><i class="fa fa-user-times"></i></span>
+                            <span class="menu-title">Ressources</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <section id="main">
       <!-- <div class="row"> -->
-		
+
 			<!-- Header -->
         	<div class="header">
 				<a class="last-update" href="./" title="dernière mise à jour">
@@ -246,7 +220,7 @@
 				</ul>
         	</div>
 
-	        <div id="main-content" class="container-fluid" ng-view ng-cloak></div>
+	        <div id="main-content" class="container-fluid" ui-view ng-cloak></div>
 
 	  <!-- </div> -->
 	</section>
@@ -272,8 +246,8 @@
     <script src="node_modules/nvd3/build/nv.d3.min.js"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script> -->
     <script src="node_modules/angular/angular.min.js"></script>
-    <!-- <script src="https://http://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-route.js"></script> -->
-    <script src="node_modules/angular-route/angular-route.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script> -->
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
     <!-- Angular app script -->
     <script src="public/js/app.js"></script>
 </body>

@@ -271,12 +271,11 @@ a:hover, a:focus {
 					}
 				}
 				& > ul {
-					height: 0;
-					transition: height 220ms linear;
+					//height: 0;
+					//transition: height 220ms linear;
 					overflow: hidden;
 					background: rgba(19,34,50,0.44); //darken
-					padding-left: 4rem;
-					// TODO: add padding-top to first & lqst elements
+					// TODO: add padding-top to first & last elements
 					// padding: 0.1rem 0 0.2rem 4rem;
 					padding-left: 4rem;
 					padding-right: 0;
