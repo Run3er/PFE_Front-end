@@ -3,6 +3,7 @@ public/css/
 public/js/
 public/CDN-ress/
 git.ignore/
+.idea/
 
 
 ### Node.gitignore ###
