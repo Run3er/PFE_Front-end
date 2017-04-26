@@ -1,6 +1,6 @@
 
-angular.module('ProjMngmnt', ['ngRoute'])
-	.config(function($routeProvider, $locationProvider) {
+angular.module('ProjMngmnt', ['ui.router'])
+	.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 			var entriesMap = [
 				{
 					url: "/actions", 
@@ -20,21 +20,23 @@ angular.module('ProjMngmnt', ['ngRoute'])
 				}
 			];
 
-			$routeProvider
-				.when('/', {
-					// blank view
+			$stateProvider
+				.state('global', {
+					url: '/'
 				})
-				.when('/dashboard', {
-					templateUrl:'partials/dashboard.html', 
+				.state('dashboard', {
+					url: '/dashboard', 
+					templateUrl: 'partials/dashboard.html', 
 					controller: 'DashboardCtrl'
-				})
-				.otherwise({
-					redirectTo:'/'
 				});
+
+			$urlRouterProvider.otherwise('/');
+		
 			// entries routes
 			for (var i = 0; i < entriesMap.length; i++) {
-				$routeProvider
-					.when(entriesMap[i].url, {
+				$stateProvider
+					.state(entriesMap[i].url, {
+						url: entriesMap[i].url, 
 						templateUrl:'partials/entries.html', 
 						controller: 'EntriesCtrl', 
 						resolve: {
