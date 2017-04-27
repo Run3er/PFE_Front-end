@@ -14,8 +14,8 @@ angular.module('ProjMngmnt')
 		// Reset form
 		var formReset = function () {
 			$scope.form.$setPristine();
-			$scope.form.$setUntouched();			
-		}
+			$scope.form.$setUntouched();
+		};
 
 		// On form reset
 		$scope.formCancel = function() {
@@ -55,7 +55,7 @@ angular.module('ProjMngmnt')
 			//color corresponding entry in table
 
 			$scope.formAction.submit = update;
-		}
+		};
 
 		// On entry delete
 		$scope.delete = function (entryIdx) {
@@ -207,7 +207,7 @@ angular.module('ProjMngmnt')
 				if (viewData.form.fields[i].choices !== void(0)) {
 					for (var j = 0; j < _entries.length; j++) {
 						for (var k = 0; k < viewData.form.fields[i].choices.length; k++) {
-							if (viewData.form.fields[i].choices[k].identifier == _entries[j][viewData.form.fields[i].identifier]) {
+							if (viewData.form.fields[i].choices[k].identifier === _entries[j][viewData.form.fields[i].identifier]) {
 								_rows[j][viewData.form.fields[i].identifier] = viewData.form.fields[i].choices[k].value;
 								break;					
 							}
