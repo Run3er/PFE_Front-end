@@ -21,16 +21,30 @@ angular.module('ProjMngmnt', ['ui.router'])
 			];
 
 			$stateProvider
-				.state('global', {
-					url: '/'
-				})
+                .state('portfolio', {
+                    url: '/portfolio',
+                    controller: 'PortfolioCtrl'
+                })
 				.state('dashboard', {
 					url: '/dashboard', 
 					templateUrl: 'partials/dashboard.html', 
 					controller: 'DashboardCtrl'
-				});
+				})
 
-			$urlRouterProvider.otherwise('/');
+                .state('404', {
+                    // no url defined
+                    template: '<div>404 Not Found.</div>'
+                });
+
+            $urlRouterProvider
+                .when("/", "/portfolio")
+                .otherwise(function($injector) {
+                    var $state = $injector.get('$state');
+
+                    $state.go('404', null, {
+                        location: false
+                    });
+                });
 		
 			// entries routes
 			for (var i = 0; i < entriesMap.length; i++) {

@@ -22,6 +22,7 @@
     <!-- Custom styling -->
     <link rel="stylesheet" href="public/css/style.css">
 </head>
+
 <body class="{{miniSidebarToggle ? 'mini-sidebar' : ''}}">
 	<!-- Navbar top -->
     <nav id="navbar-top" class="navbar navbar-default">
@@ -44,7 +45,7 @@
       			</a>
   			</li>
           	<li class="visible-xs navbar-title">
-	    		<span title="Projectify">Projectify</span>
+                <a href="./portfolio"><span title="Projectify">Projectify</span></a>
   			</li>
           </ul>
         </div>
@@ -91,7 +92,7 @@
 
 	<!-- Sidebar -->
     <div id="sidebar" ng-controller="SidebarCtrl" ng-cloak>
-  		<a id="nav-brand" href="index.html">
+  		<a id="nav-brand" href="./portfolio">
             Projectify
         </a>
         <ul class="nav nav-tabs">

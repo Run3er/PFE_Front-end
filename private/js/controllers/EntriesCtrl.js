@@ -1,6 +1,8 @@
 
 angular.module('ProjMngmnt')
-	.controller('EntriesCtrl', function (DB, $scope, entriesSpecifics) {
+	.controller('EntriesCtrl', function (Sidebar, DB, $scope, entriesSpecifics) {
+        Sidebar.setContent("project");
+
 		// Get DB layer entries data
 		var entries = angular.copy(DB.entries(entriesSpecifics.type).getAll());
 		// Get view layer entries data

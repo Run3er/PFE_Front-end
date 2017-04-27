@@ -1,8 +1,9 @@
 
 angular.module('ProjMngmnt')
 	.service('Sidebar', function () {
+	    var sidebarContent = {};
 
-		this.contents = {
+		var projectLevelBaseContent = {
 			"title": "Application de gestion de projets en mode SaaS",
 			"entries": [
                 {
@@ -46,30 +47,154 @@ angular.module('ProjMngmnt')
                     "url": "./planning",
                     "iconClass": "fa fa-calendar",
                     "title": "Planning"
+                }
+			]
+		};
+
+		var entitiesContent  = {
+            "title": "Portefeuille",
+            "entries": [
+                {
+                    "url": "./portfolio/details",
+                    "iconClass": "fa fa-dashboard",
+                    "title": "Détails"
                 },
                 {
-                    "url": "./sub-projects",
+                    "url": "javascript:void(0)",
                     "iconClass": "fa fa-sitemap",
-                    "title": "Sous-projets",
+                    "title": "Entité-A",
                     "entries": [
                         {
-                            "url": "./sub-projects/1",
+                            "url": "./projects/1",
                             "title": "Service 5G - Ooredoo"
                         },
                         {
-                            "url": "./sub-projects/2",
+                            "url": "./projects/2",
                             "title": "SMS Sender - TT"
                         },
                         {
-                            "url": "./sub-projects/3",
+                            "url": "./projects/3",
                             "title": "Application de gestion de projets en mode SaaS"
                         },
                         {
-                            "url": "./sub-projects/4",
+                            "url": "./projects/4",
+                            "title": "Rénovation Infrastructure"
+                        }
+                    ]
+                },
+                {
+                    "url": "javascript:void(0)",
+                    "iconClass": "fa fa-sitemap",
+                    "title": "Entité-A",
+                    "entries": [
+                        {
+                            "url": "./projects/1",
+                            "title": "Service 5G - Ooredoo"
+                        },
+                        {
+                            "url": "./projects/2",
+                            "title": "SMS Sender - TT"
+                        },
+                        {
+                            "url": "./projects/3",
+                            "title": "Application de gestion de projets en mode SaaS"
+                        },
+                        {
+                            "url": "./projects/4",
+                            "title": "Rénovation Infrastructure"
+                        }
+                    ]
+                },{
+                    "url": "javascript:void(0)",
+                    "iconClass": "fa fa-sitemap",
+                    "title": "Entité-C",
+                    "entries": [
+                        {
+                            "url": "./projects/1",
+                            "title": "Service 5G - Ooredoo"
+                        },
+                        {
+                            "url": "./projects/2",
+                            "title": "SMS Sender - TT"
+                        },
+                        {
+                            "url": "./projects/3",
+                            "title": "Application de gestion de projets en mode SaaS"
+                        },
+                        {
+                            "url": "./projects/4",
                             "title": "Rénovation Infrastructure"
                         }
                     ]
                 }
-			]
-		};
+            ]
+        };
+
+        function getSubHierarchyEntry(hierarchyHead) {
+            var projectLevelSuffix;
+            var projectLevelTitle;
+
+            if (hierarchyHead === "entities") {
+                projectLevelSuffix = "projects";
+                projectLevelTitle = "Projets";
+            }
+            else if (hierarchyHead === "project") {
+                projectLevelSuffix = "sub-projects";
+                projectLevelTitle = "Sous-projets";                
+            }
+            else if (hierarchyHead === "sub-project") {
+                projectLevelSuffix = "construction-sites";
+                projectLevelTitle = "Chantiers";
+            }
+            else return void(0);
+
+            return {
+                "url": "javascript:void(0)",
+                "iconClass": "fa fa-sitemap",
+                "title": projectLevelTitle,
+                "entries": [
+                    {
+                        "url": "./" + projectLevelSuffix + "/1",
+                        "title": "Service 5G - Ooredoo"
+                    },
+                    {
+                        "url": "./" + projectLevelSuffix + "/2",
+                        "title": "SMS Sender - TT"
+                    },
+                    {
+                        "url": "./" + projectLevelSuffix + "/3",
+                        "title": "Application de gestion de projets en mode SaaS"
+                    },
+                    {
+                        "url": "./" + projectLevelSuffix + "/4",
+                        "title": "Rénovation Infrastructure"
+                    }
+                ]
+            };
+        }
+
+
+        this.getContent = function () {
+            return sidebarContent;
+        };
+
+        this.setContent = function (pageContentType) {
+            var cloneContent;
+
+            if (pageContentType === "portfolio") {
+                cloneContent = angular.copy(entitiesContent);
+            }
+            else if (pageContentType === "project" || pageContentType === "sub-project" || pageContentType === "construction-site") {
+                cloneContent = angular.copy(projectLevelBaseContent);
+                var entry = getSubHierarchyEntry(pageContentType);
+                if (entry !== void(0)){
+                    cloneContent.entries.push(entry);
+                }
+            }
+            sidebarContent.title = cloneContent.title;
+            sidebarContent.entries = cloneContent.entries;
+            sidebarContent.menuActive = void(0);
+            sidebarContent.menuExpanded = void(0);
+            sidebarContent.subMenuActive = void(0);
+        };
 	});
