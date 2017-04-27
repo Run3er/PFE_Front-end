@@ -51,82 +51,99 @@ angular.module('ProjMngmnt')
 			]
 		};
 
-		var entitiesContent  = {
-            "title": "Portefeuille",
+		var portfolioContent  = {
+            "title": "Général",
             "entries": [
                 {
-                    "url": "./portfolio/details",
+                    "url": "./general/dashboard",
                     "iconClass": "fa fa-dashboard",
-                    "title": "Détails"
-                },
-                {
-                    "url": "javascript:void(0)",
-                    "iconClass": "fa fa-sitemap",
-                    "title": "Entité-A",
-                    "entries": [
-                        {
-                            "url": "./projects/1",
-                            "title": "Service 5G - Ooredoo"
-                        },
-                        {
-                            "url": "./projects/2",
-                            "title": "SMS Sender - TT"
-                        },
-                        {
-                            "url": "./projects/3",
-                            "title": "Application de gestion de projets en mode SaaS"
-                        },
-                        {
-                            "url": "./projects/4",
-                            "title": "Rénovation Infrastructure"
-                        }
-                    ]
-                },
-                {
-                    "url": "javascript:void(0)",
-                    "iconClass": "fa fa-sitemap",
-                    "title": "Entité-A",
-                    "entries": [
-                        {
-                            "url": "./projects/1",
-                            "title": "Service 5G - Ooredoo"
-                        },
-                        {
-                            "url": "./projects/2",
-                            "title": "SMS Sender - TT"
-                        },
-                        {
-                            "url": "./projects/3",
-                            "title": "Application de gestion de projets en mode SaaS"
-                        },
-                        {
-                            "url": "./projects/4",
-                            "title": "Rénovation Infrastructure"
-                        }
-                    ]
+                    "title": "Dashboard"
                 },{
-                    "url": "javascript:void(0)",
-                    "iconClass": "fa fa-sitemap",
-                    "title": "Entité-C",
-                    "entries": [
-                        {
-                            "url": "./projects/1",
-                            "title": "Service 5G - Ooredoo"
-                        },
-                        {
-                            "url": "./projects/2",
-                            "title": "SMS Sender - TT"
-                        },
-                        {
-                            "url": "./projects/3",
-                            "title": "Application de gestion de projets en mode SaaS"
-                        },
-                        {
-                            "url": "./projects/4",
-                            "title": "Rénovation Infrastructure"
-                        }
-                    ]
+                    "url": "./general/portfolio",
+                    "iconClass": "fa fa-th",
+                    "title": "Portefeuille"
+                },{
+                    "url": "./general/resources",
+                    "iconClass": "fa fa-user-times",
+                    "title": "Ressources"
+                },{
+                    "url": "./general/internal",
+                    "iconClass": "fa fa-bullseye",
+                    "title": "Interne"
+                },{
+                    "url": "./general/external",
+                    "iconClass": "fa fa-external-link",
+                    "title": "Externe"
                 }
+                // ,
+                // {
+                //     "url": "javascript:void(0)",
+                //     "iconClass": "fa fa-sitemap",
+                //     "title": "Entité-A",
+                //     "entries": [
+                //         {
+                //             "url": "./projects/1",
+                //             "title": "Service 5G - Ooredoo"
+                //         },
+                //         {
+                //             "url": "./projects/2",
+                //             "title": "SMS Sender - TT"
+                //         },
+                //         {
+                //             "url": "./projects/3",
+                //             "title": "Application de gestion de projets en mode SaaS"
+                //         },
+                //         {
+                //             "url": "./projects/4",
+                //             "title": "Rénovation Infrastructure"
+                //         }
+                //     ]
+                // },
+                // {
+                //     "url": "javascript:void(0)",
+                //     "iconClass": "fa fa-sitemap",
+                //     "title": "Entité-A",
+                //     "entries": [
+                //         {
+                //             "url": "./projects/1",
+                //             "title": "Service 5G - Ooredoo"
+                //         },
+                //         {
+                //             "url": "./projects/2",
+                //             "title": "SMS Sender - TT"
+                //         },
+                //         {
+                //             "url": "./projects/3",
+                //             "title": "Application de gestion de projets en mode SaaS"
+                //         },
+                //         {
+                //             "url": "./projects/4",
+                //             "title": "Rénovation Infrastructure"
+                //         }
+                //     ]
+                // },{
+                //     "url": "javascript:void(0)",
+                //     "iconClass": "fa fa-sitemap",
+                //     "title": "Entité-C",
+                //     "entries": [
+                //         {
+                //             "url": "./projects/1",
+                //             "title": "Service 5G - Ooredoo"
+                //         },
+                //         {
+                //             "url": "./projects/2",
+                //             "title": "SMS Sender - TT"
+                //         },
+                //         {
+                //             "url": "./projects/3",
+                //             "title": "Application de gestion de projets en mode SaaS"
+                //         },
+                //         {
+                //             "url": "./projects/4",
+                //             "title": "Rénovation Infrastructure"
+                //         }
+                //     ]
+                // }
             ]
         };
 
@@ -173,6 +190,14 @@ angular.module('ProjMngmnt')
             };
         }
 
+        this.setMenuActive = function (entryUrl) {
+            for (var i = 0; i < sidebarContent.entries; i++) {
+                if (sidebarContent.entries[i].url === entryUrl) {
+
+                }
+            }
+        };
+
 
         this.getContent = function () {
             return sidebarContent;
@@ -181,8 +206,8 @@ angular.module('ProjMngmnt')
         this.setContent = function (pageContentType) {
             var cloneContent;
 
-            if (pageContentType === "portfolio") {
-                cloneContent = angular.copy(entitiesContent);
+            if (pageContentType === "general") {
+                cloneContent = angular.copy(portfolioContent);
             }
             else if (pageContentType === "project" || pageContentType === "sub-project" || pageContentType === "construction-site") {
                 cloneContent = angular.copy(projectLevelBaseContent);

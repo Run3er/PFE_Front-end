@@ -1,7 +1,8 @@
 
 angular.module('ProjMngmnt')
-	.controller('EntriesCtrl', function (Sidebar, DB, $scope, entriesSpecifics) {
+	.controller('EntriesCtrl', function (Sidebar, Header, DB, $scope, entriesSpecifics) {
         Sidebar.setContent("project");
+        Header.displayUpdateTime();
 
 		// Get DB layer entries data
 		var entries = angular.copy(DB.entries(entriesSpecifics.type).getAll());

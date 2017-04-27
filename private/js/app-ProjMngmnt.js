@@ -9,7 +9,7 @@ angular.module('ProjMngmnt', ['ui.router'])
 							type: "action"
 						};
 					}
-				}, 
+				},
 				{
 					url: "/risks", 
 					resolveFn: function () {
@@ -22,8 +22,8 @@ angular.module('ProjMngmnt', ['ui.router'])
 
 			$stateProvider
                 .state('portfolio', {
-                    url: '/portfolio',
-                    controller: 'PortfolioCtrl'
+                    url: '/general',
+                    controller: 'GeneralCtrl'
                 })
 				.state('dashboard', {
 					url: '/dashboard', 
@@ -37,7 +37,7 @@ angular.module('ProjMngmnt', ['ui.router'])
                 });
 
             $urlRouterProvider
-                .when("/", "/portfolio")
+                .when("/", "/general")
                 .otherwise(function($injector) {
                     var $state = $injector.get('$state');
 

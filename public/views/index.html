@@ -45,7 +45,7 @@
                 </a>
             </li>
             <li class="visible-xs navbar-title">
-                <a href="./portfolio"><span title="Projectify">Projectify</span></a>
+                <a href="./general"><span title="Projectify">Projectify</span></a>
             </li>
         </ul>
     </div>
@@ -92,7 +92,7 @@
 
 <!-- Sidebar -->
 <div id="sidebar" ng-controller="SidebarCtrl" ng-cloak>
-    <a id="nav-brand" href="./portfolio">
+    <a id="nav-brand" href="./general">
         Projectify
     </a>
     <ul class="nav nav-menu">
@@ -131,8 +131,9 @@
     <!-- <div class="row"> -->
 
     <!-- Header -->
-    <div class="header">
-        <a class="last-update" href="./" title="dernière mise à jour">
+    <div class="header" ng-controller="HeaderCtrl">
+        <a class="last-update" href="./" title="dernière mise à jour"
+           ng-if="content.updateTimeDisplayed" ng-cloak>
             <i class="icon fa fa-calendar-check-o"></i>
             &nbsp;<span class="day-month">03/02</span>
             <span class="year">/2017</span>
