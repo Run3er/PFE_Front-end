@@ -2,350 +2,350 @@
 //	Navbar & Sidebar styling 
 //
 //
-
-
 @import "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700";
 @import "http://fonts.googleapis.com/css?family=Fanwood+Text:400,400italic";
 
 $sidebar-width: 27rem;
 $sidebar-width-shrinked: 6rem;
 
-
 /*=============== Navbar-Sidebar ===============*/
 body {
-  font-size: 1.4rem;
-  font-family: "Open Sans", sans-serif;
+   font-size: 1.4rem;
+   font-family: "Open Sans", sans-serif;
 }
+
 #main {
-  margin-top: 5.7rem;
-  @media (min-width: 768px) {
-    margin-top: 0	;
-    margin-left: $sidebar-width;
-  }
+   margin-top: 5.7rem;
+   @media (min-width: 768px) {
+      margin-top: 0;
+      margin-left: $sidebar-width;
+   }
 }
+
 a:hover, a:focus {
-  outline:none;
-  text-decoration: none;
+   outline: none;
+   text-decoration: none;
 }
 
 // Bootstrap override
 .form-control {
-  color: #7d8282;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+   color: #7d8282;
+   -webkit-box-shadow: none;
+   box-shadow: none;
 }
+
 .form-control:focus {
-  border-color: #3ba0ff;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+   border-color: #3ba0ff;
+   -webkit-box-shadow: none;
+   box-shadow: none;
 }
 
 //* Navbar *//
 #navbar-top {
-  height: 5.7rem;
-  margin-bottom: 0;
-  // border-top still at 1px by default
-  border-left: none;
-  border-right: none;
-  background-color: #3ba0ff;
-  @media (max-width: 767px) {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1050;
-    border: none;
-  }
-  @media (min-width: 768px) {
-    margin-left: $sidebar-width;
-    background-color: #fff;
-    padding-right: 1.5rem;
-    border-bottom: 1px solid #E9EAEB;
-  }
-  .navbar-header {
-    .nav-icon {
-      height: 5.5rem;
-      font-size: 2.1rem;
-      line-height: 3.4rem;
-      color: #7D8282;
-      &:hover {
-        background-color: #FCFCFC; // darken TODO:..more
+   height: 5.7rem;
+   margin-bottom: 0;
+   // border-top still at 1px by default
+   border-left: none;
+   border-right: none;
+   background-color: #3ba0ff;
+   @media (max-width: 767px) {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1050;
+      border: none;
+   }
+   @media (min-width: 768px) {
+      margin-left: $sidebar-width;
+      background-color: #fff;
+      padding-right: 1.5rem;
+      border-bottom: 1px solid #E9EAEB;
+   }
+   .navbar-header {
+      .nav-icon {
+         height: 5.5rem;
+         font-size: 2.1rem;
+         line-height: 3.4rem;
+         color: #7D8282;
+         &:hover {
+            background-color: #FCFCFC; // darken TODO:..more
+         }
+         &:not(:hover):focus {
+            background-color: unset;
+         }
+         @media (max-width: 767px) {
+            font-size: 2.4rem;
+            line-height: 3.8rem;
+            color: #fff;
+            &:hover, &:focus {
+               background-color: unset;
+            }
+         }
       }
-      &:not(:hover):focus {
-        background-color: unset;
+      .navbar-title {
+         width: auto;
+         height: auto;
+         padding-top: 0.6rem;
+         margin: 0 1.5rem 0;
+         font-family: 'Fanwood Text', serif;
+         font-size: 3.5rem;
+         line-height: 4rem;
+         font-style: italic;
+         text-align: center;
+         color: #fff;
+         overflow: hidden;
+         white-space: nowrap;
+         text-overflow: ellipsis;
       }
-      @media (max-width: 767px) {
-        font-size: 2.4rem;
-        line-height: 3.8rem;
-        color: #fff;
-        &:hover, &:focus {
-          background-color: unset;
-        }
+   }
+   #navbar {
+      background-color: #fff;
+      & > ul > li {
+         & > a {
+            height: 5.5rem;
+            font-size: 1.6rem;
+            line-height: 2.8rem;
+            &:hover {
+               background-color: #FCFCFC; // darken TODO:..more
+            }
+         }
+         &.open > a {
+            background-color: #FCFCFC; // darken TODO:..more
+         }
+         ul.dropdown-menu > li > a {
+            padding: 0.3rem 2rem;
+            font-size: 1.5rem;
+            line-height: 3rem;
+            &:focus, &:hover {
+               color: #fff;
+               background-color: #3ba0ff;
+            }
+         }
       }
-    }
-    .navbar-title {
-      width: auto;
-      height: auto;
-      padding-top: 0.6rem;
-      margin: 0 1.5rem 0;
-      font-family: 'Fanwood Text',serif;
-      font-size: 3.5rem;
-      line-height: 4rem;
-      font-style: italic;
-      text-align: center;
-      color: #fff;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-  }
-  #navbar {
-    background-color: #fff;
-    & > ul > li {
-      & > a {
-        height: 5.5rem;
-        font-size: 1.6rem;
-        line-height: 2.8rem;
-        &:hover {
-          background-color: #FCFCFC; // darken TODO:..more
-        }
+      .profile-menu {
+         img {
+            height: 40px;
+            margin-top: -8px;
+            cursor: pointer;
+         }
       }
-      &.open > a {
-        background-color: #FCFCFC; // darken TODO:..more
+      .navbar-search {
+         margin-top: 0.2rem;
+         border-radius: 2rem;
       }
-      ul.dropdown-menu > li > a {
-        padding: 0.3rem 2rem;
-        font-size: 1.5rem;
-        line-height: 3rem;
-        &:focus, &:hover {
-          color: #fff;
-          background-color: #3ba0ff;
-        }
-      }
-    }
-    .profile-menu {
-      img {
-        height: 40px;
-        margin-top: -8px;
-        cursor: pointer;
-      }
-    }
-    .navbar-search {
-      margin-top: 0.2rem;
-      border-radius: 2rem;
-    }
-  }
+   }
 }
-
 
 //* Sidebar *//
 #sidebar {
-  display: none;
-  width: $sidebar-width;
-  background-color: #253341;
-  // overflow-x: hidden;
-  // overflow-y: auto;
-  @media (min-width: 768px) {
-    display: initial;
-    position: fixed;
-    top: 0rem;
-    bottom: 0;
-    left: 0;
-    z-index: 1200;
-  }
-  #nav-brand {
-    display: block;
-    height: 5.7rem;
-    width: 100%;
-    padding: 1.5rem;
-    font-family: 'Fanwood Text',serif;
-    font-size: 3.5rem;
-    line-height: 2.2rem;
-    font-style: italic;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    background-color: #3ba0ff;
-  }
-  .nav-tabs {
-    border-bottom: none;
-    & > li {
-      width: 50%;
-      margin-bottom: 0;
-      & > a {
-        text-align: center;
-        background-color: unset;
-        color: #fff;
-        border: none;
-        font-size: 1.8rem;
-      }
-      &.active {
-        & > a {
-          color: #3ba0ff;
-          border-bottom: 1px solid #3ba0ff;
-        }
-      }
-    }
-  }
-  .tab-content .tab-pane {
-    font-size: 1.3rem;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-  ul {
-    list-style: none;
-  }
-  li {
-    display: block;
-  }
-  a {
-    text-decoration: none;
-  }
-  ul.nav-menu > li {
-    &.tab-content-header {
-      height: 4.6rem;
-      padding: 1.5rem 1.7rem;
-      margin-bottom: 2rem;
-      background-color: #294c70;
-      color: #ccc;
+   display: none;
+   width: $sidebar-width;
+   background-color: #253341;
+   // overflow-x: hidden;
+   // overflow-y: auto;
+   @media (min-width: 768px) {
+      display: initial;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1200;
+   }
+   #nav-brand {
+      display: block;
+      height: 5.7rem;
+      width: 100%;
+      padding: 1.5rem;
+      font-family: 'Fanwood Text', serif;
+      font-size: 3.5rem;
+      line-height: 2.2rem;
+      font-style: italic;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    &:not(.tab-content-header) {
-      & > a {
-        display: inline-block;
-        width: 100%;
-        margin: 0;
-        padding: 1.2rem 0 0.8rem 2.2rem;
-        color: #909090;
-        &:hover, &:focus {
-          background-color: unset;
-        }
-        &:not(:hover):focus {
-          color: #909090;
-        }
-        &:hover {
-          color: #b4b6b4;
-        }
-        .menu-icon {
-          width: 15%;
-          float: left;
-          font-size: 1.7rem;
-        }
-        .menu-title {
-          padding-top: 0.2rem;
-          display: inline-block;
-          width: 70%;
-          overflow-wrap: break-word;
-          word-wrap: break-word;
-          -ms-word-break: break-all;
-          word-break: break-word;
-        }
-        .menu-badge {
-          width: 15%;
-          float: right;
-          font-size: 1.7rem;
-          .dropdown-arrow {
-            padding-left: 40%;
-          }
-          .label {
-            display: inline-block;
-            position: relative;
-            top: 0.1rem;
-            left: 0.4rem;
-            max-width: 29.1px;
-            padding: 0.4rem 0.6rem;
-            font-size: 1rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-        }
-      }
-      &.active > a {
-        padding-left: 1.9rem; //15px - 0.3rem
-        border-left: 0.3rem solid #3ba0ff;
-        color: #b4b6b4;
-        background-color: #2e3f50; //lighten
-        &:focus {
-          color: #b4b6b4;
-        }
-      }
-      & > ul {
-        //height: 0;
-        //transition: height 220ms linear;
-        overflow: hidden;
-        background: rgba(19,34,50,0.44); //darken
-        // TODO: add padding-top to first & last elements
-        // padding: 0.1rem 0 0.2rem 4rem;
-        padding-left: 4rem;
-        padding-right: 0;
-        & > li {
-          & > a {
-            display: inline-block;
-            width: 100%;
-            color: #909090;
-            padding: 0.6rem 1.5rem;
-            border-left: 2px dashed #2e3f50;
-            &.active {
-              color: #e0e0e0;
-              // transition: color 200ms linear;
+      background-color: #3ba0ff;
+   }
+   .nav-tabs {
+      border-bottom: none;
+      & > li {
+         width: 50%;
+         margin-bottom: 0;
+         & > a {
+            text-align: center;
+            background-color: unset;
+            color: #fff;
+            border: none;
+            font-size: 1.8rem;
+         }
+         &.active {
+            & > a {
+               color: #3ba0ff;
+               border-bottom: 1px solid #3ba0ff;
             }
-          }
-          &:hover > a:not(.active) {
-            color: #b4b6b4;
-          }
-
-          &:first-of-type > a {
-            padding-top: 0.7rem;
-          }
-          &:last-of-type > a {
-            padding-bottom: 0.9rem;
-          }
-        }
+         }
       }
-    }
-  }
-}
-body.mini-sidebar {
-  #navbar-top, #main {
-    @media (min-width: 768px) {
-      margin-left: $sidebar-width-shrinked;
-    }
-  }
-  #sidebar {
-    width: $sidebar-width-shrinked;
-    #nav-brand {
-      padding: 1.5rem 1rem;
-      font-size: 2rem;
-    }
-    .nav-tabs  > li {
-      width: 100%;
-    }
-    ul.nav-menu > li {
+   }
+   .tab-content .tab-pane {
+      font-size: 1.3rem;
+      overflow-x: hidden;
+      overflow-y: auto;
+   }
+   ul {
+      list-style: none;
+   }
+   li {
+      display: block;
+   }
+   a {
+      text-decoration: none;
+   }
+   ul.nav-menu > li {
       &.tab-content-header {
-        padding: 1.5rem 1.1rem;
+         height: 4.6rem;
+         background-color: #294c70;
+         margin-bottom: 2rem;
+         color: #ccc;
+         padding: 1.5rem 1.7rem;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
       }
       &:not(.tab-content-header) {
-        & > a {
-          padding: 1.2rem 2rem 0.8rem 2rem;
-          .menu-icon {
+         & > a {
+            display: inline-block;
             width: 100%;
-          }
-          .menu-title {
-            display: none;
-          }
-          .menu-badge {
-            display: none;
-          }
-        }
-        &.active > a {
-          padding-left: 1.7rem; //2rem - 0.3rem
-        }
+            margin: 0;
+            padding: 1.2rem 0 0.8rem 2.2rem;
+            color: #909090;
+            &:hover, &:focus {
+               background-color: unset;
+            }
+            &:not(:hover):focus {
+               color: #909090;
+            }
+            &:hover {
+               color: #b4b6b4;
+            }
+            .menu-icon {
+               width: 15%;
+               float: left;
+               font-size: 1.7rem;
+            }
+            .menu-title {
+               padding-top: 0.2rem;
+               display: inline-block;
+               width: 70%;
+               overflow-wrap: break-word;
+               word-wrap: break-word;
+               -ms-word-break: break-all;
+               word-break: break-word;
+            }
+            .menu-badge {
+               width: 15%;
+               float: right;
+               font-size: 1.7rem;
+               .dropdown-arrow {
+                  padding-left: 40%;
+               }
+               .label {
+                  display: inline-block;
+                  position: relative;
+                  top: 0.1rem;
+                  left: 0.4rem;
+                  max-width: 29.1px;
+                  padding: 0.4rem 0.6rem;
+                  font-size: 1rem;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+               }
+            }
+         }
+         &.active > a {
+            padding-left: 1.9rem; //15px - 0.3rem
+            border-left: 0.3rem solid #3ba0ff;
+            color: #b4b6b4;
+            background-color: #2e3f50; //lighten
+            &:focus {
+               color: #b4b6b4;
+            }
+         }
+         & > ul {
+            //height: 0;
+            //transition: height 220ms linear;
+            overflow: hidden;
+            background: rgba(19, 34, 50, 0.44); //darken
+            // TODO: add padding-top to first & last elements
+            // padding: 0.1rem 0 0.2rem 4rem;
+            padding-left: 4rem;
+            padding-right: 0;
+            & > li {
+               & > a {
+                  display: inline-block;
+                  width: 100%;
+                  color: #909090;
+                  padding: 0.6rem 1.5rem;
+                  border-left: 2px dashed #2e3f50;
+                  &.active {
+                     color: #e0e0e0;
+                     // transition: color 200ms linear;
+                  }
+               }
+               &:hover > a:not(.active) {
+                  color: #b4b6b4;
+               }
+
+               &:first-of-type > a {
+                  padding-top: 0.7rem;
+               }
+               &:last-of-type > a {
+                  padding-bottom: 0.9rem;
+               }
+            }
+         }
       }
-    }
-  }
+   }
+}
+
+body.mini-sidebar {
+   #navbar-top, #main {
+      @media (min-width: 768px) {
+         margin-left: $sidebar-width-shrinked;
+      }
+   }
+   #sidebar {
+      width: $sidebar-width-shrinked;
+      #nav-brand {
+         padding: 1.5rem 1rem;
+         font-size: 2rem;
+      }
+      .nav-tabs > li {
+         width: 100%;
+      }
+      ul.nav-menu > li {
+         &.tab-content-header {
+            padding: 1.5rem 1.1rem;
+         }
+         &:not(.tab-content-header) {
+            & > a {
+               padding: 1.2rem 2rem 0.8rem 2rem;
+               .menu-icon {
+                  width: 100%;
+               }
+               .menu-title {
+                  display: none;
+               }
+               .menu-badge {
+                  display: none;
+               }
+            }
+            &.active > a {
+               padding-left: 1.7rem; //2rem - 0.3rem
+            }
+         }
+      }
+   }
 }

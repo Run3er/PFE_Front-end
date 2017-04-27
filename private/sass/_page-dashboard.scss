@@ -2,31 +2,29 @@
 //	Dashboard styling 
 //
 // 
-
-
 @import "https://fonts.googleapis.com/css?family=Roboto";
 
 // Breakpoints
 // -Custom 
-$custom-smr-lv1-min-width: 420px; 
-$custom-smr-lv1-max-width: $bootstrap-xs-max-width; 
-$custom-smr-lv2-min-width: 460px; 
-$custom-smr-lv2-max-width: $bootstrap-xs-max-width; 
-$custom-smr-lv3-min-width: 590px; 
-$custom-smr-lv3-max-width: $bootstrap-xs-max-width; 
-$custom-xlg-min-width: 1605px; 
+$custom-smr-lv1-min-width: 420px;
+$custom-smr-lv1-max-width: $bootstrap-xs-max-width;
+$custom-smr-lv2-min-width: 460px;
+$custom-smr-lv2-max-width: $bootstrap-xs-max-width;
+$custom-smr-lv3-min-width: 590px;
+$custom-smr-lv3-max-width: $bootstrap-xs-max-width;
+$custom-xlg-min-width: 1605px;
 // -Minor 
-$indicator-title-shorten-min1-width: $custom-smr-lv1-min-width; 
-$indicator-title-shorten-max1-width: 500px; 
-$indicator-title-shorten-min2-width: $bootstrap-md-min-width; 
-$indicator-title-shorten-max2-width: 1150px; 
-$indicator-measure-minor-full-line-min-width: $indicator-title-shorten-min1-width; 
-$indicator-measure-minor-full-line-max-width: 475px; 
-$advancement-indicators-abreast-pos1-min-width: $custom-smr-lv2-min-width; 
-$advancement-indicators-abreast-pos1-max-width: 560px; 
-$advancement-indicators-stacked-max-width: $advancement-indicators-abreast-pos1-min-width - 1; 
-$advancement-indicators-abreast-pos2-min-width: $advancement-indicators-abreast-pos1-max-width + 1; 
-$advancement-indicators-abreast-pos2-max-width: $bootstrap-sm-max-width; 
+$indicator-title-shorten-min1-width: $custom-smr-lv1-min-width;
+$indicator-title-shorten-max1-width: 500px;
+$indicator-title-shorten-min2-width: $bootstrap-md-min-width;
+$indicator-title-shorten-max2-width: 1150px;
+$indicator-measure-minor-full-line-min-width: $indicator-title-shorten-min1-width;
+$indicator-measure-minor-full-line-max-width: 475px;
+$advancement-indicators-abreast-pos1-min-width: $custom-smr-lv2-min-width;
+$advancement-indicators-abreast-pos1-max-width: 560px;
+$advancement-indicators-stacked-max-width: $advancement-indicators-abreast-pos1-min-width - 1;
+$advancement-indicators-abreast-pos2-min-width: $advancement-indicators-abreast-pos1-max-width + 1;
+$advancement-indicators-abreast-pos2-max-width: $bootstrap-sm-max-width;
 // Timeline dot properties
 $timeline-dot-square-size: 1.6rem;
 $timeline-dot-top-offset: 1.55rem;
@@ -42,464 +40,462 @@ $firstRow-xlg-margin-bottom: 2.5rem;
 // Theme
 $font-number-indicator: roboto;
 
-
-/*=============== Dashboard page ===============*/ 	 
+/*=============== Dashboard page ===============*/
 #measure-chart-indicators-col {
-	padding: 0; 
+   padding: 0;
 }
+
 .nvd3 text {
-	user-select: text;
-	font: inherit {
-		family: calibri; 
-	}
+   user-select: text;
+   font: inherit {
+      family: calibri;
+   }
 }
+
 .glyphicon {
-	cursor: default; 
+   cursor: default;
 }
 
 // Custom breakpoints (Smaller: smr (3 levels) & ExtraLarge: xlg)
 @mixin breakpoint-custom($breakpoint-name, $breakpoint-width) {
-	.#{$breakpoint-name} {
-		float: left; 		
-		position: relative; 
-		min-height: 1rem; 
-		padding-right: 1.5rem; 
-		padding-left: 1.5rem; 
-		width: $breakpoint-width;		
-	}
+   .#{$breakpoint-name} {
+      float: left;
+      position: relative;
+      min-height: 1rem;
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+      width: $breakpoint-width;
+   }
 }
 
 @media (min-width: $custom-smr-lv1-min-width) and (max-width: $custom-smr-lv1-max-width) {
-	@include breakpoint-custom("col-smr-lv1-4", 33.33333333%);
-	@include breakpoint-custom("col-smr-lv1-6", 40.66666666%);
-}
-@media (min-width: $custom-smr-lv2-min-width) and (max-width: $custom-smr-lv2-max-width) {
-	@include breakpoint-custom("col-smr-lv2-4", 33.33333333%);
-	@include breakpoint-custom("col-smr-lv2-8", 66.66666666%);
-}
-@media (min-width: $custom-smr-lv3-min-width) and (max-width: $custom-smr-lv3-max-width) {
-	@include breakpoint-custom("col-smr-lv3-6", 50%);
-}
-@media (min-width: $custom-xlg-min-width) {
-	@include breakpoint-custom("col-xlg-2", 16.66666666%);
-	@include breakpoint-custom("col-xlg-3", 25%);
-	@include breakpoint-custom("col-xlg-4", 33.33333333%);
-	@include breakpoint-custom("col-xlg-5", 41.66666666%);
-	@include breakpoint-custom("col-xlg-6", 50%);
-	@include breakpoint-custom("col-xlg-8", 66.66666666%);
-	@include breakpoint-custom("col-xlg-9", 75%);
-	@include breakpoint-custom("col-xlg-12", 100%);
+   @include breakpoint-custom("col-smr-lv1-4", 33.33333333%);
+   @include breakpoint-custom("col-smr-lv1-6", 40.66666666%);
 }
 
+@media (min-width: $custom-smr-lv2-min-width) and (max-width: $custom-smr-lv2-max-width) {
+   @include breakpoint-custom("col-smr-lv2-4", 33.33333333%);
+   @include breakpoint-custom("col-smr-lv2-8", 66.66666666%);
+}
+
+@media (min-width: $custom-smr-lv3-min-width) and (max-width: $custom-smr-lv3-max-width) {
+   @include breakpoint-custom("col-smr-lv3-6", 50%);
+}
+
+@media (min-width: $custom-xlg-min-width) {
+   @include breakpoint-custom("col-xlg-2", 16.66666666%);
+   @include breakpoint-custom("col-xlg-3", 25%);
+   @include breakpoint-custom("col-xlg-4", 33.33333333%);
+   @include breakpoint-custom("col-xlg-5", 41.66666666%);
+   @include breakpoint-custom("col-xlg-6", 50%);
+   @include breakpoint-custom("col-xlg-8", 66.66666666%);
+   @include breakpoint-custom("col-xlg-9", 75%);
+   @include breakpoint-custom("col-xlg-12", 100%);
+}
 
 //* Panel Indicators *//
 .panel.panel-indicator {
-	text-align: center; 
-	border-radius: 0; 
-	margin-bottom: 2.5rem; 
-	box-shadow: 0 0.5rem 0.5rem rgba(0,0,0,.05); 
-	border-top: 0.2rem solid lighten($color-primary, 10%);; 
-	.panel-body {
-		margin-bottom: 2.0rem; 
-		padding-top: 0; 
-		padding-bottom: 0; 
-	}
+   text-align: center;
+   border-radius: 0;
+   margin-bottom: 2.5rem;
+   box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, .05);
+   border-top: 0.2rem solid lighten($color-primary, 10%);;
+   .panel-body {
+      margin-bottom: 2.0rem;
+      padding-top: 0;
+      padding-bottom: 0;
+   }
 }
+
 .indicator-title {
-    font-size: 1.9rem; 
-    margin-top: 1.5rem; 
-    color: #899198; 
-    @media (max-width: $bootstrap-sm-min-width) {
-        font-size: 1.7rem; 
-    }
-    @media (min-width: $indicator-title-shorten-min2-width) and (max-width: $indicator-title-shorten-max2-width), 
-            (min-width: $indicator-title-shorten-min1-width) and (max-width: $indicator-title-shorten-max1-width) {
-        & span {
-            display: none; 
-        }
-    }
+   font-size: 1.9rem;
+   margin-top: 1.5rem;
+   color: #899198;
+   @media (max-width: $bootstrap-sm-min-width) {
+      font-size: 1.7rem;
+   }
+   @media (min-width: $indicator-title-shorten-min2-width) and (max-width: $indicator-title-shorten-max2-width),
+   (min-width: $indicator-title-shorten-min1-width) and (max-width: $indicator-title-shorten-max1-width) {
+      & span {
+         display: none;
+      }
+   }
 }
 
-
-
-//*=============== First Row & Measures ===============*/ 
+//*=============== First Row & Measures ===============*/
 #firstRow {
-	padding: 0; 
-    .panel.panel-indicator {
-        height: $firstRow-xlg-height; 
-        margin-bottom: $firstRow-xlg-margin-bottom;
-        @media (max-width: $bootstrap-sm-min-width) {
-            height: 9.0rem; 
-        }
-        @media (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
-            height: 9.5rem; 
-        }
-        .panel-body {
-            margin-top: -0.5rem; 
-            margin-bottom: 1.5rem; 
-            @media (max-width: $bootstrap-xs-max-width) {
-                margin-top: -0.1rem; 
-            }
-            @media (max-width: $bootstrap-sm-max-width) {
-                margin-bottom: 0; 
-            }
-            @media (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
-                margin-top: 0rem; 
-            }
-        }
-    }
-    #last-update-indicator, #charge-consumed-indicator {
-        @media (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
-            .panel.panel-indicator .panel-body {
-                margin-top: -.4rem; 
-            }
-        }
-    }
-    .indicator-title {
-        @media (max-width: $bootstrap-xs-max-width) {
-            margin-top: 0.7rem; 
-            margin-bottom: 0.0rem; 
-        }
-        @media (min-width: $indicator-title-shorten-min2-width) and (max-width: $indicator-title-shorten-max2-width) {
-            margin-bottom: 0.2rem; 
-        }
-    }
-	.indicator-measure {
-		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-		// font-family: $font-number-indicator;
-		font-size: 4.9rem; 
-		color: $font-color-dark;
-        @media (max-width: $bootstrap-xs-max-width) {
-            font-size: 4.3rem; 
-        }
-	}
-	#status-light {
-		width: 5.0rem; 
-		height: 5.0rem; 
-		border-radius: 50%; 
-		background-color: #64CF6F; 
-		margin: 0.8rem auto 0; 
-		opacity: 0.87; 
-		transition: opacity 250ms linear; 
-		&:hover {
-			opacity: 1; 
-		}
-        @media (max-width: $bootstrap-xs-max-width) {
-            width: 4.7rem; 
-            height: 4.7rem; 
-        }
-	}
+   padding: 0;
+   .panel.panel-indicator {
+      height: $firstRow-xlg-height;
+      margin-bottom: $firstRow-xlg-margin-bottom;
+      @media (max-width: $bootstrap-sm-min-width) {
+         height: 9.0rem;
+      }
+      @media (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
+         height: 9.5rem;
+      }
+      .panel-body {
+         margin-top: -0.5rem;
+         margin-bottom: 1.5rem;
+         @media (max-width: $bootstrap-xs-max-width) {
+            margin-top: -0.1rem;
+         }
+         @media (max-width: $bootstrap-sm-max-width) {
+            margin-bottom: 0;
+         }
+         @media (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
+            margin-top: 0;
+         }
+      }
+   }
+   #last-update-indicator, #charge-consumed-indicator {
+      @media (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
+         .panel.panel-indicator .panel-body {
+            margin-top: -.4rem;
+         }
+      }
+   }
+   .indicator-title {
+      @media (max-width: $bootstrap-xs-max-width) {
+         margin-top: 0.7rem;
+         margin-bottom: 0.0rem;
+      }
+      @media (min-width: $indicator-title-shorten-min2-width) and (max-width: $indicator-title-shorten-max2-width) {
+         margin-bottom: 0.2rem;
+      }
+   }
+   .indicator-measure {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      // font-family: $font-number-indicator;
+      font-size: 4.9rem;
+      color: $font-color-dark;
+      @media (max-width: $bootstrap-xs-max-width) {
+         font-size: 4.3rem;
+      }
+   }
+   #status-light {
+      width: 5.0rem;
+      height: 5.0rem;
+      border-radius: 50%;
+      background-color: #64CF6F;
+      margin: 0.8rem auto 0;
+      opacity: 0.87;
+      transition: opacity 250ms linear;
+      &:hover {
+         opacity: 1;
+      }
+      @media (max-width: $bootstrap-xs-max-width) {
+         width: 4.7rem;
+         height: 4.7rem;
+      }
+   }
 
-	.indicator-measure-minor {
-        span {
-    		display: visible; 
-            @media (min-width: $indicator-title-shorten-min2-width) and (max-width: $indicator-title-shorten-max2-width), 
-                    (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
-                display: none; 
-            }
-        }
-        div {
-    		display: none; 
-            @media (min-width: $indicator-title-shorten-min2-width) and (max-width: $indicator-title-shorten-max2-width), 
-                    (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
-                display: block; /* TODO: How to make initial / default ??? */ 
-                margin-top: -1.5rem; 
-            }
-        }
-	}
+   .indicator-measure-minor {
+      span {
+         display: visible;
+         @media (min-width: $indicator-title-shorten-min2-width) and (max-width: $indicator-title-shorten-max2-width),
+         (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
+            display: none;
+         }
+      }
+      div {
+         display: none;
+         @media (min-width: $indicator-title-shorten-min2-width) and (max-width: $indicator-title-shorten-max2-width),
+         (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
+            display: block; /* TODO: How to make initial / default ??? */
+            margin-top: -1.5rem;
+         }
+      }
+   }
 }
 
-
-//*=============== Advancement & SubAdvancements ===============*/ 
+//*=============== Advancement & SubAdvancements ===============*/
 #advancement-indicators {
-	.panel.panel-indicator {			 
-        height: 21.0rem; 
-        @media (max-width: $advancement-indicators-stacked-max-width) {
-            height: 34.6rem; 
-        }
-        @media (min-width: $custom-xlg-min-width) {
-            height: 41.6rem; 
-        }
-        .panel-body {
-            margin-bottom: 0; 
-            @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos1-max-width) {
-                margin-left: 1%; 
-            }
-        }
-	}
-	#advancement-measure {
-		height: 20.0rem; 
-		/*width: 20.0rem !important;*/ 
-		margin-top: -3.0rem; 
-        @media (max-width: $advancement-indicators-abreast-pos2-max-width) {
-            margin-top: -2.6rem; 
-        }
-        @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos1-max-width) {
-            margin-left: -2.4rem; 
-            margin-right: 1.5rem; 
-            padding: 0; 
-        }
-        @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos2-max-width) {
-            margin-top: -2.4rem; 
-        }
-        @media (min-width: $custom-xlg-min-width) {
-            margin-top: -1.0rem; 
-        }
-        svg {
-            width: 19.0rem; 
-            height: 19.0rem; 
-                overflow: visible; 
-                display: inline; 
-                text-align: center; 
-		}
-        .nvd3.nv-pie {
-            .nv-pie-title {
-                font-size: 4.3rem !important; 
-                /* TODO: beware maybe for there are many in inherited (could be wrong guess here) */ 
-				font-family: $font-number-indicator;
-                fill: $font-color-dark;
-            }
-            path {
-                /*stroke: none;*/ 
-            }
-        }
-	}
-	#advancement-chart {
-		/*overflow: hidden;*/ 
-        @media (max-width: $custom-smr-lv1-min-width - 1) {
-            margin-left: -3.6rem; 
-            padding-right: 0.6rem; 
-        }
-        @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos1-max-width) {
-            padding: 0; 
-        }
-        svg {
-            height: 18.5rem; 
-            margin-left: 2.0rem; 
-            margin-top: -.8rem; 
-            @media (max-width: $custom-smr-lv2-max-width) {
-                margin-top: -4.4rem; 
-            }
-            @media (min-width: $custom-smr-lv2-min-width) and (max-width: $custom-smr-lv2-max-width) {
-                margin-top: -0.8rem; 
-            }
-            @media (min-width: $custom-xlg-min-width) {
-                /*margin-top: px;*/ 
-            }
-        }
-        .nvd3 .nv-axis {
-    		pointer-events: auto;
-            &.nv-x text {
-                fill: $font-color-dark; 
-                font-weight: bold; 
-            }
-            /* &.nv-x line,  */ 
-            &.nv-y line {
-                display: none; 
-            }
-    	}
-	}
+   .panel.panel-indicator {
+      height: 21.0rem;
+      @media (max-width: $advancement-indicators-stacked-max-width) {
+         height: 34.6rem;
+      }
+      @media (min-width: $custom-xlg-min-width) {
+         height: 41.6rem;
+      }
+      .panel-body {
+         margin-bottom: 0;
+         @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos1-max-width) {
+            margin-left: 1%;
+         }
+      }
+   }
+   #advancement-measure {
+      height: 20.0rem;
+      /*width: 20.0rem !important;*/
+      margin-top: -3.0rem;
+      @media (max-width: $advancement-indicators-abreast-pos2-max-width) {
+         margin-top: -2.6rem;
+      }
+      @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos1-max-width) {
+         margin-left: -2.4rem;
+         margin-right: 1.5rem;
+         padding: 0;
+      }
+      @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos2-max-width) {
+         margin-top: -2.4rem;
+      }
+      @media (min-width: $custom-xlg-min-width) {
+         margin-top: -1.0rem;
+      }
+      svg {
+         width: 19.0rem;
+         height: 19.0rem;
+         overflow: visible;
+         display: inline;
+         text-align: center;
+      }
+      .nvd3.nv-pie {
+         .nv-pie-title {
+            font-size: 4.3rem !important;
+            /* TODO: beware maybe for there are many in inherited (could be wrong guess here) */
+            font-family: $font-number-indicator;
+            fill: $font-color-dark;
+         }
+         path {
+            /*stroke: none;*/
+         }
+      }
+   }
+   #advancement-chart {
+      /*overflow: hidden;*/
+      @media (max-width: $custom-smr-lv1-min-width - 1) {
+         margin-left: -3.6rem;
+         padding-right: 0.6rem;
+      }
+      @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos1-max-width) {
+         padding: 0;
+      }
+      svg {
+         height: 18.5rem;
+         margin-left: 2.0rem;
+         margin-top: -.8rem;
+         @media (max-width: $custom-smr-lv2-max-width) {
+            margin-top: -4.4rem;
+         }
+         @media (min-width: $custom-smr-lv2-min-width) and (max-width: $custom-smr-lv2-max-width) {
+            margin-top: -0.8rem;
+         }
+         @media (min-width: $custom-xlg-min-width) {
+            /*margin-top: px;*/
+         }
+      }
+      .nvd3 .nv-axis {
+         pointer-events: auto;
+         &.nv-x text {
+            fill: $font-color-dark;
+            font-weight: bold;
+         }
+         /* &.nv-x line,  */
+         &.nv-y line {
+            display: none;
+         }
+      }
+   }
 }
 
-
-//*=============== Pies' Row ===============*/ 
+//*=============== Pies' Row ===============*/
 #piesRow {
-	padding: 0; 
-	@media(min-width: $custom-xlg-min-width) {
-    	margin-top: #{- ($firstRow-xlg-height + $firstRow-xlg-margin-bottom)};	
-	}
-	.panel.panel-indicator .panel-body {
-        height: 12.6rem; 
-        position: relative; 
-		@media(min-width: $custom-xlg-min-width) {
-			height: 19.9rem;
-		}
-    	& > div {
-    		position: absolute; 
-    		top: 50%; 
-    		left: 50%; 
-    		transform: translate(-50%, -50%); 
-    	}
-    }
-	svg {
-		position: relative;
-		bottom: 0.9rem; 
-		width: 28.0rem; 
-		height: 17.0rem; 
-		@media(min-width: $custom-xlg-min-width) {
-			height: 21rem;
-		}
-	}
-	.glyphicon.glyphicon-filter {
-		position: absolute; 
-		top: calc(100% - 3rem); 
-		color: #d9d9d9; 
-		opacity: .9; 
-		font-size: 1.2rem; 
-		right: 10%; 
-    }
-	.nvd3.nv-pieChart {
-    	.nv-slice path {
-			stroke: none; 
-			fill-opacity: .87; 
-    		&.hover path {
-    			fill-opacity: 1; 
-    		}
-    	} 
-    	.nv-pieLabels text {
-    		transform: translate(0, 0.8rem); 
-    		font-family: $font-number-indicator; 
-    		font-size: 1.9rem; 
-    		fill: rgb(60, 60, 60) !important; 
-    		@media (min-width: $custom-xlg-min-width) {
-    			font-size: 2.3rem;
-    		}
-    	}
-    	.nv-legend-text {
-    		font-size: 100%; 
-    		fill: rgb(65, 65, 65); 
-    	}
-    }
+   padding: 0;
+   @media(min-width: $custom-xlg-min-width) {
+      margin-top: #{- ($firstRow-xlg-height + $firstRow-xlg-margin-bottom)};
+   }
+   .panel.panel-indicator .panel-body {
+      height: 12.6rem;
+      position: relative;
+      @media(min-width: $custom-xlg-min-width) {
+         height: 19.9rem;
+      }
+      & > div {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+      }
+   }
+   svg {
+      position: relative;
+      bottom: 0.9rem;
+      width: 28.0rem;
+      height: 17.0rem;
+      @media(min-width: $custom-xlg-min-width) {
+         height: 21rem;
+      }
+   }
+   .glyphicon.glyphicon-filter {
+      position: absolute;
+      top: calc(100% - 3rem);
+      color: #d9d9d9;
+      opacity: .9;
+      font-size: 1.2rem;
+      right: 10%;
+   }
+   .nvd3.nv-pieChart {
+      .nv-slice path {
+         stroke: none;
+         fill-opacity: .87;
+         &.hover path {
+            fill-opacity: 1;
+         }
+      }
+      .nv-pieLabels text {
+         transform: translate(0, 0.8rem);
+         font-family: $font-number-indicator;
+         font-size: 1.9rem;
+         fill: rgb(60, 60, 60) !important;
+         @media (min-width: $custom-xlg-min-width) {
+            font-size: 2.3rem;
+         }
+      }
+      .nv-legend-text {
+         font-size: 100%;
+         fill: rgb(65, 65, 65);
+      }
+   }
 }
-
 
 //*=============== Dates & Milestones ===============*/
 #milestones-col {
-	.panel.panel-indicator .panel-body {
-		height: auto;
-		max-height: 32.6rem;
-		margin-top: 1.6rem;
-		margin-bottom: 2.0rem;
-		padding: 0 1.5rem 0 2.5rem;
-		overflow-x: unset;
-		overflow-y: auto;
-		@media (min-width: $bootstrap-sm-min-width) {
-			height: auto;
-			max-height: 35.6rem;
-		}
-		@media (min-width: $bootstrap-md-min-width) {
-			height: #{35.5rem + ($firstRow-xlg-height + $firstRow-xlg-margin-bottom)};
-			max-height: unset;
-		}
-		@media (min-width: $custom-xlg-min-width) {
-			height: 48.5rem;
-			max-height: unset;
-		}
-	}
-	ul#timeline {
-		display: table;
-		margin: auto; 
-		padding-left: 0.0rem;
-		list-style: none;
-		text-align: left;
-		transition: background-color 250ms linear;
+   .panel.panel-indicator .panel-body {
+      height: auto;
+      max-height: 32.6rem;
+      margin-top: 1.6rem;
+      margin-bottom: 2.0rem;
+      padding: 0 1.5rem 0 2.5rem;
+      overflow-x: unset;
+      overflow-y: auto;
+      @media (min-width: $bootstrap-sm-min-width) {
+         height: auto;
+         max-height: 35.6rem;
+      }
+      @media (min-width: $bootstrap-md-min-width) {
+         height: #{35.5rem + ($firstRow-xlg-height + $firstRow-xlg-margin-bottom)};
+         max-height: unset;
+      }
+      @media (min-width: $custom-xlg-min-width) {
+         height: 48.5rem;
+         max-height: unset;
+      }
+   }
+   ul#timeline {
+      display: table;
+      margin: auto;
+      padding-left: 0.0rem;
+      list-style: none;
+      text-align: left;
+      transition: background-color 250ms linear;
 
-
-    	& > li {
-    		display: table-row;
-    	}
-    	.milestone {
-    		&-date, 
-	    	&-title, 
-	    	&-year {
-	    		display: table-cell;
-	    	}
-    		&-date, 
-	    	&-title {
-				padding: 0.8rem 0 0.4rem;
-				font-size: 1.8rem;
-	    	}
-	    	&-date {
-	    		padding-right: 1.5rem;
-	    	}
-	    	&-title {
-				position: relative;
-	    		border-left: $timeline-piping-width solid $timeline-piping-color;
-				color: #444;
-				@media (min-width: $custom-xlg-min-width) {
-				    font-size: 2.0rem;
-				}
-				& > * {
-					margin-top: 0.2rem;
-	    			margin-left: 1.4rem;
-				}
-	    	}
-	    	&-year {
-	    		border-left: $timeline-piping-width solid $timeline-piping-color;
-		    	div {
-		    		display: block;
-					width: 3.6rem;
-					margin-top: 0.5rem;
-					// margin-bottom: 0.1rem;
-					margin-left: -2.1rem;
-					border: 0.1rem solid $timeline-piping-color;
-					border-radius: 16%;
-					line-height: 1.4rem;
-					font-size: 1.2rem;
-					font-weight: bold;
-					color: #999999;
-					text-align: center;
-					background-color: $timeline-piping-color;
-					opacity: 1;
-		    	}
-		    }
-		    &-dot {
-				display: block; 
-				position: absolute;
-			    top: $timeline-dot-top-offset;
-				left: $timeline-dot-left-offset;
-			    width: $timeline-dot-square-size;
-			    height: $timeline-dot-square-size;
-			    border: $timeline-dot-border-width solid $timeline-piping-color;
-			    border-radius: 50%;
-			    background-color: $timeline-dots-light-color;
-	    		transition: background-color 200ms linear;
-				@media (min-width: $custom-xlg-min-width) {
-				    top: #{$timeline-dot-top-offset + 0.2rem};
-				}
-			}
-    	}
-    	// Dynamic decoration
-		& > li {
-			&:first-of-type .milestone-dot {
-				background-color: $timeline-first-dot-light-color;
-			}
-			// Timeline start & end Dots' linking-excess pruning
-			&:first-of-type .milestone-title::before, 
-			&:last-of-type .milestone-title::before {
-			    content: "";
-			    position: absolute;
-			    left: $timeline-dot-left-offset;
-			    width: $timeline-dot-square-size;
-			    background-color: white;
-			}
-			&:first-of-type .milestone-title::before {
-			    top: 0;
-			    height: $timeline-dot-top-offset + $timeline-dot-border-width;
-			}
-			&:last-of-type .milestone-title::before {
-			    bottom: 0;
-			    height: calc(100% - #{$timeline-dot-square-size + $timeline-dot-top-offset - $timeline-dot-border-width});
-			}
-	    	// Opacity decoration & animation
-	    	.milestone-text {
-	    		opacity: 0.8;
-	    		transition: opacity 250ms linear;
-	    	}
-	    	&:first-of-type .milestone-text {
-	    		opacity: 1;
-	    	}
-	    	&:hover {
-	    		.milestone-text {
-	    			opacity: 1;
-		    	}
-		    	.milestone-dot {
-				    background-color: darken($timeline-dots-light-color, 7%);
-				}
-		    	&:first-of-type .milestone-dot {
-				    background-color: darken($timeline-first-dot-light-color, 6%);
-				}
-			}
-	    }
-	}
+      & > li {
+         display: table-row;
+      }
+      .milestone {
+         &-date,
+         &-title,
+         &-year {
+            display: table-cell;
+         }
+         &-date,
+         &-title {
+            padding: 0.8rem 0 0.4rem;
+            font-size: 1.8rem;
+         }
+         &-date {
+            padding-right: 1.5rem;
+         }
+         &-title {
+            position: relative;
+            border-left: $timeline-piping-width solid $timeline-piping-color;
+            color: #444;
+            @media (min-width: $custom-xlg-min-width) {
+               font-size: 2.0rem;
+            }
+            & > * {
+               margin-top: 0.2rem;
+               margin-left: 1.4rem;
+            }
+         }
+         &-year {
+            border-left: $timeline-piping-width solid $timeline-piping-color;
+            div {
+               display: block;
+               width: 3.6rem;
+               margin-top: 0.5rem;
+               // margin-bottom: 0.1rem;
+               margin-left: -2.1rem;
+               border: 0.1rem solid $timeline-piping-color;
+               border-radius: 16%;
+               line-height: 1.4rem;
+               font-size: 1.2rem;
+               font-weight: bold;
+               color: #999999;
+               text-align: center;
+               background-color: $timeline-piping-color;
+               opacity: 1;
+            }
+         }
+         &-dot {
+            display: block;
+            position: absolute;
+            top: $timeline-dot-top-offset;
+            left: $timeline-dot-left-offset;
+            width: $timeline-dot-square-size;
+            height: $timeline-dot-square-size;
+            border: $timeline-dot-border-width solid $timeline-piping-color;
+            border-radius: 50%;
+            background-color: $timeline-dots-light-color;
+            transition: background-color 200ms linear;
+            @media (min-width: $custom-xlg-min-width) {
+               top: #{$timeline-dot-top-offset + 0.2rem};
+            }
+         }
+      }
+      // Dynamic decoration
+      & > li {
+         &:first-of-type .milestone-dot {
+            background-color: $timeline-first-dot-light-color;
+         }
+         // Timeline start & end Dots' linking-excess pruning
+         &:first-of-type .milestone-title::before,
+         &:last-of-type .milestone-title::before {
+            content: "";
+            position: absolute;
+            left: $timeline-dot-left-offset;
+            width: $timeline-dot-square-size;
+            background-color: white;
+         }
+         &:first-of-type .milestone-title::before {
+            top: 0;
+            height: $timeline-dot-top-offset + $timeline-dot-border-width;
+         }
+         &:last-of-type .milestone-title::before {
+            bottom: 0;
+            height: calc(100% - #{$timeline-dot-square-size + $timeline-dot-top-offset - $timeline-dot-border-width});
+         }
+         // Opacity decoration & animation
+         .milestone-text {
+            opacity: 0.8;
+            transition: opacity 250ms linear;
+         }
+         &:first-of-type .milestone-text {
+            opacity: 1;
+         }
+         &:hover {
+            .milestone-text {
+               opacity: 1;
+            }
+            .milestone-dot {
+               background-color: darken($timeline-dots-light-color, 7%);
+            }
+            &:first-of-type .milestone-dot {
+               background-color: darken($timeline-first-dot-light-color, 6%);
+            }
+         }
+      }
+   }
 }
