@@ -8,6 +8,7 @@
 $sidebar-width: 27rem;
 $sidebar-width-shrinked: 6rem;
 $navbar-top-height: 5.6rem;
+$navbar-border-color: #E9EAEB;
 
 /*=============== Navbar-Sidebar ===============*/
 body {
@@ -62,11 +63,13 @@ a:hover, a:focus {
    @media (min-width: 768px) {
       //margin-left: $sidebar-width;
       background-color: #fff;
-      padding-right: 1.5rem;
-      border-bottom: 1px solid #E9EAEB;
+      border-bottom: 1px solid $navbar-border-color;
+   }
+   ul {
+      margin: 0;
    }
    #navbar-collapse {
-      padding-left: 0;
+      padding: 0;
    }
    #nav-brand {
       display: block;
@@ -114,40 +117,57 @@ a:hover, a:focus {
       .navbar-title {
          width: auto;
          height: auto;
-         padding-top: 0.6rem;
-         margin: 0 1.5rem 0;
-         font-family: 'Fanwood Text', serif;
-         font-size: 3.5rem;
-         line-height: 4rem;
-         font-style: italic;
-         text-align: center;
-         color: #fff;
          overflow: hidden;
-         white-space: nowrap;
-         text-overflow: ellipsis;
+         & > a {
+            padding: 0.8rem 0;
+            text-align: center;
+            font-family: 'Fanwood Text', serif;
+            font-size: 3.5rem;
+            line-height: 4rem;
+            font-style: italic;
+            color: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            &:hover, &:focus {
+               background-color: unset;
+            }
+         }
       }
    }
    #navbar {
       background-color: #fff;
-      & > ul > li {
-         & > a {
-            height: $navbar-top-height;
-            font-size: 1.6rem;
-            line-height: 2.8rem;
-            &:hover {
+      @media (min-width: 767px) {
+         padding-right: 1.5rem;
+      }
+      & > ul {
+         // Overlaps with navbar-top's, but is okay
+         border-bottom: 1px solid $navbar-border-color;
+         & > li {
+            & > a {
+               height: $navbar-top-height;
+               font-size: 1.6rem;
+               line-height: 2.8rem;
+               &:hover {
+                  background-color: #FCFCFC; // darken TODO:..more
+               }
+            }
+            &.open > a {
                background-color: #FCFCFC; // darken TODO:..more
             }
-         }
-         &.open > a {
-            background-color: #FCFCFC; // darken TODO:..more
-         }
-         ul.dropdown-menu > li > a {
-            padding: 0.3rem 2rem;
-            font-size: 1.5rem;
-            line-height: 3rem;
-            &:focus, &:hover {
-               color: #fff;
-               background-color: #3ba0ff;
+            ul.dropdown-menu > li > a {
+               padding: 0.3rem 2rem;
+               font-size: 1.5rem;
+               line-height: 3rem;
+               &:focus, &:hover {
+                  color: #fff;
+                  background-color: #3ba0ff;
+               }
+               .dropdown-icon {
+                  display: inline-block;
+                  width: 2rem;
+                  text-align: center;
+               }
             }
          }
       }
