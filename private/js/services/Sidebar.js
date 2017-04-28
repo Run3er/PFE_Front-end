@@ -1,221 +1,191 @@
 
 angular.module('ProjMngmnt')
 	.service('Sidebar', function () {
+        // Project levels string
+        var projectString = "project";
+        var subProjectString = "subProject";
+        var constructionSiteString = "constructionSite";
+        var projectLevels = [ projectString, subProjectString, constructionSiteString ];
+
 	    var sidebarContent = {};
 
 		var projectLevelBaseContent = {
-			"title": "Application de gestion de projets en mode SaaS",
-			"entries": [
+			title: "Application de gestion de projets en mode SaaS",
+			entries: [
                 {
-                	"url": "./dashboard",
-                    "iconClass": "fa fa-dashboard",
-                    "title": "Tableau de bord"
+                	url: "dashboard",
+                    iconClass: "fa fa-dashboard",
+                    title: "Tableau de bord"
                 },
                 {
-                    "url": "./actions",
-                    "iconClass": "fa fa-tasks",
-                    "title": "Actions"
+                    url: "actions",
+                    iconClass: "fa fa-tasks",
+                    title: "Actions"
                 },
                 {
-                    "url": "./risks",
-                    "iconClass": "fa fa-warning",
-                    "title": "Risques"
+                    url: "risks",
+                    iconClass: "fa fa-warning",
+                    title: "Risques"
                 },
                 {
-                    "url": "./pending-issues",
-                    "iconClass": "fa fa-pause-circle-o",
-                    "title": "Points en suspens"
+                    url: "pendingIssues",
+                    iconClass: "fa fa-pause-circle-o",
+                    title: "Points en suspens"
                 },
                 {
-                    "url": "./change-requests",
-                    "iconClass": "fa fa-exchange",
-                    "title": "Demandes de changement",
-					"notifsNb": 1
+                    url: "changeRequests",
+                    iconClass: "fa fa-exchange",
+                    title: "Demandes de changement",
+					notifsNb: 1
                 },
                 {
-                    "url": "./resources",
-                    "iconClass": "fa fa-user-times",
-                    "title": "Ressources"
+                    url: "resources",
+                    iconClass: "fa fa-user-times",
+                    title: "Ressources"
                 },
                 {
-                    "url": "./documents",
-                    "iconClass": "fa fa-file",
-                    "title": "Documents",
-					"notifsNb": 2
+                    url: "documents",
+                    iconClass: "fa fa-file",
+                    title: "Documents",
+					notifsNb: 2
                 },
                 {
-                    "url": "./planning",
-                    "iconClass": "fa fa-calendar",
-                    "title": "Planning"
+                    url: "planning",
+                    iconClass: "fa fa-calendar",
+                    title: "Planning"
                 }
 			]
 		};
 
 		var portfolioContent  = {
-            "title": "Général",
-            "entries": [
+            title: "Général",
+            entries: [
                 {
-                    "url": "./general/dashboard",
-                    "iconClass": "fa fa-dashboard",
-                    "title": "Dashboard"
+                    url: "dashboard",
+                    iconClass: "fa fa-dashboard",
+                    title: "Tableau de bord"
                 },{
-                    "url": "./general/portfolio",
-                    "iconClass": "fa fa-th",
-                    "title": "Portefeuille"
+                    url: "portfolio",
+                    iconClass: "fa fa-th",
+                    title: "Portefeuille"
                 },{
-                    "url": "./general/resources",
-                    "iconClass": "fa fa-user-times",
-                    "title": "Ressources"
+                    url: "resources",
+                    iconClass: "fa fa-user-times",
+                    title: "Ressources"
                 },{
-                    "url": "./general/internal",
-                    "iconClass": "fa fa-bullseye",
-                    "title": "Interne"
+                    url: "internal",
+                    iconClass: "fa fa-bullseye",
+                    title: "Interne"
                 },{
-                    "url": "./general/external",
-                    "iconClass": "fa fa-external-link",
-                    "title": "Externe"
+                    url: "external",
+                    iconClass: "fa fa-external-link",
+                    title: "Externe"
                 }
-                // ,
-                // {
-                //     "url": "javascript:void(0)",
-                //     "iconClass": "fa fa-sitemap",
-                //     "title": "Entité-A",
-                //     "entries": [
-                //         {
-                //             "url": "./projects/1",
-                //             "title": "Service 5G - Ooredoo"
-                //         },
-                //         {
-                //             "url": "./projects/2",
-                //             "title": "SMS Sender - TT"
-                //         },
-                //         {
-                //             "url": "./projects/3",
-                //             "title": "Application de gestion de projets en mode SaaS"
-                //         },
-                //         {
-                //             "url": "./projects/4",
-                //             "title": "Rénovation Infrastructure"
-                //         }
-                //     ]
-                // },
-                // {
-                //     "url": "javascript:void(0)",
-                //     "iconClass": "fa fa-sitemap",
-                //     "title": "Entité-A",
-                //     "entries": [
-                //         {
-                //             "url": "./projects/1",
-                //             "title": "Service 5G - Ooredoo"
-                //         },
-                //         {
-                //             "url": "./projects/2",
-                //             "title": "SMS Sender - TT"
-                //         },
-                //         {
-                //             "url": "./projects/3",
-                //             "title": "Application de gestion de projets en mode SaaS"
-                //         },
-                //         {
-                //             "url": "./projects/4",
-                //             "title": "Rénovation Infrastructure"
-                //         }
-                //     ]
-                // },{
-                //     "url": "javascript:void(0)",
-                //     "iconClass": "fa fa-sitemap",
-                //     "title": "Entité-C",
-                //     "entries": [
-                //         {
-                //             "url": "./projects/1",
-                //             "title": "Service 5G - Ooredoo"
-                //         },
-                //         {
-                //             "url": "./projects/2",
-                //             "title": "SMS Sender - TT"
-                //         },
-                //         {
-                //             "url": "./projects/3",
-                //             "title": "Application de gestion de projets en mode SaaS"
-                //         },
-                //         {
-                //             "url": "./projects/4",
-                //             "title": "Rénovation Infrastructure"
-                //         }
-                //     ]
-                // }
             ]
         };
 
+		// Get collapsible sub-hierarchy entry w/sub-links
         function getSubHierarchyEntry(hierarchyHead) {
             var projectLevelSuffix;
             var projectLevelTitle;
 
             if (hierarchyHead === "entities") {
-                projectLevelSuffix = "projects";
+                projectLevelSuffix = projectString + "s";
                 projectLevelTitle = "Projets";
             }
-            else if (hierarchyHead === "project") {
-                projectLevelSuffix = "sub-projects";
-                projectLevelTitle = "Sous-projets";                
+            else if (hierarchyHead === projectString) {
+                projectLevelSuffix = subProjectString + "s";
+                projectLevelTitle = "Sous-projets";
             }
-            else if (hierarchyHead === "sub-project") {
-                projectLevelSuffix = "construction-sites";
+            else if (hierarchyHead === subProjectString) {
+                projectLevelSuffix = constructionSiteString + "s";
                 projectLevelTitle = "Chantiers";
             }
             else return void(0);
 
             return {
-                "url": "javascript:void(0)",
-                "iconClass": "fa fa-sitemap",
-                "title": projectLevelTitle,
-                "entries": [
+                url: "javascript:void(0)",
+                iconClass: "fa fa-sitemap",
+                title: projectLevelTitle,
+                entries: [
                     {
-                        "url": "./" + projectLevelSuffix + "/1",
-                        "title": "Service 5G - Ooredoo"
+                        url: projectLevelSuffix + "/1",
+                        title: "Service 5G - Ooredoo"
                     },
                     {
-                        "url": "./" + projectLevelSuffix + "/2",
-                        "title": "SMS Sender - TT"
+                        url: projectLevelSuffix + "/2",
+                        title: "SMS Sender - TT"
                     },
                     {
-                        "url": "./" + projectLevelSuffix + "/3",
-                        "title": "Application de gestion de projets en mode SaaS"
+                        url: projectLevelSuffix + "/3",
+                        title: "Application de gestion de projets en mode SaaS"
                     },
                     {
-                        "url": "./" + projectLevelSuffix + "/4",
-                        "title": "Rénovation Infrastructure"
+                        url: projectLevelSuffix + "/4",
+                        title: "Rénovation Infrastructure"
                     }
                 ]
             };
         }
 
-        this.setMenuActive = function (entryUrl) {
-            for (var i = 0; i < sidebarContent.entries; i++) {
-                if (sidebarContent.entries[i].url === entryUrl) {
+        function prependUrlPrefix(entries, urlPrefix) {
+            urlPrefix = "./" + (urlPrefix ? urlPrefix + "/" : "");
+            for (var i = 0; i < entries.length; i++) {
+                // Avoid prefixing for collapsible entry links [javascript:void(0)]
+                if (entries[i].entries === void(0)) {
+                    entries[i].url = urlPrefix + entries[i].url;
+                }
+                else {
+                    // Prepend collapsible link sub-links
+                    for (var j = 0; j < entries[i].entries.length; j++) {
+                        if (entries[i].entries[j].entries === void(0)) {
+                            entries[i].entries[j].url = urlPrefix + entries[i].entries[j].url;
+                        }
+                    }
+                }
+            }
+        }
 
+
+        // Set active menu link corresponding to URL path
+        this.setMenuActive = function (menuActiveUrl) {
+            if (menuActiveUrl !== void(0)) {
+                var urlParts;
+                var urlEnding;
+                for (var i = 0; i < sidebarContent.entries.length; i++) {
+                    urlParts = sidebarContent.entries[i].url.split("/");
+                    urlEnding = urlParts[urlParts.length - 1];
+                    if (urlEnding === menuActiveUrl) {
+                        // Since entries are identified & ordered by their ng-repeat $index, simply use i
+                        sidebarContent.menuActive = i;
+                        break;
+                    }
                 }
             }
         };
-
 
         this.getContent = function () {
             return sidebarContent;
         };
 
-        this.setContent = function (pageContentType) {
+        this.setContent = function (pageProperties) {
             var cloneContent;
 
-            if (pageContentType === "general") {
+            // Set page [type] content
+            if (pageProperties.type === "general") {
                 cloneContent = angular.copy(portfolioContent);
             }
-            else if (pageContentType === "project" || pageContentType === "sub-project" || pageContentType === "construction-site") {
+            else if (projectLevels.indexOf(pageProperties.type) !== -1) {
                 cloneContent = angular.copy(projectLevelBaseContent);
-                var entry = getSubHierarchyEntry(pageContentType);
+
+                var entry = getSubHierarchyEntry(pageProperties.type);
                 if (entry !== void(0)){
                     cloneContent.entries.push(entry);
                 }
             }
+            prependUrlPrefix(cloneContent.entries, pageProperties.urlPrefix);
+
+            // Change global content
             sidebarContent.title = cloneContent.title;
             sidebarContent.entries = cloneContent.entries;
             sidebarContent.menuActive = void(0);
