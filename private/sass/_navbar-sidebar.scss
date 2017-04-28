@@ -7,6 +7,7 @@
 
 $sidebar-width: 27rem;
 $sidebar-width-shrinked: 6rem;
+$navbar-top-height: 5.6rem;
 
 /*=============== Navbar-Sidebar ===============*/
 body {
@@ -15,7 +16,7 @@ body {
 }
 
 #main {
-   margin-top: 5.7rem;
+   margin-top: $navbar-top-height;
    @media (min-width: 768px) {
       margin-top: 0;
       margin-left: $sidebar-width;
@@ -42,11 +43,13 @@ a:hover, a:focus {
 
 //* Navbar *//
 #navbar-top {
-   height: 5.7rem;
+   height: $navbar-top-height;
+   border-top-width: 0;
    margin-bottom: 0;
    // border-top still at 1px by default
    border-left: none;
    border-right: none;
+   box-sizing: content-box;
    background-color: #3ba0ff;
    @media (max-width: 767px) {
       position: fixed;
@@ -57,32 +60,57 @@ a:hover, a:focus {
       border: none;
    }
    @media (min-width: 768px) {
-      margin-left: $sidebar-width;
+      //margin-left: $sidebar-width;
       background-color: #fff;
       padding-right: 1.5rem;
       border-bottom: 1px solid #E9EAEB;
    }
-   .navbar-header {
-      .nav-icon {
-         height: 5.5rem;
-         font-size: 2.1rem;
-         line-height: 3.4rem;
-         color: #7D8282;
-         &:hover {
-            background-color: #FCFCFC; // darken TODO:..more
-         }
-         &:not(:hover):focus {
+   #navbar-collapse {
+      padding-left: 0;
+   }
+   #nav-brand {
+      display: block;
+      height: #{$navbar-top-height - 0.0rem};
+      width: $sidebar-width;
+      padding: 1.5rem;
+      font-family: 'Fanwood Text', serif;
+      font-size: 3.5rem;
+      line-height: 2.2rem;
+      font-style: italic;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      background-color: #3ba0ff;
+   }
+   .navbar-form {
+      @media (max-width: 767px) {
+         margin: 0;
+      }
+   }
+   a.nav-icon {
+      height: $navbar-top-height;
+      padding: 10px 15px;
+      font-size: 2.1rem;
+      line-height: 3.4rem;
+      color: #7D8282;
+      &:hover {
+         background-color: #FCFCFC; // darken TODO:..more
+      }
+      &:not(:hover):focus {
+         background-color: unset;
+      }
+      @media (max-width: 767px) {
+         font-size: 2.4rem;
+         line-height: 3.8rem;
+         color: #fff;
+         &:hover, &:focus {
             background-color: unset;
          }
-         @media (max-width: 767px) {
-            font-size: 2.4rem;
-            line-height: 3.8rem;
-            color: #fff;
-            &:hover, &:focus {
-               background-color: unset;
-            }
-         }
       }
+   }
+   .navbar-header {
       .navbar-title {
          width: auto;
          height: auto;
@@ -103,7 +131,7 @@ a:hover, a:focus {
       background-color: #fff;
       & > ul > li {
          & > a {
-            height: 5.5rem;
+            height: $navbar-top-height;
             font-size: 1.6rem;
             line-height: 2.8rem;
             &:hover {
@@ -141,6 +169,7 @@ a:hover, a:focus {
 #sidebar {
    display: none;
    width: $sidebar-width;
+   margin-top: $navbar-top-height;
    background-color: #253341;
    // overflow-x: hidden;
    // overflow-y: auto;
@@ -151,22 +180,6 @@ a:hover, a:focus {
       bottom: 0;
       left: 0;
       z-index: 1200;
-   }
-   #nav-brand {
-      display: block;
-      height: 5.7rem;
-      width: 100%;
-      padding: 1.5rem;
-      font-family: 'Fanwood Text', serif;
-      font-size: 3.5rem;
-      line-height: 2.2rem;
-      font-style: italic;
-      color: #fff;
-      text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      background-color: #3ba0ff;
    }
    .nav-tabs {
       border-bottom: none;
@@ -311,17 +324,18 @@ a:hover, a:focus {
 }
 
 body.mini-sidebar {
-   #navbar-top, #main {
+   #main {
       @media (min-width: 768px) {
          margin-left: $sidebar-width-shrinked;
       }
    }
+   #navbar-top #nav-brand {
+      width: $sidebar-width-shrinked;
+      padding: 1.5rem 1rem;
+      font-size: 2rem;
+   }
    #sidebar {
       width: $sidebar-width-shrinked;
-      #nav-brand {
-         padding: 1.5rem 1rem;
-         font-size: 2rem;
-      }
       .nav-tabs > li {
          width: 100%;
       }

@@ -29,7 +29,7 @@ angular.module("ProjMngmnt", ["ui.router"])
             return {
                 projectLevelConfig: {
                     url: url,
-                    templateUrl: partialsDir + "/nested-abstract.html",
+                    templateUrl: partialsDir + "/nav-sidebar-header.html",
                     controller: function ($state) {
                         // Default redirection to base path
                         // $state.current; returns child state (if detected through url), instead of this hereby state
@@ -109,7 +109,7 @@ angular.module("ProjMngmnt", ["ui.router"])
         $stateProvider
             .state("general", {
                 url: "/general",
-                templateUrl: partialsDir + "/nested-abstract.html",
+                templateUrl: partialsDir + "/nav-sidebar-header.html",
                 controller: function ($state) {
                     // Default redirection to base path
                     if ($state.href($state.current.name, $state.params) === $state.current.url){
@@ -166,7 +166,7 @@ angular.module("ProjMngmnt", ["ui.router"])
 
             .state("404", {
                 // no url defined
-                template: "<p>404 Not Found.</p>"
+                templateUrl: partialsDir + "/404-not-found.html"
             });
 
         // Project level similar routing
@@ -183,6 +183,7 @@ angular.module("ProjMngmnt", ["ui.router"])
             }
         }
 
+        // Default routing behavior
         $urlRouterProvider
             .when("/", "/general")
             .otherwise(function ($injector) {

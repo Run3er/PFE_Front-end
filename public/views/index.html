@@ -34,154 +34,65 @@
                 </a>
             </li>
             <li class="visible-xs pull-right">
-                <a class="nav-icon" href="#" class="collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <a class="nav-icon" href="#" class="collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
                     <i class="fa fa-chevron-down"></i>
                 </a>
             </li>
-            <li class="hidden-xs">
-                <a id="outdent-icon" href="#" class="nav-icon"
-                   ng-init="miniSidebarToggle = false" ng-click="miniSidebarToggle = !miniSidebarToggle">
-                    <i class="fa fa-outdent"></i>
-                </a>
-            </li>
             <li class="visible-xs navbar-title">
-                <a href="./general"><span title="Projectify">Projectify</span></a>
+                <a href="./general/"><span title="Projectify">Projectify</span></a>
             </li>
         </ul>
     </div>
 
-    <div id="navbar" class="navbar-collapse collapse">
-        <form class="navbar-form navbar-left">
-            <input type="text" class="form-control navbar-search" placeholder="Rechercher">
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a href="#" class="profile-menu dropdown-toggle" data-toggle="dropdown">
-                    <span>Amine</span>
-                    <img class="img-circle" src="public/img/avatar-m.png" alt="avatar" />
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="#"><i class="fa fa-globe"></i> Notification <span class="label label-danger"> 5</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-user"></i> Profile</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-gear"></i> Settings</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-share"></i> Logout</a>
-                    </li>
-                </ul>
-            </li><!--
-         	<li>
-	          <a href="#"><i class="nav-icon fa fa-question-circle-o"></i></a>
-    		</li> -->
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="nav-icon fa fa-gear"></i> <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#" id="fixed-sidebar-link">Fixed sidebar</a></li>
-                    <li><a href="#" id="fixed-navbar-link">Fixed Navbar</a></li>
-                </ul>
-            </li>
-        </ul>
+    <div id="navbar-collapse" class="navbar-collapse collapse">
+        <a id="nav-brand" href="./general/" class="hidden-xs navbar-left">
+            Projectify
+        </a>
+        <div id="navbar">
+            <a href="#" class="hidden-xs nav-icon navbar-left" ng-init="miniSidebarToggle = false" ng-click="miniSidebarToggle = !miniSidebarToggle">
+                <i class="fa fa-outdent"></i>
+            </a>
+            <form class="navbar-form navbar-left">
+                <input type="text" class="form-control navbar-search" placeholder="Rechercher">
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="profile-menu dropdown-toggle" data-toggle="dropdown">
+                        <span>Amine</span>
+                        <img class="img-circle" src="public/img/avatar-m.png" alt="avatar" />
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-globe"></i> Notification <span class="label label-danger"> 5</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-user"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-gear"></i> Settings</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-share"></i> Logout</a>
+                        </li>
+                    </ul>
+                </li><!--
+                <li>
+                  <a href="#"><i class="nav-icon fa fa-question-circle-o"></i></a>
+                </li> -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="nav-icon fa fa-gear"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id="fixed-sidebar-link">Fixed sidebar</a></li>
+                        <li><a href="#" id="fixed-navbar-link">Fixed Navbar</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 
-<!-- Sidebar -->
-<div id="sidebar" ng-controller="SidebarCtrl" ng-cloak>
-    <a id="nav-brand" href="./general/">
-        Projectify
-    </a>
-    <ul class="nav nav-menu">
-        <li class="tab-content-header">
-            <span title="{{menu.title}}">{{menu.title}}</span>
-        </li>
-        <li class="simple-menu {{menu.menuActive == index ? 'active' : ''}}" ng-repeat-start="(index, entry) in menu.entries"
-            ng-if="entry.entries == void(0)" ng-click="menu.menuActive = index; menu.menuExpanded = void(0)">
-            <a ng-href="{{entry.url}}">
-                <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
-                <span class="menu-title">{{entry.title}}</span>
-                <span class="menu-badge" ng-if="entry.notifsNb">
-                    <span class="label label-danger" ng-if="entry.notifsNb">{{entry.notifsNb}}</span>
-                    <!-- TODO: if more than three numerals (>1000), add title attribute -->
-                    <!-- <span class="menu-badge"><span class="label label-danger" title="1000">1000</span></span> -->
-                </span>
-            </a>
-        </li>
-        <li class="collapsible-menu {{menu.menuActive == index ? 'active' : ''}}" ng-repeat-end ng-if="entry.entries != void(0)">
-            <a ng-href="{{entry.url}}" ng-click="menu.menuExpanded = (menu.menuExpanded == index) ? void(0) : index">
-                <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
-                <span class="menu-title">{{entry.title}}</span>
-                <span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right" ng-if="entry.entries"></i></span>
-            </a>
-            <ul ng-show="menu.menuExpanded == index || menu.menuActive == index">
-                <li ng-repeat="(subIndex, subEntry) in entry.entries">
-                    <a ng-href="{{subEntry.url}}" class="{{menu.menuActive == index && menu.subMenuActive == subIndex ? 'active' : ''}}"
-                       ng-click="menu.subMenuActive = subIndex; menu.menuActive = index">{{subEntry.title}}</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</div>
-
-<section id="main">
-    <!-- <div class="row"> -->
-
-    <!-- Header -->
-    <div class="header" ng-controller="HeaderCtrl">
-        <a class="last-update" href="./" title="dernière mise à jour"
-           ng-if="content.updateTimeDisplayed" ng-cloak>
-            <i class="icon fa fa-calendar-check-o"></i>
-            &nbsp;<span class="day-month">03/02</span>
-            <span class="year">/2017</span>
-            &nbsp;<i class="icon icon-tiny fa fa-caret-down"></i>
-        </a>
-        <ul class="breadcrumbs-list">
-            <li>
-                <a href="./"><i class="fa fa-home"></i></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="./projects/123/"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a ui-sref="project.actions"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="#"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="#"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="#"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="#"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="#"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="#"><span>Projet X</span></a>
-            </li>
-        </ul>
-    </div>
-
-    <div id="main-content" class="container-fluid" ui-view ng-cloak></div>
-
-    <!-- </div> -->
-</section>
+<div ui-view ng-cloak></div>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

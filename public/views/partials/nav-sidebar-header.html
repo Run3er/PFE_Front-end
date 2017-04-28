@@ -1,0 +1,90 @@
+
+<!-- Sidebar -->
+<div id="sidebar" ng-controller="SidebarCtrl" ng-cloak>
+    <ul class="nav nav-menu">
+        <li class="tab-content-header">
+            <span title="{{menu.title}}">{{menu.title}}</span>
+        </li>
+        <li class="simple-menu {{menu.menuActive == index ? 'active' : ''}}" ng-repeat-start="(index, entry) in menu.entries"
+            ng-if="entry.entries == void(0)" ng-click="menu.menuExpanded = void(0)">
+            <a ng-href="{{entry.url}}">
+                <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
+                <span class="menu-title">{{entry.title}}</span>
+                <span class="menu-badge" ng-if="entry.notifsNb">
+                    <span class="label label-danger" ng-if="entry.notifsNb">{{entry.notifsNb}}</span>
+                    <!-- TODO: if more than three numerals (>1000), add title attribute -->
+                    <!-- <span class="menu-badge"><span class="label label-danger" title="1000">1000</span></span> -->
+                </span>
+            </a>
+        </li>
+        <li class="collapsible-menu {{menu.menuActive == index ? 'active' : ''}}" ng-repeat-end ng-if="entry.entries != void(0)">
+            <a ng-href="{{entry.url}}" ng-click="menu.menuExpanded = (menu.menuExpanded == index) ? void(0) : index">
+                <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
+                <span class="menu-title">{{entry.title}}</span>
+                <span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right" ng-if="entry.entries"></i></span>
+            </a>
+            <ul ng-show="menu.menuExpanded == index || menu.menuActive == index">
+                <li ng-repeat="(subIndex, subEntry) in entry.entries">
+                    <a ng-href="{{subEntry.url}}" class="{{menu.menuActive == index && menu.subMenuActive == subIndex ? 'active' : ''}}"
+                       ng-click="menu.subMenuActive = subIndex; menu.menuActive = index">{{subEntry.title}}</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<section id="main">
+    <!-- <div class="row"> -->
+
+    <!-- Header -->
+    <div class="header" ng-controller="HeaderCtrl">
+        <a class="last-update" href="./" title="dernière mise à jour"
+           ng-if="content.updateTimeDisplayed" ng-cloak>
+            <i class="icon fa fa-calendar-check-o"></i>
+            &nbsp;<span class="day-month">03/02</span>
+            <span class="year">/2017</span>
+            &nbsp;<i class="icon icon-tiny fa fa-caret-down"></i>
+        </a>
+        <ul class="breadcrumbs-list">
+            <li>
+                <a href="./"><i class="fa fa-home"></i></a>
+            </li>
+            <li>
+                &nbsp;<i class="chevron fa fa-caret-right"></i>
+                &nbsp;<a href="./projects/123/"><span>Projet X</span></a>
+            </li>
+            <li>
+                &nbsp;<i class="chevron fa fa-caret-right"></i>
+                &nbsp;<a ui-sref="project.actions"><span>Projet X</span></a>
+            </li>
+            <li>
+                &nbsp;<i class="chevron fa fa-caret-right"></i>
+                &nbsp;<a href="#"><span>Projet X</span></a>
+            </li>
+            <li>
+                &nbsp;<i class="chevron fa fa-caret-right"></i>
+                &nbsp;<a href="#"><span>Projet X</span></a>
+            </li>
+            <li>
+                &nbsp;<i class="chevron fa fa-caret-right"></i>
+                &nbsp;<a href="#"><span>Projet X</span></a>
+            </li>
+            <li>
+                &nbsp;<i class="chevron fa fa-caret-right"></i>
+                &nbsp;<a href="#"><span>Projet X</span></a>
+            </li>
+            <li>
+                &nbsp;<i class="chevron fa fa-caret-right"></i>
+                &nbsp;<a href="#"><span>Projet X</span></a>
+            </li>
+            <li>
+                &nbsp;<i class="chevron fa fa-caret-right"></i>
+                &nbsp;<a href="#"><span>Projet X</span></a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="main-content" class="container-fluid" ui-view ng-cloak></div>
+
+    <!-- </div> -->
+</section>
