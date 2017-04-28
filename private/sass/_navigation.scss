@@ -5,10 +5,11 @@
 @import "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700";
 @import "http://fonts.googleapis.com/css?family=Fanwood+Text:400,400italic";
 
-$sidebar-width: 27rem;
-$sidebar-width-shrinked: 6rem;
 $navbar-top-height: 5.6rem;
 $navbar-border-color: #E9EAEB;
+$sidebar-width: 27rem;
+$sidebar-width-shrunken: 6rem;
+$header-height: 4.6rem;
 
 /*=============== Navbar-Sidebar ===============*/
 body {
@@ -237,7 +238,7 @@ a:hover, a:focus {
    }
    ul.nav-menu > li {
       &.tab-content-header {
-         height: 4.6rem;
+         height: $header-height;
          background-color: #294c70;
          margin-bottom: 2rem;
          color: #ccc;
@@ -343,19 +344,130 @@ a:hover, a:focus {
    }
 }
 
+//* Header *//
+#main {
+   margin-top: $navbar-top-height;
+   #main-content {
+      margin-top: #{$navbar-top-height + $header-height + 2rem};
+   }
+   .header {
+      position: fixed;
+      top: $navbar-top-height;
+      width: 100%;
+      height: $header-height;
+      border-bottom: 1px solid #E9EAEB;
+      box-sizing: content-box;
+      z-index: 1010;
+      background-color: #FFF;
+      @media (min-width: $bootstrap-sm-min-width) {
+         width: calc(100% - #{$sidebar-width});
+      }
+      ul.breadcrumbs-list {
+         height: $header-height;
+         padding-left: 3.5rem;
+         list-style: none;
+         font-size: 1.7rem;
+         // font-weight: 600;
+         line-height: 4.3rem;
+         color: #858D8D;
+         overflow-x: auto;
+         overflow-y: hidden;
+         white-space: nowrap;
+         @media (max-width: $bootstrap-xs-max-width) {
+            padding-left: 1.2rem;
+         }
+         li {
+            display: inline-block;
+            max-width: 15rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            .chevron {
+               font-size: 1.4rem;
+            }
+            a {
+               color: #9CA4A4;
+               transition: color 200ms ease;
+               &:hover {
+                  color: darken(#9CA4A4, 14%);
+               }
+            }
+            &:last-of-type {
+               max-width: unset;
+               a {
+                  padding-right: 1.5rem;
+                  color: lighten($color-primary, 5%);
+                  &:hover {
+                     color: darken($color-primary, 3%);
+                  }
+               }
+            }
+         }
+      }
+      .last-update {
+         float: right;
+         margin-left: 0.8rem;
+         border-left: 1px solid #E9EAEB;
+         padding-left: 1.5rem;
+         padding-right: 3.5rem;
+         line-height: 4.4rem;
+         @media (max-width: $bootstrap-xs-max-width) {
+            margin-left: 0.5rem;
+            padding-right: 1.2rem;
+         }
+         * {
+            transition: color 200ms ease-in-out;
+         }
+         &:hover {
+            .icon, .icon-tiny, .day-month, .year {
+               color: darken($color-primary, 3%);
+            }
+         }
+         .icon {
+            display: inline-block;
+            position: relative;
+            top: -2px;
+            font-size: 2.1rem;
+            color: lighten($color-primary, 5%);
+         }
+         .day-month {
+            font-size: 2.2rem;
+            color: #858D8D;
+         }
+         .year {
+            font-size: 1.5rem;
+            color: #9CA4A4;
+            @media (max-width: $bootstrap-xs-max-width) {
+               display: none;
+            }
+         }
+         .icon-tiny {
+            font-size: 1.2rem;
+            color: #9CA4A4;
+         }
+      }
+   }
+}
+
+// Shrunken sidebar adjustments
 body.mini-sidebar {
    #main {
-      @media (min-width: 768px) {
-         margin-left: $sidebar-width-shrinked;
+      @media (min-width: $bootstrap-sm-min-width) {
+         margin-left: $sidebar-width-shrunken;
+      }
+      .header {
+         @media (min-width: $bootstrap-sm-min-width) {
+            width: calc(100% - #{$sidebar-width-shrunken});
+         }
       }
    }
    #navbar-top #nav-brand {
-      width: $sidebar-width-shrinked;
+      width: $sidebar-width-shrunken;
       padding: 1.5rem 1rem;
       font-size: 2rem;
    }
    #sidebar {
-      width: $sidebar-width-shrinked;
+      width: $sidebar-width-shrunken;
       .nav-tabs > li {
          width: 100%;
       }
