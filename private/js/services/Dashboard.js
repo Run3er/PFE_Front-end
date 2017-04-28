@@ -19,28 +19,28 @@ angular.module('ProjMngmnt')
 		var actionValues_AscendingGravity = [9, 14];
 		// Risks & Actions Data
 		var risksData = [
-			{ 
+			{
 				"label": riskLabels_AscendingGravity[0],
 				"value" : riskValues_AscendingGravity[0]
-			} , 
-			{ 
+			} ,
+			{
 				"label": riskLabels_AscendingGravity[1],
 				"value" : riskValues_AscendingGravity[1]
-			} , 
-			{ 
+			} ,
+			{
 				"label": riskLabels_AscendingGravity[2],
 				"value" : riskValues_AscendingGravity[2]
 			}
 		];
 		var actionsData = [
-			{ 
+			{
 				"label": actionLabels_AscendingGravity[0],
 				"value" : actionValues_AscendingGravity[0]
-			}, 
-			{ 
+			},
+			{
 				"label": actionLabels_AscendingGravity[1],
 				"value" : actionValues_AscendingGravity[1]
-			} 
+			}
 		];
 
 		// Risks & Actions chart creation function
@@ -57,7 +57,7 @@ angular.module('ProjMngmnt')
 		            .valueFormat(d3.format('.0'))
 		            .growOnHover(false)
 		            .showLabels(true);
-		        
+
 		        chartHolder.chart.tooltip.enabled(false);
 
 		        d3.select(selector)
@@ -155,7 +155,7 @@ angular.module('ProjMngmnt')
 				// remove media query on charts unload (controller/view unload)
 				controllerScope.$on('destroy', function () {
 					mq.removeListener(Width2xlg);
-				})
+				});
 
 
 				// Create AdvancementRatio chart & Feed it data
@@ -214,7 +214,7 @@ angular.module('ProjMngmnt')
 						.valueFormat(d3.format('.0%'))
 				        .showLegend(false)
 				        .showControls(false);
-					    
+
 					subAdvancementsChartHolder.chart.tooltip.enabled(false);
 
 				    d3.select('#advancement-chart svg')

@@ -1,84 +1,95 @@
-
 angular.module("ProjMngmnt", ["ui.router"])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $compileProvider) {
         // Project levels string
         var projectString = "project";
         var subProjectString = "subProject";
         var constructionSiteString = "constructionSite";
-        var projectLevelArtifacts = [ "action", "risk", "pendingIssue", "changeRequest", "resource", "document" ];
+        var projectLevelArtifacts = ["action", "risk", "pendingIssue", "changeRequest", "resource", "document"];
 
         var partialsDir = "partials";
 
 
         // Common project level states, parametrized, config
         function getProjectLevelStatesConfig(projectLevelSingleName) {
-            var url = "";
-            if (projectLevelSingleName === projectString) {
-                url += "/" + projectString + "s/:" + projectString + "Id";
+            var urlParts = [""];
+            if (projectLevelSingleName === projectString
+                    || projectLevelSingleName === subProjectString
+                    || projectLevelSingleName === constructionSiteString) {
+                urlParts.push(projectString + "s/:" + projectString + "Id");
             }
-            if (projectLevelSingleName === subProjectString) {
-                url += "/" + projectString + "s/:" + projectString + "Id";
-                url += "/" + subProjectString + "s/:" + subProjectString + "Id";
+            if (projectLevelSingleName === subProjectString
+                    || projectLevelSingleName === constructionSiteString) {
+                urlParts.push(subProjectString + "s/:" + subProjectString + "Id");
             }
             if (projectLevelSingleName === constructionSiteString) {
-                url += "/" + projectString + "s/:" + projectString + "Id";
-                url += "/" + subProjectString + "s/:" + subProjectString + "Id";
-                url += "/" + constructionSiteString + "s/:" + constructionSiteString + "Id";
+                urlParts.push(constructionSiteString + "s/:" + constructionSiteString + "Id");
             }
 
             return {
                 projectLevelConfig: {
-                    url: url,
+                    url: urlParts.join("/"),
                     templateUrl: partialsDir + "/nav-sidebar-header.html",
-                    controller: function ($state) {
-                        // Default redirection to base path
-                        // $state.current; returns child state (if detected through url), instead of this hereby state
-                        if ($state.current.name === projectLevelSingleName){
-                            $state.go(".default", null, { location: "replace" });
+                    controller: function (Sidebar, Header, $state, $stateParams) {
+                        // Sidebar setup
+                        var urlPrefixParts = [];
+                        // Header setup
+                        var entries = [];
+                        entries.push({ title: "Portefeuille", url: $state.href("general.portfolio", null, {absolute: true}) });
+
+                        // Common conditions
+                        if (projectLevelSingleName === projectString
+                            || projectLevelSingleName === subProjectString
+                            || projectLevelSingleName === constructionSiteString) {
+                            urlPrefixParts.push(projectString + "s/" + $stateParams[projectString + "Id"]);
+                            // Get project name by projectId, from DB
+                            entries.push({ title: "Projet X", url: urlPrefixParts[0] + "/" });
                         }
-                    },
-                    onEnter: function (Sidebar, Header, $stateParams) {
-                        var urlPrefix = "";
-                        if (projectLevelSingleName === projectString) {
-                            urlPrefix += projectString + "s/" + $stateParams[projectString + "Id"];
-                        }
-                        if (projectLevelSingleName === subProjectString) {
-                            urlPrefix += projectString + "s/" + $stateParams[projectString + "Id"] + "/";
-                            urlPrefix += subProjectString + "s/" + $stateParams[subProjectString + "Id"];
+                        if (projectLevelSingleName === subProjectString
+                            || projectLevelSingleName === constructionSiteString) {
+                            urlPrefixParts.push(subProjectString + "s/" + $stateParams[subProjectString + "Id"]);
+                            // Get sub-project name by subProjectId, from DB
+                            entries.push({ title: "Sous-projet Y", url: urlPrefixParts[0] + "/" + urlPrefixParts[1] + "/" });
                         }
                         if (projectLevelSingleName === constructionSiteString) {
-                            urlPrefix += projectString + "s/" + $stateParams[projectString + "Id"] + "/";
-                            urlPrefix += subProjectString + "s/" + $stateParams[subProjectString + "Id"] + "/";
-                            urlPrefix += constructionSiteString + "s/" + $stateParams[constructionSiteString + "Id"];
+                            urlPrefixParts.push(constructionSiteString + "s/" + $stateParams[constructionSiteString + "Id"]);
+                            // Get sub-project name by constructionSiteId, from DB
+                            entries.push({ title: "Chantier Z", url: urlPrefixParts[0] + "/" + urlPrefixParts[1] + "/" + urlPrefixParts[2] + "/" });
                         }
 
-                        Sidebar.setContent({ type: projectLevelSingleName, urlPrefix: urlPrefix });
-                        Header.displayUpdateTime();
+                        // Post-setup
+                        Sidebar.setContent({ type: projectLevelSingleName, urlPrefix: urlPrefixParts.join("/") });
+                        // Empty object, to be spliced out by children
+                        entries.push({});
+                        Header.setContent({ updateTimeDisplayed:true, entries: entries });
+
+
+                        // TODO: Change sidebar title ...
+
+
+                        // Default redirection to base path
+                        // $state.current; returns child state (if detected through url), instead of this hereby state
+                        if ($state.current.name === projectLevelSingleName) {
+                            $state.go(".default", null, {location: "replace"});
+                        }
                     }
                 },
                 defaultConfig: {
                     url: "/",
                     controller: function ($state) {
                         // Default redirection to designated entry (instead of blank)
-                        $state.go("^.dashboard", null, { location: "replace" });
+                        $state.go("^.dashboard", null, {location: "replace"});
                     }
                 },
                 dashboardConfig: {
                     url: "/dashboard",
                     templateUrl: partialsDir + "/dashboard.html",
-                    controller: "DashboardCtrl",
-                    onEnter: function (Sidebar) {
-                        Sidebar.setMenuActive("dashboard");
-                    }
+                    controller: "DashboardCtrl"
                 },
                 getEntryConfig: function (stateSingleName) {
                     return {
                         url: "/" + stateSingleName + "s",
                         templateUrl: partialsDir + "/entries.html",
                         controller: "EntriesCtrl",
-                        onEnter: function (Sidebar) {
-                            Sidebar.setMenuActive(stateSingleName + "s");
-                        },
                         resolve: {
                             //	This does not work (but fails silently):
                             //     // entriesSpecifics: function () {
@@ -112,25 +123,32 @@ angular.module("ProjMngmnt", ["ui.router"])
                 templateUrl: partialsDir + "/nav-sidebar-header.html",
                 controller: function ($state) {
                     // Default redirection to base path
-                    if ($state.href($state.current.name, $state.params) === $state.current.url){
-                        $state.go(".default", null, { location: "replace" });
+                    if ($state.href($state.current.name, $state.params) === $state.current.url) {
+                        $state.go(".default", null, {location: "replace"});
                     }
                 },
                 onEnter: function (Sidebar, Header) {
                     Sidebar.setContent({type: "general", urlPrefix: "general"});
-                    Header.removeUpdateTime();
+                    Header.setContent({updateTimeDisplayed: false, entries: []});
                 }
             })
             .state("general.default", {
                 url: "/",
                 controller: function ($state) {
                     // Default redirection to designated entry (instead of blank)
-                    $state.go("^.dashboard", null, { location: "replace" });
+                    $state.go("^.dashboard", null, {location: "replace"});
                 }
             })
             .state("general.dashboard", {
                 url: "/dashboard",
                 template: "<p>Tableau de bord.</p>",
+                controller: function (Header, $state) {
+                    Header.getEntries().splice(-1, 1);
+                    Header.getEntries().push({
+                        title: "Tableau de bord",
+                        url: $state.href($state.current.name, null, {absolute: true})
+                    });
+                },
                 onEnter: function (Sidebar) {
                     Sidebar.setMenuActive("dashboard");
                 }
@@ -138,6 +156,13 @@ angular.module("ProjMngmnt", ["ui.router"])
             .state("general.portfolio", {
                 url: "/portfolio",
                 template: "<p>Portefeuille.</p>",
+                controller: function (Header, $state) {
+                    Header.getEntries().splice(-1, 1);
+                    Header.getEntries().push({
+                        title: "Portefeuille",
+                        url: $state.href($state.current.name, null, {absolute: true})
+                    });
+                },
                 onEnter: function (Sidebar) {
                     Sidebar.setMenuActive("portfolio");
                 }
@@ -145,13 +170,27 @@ angular.module("ProjMngmnt", ["ui.router"])
             .state("general.resources", {
                 url: "/resources",
                 template: "<p>Ressources.</p>",
+                controller: function (Header, $state) {
+                    Header.getEntries().splice(-1, 1);
+                    Header.getEntries().push({
+                        title: "Ressources",
+                        url: $state.href($state.current.name, null, {absolute: true})
+                    });
+                },
                 onEnter: function (Sidebar) {
-                Sidebar.setMenuActive("resources");
-            }
+                    Sidebar.setMenuActive("resources");
+                }
             })
             .state("general.internal", {
                 url: "/internal",
                 template: "<p>Interne.</p>",
+                controller: function (Header, $state) {
+                    Header.getEntries().splice(-1, 1);
+                    Header.getEntries().push({
+                        title: "Interne",
+                        url: $state.href($state.current.name, null, {absolute: true})
+                    });
+                },
                 onEnter: function (Sidebar) {
                     Sidebar.setMenuActive("internal");
                 }
@@ -159,6 +198,13 @@ angular.module("ProjMngmnt", ["ui.router"])
             .state("general.external", {
                 url: "/external",
                 template: "<p>Externe.</p>",
+                controller: function (Header, $state) {
+                    Header.getEntries().splice(-1, 1);
+                    Header.getEntries().push({
+                        title: "Externe",
+                        url: $state.href($state.current.name, null, {absolute: true})
+                    });
+                },
                 onEnter: function (Sidebar) {
                     Sidebar.setMenuActive("external");
                 }
@@ -170,7 +216,7 @@ angular.module("ProjMngmnt", ["ui.router"])
             });
 
         // Project level similar routing
-        var projectLevels = [ projectString, subProjectString, constructionSiteString ];
+        var projectLevels = [projectString, subProjectString, constructionSiteString];
         for (var i = 0; i < projectLevels.length; i++) {
             $stateProvider
                 .state(projectLevels[i], getProjectLevelStatesConfig(projectLevels[i]).projectLevelConfig)
@@ -179,13 +225,13 @@ angular.module("ProjMngmnt", ["ui.router"])
                 .state(projectLevels[i] + ".planning", getProjectLevelStatesConfig(projectLevels[i]).planningConfig);
             for (var j = 0; j < projectLevelArtifacts.length; j++) {
                 $stateProvider.state(projectLevels[i] + "." + projectLevelArtifacts[j] + "s",
-                        getProjectLevelStatesConfig(projectLevels[i]).getEntryConfig(projectLevelArtifacts[j]));
+                    getProjectLevelStatesConfig(projectLevels[i]).getEntryConfig(projectLevelArtifacts[j]));
             }
         }
 
         // Default routing behavior
         $urlRouterProvider
-            .when("/", "/general")
+            .when("/", "/general/")
             .otherwise(function ($injector) {
                 var $state = $injector.get("$state");
 

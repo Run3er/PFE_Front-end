@@ -38,7 +38,7 @@
 
     <!-- Header -->
     <div class="header" ng-controller="HeaderCtrl">
-        <a class="last-update" href="./" title="dernière mise à jour"
+        <a class="last-update" href="#" title="dernière mise à jour"
            ng-if="content.updateTimeDisplayed" ng-cloak>
             <i class="icon fa fa-calendar-check-o"></i>
             &nbsp;<span class="day-month">03/02</span>
@@ -49,37 +49,9 @@
             <li>
                 <a href="./"><i class="fa fa-home"></i></a>
             </li>
-            <li>
+            <li ng-repeat="entry in content.entries">
                 &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="./projects/123/"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a ui-sref="project.actions"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="#"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="#"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="#"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="#"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="#"><span>Projet X</span></a>
-            </li>
-            <li>
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a href="#"><span>Projet X</span></a>
+                &nbsp;<a ng-href="{{entry.url}}"><span>{{entry.title}}</span></a>
             </li>
         </ul>
     </div>

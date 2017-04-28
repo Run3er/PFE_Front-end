@@ -57,13 +57,16 @@ _:-ms-lang(x), _::-webkit-meter-bar,
       color: #858D8D;
       overflow-x: auto;
       overflow-y: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
       @media (max-width: $bootstrap-xs-max-width) {
          padding-left: 1.2rem;
       }
       li {
-         display: inline;
+         display: inline-block;
+         max-width: 15rem;
+         overflow: hidden;
+         white-space: nowrap;
+         text-overflow: ellipsis;
          .chevron {
             font-size: 1.4rem;
          }
@@ -74,11 +77,14 @@ _:-ms-lang(x), _::-webkit-meter-bar,
                color: darken(#9CA4A4, 14%);
             }
          }
-         &:last-of-type a {
-            padding-right: 1.5rem;
-            color: lighten($color-primary, 5%);
-            &:hover {
-               color: darken($color-primary, 3%);
+         &:last-of-type {
+            max-width: unset;
+            a {
+               padding-right: 1.5rem;
+               color: lighten($color-primary, 5%);
+               &:hover {
+                  color: darken($color-primary, 3%);
+               }
             }
          }
       }

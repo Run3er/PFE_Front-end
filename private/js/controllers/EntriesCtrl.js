@@ -1,7 +1,16 @@
 
 angular.module('ProjMngmnt')
-	.controller('EntriesCtrl', function (Sidebar, Header, DB, $scope, entriesSpecifics) {
-		// Get DB layer entries data
+	.controller('EntriesCtrl', function (Sidebar, Header, $state, $stateParams, DB, $scope, entriesSpecifics) {
+        // Navigation setup
+        Sidebar.setMenuActive(entriesSpecifics.type + "s");
+        Header.getEntries().splice(-1, 1);
+        var sidebarEntry = Sidebar.getEntryByUrl(entriesSpecifics.type + "s");
+        Header.getEntries().push({
+            title: sidebarEntry.title,
+            url: sidebarEntry.url
+        });
+
+        // Get DB layer entries data
 		var entries = angular.copy(DB.entries(entriesSpecifics.type).getAll());
 		// Get view layer entries data
 		var viewData = DB.entries(entriesSpecifics.type).viewData.getAll();

@@ -139,13 +139,26 @@ angular.module('ProjMngmnt')
                     // Prepend collapsible link sub-links
                     for (var j = 0; j < entries[i].entries.length; j++) {
                         if (entries[i].entries[j].entries === void(0)) {
-                            entries[i].entries[j].url = urlPrefix + entries[i].entries[j].url;
+                            entries[i].entries[j].url = urlPrefix + entries[i].entries[j].url + "/";
                         }
                     }
                 }
             }
         }
 
+
+
+        this.getEntryByUrl = function (entryUrl) {
+            var urlParts;
+            var urlEnding;
+            for (var i = 0; i < sidebarContent.entries.length; i++) {
+                urlParts = sidebarContent.entries[i].url.split("/");
+                urlEnding = urlParts[urlParts.length - 1];
+                if (urlEnding === entryUrl) {
+                    return sidebarContent.entries[i];
+                }
+            }
+        };
 
         // Set active menu link corresponding to URL path
         this.setMenuActive = function (menuActiveUrl) {
