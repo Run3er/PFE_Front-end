@@ -4,6 +4,97 @@ angular.module('ProjMngmnt')
 	.service('DB', function ($q, $http) {
 		// View Data
 		var viewsData = {
+            project: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values
+                        {
+                            key: "name",
+                            name: "Nom"
+                        },
+                        {
+                            key: "advancement",
+                            name: "Avancement"
+                        },
+                        {
+                            key: "status",
+                            name: "Statut"
+                        },
+                        {
+                            key: "chargeConsumed",
+                            name: "Charge Consommée"
+                        },
+                        {
+                            key: "budgetConsumed",
+                            name: "Budget Consommé"
+                        },
+                        {
+                            key: "budgetTotal",
+                            name: "Budget Total"
+                        },
+                        {
+                            key: "budgetPlanned",
+                            name: "Budget Planifié"
+                        }
+                    ]
+                },
+                form: {
+                    title: {
+                        add: "Ajouter un projet",
+                        edit: "Modifier un projet"
+                    },
+                    defaultSortingField: "name",
+                    fields: [
+                        {
+                            identifier: "name",
+                            label: "Nom",
+                            placeholder: "Saisir un nom",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "advancement",
+                            label: "Avancement",
+                            placeholder: "Saisir l'avancement",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "status",
+                            label: "Statut",
+                            placeholder: "Sélectionner le statut",
+                            choices: [
+                                { identifier: "BAD", value: "Mauvais"},
+                                { identifier: "UNCERTAIN", value: "Incertain"},
+                                { identifier: "GOOD", value: "Bon"}
+                            ]
+                        },
+                        {
+                            identifier: "chargeConsumed",
+                            label: "Charge consommée",
+                            placeholder: "Saisir la charge consommée",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "budgetConsumed",
+                            label: "Budget consommé",
+                            placeholder: "Saisir le budget consommé",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "budgetPlanned",
+                            label: "Budget planifié",
+                            placeholder: "Saisir le budget planifié",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "budgetTotal",
+                            label: "Budget total",
+                            placeholder: "Saisir le budget total",
+                            type: 'input'
+                        }
+                    ]
+                }
+            },
 			action: {
                 table: {
                     // tenantDataKey_columnName mapping
@@ -311,7 +402,7 @@ angular.module('ProjMngmnt')
                     ]
                 }
             },
-			project: {
+            resource: {
                 table: {
                     // tenantDataKey_columnName mapping
                     columnMaps: [
@@ -321,37 +412,17 @@ angular.module('ProjMngmnt')
                             name: "Nom"
                         },
                         {
-                            key: "advancement",
-                            name: "Avancement"
-                        },
-                        {
-                            key: "status",
-                            name: "Statut"
-                        },
-                        {
-                            key: "chargeConsumed",
-                            name: "Charge Consommée"
-                        },
-                        {
-                            key: "budgetConsumed",
-                            name: "Budget Consommé"
-                        },
-                        {
-                            key: "budgetTotal",
-                            name: "Budget Total"
-                        },
-                        {
-                            key: "budgetPlanned",
-                            name: "Budget Planifié"
+                            key: "type",
+                            name: "Type"
                         }
                     ]
                 },
                 form: {
                     title: {
-                        add: "Ajouter un projet",
-                        edit: "Modifier un projet"
+                        add: "Ajouter une ressource",
+                        edit: "Modifier une ressource"
                     },
-                    defaultSortingField: "name",
+                    defaultSortingField: "type",
                     fields: [
                         {
                             identifier: "name",
@@ -360,9 +431,100 @@ angular.module('ProjMngmnt')
                             type: 'input'
                         },
                         {
-                            identifier: "advancement",
-                            label: "Avancement",
-                            placeholder: "Saisir l'avancement",
+                            identifier: "type",
+                            label: "Type",
+                            placeholder: "Sélectionner le type",
+                            choices: [
+                                { identifier: "HUMAN", value: "Humaine"},
+                                { identifier: "HARDWARE", value: "Matérielle"},
+                                { identifier: "SOFTWARE", value: "Logicielle"}
+                            ]
+                        }
+                    ]
+                }
+            },
+            document: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values
+                        {
+                            key: "name",
+                            name: "Nom"
+                        }
+                    ]
+                },
+                form: {
+                    title: {
+                        add: "Ajouter un document",
+                        edit: "Modifier un document"
+                    },
+                    defaultSortingField: "name",
+                    fields: [
+                        {
+                            identifier: "name",
+                            label: "Nom",
+                            placeholder: "Saisir un nom",
+                            type: 'input'
+                        }
+                    ]
+                }
+            },
+            pendingIssue: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values
+                        {
+                            key: "description",
+                            name: "Description"
+                        },
+                        {
+                            key: "status",
+                            name: "Statut"
+                        },
+                        {
+                            key: "priority",
+                            name: "Priorité"
+                        },
+                        {
+                            key: "supervisor",
+                            name: "Responsable"
+                        },
+                        {
+                            key: "creationDate",
+                            name: "Création"
+                        },
+                        {
+                            key: "resolutionPlannedDate",
+                            name: "Résolution Planifiée"
+                        },
+                        {
+                            key: "resolutionDate",
+                            name: "Résolution Effective"
+                        },
+                        {
+                            key: "impacts",
+                            name: "Impacts"
+                        },
+                        {
+                            key: "decisions",
+                            name: "Décisions"
+                        }
+                    ]
+                },
+                form: {
+                    title: {
+                        add: "Ajouter un point en suspens",
+                        edit: "Modifier un point en suspens"
+                    },
+                    defaultSortingField: "creationDate",
+                    fields: [
+                        // labels are taken from DB_getAll().keys
+                        {
+                            identifier: "description",
+                            label: "Description",
+                            placeholder: "Saisir une description",
                             type: 'input'
                         },
                         {
@@ -370,33 +532,171 @@ angular.module('ProjMngmnt')
                             label: "Statut",
                             placeholder: "Sélectionner le statut",
                             choices: [
-                                { identifier: "BAD", value: "Mauvais"},
-                                { identifier: "UNCERTAIN", value: "Incertain"},
-                                { identifier: "GOOD", value: "Bon"}
+                                { identifier: "OPEN", value: "Ouvert"},
+                                { identifier: "AFFECTED", value: "Affecté"},
+                                { identifier: "DEFERRED", value: "Différé"},
+                                { identifier: "CLOSED", value: "Clôturée"}
                             ]
                         },
                         {
-                            identifier: "chargeConsumed",
-                            label: "Charge consommée",
-                            placeholder: "Saisir la charge consommée",
+                            identifier: "supervisor",
+                            label: "Responsable",
+                            placeholder: "Sélectionner le responsable",
+                            choices: [
+                                { identifier: "1", value: "Mohamed"},
+                                { identifier: "2", value: "Fatma"},
+                                { identifier: "3", value: "Ali"},
+                                { identifier: "4", value: "Salma"}
+                            ]
+                        },
+                        {
+                            identifier: "priority",
+                            label: "Priorité",
+                            placeholder: "Sélectionner la priorité",
+                            choices: [
+                                { identifier: "1", value: "Faible"},
+                                { identifier: "2", value: "Moyenne"},
+                                { identifier: "3", value: "Haute"},
+                                { identifier: "4", value: "Critique"}
+                            ]
+                        },
+                        {
+                            identifier: "creationDate",
+                            label: "Date de création",
+                            placeholder: "Spécifier la date de création",
                             type: 'input'
                         },
                         {
-                            identifier: "budgetConsumed",
-                            label: "Budget consommé",
-                            placeholder: "Saisir le budget consommé",
+                            identifier: "resolutionPlannedDate",
+                            label: "Date de résolution planifiée",
+                            placeholder: "Spécifier la date de clôture planifiée",
                             type: 'input'
                         },
                         {
-                            identifier: "budgetPlanned",
-                            label: "Budget planifié",
-                            placeholder: "Saisir le budget planifié",
+                            identifier: "resolutionDate",
+                            label: "Date de clôture",
+                            placeholder: "Spécifier la date de résolution réelle",
                             type: 'input'
                         },
                         {
-                            identifier: "budgetTotal",
-                            label: "Budget total",
-                            placeholder: "Saisir le budget total",
+                            identifier: "impacts",
+                            label: "Impacts",
+                            placeholder: "Saisir les impacts",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "decisions",
+                            label: "Décisions",
+                            placeholder: "Saisir les décisions",
+                            type: 'textarea'
+                        }
+                    ]
+                }
+            },
+            changeRequest: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values
+                        {
+                            key: "description",
+                            name: "Description"
+                        },
+                        {
+                            key: "status",
+                            name: "Statut"
+                        },
+                        {
+                            key: "requester",
+                            name: "Demandeur"
+                        },
+                        {
+                            key: "priority",
+                            name: "Priorité"
+                        },
+                        {
+                            key: "requestDate",
+                            name: "Soumission"
+                        },
+                        {
+                            key: "decisionPlannedDate",
+                            name: "Décision Planifiée"
+                        },
+                        {
+                            key: "decisionDate",
+                            name: "Décision Effective"
+                        },
+                        {
+                            key: "impacts",
+                            name: "Impacts"
+                        }
+                    ]
+                },
+                form: {
+                    title: {
+                        add: "Ajouter une demande de changement",
+                        edit: "Modifier une demande de changement"
+                    },
+                    defaultSortingField: "requestDate",
+                    fields: [
+                        // labels are taken from DB_getAll().keys
+                        {
+                            identifier: "description",
+                            label: "Description",
+                            placeholder: "Saisir une description",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "status",
+                            label: "Statut",
+                            placeholder: "Sélectionner le statut",
+                            choices: [
+                                {identifier: "STUDYING", value: "À l'étude"},
+                                {identifier: "ONGOING", value: "En cours"},
+                                {identifier: "ACCEPTED", value: "Acceptée"},
+                                {identifier: "REFUSED", value: "Refusée"},
+                                {identifier: "ABANDONED", value: "Abandonnée"},
+                                {identifier: "REPLACED", value: "Remplacée"}
+                            ]
+                        },
+                        {
+                            identifier: "requester",
+                            label: "Demandeur",
+                            placeholder: "Spécifier le demandeur",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "priority",
+                            label: "Priorité",
+                            placeholder: "Sélectionner la priorité",
+                            choices: [
+                                { identifier: "1", value: "Faible"},
+                                { identifier: "2", value: "Moyenne"},
+                                { identifier: "3", value: "Élevée"}
+                            ]
+                        },
+                        {
+                            identifier: "requestDate",
+                            label: "Date de création",
+                            placeholder: "Spécifier la date de demande",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "decisionPlannedDate",
+                            label: "Date de clôture planifiée",
+                            placeholder: "Spécifier la date de prise de décision planifiée",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "decisionDate",
+                            label: "Date de prise de décision",
+                            placeholder: "Spécifier la date de prise de décision réelle",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "impacts",
+                            label: "Impacts",
+                            placeholder: "Saisir les impacts",
                             type: 'input'
                         }
                     ]
@@ -408,29 +708,14 @@ angular.module('ProjMngmnt')
 var serverOn;
 
 
-		// DB entries interface object
-		function getEntriesProps(entryType) {
-			return {
+        // DB entries interface object
+        function getEntriesProps(entryType) {
+            return {
                 // Tenant specific data
                 getAll: function () {
-                    // Entries fetching logic
-                    console.log("FAKE_SERVER--fetching... " + JSON.stringify(entryType));
-
                     // Return promise
                     return $q(function (resolve, reject) {
-                        var uri;
-                        // TODO: get raw data to format it for ...
-                        switch (entryType) {
-                            case "project":
-                                uri = "projects";
-                                break;
-                            case "action":
-                                uri = "actions";
-                                break;
-                            case "risk":
-                                uri = "risks";
-                                break;
-                        }
+                        var uri= entryType + "s";
 
                         // Fetch data from DB
                         $http.get("http://localhost:9000/" + uri)
@@ -448,11 +733,9 @@ var serverOn;
                                 }
 
                                 resolve(entries);
-                                console.log('FAKE_SERVER--Success.');
                             }, function errorCallback(response) {
                                 // Reject (DB failure implied)
                                 reject();
-                                console.log('FAKE_SERVER--Failure.');
                             });
                     });
 
@@ -535,25 +818,8 @@ var serverOn;
         }
 
 
-		// DB entries interface
-		this.getEntries = function(entryType) {
-
-			// TODO: implement each of these ...
-            switch (entryType) {
-                case "resource":
-                    entryType = "action";
-                    break;
-                case "changeRequest":
-                    entryType = "action";
-                    break;
-                case "pendingIssue":
-                    entryType = "action";
-                    break;
-                case "document":
-                    entryType = "action";
-                    break;
-            }
-
-			return getEntriesProps(entryType);
-		};
-	});
+        // DB entries interface
+        this.getEntries = function(entryType) {
+            return getEntriesProps(entryType);
+        };
+    });
