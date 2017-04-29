@@ -655,29 +655,124 @@ angular.module('ProjMngmnt')
             }
         ];
 
-        var projectsTenantData = [
-            {
-                "id": "d440938a-04d9-4615-8303-abe4d124ab9c",
-                "budgetTotal": null,
-                "budgetPlanned": null,
-                "budgetConsumed": null,
-                "chargeConsumed": 0,
-                "advancement": 0.9,
-                "status": "BAD",
-                "name": "Project-X"
-            },
-            {
-                "id": "ed17d92c-19a8-4591-8f6b-16923e550de1",
-                "budgetTotal": null,
-                "budgetPlanned": null,
-                "budgetConsumed": null,
-                "chargeConsumed": 0,
-                "advancement": 0,
-                "status": "BAD",
-                "name": "wtvr"
-            }
-        ];
 
+        // Mock API Response
+        var projectsRawData = {
+            "_embedded": {
+                "projects": [
+                    {
+                        "budgetTotal": null,
+                        "budgetPlanned": null,
+                        "budgetConsumed": null,
+                        "chargeConsumed": 0,
+                        "advancement": 0.9,
+                        "status": "BAD",
+                        "name": "Project-X",
+                        "_links": {
+                            "self": {
+                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1"
+                            },
+                            "project": {
+                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1{?projection}",
+                                "templated": true
+                            },
+                            "archivedUpdates": {
+                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/archivedUpdates"
+                            },
+                            "milestones": {
+                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/milestones"
+                            },
+                            "entity": {
+                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/entity"
+                            },
+                            "pendingIssues": {
+                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/pendingIssues"
+                            },
+                            "actions": {
+                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/actions"
+                            },
+                            "changeRequests": {
+                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/changeRequests"
+                            },
+                            "subProjects": {
+                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/subProjects"
+                            },
+                            "risks": {
+                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/risks"
+                            },
+                            "resources": {
+                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/resources"
+                            },
+                            "documents": {
+                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/documents"
+                            }
+                        }
+                    },
+                    {
+                        "budgetTotal": null,
+                        "budgetPlanned": null,
+                        "budgetConsumed": null,
+                        "chargeConsumed": 0,
+                        "advancement": 0,
+                        "status": "BAD",
+                        "name": "wtvr",
+                        "_links": {
+                            "self": {
+                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c"
+                            },
+                            "project": {
+                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c{?projection}",
+                                "templated": true
+                            },
+                            "archivedUpdates": {
+                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/archivedUpdates"
+                            },
+                            "milestones": {
+                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/milestones"
+                            },
+                            "entity": {
+                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/entity"
+                            },
+                            "pendingIssues": {
+                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/pendingIssues"
+                            },
+                            "actions": {
+                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/actions"
+                            },
+                            "changeRequests": {
+                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/changeRequests"
+                            },
+                            "subProjects": {
+                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/subProjects"
+                            },
+                            "risks": {
+                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/risks"
+                            },
+                            "resources": {
+                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/resources"
+                            },
+                            "documents": {
+                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/documents"
+                            }
+                        }
+                    }
+                ]
+            },
+            "_links": {
+                "self": {
+                    "href": "http://localhost:9000/projects"
+                },
+                "profile": {
+                    "href": "http://localhost:9000/profile/projects"
+                }
+            },
+            "page": {
+                "size": 20,
+                "totalElements": 2,
+                "totalPages": 1,
+                "number": 0
+            }
+        };
 
 
 var serverOn;
@@ -688,35 +783,57 @@ var serverOn;
 			return {
                 // Tenant specific data
                 getAll: function () {
-                    var tenantData;
+                    // Entries fetching logic
+                    console.log("FAKE_SERVER--fetching... " + JSON.stringify(entryType));
 
-                    switch (entryType) {
-                        case "action":
-                            tenantData = actionsTenantData;
-                            break;
-                        case "risk":
-                            tenantData = risksTenantData;
-                            break;
+                    // Return promise
+                    return $q(function (resolve, reject) {
+                        // Simulate request timelaps
+                        setTimeout(function () {
+                            // Simulate fetching operation result
+                            serverOn = true;
 
-                        case "resource":
-                            tenantData = actionsTenantData;
-                            break;
-                        case "changeRequest":
-                            tenantData = actionsTenantData;
-                            break;
-                        case "pendingIssue":
-                            tenantData = actionsTenantData;
-                            break;
-                        case "document":
-                            tenantData = actionsTenantData;
-                            break;
+                            // on resolve success
+                            if (serverOn) {
+                                // Request data from DB (promise)...
+                                var tenantRawData = projectsRawData;
 
-                        case "project":
-                            tenantData = projectsTenantData;
-                            break;
-                    }
+                                // Format data to desired simple array format
+                                var entries = angular.copy(tenantRawData._embedded.projects);
+                                // TODO: format others ...
+                                if (entryType === "project") {
+                                    for (var i = 0; i < entries.length; i++) {
+                                        var urlParts = entries[i]._links.self.href.split("/");
+                                        entries[i].id = urlParts[urlParts.length - 1];
+                                        // Not needed for now...
+                                        // delete entries[i]._links;
+                                        // So set to undefined instead
+                                        entries[i]._links = void(0);
+                                    }
+                                }
+                                // TODO: get raw data to format it for ...
+                                else {
+                                    switch (entryType) {
+                                        case "action":
+                                            entries = actionsTenantData;
+                                            break;
+                                        case "risk":
+                                            entries = risksTenantData;
+                                            break;
+                                    }
+                                }
 
-                    return tenantData;
+                                resolve(entries);
+                                console.log('FAKE_SERVER--Success.');
+                            }
+                            else {
+                                // Reject (DB failure implied)
+                                reject();
+                                console.log('FAKE_SERVER--Failure.');
+                            }
+                        }, 1500);
+                    });
+
                 },
                 add: function (entry) {
                     // Entry addition logic
@@ -726,7 +843,7 @@ var serverOn;
                     return $q(function (resolve, reject) {
                         // Simulate request timelaps
                         setTimeout(function () {
-                            // Simulate addtion operation result
+                            // Simulate addition operation result
                             serverOn = true;
 
                             if (serverOn) {

@@ -10,11 +10,6 @@ angular.module('ProjMngmnt')
             url: sidebarEntry.url
         });
 
-        // Get DB layer entries data
-		var entries = angular.copy(DB.getEntries(entriesSpecifics.type).getAll());
-		// Get view layer entries data
-		var viewData = DB.getEntries(entriesSpecifics.type).viewData.getAll();
-
 
 		// Functions definition
 
@@ -180,7 +175,7 @@ angular.module('ProjMngmnt')
 					$scope.formAlert.active = true;
 				});
 
-			return resultPromise;	
+			return resultPromise;
 		};
 
 		/**
@@ -227,18 +222,36 @@ angular.module('ProjMngmnt')
 
 		// Controller init. code, Prepare table entries for display
 
-		var rows = angular.copy(entries);
-		// Add view-only auto generated fields to tableEntries
-		var columnMaps = angular.copy(viewData.table.columnMaps);
-		generateAutoFields(entries, rows, columnMaps);
-		// Add row's array index to each row (for ng-repeat)
-		for (var i = 0; i < rows.length; i++) {
-			rows[i].index = i;
-		}
-		$scope.tableEntries = {
-			columnMaps: columnMaps, 
-			rows: rows
-		};
+        // Get DB layer entries data
+        var entries;
+        request("getAll")
+            .then(function (resolveData) {
+                    // Get the requested data
+					entries = angular.copy(resolveData);
+
+					var rows = angular.copy(entries);
+					// Add view-only auto generated fields to tableEntries
+					var columnMaps = angular.copy(viewData.table.columnMaps);
+					generateAutoFields(entries, rows, columnMaps);
+					// Add row's array index to each row (for ng-repeat)
+					for (var i = 0; i < rows.length; i++) {
+						rows[i].index = i;
+					}
+					$scope.tableEntries = {
+						columnMaps: columnMaps,
+						rows: rows
+					};
+                },
+                function (rejectData) {
+                    $scope.formAlert.msg = "Getting entries failed. [Try refreshing.]";
+                    $scope.formAlert.didSucceed = false;
+                    // Set alert on the view ...
+                    $scope.formAlert.active = true;
+                });
+
+
+        // Get view layer entries data
+        var viewData = DB.getEntries(entriesSpecifics.type).viewData.getAll();
 
 		// Initialize form
 		$scope.formFields = viewData.form.fields;
