@@ -1,7 +1,7 @@
 
 angular.module('ProjMngmnt')
 	// Database layer mockup
-	.service('DB', function ($q) {
+	.service('DB', function ($q, $http) {
 		// View Data
 		var viewsData = {
 			action: {
@@ -273,7 +273,7 @@ angular.module('ProjMngmnt')
                                 { identifier: "TO_STUDY", value: "À étudier"},
                                 { identifier: "QUALIFIED", value: "qualifié"},
                                 { identifier: "DECIDED_UPON", value: "Décision prise"},
-                                { identifier: "ACTION_PLAN_ONGOING", value: "Plan d'action ongoing"},
+                                { identifier: "ACTION_PLAN_ONGOING", value: "Plan d'action en cours"},
                                 { identifier: "MASTERED", value: "Maîtrisé"},
                                 { identifier: "CLOSED", value: "Clôturé"}
                             ]
@@ -404,376 +404,6 @@ angular.module('ProjMngmnt')
             }
 		};
 
-		// Mock data
-		var actionsTenantData = [
-			{
-				"id": 1,
-				"description": "Faire Action I",
-				"status": "ONGOING",
-				"supervisor": "1",
-				"priority": "2",
-				"creationDate": "01/02/2017",
-				"closingPlannedDate": "29/03/2017",
-				"delay": "20 j",
-				"closingDate": "",
-				"comment": "Consulter Foulen pour les guides."
-			},
-			{
-				"id": 2,
-				"description": "Compléter Action II",
-				"status": "STANDBY",
-				"supervisor": "2",
-				"priority": "1",
-				"creationDate": "02/02/2017",
-				"closingPlannedDate": "17/02/2017",
-				"delay": "3 j",
-				"closingDate": "",
-				"comment": ""
-			},
-			{
-				"id": 3,
-				"description": "S'occuper de Action III",
-				"status": "ONGOING",
-				"supervisor": "3",
-				"priority": "3",
-				"creationDate": "01/02/2017",
-				"closingPlannedDate": "31/03/2017",
-				"delay": "",
-				"closingDate": "",
-				"comment": "Maîtriser le process avant d'entreprendre l'action."
-			},
-			{
-				"id": 4,
-				"description": "S'occuper de Action IV",
-				"status": "CLOSED",
-				"supervisor": "1",
-				"priority": "3",
-				"creationDate": "01/02/2017",
-				"closingPlannedDate": "31/03/2017",
-				"delay": "",
-				"closingDate": "20/03/2017",
-				"comment": "Une partie du travail a déja été faite par Ammar."
-			},
-			{
-				"id": 5,
-				"description": "Faire Action I",
-				"status": "ONGOING",
-				"supervisor": "1",
-				"priority": "2",
-				"creationDate": "01/02/2017",
-				"closingPlannedDate": "29/03/2017",
-				"delay": "20 j",
-				"closingDate": "",
-				"comment": "Consulter Foulen pour les guides."
-			},
-			{
-				"id": 6,
-				"description": "Compléter Action II",
-				"status": "STANDBY",
-				"supervisor": "2",
-				"priority": "1",
-				"creationDate": "02/02/2017",
-				"closingPlannedDate": "17/02/2017",
-				"delay": "3 j",
-				"closingDate": "",
-				"comment": ""
-			},
-			{
-				"id": 7,
-				"description": "S'occuper de Action III",
-				"status": "ONGOING",
-				"supervisor": "3",
-				"priority": "3",
-				"creationDate": "01/02/2017",
-				"closingPlannedDate": "31/03/2017",
-				"delay": "",
-				"closingDate": "",
-				"comment": "Maîtriser le process avant d'entreprendre l'action."
-			},
-			{
-				"id": 8,
-				"description": "S'occuper de Action IV",
-				"status": "CLOSED",
-				"supervisor": "1",
-				"priority": "3",
-				"creationDate": "01/02/2017",
-				"closingPlannedDate": "31/03/2017",
-				"delay": "",
-				"closingDate": "20/03/2017",
-				"comment": "Une partie du travail a déja été faite par Ammar."
-			},
-			{
-				"id": 9,
-				"description": "Faire Action I",
-				"status": "ONGOING",
-				"supervisor": "1",
-				"priority": "2",
-				"creationDate": "01/02/2017",
-				"closingPlannedDate": "29/03/2017",
-				"delay": "20 j",
-				"closingDate": "",
-				"comment": "Consulter Foulen pour les guides."
-			},
-			{
-				"id": 10,
-				"description": "Compléter Action II",
-				"status": "STANDBY",
-				"supervisor": "2",
-				"priority": "1",
-				"creationDate": "02/02/2017",
-				"closingPlannedDate": "17/02/2017",
-				"delay": "3 j",
-				"closingDate": "",
-				"comment": ""
-			},
-			{
-				"id": 11,
-				"description": "S'occuper de Action III",
-				"status": "ONGOING",
-				"supervisor": "3",
-				"priority": "3",
-				"creationDate": "01/02/2017",
-				"closingPlannedDate": "31/03/2017",
-				"delay": "",
-				"closingDate": "",
-				"comment": "Maîtriser le process avant d'entreprendre l'action."
-			},
-			{
-				"id": 12,
-				"description": "S'occuper de Action IV",
-				"status": "CLOSED",
-				"supervisor": "1",
-				"priority": "3",
-				"creationDate": "01/02/2017",
-				"closingPlannedDate": "31/03/2017",
-				"delay": "",
-				"closingDate": "20/03/2017",
-				"comment": "Une partie du travail a déja été faite par Ammar."
-			},
-			{
-				"id": 13,
-				"description": "Faire Action I",
-				"status": "ONGOING",
-				"supervisor": "1",
-				"priority": "2",
-				"creationDate": "01/02/2017",
-				"closingPlannedDate": "29/03/2017",
-				"delay": "20 j",
-				"closingDate": "",
-				"comment": "Consulter Foulen pour les guides."
-			},
-			{
-				"id": 14,
-				"description": "Compléter Action II",
-				"status": "STANDBY",
-				"supervisor": "2",
-				"priority": "1",
-				"creationDate": "02/02/2017",
-				"closingPlannedDate": "17/02/2017",
-				"delay": "3 j",
-				"closingDate": "",
-				"comment": ""
-			},
-			{
-				"id": 15,
-				"description": "S'occuper de Action III",
-				"status": "ONGOING",
-				"supervisor": "3",
-				"priority": "3",
-				"creationDate": "01/02/2017",
-				"closingPlannedDate": "31/03/2017",
-				"delay": "",
-				"closingDate": "",
-				"comment": "Maîtriser le process avant d'entreprendre l'action."
-			},
-			{
-				"id": 16,
-				"description": "S'occuper de Action IV",
-				"status": "CLOSED",
-				"supervisor": "1",
-				"priority": "3",
-				"creationDate": "01/02/2017",
-				"closingPlannedDate": "31/03/2017",
-				"delay": "",
-				"closingDate": "20/03/2017",
-				"comment": "Une partie du travail a déja été faite par Ammar."
-			}
-		];
-
-        var risksTenantData = [
-            {
-                "id": 1,
-                "description": "Panne de X",
-                "probability": "2",
-                "impact": "4",
-                "actionPlan": "Mettre en place X",
-                "status": "DECIDED_UPON",
-                "decision": "Go",
-                "detectionDate": "02/02/2017",
-                "qualificationDate": "05/02/2017",
-                "closingDate": "",
-                "comment": "Consulter FoulenX pour avant la mise en place"
-            },
-            {
-                "id": 2,
-                "description": "Panne de Y",
-                "probability": "2",
-                "impact": "4",
-                "actionPlan": "Imposer Y",
-                "status": "DECIDED_UPON",
-                "decision": "Go",
-                "detectionDate": "03/02/2017",
-                "qualificationDate": "05/02/2017",
-                "closingDate": "",
-                "comment": "Consulter FoulenY pour avant la mise en place"
-            },
-            {
-                "id": 3,
-                "description": "Z absent",
-                "probability": "3",
-                "impact": "5",
-                "actionPlan": "Prendre mesure Z",
-                "status": "DETECTED",
-                "decision": "Go",
-                "detectionDate": "01/03/2017",
-                "qualificationDate": "",
-                "closingDate": "05/02/2017",
-                "comment": "Consulter FoulenZ pour avant la mise en place"
-            },
-            {
-                "id": 4,
-                "description": "Panne de W",
-                "probability": "3",
-                "impact": "1",
-                "actionPlan": "Imposer W",
-                "status": "DECIDED_UPON",
-                "decision": "Go",
-                "detectionDate": "01/02/2017",
-                "qualificationDate": "05/02/2017",
-                "closingDate": "",
-                "comment": "Consulter FoulenW pour avant la mise en place"
-            }
-        ];
-
-
-        // Mock API Response
-        var projectsRawData = {
-            "_embedded": {
-                "projects": [
-                    {
-                        "budgetTotal": null,
-                        "budgetPlanned": null,
-                        "budgetConsumed": null,
-                        "chargeConsumed": 0,
-                        "advancement": 0.9,
-                        "status": "BAD",
-                        "name": "Project-X",
-                        "_links": {
-                            "self": {
-                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1"
-                            },
-                            "project": {
-                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1{?projection}",
-                                "templated": true
-                            },
-                            "archivedUpdates": {
-                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/archivedUpdates"
-                            },
-                            "milestones": {
-                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/milestones"
-                            },
-                            "entity": {
-                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/entity"
-                            },
-                            "pendingIssues": {
-                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/pendingIssues"
-                            },
-                            "actions": {
-                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/actions"
-                            },
-                            "changeRequests": {
-                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/changeRequests"
-                            },
-                            "subProjects": {
-                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/subProjects"
-                            },
-                            "risks": {
-                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/risks"
-                            },
-                            "resources": {
-                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/resources"
-                            },
-                            "documents": {
-                                "href": "http://localhost:9000/projects/ed17d92c-19a8-4591-8f6b-16923e550de1/documents"
-                            }
-                        }
-                    },
-                    {
-                        "budgetTotal": null,
-                        "budgetPlanned": null,
-                        "budgetConsumed": null,
-                        "chargeConsumed": 0,
-                        "advancement": 0,
-                        "status": "BAD",
-                        "name": "wtvr",
-                        "_links": {
-                            "self": {
-                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c"
-                            },
-                            "project": {
-                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c{?projection}",
-                                "templated": true
-                            },
-                            "archivedUpdates": {
-                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/archivedUpdates"
-                            },
-                            "milestones": {
-                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/milestones"
-                            },
-                            "entity": {
-                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/entity"
-                            },
-                            "pendingIssues": {
-                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/pendingIssues"
-                            },
-                            "actions": {
-                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/actions"
-                            },
-                            "changeRequests": {
-                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/changeRequests"
-                            },
-                            "subProjects": {
-                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/subProjects"
-                            },
-                            "risks": {
-                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/risks"
-                            },
-                            "resources": {
-                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/resources"
-                            },
-                            "documents": {
-                                "href": "http://localhost:9000/projects/d440938a-04d9-4615-8303-abe4d124ab9c/documents"
-                            }
-                        }
-                    }
-                ]
-            },
-            "_links": {
-                "self": {
-                    "href": "http://localhost:9000/projects"
-                },
-                "profile": {
-                    "href": "http://localhost:9000/profile/projects"
-                }
-            },
-            "page": {
-                "size": 20,
-                "totalElements": 2,
-                "totalPages": 1,
-                "number": 0
-            }
-        };
-
 
 var serverOn;
 
@@ -788,50 +418,42 @@ var serverOn;
 
                     // Return promise
                     return $q(function (resolve, reject) {
-                        // Simulate request timelaps
-                        setTimeout(function () {
-                            // Simulate fetching operation result
-                            serverOn = true;
+                        var uri;
+                        // TODO: get raw data to format it for ...
+                        switch (entryType) {
+                            case "project":
+                                uri = "projects";
+                                break;
+                            case "action":
+                                uri = "actions";
+                                break;
+                            case "risk":
+                                uri = "risks";
+                                break;
+                        }
 
-                            // on resolve success
-                            if (serverOn) {
-                                // Request data from DB (promise)...
-                                var tenantRawData = projectsRawData;
+                        // Fetch data from DB
+                        $http.get("http://localhost:9000/" + uri)
+                            .then(function successCallback(response) {
+                                var entries = response.data._embedded[uri];
 
                                 // Format data to desired simple array format
-                                var entries = angular.copy(tenantRawData._embedded.projects);
-                                // TODO: format others ...
-                                if (entryType === "project") {
-                                    for (var i = 0; i < entries.length; i++) {
-                                        var urlParts = entries[i]._links.self.href.split("/");
-                                        entries[i].id = urlParts[urlParts.length - 1];
-                                        // Not needed for now...
-                                        // delete entries[i]._links;
-                                        // So set to undefined instead
-                                        entries[i]._links = void(0);
-                                    }
-                                }
-                                // TODO: get raw data to format it for ...
-                                else {
-                                    switch (entryType) {
-                                        case "action":
-                                            entries = actionsTenantData;
-                                            break;
-                                        case "risk":
-                                            entries = risksTenantData;
-                                            break;
-                                    }
+                                for (var i = 0; i < entries.length; i++) {
+                                    var urlParts = entries[i]._links.self.href.split("/");
+                                    entries[i].id = urlParts[urlParts.length - 1];
+                                    // Not needed for now...
+                                    // delete entries[i]._links;
+                                    // So set to undefined instead
+                                    entries[i]._links = void(0);
                                 }
 
                                 resolve(entries);
                                 console.log('FAKE_SERVER--Success.');
-                            }
-                            else {
+                            }, function errorCallback(response) {
                                 // Reject (DB failure implied)
                                 reject();
                                 console.log('FAKE_SERVER--Failure.');
-                            }
-                        }, 1500);
+                            });
                     });
 
                 },
