@@ -2,18 +2,18 @@
 angular.module('ProjMngmnt')
 	.controller('EntriesCtrl', function (Sidebar, Header, $state, $stateParams, DB, $scope, entriesSpecifics) {
         // Navigation setup
-        Sidebar.setMenuActive(entriesSpecifics.type + "s");
+        Sidebar.setMenuActive(entriesSpecifics.menuUrl);
         Header.getEntries().splice(-1, 1);
-        var sidebarEntry = Sidebar.getEntryByUrl(entriesSpecifics.type + "s");
+        var sidebarEntry = Sidebar.getEntryByUrl(entriesSpecifics.menuUrl);
         Header.getEntries().push({
             title: sidebarEntry.title,
             url: sidebarEntry.url
         });
 
         // Get DB layer entries data
-		var entries = angular.copy(DB.entries(entriesSpecifics.type).getAll());
+		var entries = angular.copy(DB.getEntries(entriesSpecifics.type).getAll());
 		// Get view layer entries data
-		var viewData = DB.entries(entriesSpecifics.type).viewData.getAll();
+		var viewData = DB.getEntries(entriesSpecifics.type).viewData.getAll();
 
 
 		// Functions definition
@@ -160,19 +160,19 @@ angular.module('ProjMngmnt')
 		};
 
 		// Async. request operation
-		var request = function (type, argument) {
+		var request = function (operationType, argument) {
 			// Set local copy of argument
 			var arg = angular.copy(argument);
 
 			// Request operation to DB asynchronously
-			var resultPromise = DB.entries(entriesSpecifics.type)[type](arg);
+			var resultPromise = DB.getEntries(entriesSpecifics.type)[operationType](arg);
 			resultPromise
 				// Update  alert
 				.then(function (resolveData) {
-					$scope.formAlert.msg = type + " completed with success.";
+					$scope.formAlert.msg = operationType + " completed with success.";
 					$scope.formAlert.didSucceed = true;
 				}, function (rejectData) {
-					$scope.formAlert.msg = type + " failed. [Try again.]";
+					$scope.formAlert.msg = operationType + " failed. [Try again.]";
 					$scope.formAlert.didSucceed = false;
 				})
 				.finally(function (didSucceed) {

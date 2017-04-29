@@ -100,7 +100,7 @@ angular.module("ProjMngmnt", ["ui.router"])
                             // But this does (function declared outside):
                             //     // entriesSpecifics: entriesMap["actions"].resolveFn
                             entriesSpecifics: function () {
-                                return {type: stateSingleName};
+                                return { type: stateSingleName, menuUrl: stateSingleName + "s" };
                             }
                         }
                     };
@@ -155,30 +155,22 @@ angular.module("ProjMngmnt", ["ui.router"])
             })
             .state("general.portfolio", {
                 url: "/portfolio",
-                template: "<p>Portefeuille.</p>",
-                controller: function (Header, $state) {
-                    Header.getEntries().splice(-1, 1);
-                    Header.getEntries().push({
-                        title: "Portefeuille",
-                        url: $state.href($state.current.name, null, {absolute: true})
-                    });
-                },
-                onEnter: function (Sidebar) {
-                    Sidebar.setMenuActive("portfolio");
+                templateUrl: partialsDir + "/entries.html",
+                controller: "EntriesCtrl",
+                resolve: {
+                    entriesSpecifics: function () {
+                        return { type: "project", menuUrl: "portfolio" };
+                    }
                 }
             })
             .state("general.resources", {
                 url: "/resources",
-                template: "<p>Ressources.</p>",
-                controller: function (Header, $state) {
-                    Header.getEntries().splice(-1, 1);
-                    Header.getEntries().push({
-                        title: "Ressources",
-                        url: $state.href($state.current.name, null, {absolute: true})
-                    });
-                },
-                onEnter: function (Sidebar) {
-                    Sidebar.setMenuActive("resources");
+                templateUrl: partialsDir + "/entries.html",
+                controller: "EntriesCtrl",
+                resolve: {
+                    entriesSpecifics: function () {
+                        return { type: "resource", menuUrl: "resources" };
+                    }
                 }
             })
             .state("general.internal", {

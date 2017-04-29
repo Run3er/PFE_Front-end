@@ -580,6 +580,23 @@ var serverOn = false;
 					case "risk":
 						tenantData = risksTenantData;
 						break;
+
+                    case "resource":
+                        tenantData = actionsTenantData;
+                        break;
+                    case "changeRequest":
+                        tenantData = actionsTenantData;
+                        break;
+                    case "pendingIssue":
+                        tenantData = actionsTenantData;
+                        break;
+                    case "document":
+                        tenantData = actionsTenantData;
+                        break;
+
+                    case "project":
+                        tenantData = actionsTenantData;
+                        break;
 				}
 
 				return tenantData;
@@ -658,12 +675,29 @@ var serverOn = false;
 					var viewData;
 
 					switch (entryType) {
-						case "action":
-							viewData = actionsViewData;
-							break;
-						case "risk":
-							viewData = risksViewData;
-							break;
+                        case "action":
+                            viewData = actionsViewData;
+                            break;
+                        case "risk":
+                            viewData = risksViewData;
+                            break;
+
+                        case "resource":
+                            viewData = actionsViewData;
+                            break;
+                        case "changeRequest":
+                            viewData = actionsViewData;
+                            break;
+                        case "pendingIssue":
+                            viewData = actionsViewData;
+                            break;
+                        case "document":
+                            viewData = actionsViewData;
+                            break;
+
+                        case "project":
+                            viewData = actionsViewData;
+                            break;
 					}
 
 					return viewData;
@@ -673,7 +707,7 @@ var serverOn = false;
 
 
 		// DB entries interface
-		this.entries = function(_entryType) {
+		this.getEntries = function(_entryType) {
 			// TODO: create props specific object for any entryType
 			entryType = _entryType;
 
