@@ -2,6 +2,8 @@
 angular.module('ProjMngmnt')
     // Database layer mockup
     .service('DB', function ($q, $http) {
+        var serverAddress = "http://localhost:9000";
+
         // View Data
         var viewsData = {
             project: {
@@ -709,7 +711,7 @@ var serverOn;
 
 
         // DB entries interface object
-        function getEntriesProps(entryType) {
+        this.getEntriesDAO = function (entryType) {
             return {
                 // Tenant specific data
                 getAll: function () {
@@ -718,7 +720,7 @@ var serverOn;
                         var uri= entryType + "s";
 
                         // Fetch data from DB
-                        $http.get("http://localhost:9000/" + uri)
+                        $http.get(serverAddress + "/" + uri)
                             .then(function successCallback(response) {
                                 var entries = response.data._embedded[uri];
 
@@ -733,7 +735,7 @@ var serverOn;
                                 }
 
                                 resolve(entries);
-                            }, function errorCallback(response) {
+                            }, function errorCallback() {
                                 // Reject (DB failure implied)
                                 reject();
                             });
@@ -815,11 +817,5 @@ var serverOn;
                     }
                 }
             };
-        }
-
-
-        // DB entries interface
-        this.getEntries = function(entryType) {
-            return getEntriesProps(entryType);
         };
     });

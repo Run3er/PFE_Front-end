@@ -1,6 +1,6 @@
 // Checking arguments
 if (process.argv.length > 3) {
-    console.log('Error: Too many arguments passed. Maximum number of arguments is 1. Aborting.')
+    console.log('Error: Too many arguments passed. Maximum number of arguments is 1. Aborting.');
     process.exitCode = 9;
 }
 
@@ -35,15 +35,15 @@ if (process.argv.length === 3) {
         else {
             onSuccess();
         }
-    };
+    }
 } 
 else {
     // Locating modules folder in the script's path hierarchy
     console.log("Locating " + modulesFolderName + " in the script's path hierarchy ...");
-    var pathDelimiter = process.argv[1][0] === "/" ? "/" : "\\";
+    pathDelimiter = process.argv[1][0] === "/" ? "/" : "\\";
     var parentFolders = process.argv[1].split(pathDelimiter);
     parentFolders.splice(parentFolders.length - 1, 1);
-    var path = parentFolders.join(pathDelimiter);
+    path = parentFolders.join(pathDelimiter);
     var pathHierarchy = [];
 
     while (true) {

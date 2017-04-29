@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var util = require('gulp-util');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
-var sourcemaps = require('gulp-sourcemaps')
+var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
@@ -42,7 +42,7 @@ var jsSrcPthPtrnSuffix = '*.js';
 var jsSrcPthPtrn = jsSrcPthPtrnRoot + jsSrcPthPtrnSuffix;
 var jsSrcPthPtrnAppsSuffix = 'app-*.js';
 var jsSrcAppsPthPtrn = jsSrcPthPtrnRoot + jsSrcPthPtrnAppsSuffix;
-var jsDestinationPath = 'public/js/'
+var jsDestinationPath = 'public/js/';
 
 gulp.task('js', function () {
     gulp.src([jsSrcAppsPthPtrn, jsSrcPthPtrn])

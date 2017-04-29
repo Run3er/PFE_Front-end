@@ -160,17 +160,17 @@ angular.module('ProjMngmnt')
             var arg = angular.copy(argument);
 
             // Request operation to DB asynchronously
-            var resultPromise = DB.getEntries(entriesSpecifics.type)[operationType](arg);
+            var resultPromise = DB.getEntriesDAO(entriesSpecifics.type)[operationType](arg);
             resultPromise
                 // Update  alert
-                .then(function (resolveData) {
+                .then(function () {
                     $scope.formAlert.msg = operationType + " completed with success.";
                     $scope.formAlert.didSucceed = true;
-                }, function (rejectData) {
+                }, function () {
                     $scope.formAlert.msg = operationType + " failed. [Try again.]";
                     $scope.formAlert.didSucceed = false;
                 })
-                .finally(function (didSucceed) {
+                .finally(function () {
                     // Set alert on the view ...
                     $scope.formAlert.active = true;
                 });
@@ -242,7 +242,7 @@ angular.module('ProjMngmnt')
                         rows: rows
                     };
                 },
-                function (rejectData) {
+                function () {
                     $scope.formAlert.msg = "Getting entries failed. [Try refreshing.]";
                     $scope.formAlert.didSucceed = false;
                     // Set alert on the view ...
@@ -251,7 +251,7 @@ angular.module('ProjMngmnt')
 
 
         // Get view layer entries data
-        var viewData = DB.getEntries(entriesSpecifics.type).viewData.getAll();
+        var viewData = DB.getEntriesDAO(entriesSpecifics.type).viewData.getAll();
 
         // Initialize form
         $scope.formFields = viewData.form.fields;

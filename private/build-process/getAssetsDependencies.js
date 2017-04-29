@@ -1,6 +1,6 @@
 // Checking arguments
 if (process.argv.length > 3) {
-    console.log('Error: Too many arguments passed. Maximum number of arguments is 1. Aborting.')
+    console.log('Error: Too many arguments passed. Maximum number of arguments is 1. Aborting.');
     process.exitCode = 9;
 }
 
@@ -81,7 +81,7 @@ function onSuccess(data) {
     console.log("\nDownloading assets (" + configParam + ") found in " + configFileName + ".\n");
     try {
         var devDependencies = JSON.parse(data)[configParam];
-        for(var i = 0; i < devDependencies.length; i++) {
+        for (var i = 0; i < devDependencies.length; i++) {
             var assetsPath = path + pathDelimiter + devDependencies[i].assetsPath;
             // Create path if doesn't exist
             assetsPath
