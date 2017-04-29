@@ -1,9 +1,9 @@
 
 angular.module('ProjMngmnt')
-	// Database layer mockup
-	.service('DB', function ($q, $http) {
-		// View Data
-		var viewsData = {
+    // Database layer mockup
+    .service('DB', function ($q, $http) {
+        // View Data
+        var viewsData = {
             project: {
                 table: {
                     // tenantDataKey_columnName mapping
@@ -95,7 +95,7 @@ angular.module('ProjMngmnt')
                     ]
                 }
             },
-			action: {
+            action: {
                 table: {
                     // tenantDataKey_columnName mapping
                     columnMaps: [
@@ -218,7 +218,7 @@ angular.module('ProjMngmnt')
                     ]
                 }
             },
-			risk: {
+            risk: {
                 table: {
                     // tenantDataKey_columnName mapping
                     columnMaps: [
@@ -702,7 +702,7 @@ angular.module('ProjMngmnt')
                     ]
                 }
             }
-		};
+        };
 
 
 var serverOn;

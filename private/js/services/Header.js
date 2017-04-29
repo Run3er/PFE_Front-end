@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-	.service('Header', function () {
+    .service('Header', function () {
 
         this.content = {
             updateTimeDisplayed: false,
@@ -26,4 +26,4 @@ angular.module('ProjMngmnt')
         // this.removeUpdateTime = function () {
         //     this.content.updateTimeDisplayed = false;
         // };
-	});
+    });

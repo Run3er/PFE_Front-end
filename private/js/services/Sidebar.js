@@ -1,19 +1,19 @@
 
 angular.module('ProjMngmnt')
-	.service('Sidebar', function () {
+    .service('Sidebar', function () {
         // Project levels string
         var projectString = "project";
         var subProjectString = "subProject";
         var constructionSiteString = "constructionSite";
         var projectLevels = [ projectString, subProjectString, constructionSiteString ];
 
-	    var sidebarContent = {};
+        var sidebarContent = {};
 
-		var projectLevelBaseContent = {
-			title: "Application de gestion de projets en mode SaaS",
-			entries: [
+        var projectLevelBaseContent = {
+            title: "Application de gestion de projets en mode SaaS",
+            entries: [
                 {
-                	url: "dashboard",
+                    url: "dashboard",
                     iconClass: "fa fa-dashboard",
                     title: "Tableau de bord"
                 },
@@ -36,7 +36,7 @@ angular.module('ProjMngmnt')
                     url: "changeRequests",
                     iconClass: "fa fa-exchange",
                     title: "Demandes de changement",
-					notifsNb: 1
+                    notifsNb: 1
                 },
                 {
                     url: "resources",
@@ -47,17 +47,17 @@ angular.module('ProjMngmnt')
                     url: "documents",
                     iconClass: "fa fa-file",
                     title: "Documents",
-					notifsNb: 2
+                    notifsNb: 2
                 },
                 {
                     url: "planning",
                     iconClass: "fa fa-calendar",
                     title: "Planning"
                 }
-			]
-		};
+            ]
+        };
 
-		var portfolioContent  = {
+        var portfolioContent  = {
             title: "Général",
             entries: [
                 {
@@ -84,7 +84,7 @@ angular.module('ProjMngmnt')
             ]
         };
 
-		// Get collapsible sub-hierarchy entry w/sub-links
+        // Get collapsible sub-hierarchy entry w/sub-links
         function getSubHierarchyEntry(hierarchyHead) {
             var projectLevelSuffix;
             var projectLevelTitle;
@@ -205,4 +205,4 @@ angular.module('ProjMngmnt')
             sidebarContent.menuExpanded = void(0);
             sidebarContent.subMenuActive = void(0);
         };
-	});
+    });
