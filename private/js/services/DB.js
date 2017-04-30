@@ -715,32 +715,25 @@ var serverOn;
             return {
                 // Tenant specific data
                 getAll: function () {
-                    // Return promise
-                    return $q(function (resolve, reject) {
-                        var uri= entryType + "s";
+                    var uri= entryType + "s";
 
-                        // Fetch data from DB
-                        $http.get(serverAddress + "/" + uri)
-                            .then(function successCallback(response) {
-                                var entries = response.data._embedded[uri];
+                    // Fetch data from DB
+                    return $http.get(serverAddress + "/" + uri)
+                        .then(function successCallback(response) {
+                            var entries = response.data._embedded[uri];
 
-                                // Format data to desired simple array format
-                                for (var i = 0; i < entries.length; i++) {
-                                    var urlParts = entries[i]._links.self.href.split("/");
-                                    entries[i].id = urlParts[urlParts.length - 1];
-                                    // Not needed for now...
-                                    // delete entries[i]._links;
-                                    // So set to undefined instead
-                                    entries[i]._links = void(0);
-                                }
+                            // Format data to desired simple array format
+                            for (var i = 0; i < entries.length; i++) {
+                                var urlParts = entries[i]._links.self.href.split("/");
+                                entries[i].id = urlParts[urlParts.length - 1];
+                                // Not needed for now...
+                                // delete entries[i]._links;
+                                // So set to undefined instead
+                                entries[i]._links = void(0);
+                            }
 
-                                resolve(entries);
-                            }, function errorCallback() {
-                                // Reject (DB failure implied)
-                                reject();
-                            });
-                    });
-
+                            return entries;
+                        });
                 },
                 add: function (entry) {
                     // Entry addition logic
