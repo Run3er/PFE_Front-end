@@ -58,8 +58,6 @@ angular.module("ProjMngmnt", ["ui.router"])
 
                         // Post-setup
                         Sidebar.setContent({ type: projectLevelSingleName, urlPrefix: urlPrefixParts.join("/") });
-                        // Empty object, to be spliced out by children
-                        entries.push({});
                         Header.setContent({ updateTimeDisplayed:true, entries: entries });
 
 
@@ -109,7 +107,7 @@ angular.module("ProjMngmnt", ["ui.router"])
                     url: "/planning",
                     template: "<p>Planning</p>",
                     controller: function (Sidebar) {
-                        Sidebar.setMenuActive("planning");
+                        Sidebar.setActiveMenuUrlBySuffix("planning");
                     }
                 }
             };
@@ -142,15 +140,8 @@ angular.module("ProjMngmnt", ["ui.router"])
             .state("general.dashboard", {
                 url: "/dashboard",
                 template: "<p>Tableau de bord.</p>",
-                controller: function (Header, $state) {
-                    Header.getEntries().splice(-1, 1);
-                    Header.getEntries().push({
-                        title: "Tableau de bord",
-                        url: $state.href($state.current.name, null, {absolute: true})
-                    });
-                },
                 onEnter: function (Sidebar) {
-                    Sidebar.setMenuActive("dashboard");
+                    Sidebar.setActiveMenuUrlBySuffix("dashboard");
                 }
             })
             .state("general.portfolio", {
@@ -176,29 +167,15 @@ angular.module("ProjMngmnt", ["ui.router"])
             .state("general.internal", {
                 url: "/internal",
                 template: "<p>Interne.</p>",
-                controller: function (Header, $state) {
-                    Header.getEntries().splice(-1, 1);
-                    Header.getEntries().push({
-                        title: "Interne",
-                        url: $state.href($state.current.name, null, {absolute: true})
-                    });
-                },
                 onEnter: function (Sidebar) {
-                    Sidebar.setMenuActive("internal");
+                    Sidebar.setActiveMenuUrlBySuffix("internal");
                 }
             })
             .state("general.external", {
                 url: "/external",
                 template: "<p>Externe.</p>",
-                controller: function (Header, $state) {
-                    Header.getEntries().splice(-1, 1);
-                    Header.getEntries().push({
-                        title: "Externe",
-                        url: $state.href($state.current.name, null, {absolute: true})
-                    });
-                },
                 onEnter: function (Sidebar) {
-                    Sidebar.setMenuActive("external");
+                    Sidebar.setActiveMenuUrlBySuffix("external");
                 }
             })
 

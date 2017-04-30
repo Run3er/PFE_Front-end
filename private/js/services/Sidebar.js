@@ -61,31 +61,21 @@ angular.module('ProjMngmnt')
 
 
         this.getEntryByUrl = function (entryUrl) {
-            var urlParts;
-            var urlEnding;
             for (var i = 0; i < sidebarContent.entries.length; i++) {
-                urlParts = sidebarContent.entries[i].url.split("/");
-                urlEnding = urlParts[urlParts.length - 1];
-                if (urlEnding === entryUrl) {
+                if (sidebarContent.entries[i].url === entryUrl) {
                     return sidebarContent.entries[i];
                 }
             }
         };
 
         // Set active menu link corresponding to URL path
-        this.setMenuActive = function (menuActiveUrl) {
-            if (menuActiveUrl !== void(0)) {
-                var urlParts;
-                var urlEnding;
-                for (var i = 0; i < sidebarContent.entries.length; i++) {
-                    urlParts = sidebarContent.entries[i].url.split("/");
-                    urlEnding = urlParts[urlParts.length - 1];
-                    if (urlEnding === menuActiveUrl) {
-                        // Since entries are identified & ordered by their ng-repeat $index, simply use i
-                        sidebarContent.menuActive = i;
-                        break;
-                    }
-                }
+        this.setActiveMenuUrlBySuffix = function (urlSuffix) {
+            if (urlSuffix !== void(0)) {
+                // Prepend menu entries url prefix to the submitted url suffix
+                var urlParts = sidebarContent.entries[0].url.split("/");
+                urlParts[urlParts.length - 1] = urlSuffix;
+
+                sidebarContent.activeMenuUrl = urlParts.join("/");
             }
         };
 
@@ -120,8 +110,8 @@ angular.module('ProjMngmnt')
             // Change global content
             sidebarContent.title = cloneContent.title;
             sidebarContent.entries = cloneContent.entries;
-            sidebarContent.menuActive = void(0);
-            sidebarContent.menuExpanded = void(0);
-            sidebarContent.subMenuActive = void(0);
+            sidebarContent.activeMenuUrl = void(0);
+            sidebarContent.menuExpandedIndex = void(0);
+            sidebarContent.subMenuActiveIndex = void(0);
         };
     });

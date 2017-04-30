@@ -1,14 +1,8 @@
 
 angular.module('ProjMngmnt')
-    .controller('EntriesCtrl', function (Sidebar, Header, DB, UI, $scope, entriesSpecifics) {
-        // Navigation setup
-        Sidebar.setMenuActive(entriesSpecifics.menuUrl);
-        Header.getEntries().splice(-1, 1);
-        var sidebarEntry = Sidebar.getEntryByUrl(entriesSpecifics.menuUrl);
-        Header.getEntries().push({
-            title: sidebarEntry.title,
-            url: sidebarEntry.url
-        });
+    .controller('EntriesCtrl', function (Sidebar, DB, UI, $scope, entriesSpecifics) {
+        // Navigation setup (not using onEnter because it's triggered before parent controller execution)
+        Sidebar.setActiveMenuUrlBySuffix(entriesSpecifics.menuUrl);
 
 
         // Functions definition

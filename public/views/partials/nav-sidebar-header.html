@@ -5,8 +5,8 @@
         <li class="tab-content-header">
             <span title="{{menu.title}}">{{menu.title}}</span>
         </li>
-        <li class="simple-menu {{menu.menuActive == index ? 'active' : ''}}" ng-if="entry.entries === void(0) || entry.entries.length === 0"
-            ng-repeat-start="(index, entry) in menu.entries" ng-click="menu.menuExpanded = void(0)">
+        <li class="simple-menu {{menu.activeMenuUrl == entry.url ? 'active' : ''}}" ng-if="entry.entries === void(0) || entry.entries.length === 0"
+            ng-repeat-start="(index, entry) in menu.entries" ng-click="menu.menuExpandedIndex = void(0)">
             <a class="menu-entry" ng-href="{{entry.url}}">
                 <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
                 <span class="menu-title">{{entry.title}}</span>
@@ -17,21 +17,21 @@
                 </span>
             </a>
         </li>
-        <li class="collapsible-menu {{menu.menuActive == index ? 'active' : ''}}"
+        <li class="collapsible-menu {{menu.activeMenuUrl == entry.url ? 'active' : ''}}"
             ng-if="entry.entries !== void(0) && entry.entries.length > 0" ng-repeat-end>
             <span class="menu-entry">
                 <a class="menu-entry-collapsible-main" ng-href="{{entry.url}}">
                     <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
                     <span class="menu-title">{{entry.title}}</span>
                 </a>
-                <a class="menu-badge" href="javascript:void(0)"  ng-click="menu.menuExpanded = (menu.menuExpanded == index) ? void(0) : index">
+                <a class="menu-badge" href="javascript:void(0)"  ng-click="menu.menuExpandedIndex = (menu.menuExpandedIndex == index) ? void(0) : index">
                     <span><i class="dropdown-arrow fa fa-angle-right" ng-if="entry.entries"></i></span>
                 </a>
             </span>
-            <ul ng-show="menu.menuExpanded == index || menu.menuActive == index">
+            <ul ng-show="menu.menuExpandedIndex == index || menu.activeMenuUrl == entry.url">
                 <li ng-repeat="(subIndex, subEntry) in entry.entries">
-                    <a ng-href="{{subEntry.url}}" class="{{menu.menuActive == index && menu.subMenuActive == subIndex ? 'active' : ''}}"
-                       ng-click="menu.subMenuActive = subIndex; menu.menuActive = index">{{subEntry.title}}</a>
+                    <a ng-href="{{subEntry.url}}" class="{{menu.activeMenuUrl == entry.url && menu.subMenuActiveIndex == subIndex ? 'active' : ''}}"
+                       ng-click="menu.subMenuActiveIndex = subIndex; menu.activeMenuUrl = entry.url">{{subEntry.title}}</a>
                 </li>
             </ul>
         </li>
@@ -44,7 +44,7 @@
 
         <!-- Header -->
         <div class="header" ng-controller="HeaderCtrl">
-            <a class="last-update" href="#" title="dernière mise à jour"
+            <a class="last-update" href="#" title="Dernière mise à jour"
                ng-if="content.updateTimeDisplayed" ng-cloak>
                 <i class="icon fa fa-calendar-check-o"></i>
                 &nbsp;<span class="day-month">03/02</span>
@@ -57,7 +57,14 @@
                 </li>
                 <li ng-repeat="entry in content.entries">
                     &nbsp;<i class="chevron fa fa-caret-right"></i>
-                    &nbsp;<a ng-href="{{entry.url}}"><span>{{entry.title}}</span></a>
+                    &nbsp;<a ng-href="{{entry.url}}" title="{{entry.title}}"><span>{{entry.title}}</span></a>
+                </li>
+                <li>
+                    &nbsp;<i class="chevron fa fa-caret-right"></i>&nbsp;
+                    <a ng-href="{{sidebar.getContent().activeMenuUrl}}"
+                       title="{{sidebar.getEntryByUrl(sidebar.getContent().activeMenuUrl).title}}">
+                        <span>{{sidebar.getEntryByUrl(sidebar.getContent().activeMenuUrl).title}}</span>
+                    </a>
                 </li>
             </ul>
         </div>

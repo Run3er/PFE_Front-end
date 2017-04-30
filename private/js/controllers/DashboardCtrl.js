@@ -1,13 +1,8 @@
 
 angular.module('ProjMngmnt')
-    .controller('DashboardCtrl', function ($scope, Dashboard, Sidebar, Header, $state, $stateParams) {
-        // Navigation setup
-        Sidebar.setMenuActive("dashboard");
-        Header.getEntries().splice(-1, 1);
-        Header.getEntries().push({
-            title: "Tableau de bord",
-            url: $state.href($state.current.name, $stateParams, {absolute: true})
-        });
+    .controller('DashboardCtrl', function ($scope, Dashboard, Sidebar) {
+            // Navigation setup (not using onEnter because it's triggered before parent controller execution)
+            Sidebar.setActiveMenuUrlBySuffix("dashboard");
 
             Dashboard.initCharts($scope);
         }
