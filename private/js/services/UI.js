@@ -617,7 +617,7 @@ angular.module('ProjMngmnt')
             }
         };
 
-        viewsData[projectString] = {
+        var projectLevelCommonViewData = {
             table: {
                 // tenantDataKey_columnName mapping
                 columnMaps: [
@@ -653,10 +653,6 @@ angular.module('ProjMngmnt')
                 ]
             },
             form: {
-                title: {
-                    add: "Ajouter un projet",
-                    edit: "Modifier un projet"
-                },
                 defaultSortingField: "name",
                 fields: [
                     {
@@ -709,189 +705,24 @@ angular.module('ProjMngmnt')
             }
         };
 
-        viewsData[subProjectString] = {
-            table: {
-                // tenantDataKey_columnName mapping
-                columnMaps: [
-                    // Ordered key-values
-                    {
-                        key: "name",
-                        name: "Nom"
-                    },
-                    {
-                        key: "advancement",
-                        name: "Avancement"
-                    },
-                    {
-                        key: "status",
-                        name: "Statut"
-                    },
-                    {
-                        key: "chargeConsumed",
-                        name: "Charge Consommée"
-                    },
-                    {
-                        key: "budgetConsumed",
-                        name: "Budget Consommé"
-                    },
-                    {
-                        key: "budgetTotal",
-                        name: "Budget Total"
-                    },
-                    {
-                        key: "budgetPlanned",
-                        name: "Budget Planifié"
-                    }
-                ]
-            },
-            form: {
-                title: {
-                    add: "Ajouter un sous-projet",
-                    edit: "Modifier un sous-projet"
-                },
-                defaultSortingField: "name",
-                fields: [
-                    {
-                        identifier: "name",
-                        label: "Nom",
-                        placeholder: "Saisir un nom",
-                        type: 'input'
-                    },
-                    {
-                        identifier: "advancement",
-                        label: "Avancement",
-                        placeholder: "Saisir l'avancement",
-                        type: 'input'
-                    },
-                    {
-                        identifier: "status",
-                        label: "Statut",
-                        placeholder: "Sélectionner le statut",
-                        choices: [
-                            { identifier: "BAD", value: "Mauvais"},
-                            { identifier: "UNCERTAIN", value: "Incertain"},
-                            { identifier: "GOOD", value: "Bon"}
-                        ]
-                    },
-                    {
-                        identifier: "chargeConsumed",
-                        label: "Charge consommée",
-                        placeholder: "Saisir la charge consommée",
-                        type: 'input'
-                    },
-                    {
-                        identifier: "budgetConsumed",
-                        label: "Budget consommé",
-                        placeholder: "Saisir le budget consommé",
-                        type: 'input'
-                    },
-                    {
-                        identifier: "budgetPlanned",
-                        label: "Budget planifié",
-                        placeholder: "Saisir le budget planifié",
-                        type: 'input'
-                    },
-                    {
-                        identifier: "budgetTotal",
-                        label: "Budget total",
-                        placeholder: "Saisir le budget total",
-                        type: 'input'
-                    }
-                ]
-            }
+        viewsData[projectString] = angular.copy(projectLevelCommonViewData);
+        viewsData[projectString].form.title = {
+            add: "Ajouter un projet",
+            edit: "Modifier un projet"
         };
 
-        viewsData[constructionSiteString] = {
-            table: {
-                // tenantDataKey_columnName mapping
-                columnMaps: [
-                    // Ordered key-values
-                    {
-                        key: "name",
-                        name: "Nom"
-                    },
-                    {
-                        key: "advancement",
-                        name: "Avancement"
-                    },
-                    {
-                        key: "status",
-                        name: "Statut"
-                    },
-                    {
-                        key: "chargeConsumed",
-                        name: "Charge Consommée"
-                    },
-                    {
-                        key: "budgetConsumed",
-                        name: "Budget Consommé"
-                    },
-                    {
-                        key: "budgetTotal",
-                        name: "Budget Total"
-                    },
-                    {
-                        key: "budgetPlanned",
-                        name: "Budget Planifié"
-                    }
-                ]
-            },
-            form: {
-                title: {
-                    add: "Ajouter un chantier",
-                    edit: "Modifier un chantier"
-                },
-                defaultSortingField: "name",
-                fields: [
-                    {
-                        identifier: "name",
-                        label: "Nom",
-                        placeholder: "Saisir un nom",
-                        type: 'input'
-                    },
-                    {
-                        identifier: "advancement",
-                        label: "Avancement",
-                        placeholder: "Saisir l'avancement",
-                        type: 'input'
-                    },
-                    {
-                        identifier: "status",
-                        label: "Statut",
-                        placeholder: "Sélectionner le statut",
-                        choices: [
-                            { identifier: "BAD", value: "Mauvais"},
-                            { identifier: "UNCERTAIN", value: "Incertain"},
-                            { identifier: "GOOD", value: "Bon"}
-                        ]
-                    },
-                    {
-                        identifier: "chargeConsumed",
-                        label: "Charge consommée",
-                        placeholder: "Saisir la charge consommée",
-                        type: 'input'
-                    },
-                    {
-                        identifier: "budgetConsumed",
-                        label: "Budget consommé",
-                        placeholder: "Saisir le budget consommé",
-                        type: 'input'
-                    },
-                    {
-                        identifier: "budgetPlanned",
-                        label: "Budget planifié",
-                        placeholder: "Saisir le budget planifié",
-                        type: 'input'
-                    },
-                    {
-                        identifier: "budgetTotal",
-                        label: "Budget total",
-                        placeholder: "Saisir le budget total",
-                        type: 'input'
-                    }
-                ]
-            }
+        viewsData[subProjectString] = angular.copy(projectLevelCommonViewData);
+        viewsData[subProjectString].form.title = {
+            add: "Ajouter un sous-projet",
+            edit: "Modifier un sous-projet"
         };
+
+        viewsData[constructionSiteString] = angular.copy(projectLevelCommonViewData);
+        viewsData[constructionSiteString].form.title = {
+            add: "Ajouter un chantier",
+            edit: "Modifier un chantier"
+        };
+
 
         // Sidebar Data
 
