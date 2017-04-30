@@ -1,8 +1,8 @@
 
 angular.module('ProjMngmnt')
-    .controller('EntriesCtrl', function (Sidebar, DB, UI, $scope, entriesSpecifics) {
+    .controller('EntriesCtrl', function (Sidebar, DB, UI, $scope, entrySpecifics) {
         // Navigation setup (not using onEnter because it's triggered before parent controller execution)
-        Sidebar.setActiveMenuUrlBySuffix(entriesSpecifics.menuUrl);
+        Sidebar.setActiveMenuUrlBySuffix(entrySpecifics.type + "s");
 
 
         // Functions definition
@@ -154,7 +154,7 @@ angular.module('ProjMngmnt')
             var arg = angular.copy(argument);
 
             // Request operation to DB asynchronously
-            var resultPromise = DB.getEntriesDAO(entriesSpecifics.type)[operationType](arg);
+            var resultPromise = entriesDAO[operationType](arg);
             resultPromise
                 // Update  alert
                 .then(function () {
@@ -216,6 +216,20 @@ angular.module('ProjMngmnt')
 
         // Controller init. code, Prepare table entries for display
 
+        // Get DAO
+        var uriPrefix = void(0);
+        if (entrySpecifics.urlPrefix !== void(0)) {
+            var urlParts = entrySpecifics.urlPrefix.split("/");
+            if (urlParts.length > 1) {
+                // URI resource name + id
+                uriPrefix = urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
+            }
+        }
+        var entriesDAO = DB.getEntriesDAO({
+            type: entrySpecifics.type,
+            uriPrefix: uriPrefix
+        });
+
         // Get DB layer entries data
         var entries;
         request("getAll")
@@ -245,7 +259,7 @@ angular.module('ProjMngmnt')
 
 
         // Get view layer entries data
-        var viewData = UI.getViewData(entriesSpecifics.type);
+        var viewData = UI.getViewData(entrySpecifics.type);
 
         // Initialize form
         $scope.formFields = viewData.form.fields;

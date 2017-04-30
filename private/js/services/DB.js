@@ -9,14 +9,15 @@ angular.module('ProjMngmnt')
         var serverOn;
 
         // DB entries interface object
-        this.getEntriesDAO = function (entryType) {
+        this.getEntriesDAO = function (entryProps) {
             return {
                 // Tenant specific data
                 getAll: function () {
-                    var entriesUriName= entryType + "s";
+                    var entriesUriName= entryProps.type + "s";
+                    var uri = (entryProps.uriPrefix ? entryProps.uriPrefix + "/" : "") + entriesUriName;
 
                     // Fetch data from DB
-                    return $http.get(serverAddress + "/" + entriesUriName)
+                    return $http.get(serverAddress + "/" + uri)
                         .then(function successCallback(response) {
                             var entries = response.data._embedded[entriesUriName];
 

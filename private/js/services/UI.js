@@ -782,7 +782,7 @@ angular.module('ProjMngmnt')
                     iconClass: "fa fa-dashboard",
                     title: "Tableau de bord"
                 },{
-                    url: "portfolio",
+                    url: "projects",
                     iconClass: "fa fa-th",
                     title: "Portefeuille"
                 },{

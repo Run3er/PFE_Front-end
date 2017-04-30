@@ -25,6 +25,9 @@ angular.module("ProjMngmnt", ["ui.router"])
                 urlParts.push(constructionSiteString + "s/:" + constructionSiteString + "Id");
             }
 
+            // Project level API URI prefix
+            var entrySpecifics = {};
+
             return {
                 projectLevelConfig: {
                     url: urlParts.join("/"),
@@ -47,7 +50,7 @@ angular.module("ProjMngmnt", ["ui.router"])
                         if (projectLevelSingleName === subProjectString
                             || projectLevelSingleName === constructionSiteString) {
                             urlPrefixParts.push(subProjectString + "s/" + $stateParams[subProjectString + "Id"]);
-                            // Get sub-project name by subProjectId, from DB
+                            // Get sub-project name by constructionSiteId, from DB
                             entries.push({ title: "Sous-projet Y", url: urlPrefixParts[0] + "/" + urlPrefixParts[1] + "/" });
                         }
                         if (projectLevelSingleName === constructionSiteString) {
@@ -55,9 +58,10 @@ angular.module("ProjMngmnt", ["ui.router"])
                             // Get sub-project name by constructionSiteId, from DB
                             entries.push({ title: "Chantier Z", url: urlPrefixParts[0] + "/" + urlPrefixParts[1] + "/" + urlPrefixParts[2] + "/" });
                         }
+                        entrySpecifics.urlPrefix = urlPrefixParts.join("/");
 
                         // Post-setup
-                        Sidebar.setContent({ type: projectLevelSingleName, urlPrefix: urlPrefixParts.join("/") });
+                        Sidebar.setContent({ type: projectLevelSingleName, urlPrefix: entrySpecifics.urlPrefix });
                         Header.setContent({ updateTimeDisplayed:true, entries: entries });
 
 
@@ -90,15 +94,19 @@ angular.module("ProjMngmnt", ["ui.router"])
                         controller: "EntriesCtrl",
                         resolve: {
                             //	This does not work (but fails silently):
-                            //     // entriesSpecifics: function () {
+                            //     // entrySpecifics: function () {
                             //     // 	return entriesMap[i].resolveFn();
                             //     // }
                             // .. cannot apparently use outer scope variables inside
                             //	following's alternative inline function declaration.
                             // But this does (function declared outside):
-                            //     // entriesSpecifics: entriesMap["actions"].resolveFn
-                            entriesSpecifics: function () {
-                                return { type: stateSingleName, menuUrl: stateSingleName + "s" };
+                            //     // entrySpecifics: entriesMap["actions"].resolveFn
+                            entrySpecifics: function () {
+                                entrySpecifics.type = stateSingleName;
+                                entrySpecifics.menuUrl = stateSingleName + "s";
+                                // entrySpecifics.urlPrefix; set in parent state
+
+                                return entrySpecifics;
                             }
                         }
                     };
@@ -126,8 +134,8 @@ angular.module("ProjMngmnt", ["ui.router"])
                     }
                 },
                 onEnter: function (Sidebar, Header) {
-                    Sidebar.setContent({type: "general", urlPrefix: "general"});
-                    Header.setContent({updateTimeDisplayed: false, entries: []});
+                    Sidebar.setContent({ type: "general", urlPrefix: "general" });
+                    Header.setContent({ updateTimeDisplayed: false, entries: []} );
                 }
             })
             .state("general.default", {
@@ -145,12 +153,12 @@ angular.module("ProjMngmnt", ["ui.router"])
                 }
             })
             .state("general.portfolio", {
-                url: "/portfolio",
+                url: "/projects",
                 templateUrl: partialsDir + "/entries.html",
                 controller: "EntriesCtrl",
                 resolve: {
-                    entriesSpecifics: function () {
-                        return { type: "project", menuUrl: "portfolio" };
+                    entrySpecifics: function () {
+                        return { type: "project" };
                     }
                 }
             })
@@ -159,8 +167,8 @@ angular.module("ProjMngmnt", ["ui.router"])
                 templateUrl: partialsDir + "/entries.html",
                 controller: "EntriesCtrl",
                 resolve: {
-                    entriesSpecifics: function () {
-                        return { type: "resource", menuUrl: "resources" };
+                    entrySpecifics: function () {
+                        return { type: "resource" };
                     }
                 }
             })
@@ -187,22 +195,28 @@ angular.module("ProjMngmnt", ["ui.router"])
         // Project level similar routing
         var projectLevels = [projectString, subProjectString, constructionSiteString];
         for (var i = 0; i < projectLevels.length; i++) {
+            var projectLevelStatesConfig = getProjectLevelStatesConfig(projectLevels[i]);
+
             $stateProvider
-                .state(projectLevels[i], getProjectLevelStatesConfig(projectLevels[i]).projectLevelConfig)
-                .state(projectLevels[i] + ".default", getProjectLevelStatesConfig(projectLevels[i]).defaultConfig)
-                .state(projectLevels[i] + ".dashboard", getProjectLevelStatesConfig(projectLevels[i]).dashboardConfig)
-                .state(projectLevels[i] + ".planning", getProjectLevelStatesConfig(projectLevels[i]).planningConfig);
+                .state(projectLevels[i], projectLevelStatesConfig.projectLevelConfig)
+                .state(projectLevels[i] + ".default", projectLevelStatesConfig.defaultConfig)
+                .state(projectLevels[i] + ".dashboard", projectLevelStatesConfig.dashboardConfig)
+                .state(projectLevels[i] + ".planning", projectLevelStatesConfig.planningConfig);
+
             for (var j = 0; j < projectLevelArtifacts.length; j++) {
                 $stateProvider.state(projectLevels[i] + "." + projectLevelArtifacts[j] + "s",
-                    getProjectLevelStatesConfig(projectLevels[i]).getEntryConfig(projectLevelArtifacts[j]));
+                    projectLevelStatesConfig.getEntryConfig(projectLevelArtifacts[j]));
+            }
+
+            if (projectLevels[i] === projectString) {
+                $stateProvider.state(projectString + "." + subProjectString + "s",
+                    projectLevelStatesConfig.getEntryConfig(subProjectString));
+            }
+            else if (projectLevels[i] === subProjectString) {
+                $stateProvider.state(subProjectString + "." + constructionSiteString + "s",
+                    projectLevelStatesConfig.getEntryConfig(constructionSiteString));
             }
         }
-
-        $stateProvider
-            .state(projectString + "." + subProjectString + "s",
-                getProjectLevelStatesConfig(projectString).getEntryConfig(subProjectString))
-            .state(subProjectString + "." + constructionSiteString + "s",
-                getProjectLevelStatesConfig(subProjectString).getEntryConfig(constructionSiteString));
 
         // Default routing behavior
         $urlRouterProvider

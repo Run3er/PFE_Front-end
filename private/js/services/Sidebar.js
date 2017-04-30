@@ -26,7 +26,14 @@ angular.module('ProjMngmnt')
             }
             else return void(0);
 
-            return DB.getEntriesDAO(subEntryType).getAll()
+            var urlParts = parentEntryProps.urlPrefix.split("/");
+            var uriPrefix = urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
+
+            return DB.getEntriesDAO({
+                    type: subEntryType,
+                    uriPrefix: uriPrefix
+                })
+                .getAll()
                 .then(function (entries) {
                     var subsUrlSuffix = subEntryType + "s";
 
