@@ -1,11 +1,10 @@
 
 angular.module('ProjMngmnt')
-    .service('Views', function () {
+    .service('UI', function () {
         // Project levels string
         var projectString = "project";
         var subProjectString = "subProject";
         var constructionSiteString = "constructionSite";
-
 
         // Views Data
         var viewsData = {
@@ -894,6 +893,92 @@ angular.module('ProjMngmnt')
             }
         };
 
+        // Sidebar Data
+
+        var projectLevelBaseContent = {
+            title: "Application de gestion de projets en mode SaaS",
+            entries: [
+                {
+                    url: "dashboard",
+                    iconClass: "fa fa-dashboard",
+                    title: "Tableau de bord"
+                },
+                {
+                    url: "actions",
+                    iconClass: "fa fa-tasks",
+                    title: "Actions"
+                },
+                {
+                    url: "risks",
+                    iconClass: "fa fa-warning",
+                    title: "Risques"
+                },
+                {
+                    url: "pendingIssues",
+                    iconClass: "fa fa-pause-circle-o",
+                    title: "Points en suspens"
+                },
+                {
+                    url: "changeRequests",
+                    iconClass: "fa fa-exchange",
+                    title: "Demandes de changement",
+                    notifsNb: 1
+                },
+                {
+                    url: "resources",
+                    iconClass: "fa fa-user-times",
+                    title: "Ressources"
+                },
+                {
+                    url: "documents",
+                    iconClass: "fa fa-file",
+                    title: "Documents",
+                    notifsNb: 2
+                },
+                {
+                    url: "planning",
+                    iconClass: "fa fa-calendar",
+                    title: "Planning"
+                }
+            ]
+        };
+
+        var portfolioContent  = {
+            title: "Général",
+            entries: [
+                {
+                    url: "dashboard",
+                    iconClass: "fa fa-dashboard",
+                    title: "Tableau de bord"
+                },{
+                    url: "portfolio",
+                    iconClass: "fa fa-th",
+                    title: "Portefeuille"
+                },{
+                    url: "resources",
+                    iconClass: "fa fa-user-times",
+                    title: "Ressources"
+                },{
+                    url: "internal",
+                    iconClass: "fa fa-bullseye",
+                    title: "Interne"
+                },{
+                    url: "external",
+                    iconClass: "fa fa-external-link",
+                    title: "Externe"
+                }
+            ]
+        };
+
+
+
+        this.getProjectLevelBaseContent = function () {
+            return projectLevelBaseContent;
+        };
+
+        this.getPortfolioContent = function () {
+            return portfolioContent;
+        };
 
 
         this.getViewData = function (viewType) {

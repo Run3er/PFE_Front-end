@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .service('Sidebar', function (DB) {
+    .service('Sidebar', function (DB, UI) {
         var hrefVoid = "javascript:void(0)";
 
         // Project levels string
@@ -10,81 +10,6 @@ angular.module('ProjMngmnt')
         var projectLevels = [ projectString, subProjectString, constructionSiteString ];
 
         var sidebarContent = {};
-
-        var projectLevelBaseContent = {
-            title: "Application de gestion de projets en mode SaaS",
-            entries: [
-                {
-                    url: "dashboard",
-                    iconClass: "fa fa-dashboard",
-                    title: "Tableau de bord"
-                },
-                {
-                    url: "actions",
-                    iconClass: "fa fa-tasks",
-                    title: "Actions"
-                },
-                {
-                    url: "risks",
-                    iconClass: "fa fa-warning",
-                    title: "Risques"
-                },
-                {
-                    url: "pendingIssues",
-                    iconClass: "fa fa-pause-circle-o",
-                    title: "Points en suspens"
-                },
-                {
-                    url: "changeRequests",
-                    iconClass: "fa fa-exchange",
-                    title: "Demandes de changement",
-                    notifsNb: 1
-                },
-                {
-                    url: "resources",
-                    iconClass: "fa fa-user-times",
-                    title: "Ressources"
-                },
-                {
-                    url: "documents",
-                    iconClass: "fa fa-file",
-                    title: "Documents",
-                    notifsNb: 2
-                },
-                {
-                    url: "planning",
-                    iconClass: "fa fa-calendar",
-                    title: "Planning"
-                }
-            ]
-        };
-
-        var portfolioContent  = {
-            title: "Général",
-            entries: [
-                {
-                    url: "dashboard",
-                    iconClass: "fa fa-dashboard",
-                    title: "Tableau de bord"
-                },{
-                    url: "portfolio",
-                    iconClass: "fa fa-th",
-                    title: "Portefeuille"
-                },{
-                    url: "resources",
-                    iconClass: "fa fa-user-times",
-                    title: "Ressources"
-                },{
-                    url: "internal",
-                    iconClass: "fa fa-bullseye",
-                    title: "Interne"
-                },{
-                    url: "external",
-                    iconClass: "fa fa-external-link",
-                    title: "Externe"
-                }
-            ]
-        };
 
         // Get collapsible sub-hierarchy entry w/sub-links
         function getEntrySubs(parentEntryProps) {
@@ -173,10 +98,10 @@ angular.module('ProjMngmnt')
 
             // Set page [type] content
             if (pageProperties.type === "general") {
-                cloneContent = angular.copy(portfolioContent);
+                cloneContent = angular.copy(UI.getPortfolioContent());
             }
             else if (projectLevels.indexOf(pageProperties.type) !== -1) {
-                cloneContent = angular.copy(projectLevelBaseContent);
+                cloneContent = angular.copy(UI.getProjectLevelBaseContent());
 
                 // Add subs if any
                 var promise = getEntrySubs(pageProperties);
