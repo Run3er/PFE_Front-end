@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .controller('EntriesCtrl', function (Sidebar, Header, $state, $stateParams, DB, $scope, entriesSpecifics) {
+    .controller('EntriesCtrl', function (Sidebar, Header, $state, $stateParams, DB, Views, $scope, entriesSpecifics) {
         // Navigation setup
         Sidebar.setMenuActive(entriesSpecifics.menuUrl);
         Header.getEntries().splice(-1, 1);
@@ -251,7 +251,7 @@ angular.module('ProjMngmnt')
 
 
         // Get view layer entries data
-        var viewData = DB.getEntriesDAO(entriesSpecifics.type).viewData.getAll();
+        var viewData = Views.getViewData(entriesSpecifics.type);
 
         // Initialize form
         $scope.formFields = viewData.form.fields;
