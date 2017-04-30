@@ -1,6 +1,8 @@
 
 angular.module('ProjMngmnt')
     .service('Sidebar', function () {
+        var hrefVoid = "javascript:void(0)";
+
         // Project levels string
         var projectString = "project";
         var subProjectString = "subProject";
@@ -103,8 +105,10 @@ angular.module('ProjMngmnt')
             }
             else return void(0);
 
+            // TODO: Obtain subs from DB (id & name)
+
             return {
-                url: "javascript:void(0)",
+                url: hrefVoid,
                 iconClass: "fa fa-sitemap",
                 title: projectLevelTitle,
                 entries: [
@@ -132,7 +136,7 @@ angular.module('ProjMngmnt')
             urlPrefix = "./" + (urlPrefix ? urlPrefix + "/" : "");
             for (var i = 0; i < entries.length; i++) {
                 // Avoid prefixing for collapsible entry links [javascript:void(0)]
-                if (entries[i].entries === void(0)) {
+                if (entries[i].url !== hrefVoid) {
                     entries[i].url = urlPrefix + entries[i].url;
                 }
                 else {

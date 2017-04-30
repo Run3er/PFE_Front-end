@@ -7,8 +7,10 @@
 
 $navbar-top-height: 5.6rem;
 $navbar-border-color: #E9EAEB;
+$sidebar-menu-entry-padding-left: 2.2rem;
 $sidebar-width: 27rem;
 $sidebar-width-shrunken: 6rem;
+$sidebar-bg-color: #253341;
 $header-height: 4.6rem;
 
 /*=============== Navbar-Sidebar ===============*/
@@ -191,7 +193,7 @@ a:hover, a:focus {
    display: none;
    width: $sidebar-width;
    margin-top: $navbar-top-height;
-   background-color: #253341;
+   background-color: $sidebar-bg-color;
    // overflow-x: hidden;
    // overflow-y: auto;
    @media (min-width: 768px) {
@@ -248,12 +250,11 @@ a:hover, a:focus {
          white-space: nowrap;
       }
       &:not(.tab-content-header) {
-         & > a {
+         & > .menu-entry {
             display: inline-block;
             width: 100%;
             margin: 0;
-            padding: 1.2rem 0 0.8rem 2.2rem;
-            color: #909090;
+            padding-right: 0;
             &:hover, &:focus {
                background-color: unset;
             }
@@ -263,22 +264,24 @@ a:hover, a:focus {
             &:hover {
                color: #b4b6b4;
             }
+            .menu {
+               &-icon, &-title, &-badge {
+                  color: #909090;
+               }
+            }
             .menu-icon {
-               width: 15%;
                float: left;
                font-size: 1.7rem;
             }
             .menu-title {
                padding-top: 0.2rem;
                display: inline-block;
-               width: 70%;
                overflow-wrap: break-word;
                word-wrap: break-word;
                -ms-word-break: break-all;
                word-break: break-word;
             }
             .menu-badge {
-               width: 15%;
                float: right;
                font-size: 1.7rem;
                .dropdown-arrow {
@@ -298,13 +301,54 @@ a:hover, a:focus {
                }
             }
          }
-         &.active > a {
-            padding-left: 1.9rem; //15px - 0.3rem
-            border-left: 0.3rem solid #3ba0ff;
-            color: #b4b6b4;
-            background-color: #2e3f50; //lighten
-            &:focus {
+         & > a.menu-entry,
+         & > span.menu-entry .menu-entry-collapsible-main,
+         & > span.menu-entry .menu-badge {
+            padding-top: 1.2rem;
+            padding-bottom: 0.8rem;
+         }
+         & > a.menu-entry {
+            padding-left: $sidebar-menu-entry-padding-left;
+            .menu-icon {
+               width: 15%;
+            }
+            .menu-title {
+               width: 70%;
+            }
+            .menu-badge {
+               width: 15%;
+            }
+         }
+         & > span.menu-entry {
+            .menu-entry-collapsible-main {
+               display: inline-block;
+               width: 85%;
+               padding-left: $sidebar-menu-entry-padding-left;
+               .menu-icon {
+                  width: 18%;
+               }
+               .menu-title {
+                  width: 82%;
+               }
+            }
+            .menu-badge {
+               width: 15%;
+            }
+         }
+         &.active {
+            & > .menu-entry {
+               border-left: 0.3rem solid #3ba0ff;
                color: #b4b6b4;
+               background-color: #2e3f50; //lighten
+               &:focus {
+                  color: #b4b6b4;
+               }
+            }
+            & > a.menu-entry {
+               padding-left: #{$sidebar-menu-entry-padding-left - 0.3rem};
+            }
+            & > span.menu-entry .menu-entry-collapsible-main {
+               padding-left: #{$sidebar-menu-entry-padding-left - 0.3rem};
             }
          }
          & > ul {
@@ -476,8 +520,7 @@ body.mini-sidebar {
             padding: 1.5rem 1.1rem;
          }
          &:not(.tab-content-header) {
-            & > a {
-               padding: 1.2rem 2rem 0.8rem 2rem;
+            & > .menu-entry {
                .menu-icon {
                   width: 100%;
                }
@@ -488,8 +531,20 @@ body.mini-sidebar {
                   display: none;
                }
             }
-            &.active > a {
-               padding-left: 1.7rem; //2rem - 0.3rem
+            & > a.menu-entry, & > span.menu-entry .menu-entry-collapsible-main {
+               padding-right: 2rem;
+               padding-left: 2rem;
+            }
+            & > span.menu-entry .menu-entry-collapsible-main {
+               width: 100%;
+            }
+            &.active {
+               & > a.menu-entry {
+                  padding-left: #{$sidebar-menu-entry-padding-left - 0.5rem};
+               }
+               & > span.menu-entry .menu-entry-collapsible-main {
+                  padding-left: #{$sidebar-menu-entry-padding-left - 0.5rem};
+               }
             }
          }
       }

@@ -7,7 +7,7 @@
         </li>
         <li class="simple-menu {{menu.menuActive == index ? 'active' : ''}}" ng-repeat-start="(index, entry) in menu.entries"
             ng-if="entry.entries == void(0)" ng-click="menu.menuExpanded = void(0)">
-            <a ng-href="{{entry.url}}">
+            <a class="menu-entry" ng-href="{{entry.url}}">
                 <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
                 <span class="menu-title">{{entry.title}}</span>
                 <span class="menu-badge" ng-if="entry.notifsNb">
@@ -18,11 +18,15 @@
             </a>
         </li>
         <li class="collapsible-menu {{menu.menuActive == index ? 'active' : ''}}" ng-repeat-end ng-if="entry.entries != void(0)">
-            <a ng-href="{{entry.url}}" ng-click="menu.menuExpanded = (menu.menuExpanded == index) ? void(0) : index">
-                <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
-                <span class="menu-title">{{entry.title}}</span>
-                <span class="menu-badge"><i class="dropdown-arrow fa fa-angle-right" ng-if="entry.entries"></i></span>
-            </a>
+            <span class="menu-entry">
+                <a class="menu-entry-collapsible-main" ng-href="{{entry.url}}">
+                    <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
+                    <span class="menu-title">{{entry.title}}</span>
+                </a>
+                <a class="menu-badge" href="javascript:void(0)"  ng-click="menu.menuExpanded = (menu.menuExpanded == index) ? void(0) : index">
+                    <span><i class="dropdown-arrow fa fa-angle-right" ng-if="entry.entries"></i></span>
+                </a>
+            </span>
             <ul ng-show="menu.menuExpanded == index || menu.menuActive == index">
                 <li ng-repeat="(subIndex, subEntry) in entry.entries">
                     <a ng-href="{{subEntry.url}}" class="{{menu.menuActive == index && menu.subMenuActive == subIndex ? 'active' : ''}}"
