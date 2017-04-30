@@ -5,8 +5,8 @@
         <li class="tab-content-header">
             <span title="{{menu.title}}">{{menu.title}}</span>
         </li>
-        <li class="simple-menu {{menu.menuActive == index ? 'active' : ''}}" ng-repeat-start="(index, entry) in menu.entries"
-            ng-if="entry.entries == void(0)" ng-click="menu.menuExpanded = void(0)">
+        <li class="simple-menu {{menu.menuActive == index ? 'active' : ''}}" ng-if="entry.entries === void(0) || entry.entries.length === 0"
+            ng-repeat-start="(index, entry) in menu.entries" ng-click="menu.menuExpanded = void(0)">
             <a class="menu-entry" ng-href="{{entry.url}}">
                 <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
                 <span class="menu-title">{{entry.title}}</span>
@@ -17,7 +17,8 @@
                 </span>
             </a>
         </li>
-        <li class="collapsible-menu {{menu.menuActive == index ? 'active' : ''}}" ng-repeat-end ng-if="entry.entries != void(0)">
+        <li class="collapsible-menu {{menu.menuActive == index ? 'active' : ''}}"
+            ng-if="entry.entries !== void(0) && entry.entries.length > 0" ng-repeat-end>
             <span class="menu-entry">
                 <a class="menu-entry-collapsible-main" ng-href="{{entry.url}}">
                     <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>

@@ -221,6 +221,12 @@ angular.module("ProjMngmnt", ["ui.router"])
             }
         }
 
+        $stateProvider
+            .state(projectString + "." + subProjectString + "s",
+                getProjectLevelStatesConfig(projectString).getEntryConfig(subProjectString))
+            .state(subProjectString + "." + constructionSiteString + "s",
+                getProjectLevelStatesConfig(subProjectString).getEntryConfig(constructionSiteString));
+
         // Default routing behavior
         $urlRouterProvider
             .when("/", "/general/")

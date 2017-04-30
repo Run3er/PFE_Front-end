@@ -4,99 +4,13 @@ angular.module('ProjMngmnt')
     .service('DB', function ($q, $http) {
         var serverAddress = "http://localhost:9000";
 
+        // Project levels string
+        var projectString = "project";
+        var subProjectString = "subProject";
+        var constructionSiteString = "constructionSite";
+
         // View Data
         var viewsData = {
-            project: {
-                table: {
-                    // tenantDataKey_columnName mapping
-                    columnMaps: [
-                        // Ordered key-values
-                        {
-                            key: "name",
-                            name: "Nom"
-                        },
-                        {
-                            key: "advancement",
-                            name: "Avancement"
-                        },
-                        {
-                            key: "status",
-                            name: "Statut"
-                        },
-                        {
-                            key: "chargeConsumed",
-                            name: "Charge Consommée"
-                        },
-                        {
-                            key: "budgetConsumed",
-                            name: "Budget Consommé"
-                        },
-                        {
-                            key: "budgetTotal",
-                            name: "Budget Total"
-                        },
-                        {
-                            key: "budgetPlanned",
-                            name: "Budget Planifié"
-                        }
-                    ]
-                },
-                form: {
-                    title: {
-                        add: "Ajouter un projet",
-                        edit: "Modifier un projet"
-                    },
-                    defaultSortingField: "name",
-                    fields: [
-                        {
-                            identifier: "name",
-                            label: "Nom",
-                            placeholder: "Saisir un nom",
-                            type: 'input'
-                        },
-                        {
-                            identifier: "advancement",
-                            label: "Avancement",
-                            placeholder: "Saisir l'avancement",
-                            type: 'input'
-                        },
-                        {
-                            identifier: "status",
-                            label: "Statut",
-                            placeholder: "Sélectionner le statut",
-                            choices: [
-                                { identifier: "BAD", value: "Mauvais"},
-                                { identifier: "UNCERTAIN", value: "Incertain"},
-                                { identifier: "GOOD", value: "Bon"}
-                            ]
-                        },
-                        {
-                            identifier: "chargeConsumed",
-                            label: "Charge consommée",
-                            placeholder: "Saisir la charge consommée",
-                            type: 'input'
-                        },
-                        {
-                            identifier: "budgetConsumed",
-                            label: "Budget consommé",
-                            placeholder: "Saisir le budget consommé",
-                            type: 'input'
-                        },
-                        {
-                            identifier: "budgetPlanned",
-                            label: "Budget planifié",
-                            placeholder: "Saisir le budget planifié",
-                            type: 'input'
-                        },
-                        {
-                            identifier: "budgetTotal",
-                            label: "Budget total",
-                            placeholder: "Saisir le budget total",
-                            type: 'input'
-                        }
-                    ]
-                }
-            },
             action: {
                 table: {
                     // tenantDataKey_columnName mapping
@@ -706,29 +620,302 @@ angular.module('ProjMngmnt')
             }
         };
 
+        viewsData[projectString] = {
+            table: {
+                // tenantDataKey_columnName mapping
+                columnMaps: [
+                    // Ordered key-values
+                    {
+                        key: "name",
+                        name: "Nom"
+                    },
+                    {
+                        key: "advancement",
+                        name: "Avancement"
+                    },
+                    {
+                        key: "status",
+                        name: "Statut"
+                    },
+                    {
+                        key: "chargeConsumed",
+                        name: "Charge Consommée"
+                    },
+                    {
+                        key: "budgetConsumed",
+                        name: "Budget Consommé"
+                    },
+                    {
+                        key: "budgetTotal",
+                        name: "Budget Total"
+                    },
+                    {
+                        key: "budgetPlanned",
+                        name: "Budget Planifié"
+                    }
+                ]
+            },
+            form: {
+                title: {
+                    add: "Ajouter un projet",
+                        edit: "Modifier un projet"
+                },
+                defaultSortingField: "name",
+                    fields: [
+                    {
+                        identifier: "name",
+                        label: "Nom",
+                        placeholder: "Saisir un nom",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "advancement",
+                        label: "Avancement",
+                        placeholder: "Saisir l'avancement",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "status",
+                        label: "Statut",
+                        placeholder: "Sélectionner le statut",
+                        choices: [
+                            { identifier: "BAD", value: "Mauvais"},
+                            { identifier: "UNCERTAIN", value: "Incertain"},
+                            { identifier: "GOOD", value: "Bon"}
+                        ]
+                    },
+                    {
+                        identifier: "chargeConsumed",
+                        label: "Charge consommée",
+                        placeholder: "Saisir la charge consommée",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "budgetConsumed",
+                        label: "Budget consommé",
+                        placeholder: "Saisir le budget consommé",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "budgetPlanned",
+                        label: "Budget planifié",
+                        placeholder: "Saisir le budget planifié",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "budgetTotal",
+                        label: "Budget total",
+                        placeholder: "Saisir le budget total",
+                        type: 'input'
+                    }
+                ]
+            }
+        };
+
+        viewsData[subProjectString] = {
+            table: {
+                // tenantDataKey_columnName mapping
+                columnMaps: [
+                    // Ordered key-values
+                    {
+                        key: "name",
+                        name: "Nom"
+                    },
+                    {
+                        key: "advancement",
+                        name: "Avancement"
+                    },
+                    {
+                        key: "status",
+                        name: "Statut"
+                    },
+                    {
+                        key: "chargeConsumed",
+                        name: "Charge Consommée"
+                    },
+                    {
+                        key: "budgetConsumed",
+                        name: "Budget Consommé"
+                    },
+                    {
+                        key: "budgetTotal",
+                        name: "Budget Total"
+                    },
+                    {
+                        key: "budgetPlanned",
+                        name: "Budget Planifié"
+                    }
+                ]
+            },
+            form: {
+                title: {
+                    add: "Ajouter un sous-projet",
+                        edit: "Modifier un sous-projet"
+                },
+                defaultSortingField: "name",
+                    fields: [
+                    {
+                        identifier: "name",
+                        label: "Nom",
+                        placeholder: "Saisir un nom",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "advancement",
+                        label: "Avancement",
+                        placeholder: "Saisir l'avancement",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "status",
+                        label: "Statut",
+                        placeholder: "Sélectionner le statut",
+                        choices: [
+                            { identifier: "BAD", value: "Mauvais"},
+                            { identifier: "UNCERTAIN", value: "Incertain"},
+                            { identifier: "GOOD", value: "Bon"}
+                        ]
+                    },
+                    {
+                        identifier: "chargeConsumed",
+                        label: "Charge consommée",
+                        placeholder: "Saisir la charge consommée",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "budgetConsumed",
+                        label: "Budget consommé",
+                        placeholder: "Saisir le budget consommé",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "budgetPlanned",
+                        label: "Budget planifié",
+                        placeholder: "Saisir le budget planifié",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "budgetTotal",
+                        label: "Budget total",
+                        placeholder: "Saisir le budget total",
+                        type: 'input'
+                    }
+                ]
+            }
+        };
+
+        viewsData[constructionSiteString] = {
+            table: {
+                // tenantDataKey_columnName mapping
+                columnMaps: [
+                    // Ordered key-values
+                    {
+                        key: "name",
+                        name: "Nom"
+                    },
+                    {
+                        key: "advancement",
+                        name: "Avancement"
+                    },
+                    {
+                        key: "status",
+                        name: "Statut"
+                    },
+                    {
+                        key: "chargeConsumed",
+                        name: "Charge Consommée"
+                    },
+                    {
+                        key: "budgetConsumed",
+                        name: "Budget Consommé"
+                    },
+                    {
+                        key: "budgetTotal",
+                        name: "Budget Total"
+                    },
+                    {
+                        key: "budgetPlanned",
+                        name: "Budget Planifié"
+                    }
+                ]
+            },
+            form: {
+                title: {
+                    add: "Ajouter un chantier",
+                        edit: "Modifier un chantier"
+                },
+                defaultSortingField: "name",
+                    fields: [
+                    {
+                        identifier: "name",
+                        label: "Nom",
+                        placeholder: "Saisir un nom",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "advancement",
+                        label: "Avancement",
+                        placeholder: "Saisir l'avancement",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "status",
+                        label: "Statut",
+                        placeholder: "Sélectionner le statut",
+                        choices: [
+                            { identifier: "BAD", value: "Mauvais"},
+                            { identifier: "UNCERTAIN", value: "Incertain"},
+                            { identifier: "GOOD", value: "Bon"}
+                        ]
+                    },
+                    {
+                        identifier: "chargeConsumed",
+                        label: "Charge consommée",
+                        placeholder: "Saisir la charge consommée",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "budgetConsumed",
+                        label: "Budget consommé",
+                        placeholder: "Saisir le budget consommé",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "budgetPlanned",
+                        label: "Budget planifié",
+                        placeholder: "Saisir le budget planifié",
+                        type: 'input'
+                    },
+                    {
+                        identifier: "budgetTotal",
+                        label: "Budget total",
+                        placeholder: "Saisir le budget total",
+                        type: 'input'
+                    }
+                ]
+            }
+        };
+
 
 var serverOn;
-
 
         // DB entries interface object
         this.getEntriesDAO = function (entryType) {
             return {
                 // Tenant specific data
                 getAll: function () {
-                    var uri= entryType + "s";
+                    var entriesUriName= entryType + "s";
 
                     // Fetch data from DB
-                    return $http.get(serverAddress + "/" + uri)
+                    return $http.get(serverAddress + "/" + entriesUriName)
                         .then(function successCallback(response) {
-                            var entries = response.data._embedded[uri];
+                            var entries = response.data._embedded[entriesUriName];
 
                             // Format data to desired simple array format
                             for (var i = 0; i < entries.length; i++) {
                                 var urlParts = entries[i]._links.self.href.split("/");
                                 entries[i].id = urlParts[urlParts.length - 1];
-                                // Not needed for now...
-                                // delete entries[i]._links;
-                                // So set to undefined instead
+                                // Set to undefined, delete not necessary
                                 entries[i]._links = void(0);
                             }
 

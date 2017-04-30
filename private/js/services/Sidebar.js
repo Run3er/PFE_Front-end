@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .service('Sidebar', function () {
+    .service('Sidebar', function (DB) {
         var hrefVoid = "javascript:void(0)";
 
         // Project levels string
@@ -87,67 +87,50 @@ angular.module('ProjMngmnt')
         };
 
         // Get collapsible sub-hierarchy entry w/sub-links
-        function getSubHierarchyEntry(hierarchyHead) {
-            var projectLevelSuffix;
+        function getEntrySubs(parentEntryProps) {
+            var subEntryType;
             var projectLevelTitle;
 
-            if (hierarchyHead === "entities") {
-                projectLevelSuffix = projectString + "s";
-                projectLevelTitle = "Projets";
-            }
-            else if (hierarchyHead === projectString) {
-                projectLevelSuffix = subProjectString + "s";
+            if (parentEntryProps.type === projectString) {
+                subEntryType = subProjectString;
                 projectLevelTitle = "Sous-projets";
             }
-            else if (hierarchyHead === subProjectString) {
-                projectLevelSuffix = constructionSiteString + "s";
+            else if (parentEntryProps.type === subProjectString) {
+                subEntryType = constructionSiteString;
                 projectLevelTitle = "Chantiers";
             }
             else return void(0);
 
-            // TODO: Obtain subs from DB (id & name)
+            return DB.getEntriesDAO(subEntryType).getAll()
+                .then(function (entries) {
+                    var subsUrlSuffix = subEntryType + "s";
 
-            return {
-                url: hrefVoid,
-                iconClass: "fa fa-sitemap",
-                title: projectLevelTitle,
-                entries: [
-                    {
-                        url: projectLevelSuffix + "/1",
-                        title: "Service 5G - Ooredoo"
-                    },
-                    {
-                        url: projectLevelSuffix + "/2",
-                        title: "SMS Sender - TT"
-                    },
-                    {
-                        url: projectLevelSuffix + "/3",
-                        title: "Application de gestion de projets en mode SaaS"
-                    },
-                    {
-                        url: projectLevelSuffix + "/4",
-                        title: "Rénovation Infrastructure"
+                    var subEntries = [];
+                    for (var i = 0; i < entries.length; i++) {
+                        subEntries.push({
+                            title: entries[i].name,
+                            url: subsUrlSuffix + "/" + entries[i].id
+                        });
                     }
-                ]
-            };
+                    for (var i = 0; i < subEntries.length; i++) {
+                        subEntries[i].url = prependUrlPrefix(subEntries[i].url, parentEntryProps.urlPrefix);
+                    }
+
+                    return {
+                        url: prependUrlPrefix(subsUrlSuffix, parentEntryProps.urlPrefix),
+                        iconClass: "fa fa-sitemap",
+                        title: projectLevelTitle,
+                        entries: subEntries
+                    };
+                });
         }
 
-        function prependUrlPrefix(entries, urlPrefix) {
-            urlPrefix = "./" + (urlPrefix ? urlPrefix + "/" : "");
-            for (var i = 0; i < entries.length; i++) {
-                // Avoid prefixing for collapsible entry links [javascript:void(0)]
-                if (entries[i].url !== hrefVoid) {
-                    entries[i].url = urlPrefix + entries[i].url;
-                }
-                else {
-                    // Prepend collapsible link sub-links
-                    for (var j = 0; j < entries[i].entries.length; j++) {
-                        if (entries[i].entries[j].entries === void(0)) {
-                            entries[i].entries[j].url = urlPrefix + entries[i].entries[j].url + "/";
-                        }
-                    }
-                }
+        function prependUrlPrefix(urlSuffix, urlPrefix) {
+            // Avoid prefixing for collapsible entry links [javascript:void(0)]
+            if (urlSuffix === hrefVoid) {
+                return urlSuffix;
             }
+            return "./" + (urlPrefix ? urlPrefix + "/" : "") + urlSuffix;
         }
 
 
@@ -195,12 +178,19 @@ angular.module('ProjMngmnt')
             else if (projectLevels.indexOf(pageProperties.type) !== -1) {
                 cloneContent = angular.copy(projectLevelBaseContent);
 
-                var entry = getSubHierarchyEntry(pageProperties.type);
-                if (entry !== void(0)){
-                    cloneContent.entries.push(entry);
+                // Add subs if any
+                var promise = getEntrySubs(pageProperties);
+                if (promise !== void(0)) {
+                    promise.then(function (subsEntry) {
+                        if (subsEntry !== void(0)){
+                            cloneContent.entries.push(subsEntry);
+                        }
+                    });
                 }
             }
-            prependUrlPrefix(cloneContent.entries, pageProperties.urlPrefix);
+            for (var i = 0; i < cloneContent.entries.length; i++) {
+                cloneContent.entries[i].url = prependUrlPrefix(cloneContent.entries[i].url, pageProperties.urlPrefix);
+            }
 
             // Change global content
             sidebarContent.title = cloneContent.title;
