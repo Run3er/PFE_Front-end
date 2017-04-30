@@ -39,29 +39,31 @@
 </div>
 
 <section id="main">
-    <!-- <div class="row"> -->
 
-    <!-- Header -->
-    <div class="header" ng-controller="HeaderCtrl">
-        <a class="last-update" href="#" title="dernière mise à jour"
-           ng-if="content.updateTimeDisplayed" ng-cloak>
-            <i class="icon fa fa-calendar-check-o"></i>
-            &nbsp;<span class="day-month">03/02</span>
-            <span class="year">/2017</span>
-            &nbsp;<i class="icon icon-tiny fa fa-caret-down"></i>
-        </a>
-        <ul class="breadcrumbs-list">
-            <li>
-                <a href="./"><i class="fa fa-home"></i></a>
-            </li>
-            <li ng-repeat="entry in content.entries">
-                &nbsp;<i class="chevron fa fa-caret-right"></i>
-                &nbsp;<a ng-href="{{entry.url}}"><span>{{entry.title}}</span></a>
-            </li>
-        </ul>
+    <div id="main-content">
+
+        <!-- Header -->
+        <div class="header" ng-controller="HeaderCtrl">
+            <a class="last-update" href="#" title="dernière mise à jour"
+               ng-if="content.updateTimeDisplayed" ng-cloak>
+                <i class="icon fa fa-calendar-check-o"></i>
+                &nbsp;<span class="day-month">03/02</span>
+                <span class="year">/2017</span>
+                &nbsp;<i class="icon icon-tiny fa fa-caret-down"></i>
+            </a>
+            <ul class="breadcrumbs-list">
+                <li>
+                    <a href="./"><i class="fa fa-home"></i></a>
+                </li>
+                <li ng-repeat="entry in content.entries">
+                    &nbsp;<i class="chevron fa fa-caret-right"></i>
+                    &nbsp;<a ng-href="{{entry.url}}"><span>{{entry.title}}</span></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container-fluid" ui-view ng-cloak></div>
+
     </div>
 
-    <div id="main-content" class="container-fluid" ui-view ng-cloak></div>
-
-    <!-- </div> -->
 </section>

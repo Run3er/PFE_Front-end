@@ -23,7 +23,6 @@ body {
    margin-top: $navbar-top-height;
    @media (min-width: 768px) {
       margin-top: 0;
-      margin-left: $sidebar-width;
    }
 }
 
@@ -400,6 +399,9 @@ a:hover, a:focus {
    margin-top: $navbar-top-height;
    #main-content {
       margin-top: #{$navbar-top-height + $header-height + 2rem};
+      @media (min-width: $bootstrap-sm-min-width) {
+         margin-left: $sidebar-width;
+      }
    }
    .header {
       position: fixed;
@@ -502,55 +504,55 @@ a:hover, a:focus {
 
 // Shrunken sidebar adjustments
 body.mini-sidebar {
-   #main {
-      @media (min-width: $bootstrap-sm-min-width) {
-         margin-left: $sidebar-width-shrunken;
-      }
-      .header {
-         @media (min-width: $bootstrap-sm-min-width) {
+   @media (min-width: $bootstrap-sm-min-width) {
+      #main {
+         #main-content {
+            margin-left: $sidebar-width-shrunken;
+         }
+         .header {
             width: calc(100% - #{$sidebar-width-shrunken});
          }
       }
-   }
-   #navbar-top #nav-brand {
-      width: $sidebar-width-shrunken;
-      padding: 1.5rem 1rem;
-      font-size: 2rem;
-   }
-   #sidebar {
-      width: $sidebar-width-shrunken;
-      .nav-tabs > li {
-         width: 100%;
+      #navbar-top #nav-brand {
+         width: $sidebar-width-shrunken;
+         padding: 1.5rem 1rem;
+         font-size: 2rem;
       }
-      ul.nav-menu > li {
-         &.tab-content-header {
-            padding: 1.5rem 1.1rem;
+      #sidebar {
+         width: $sidebar-width-shrunken;
+         .nav-tabs > li {
+            width: 100%;
          }
-         &:not(.tab-content-header) {
-            & > .menu-entry {
-               .menu-icon {
+         ul.nav-menu > li {
+            &.tab-content-header {
+               padding: 1.5rem 1.1rem;
+            }
+            &:not(.tab-content-header) {
+               & > .menu-entry {
+                  .menu-icon {
+                     width: 100%;
+                  }
+                  .menu-title {
+                     display: none;
+                  }
+                  .menu-badge {
+                     display: none;
+                  }
+               }
+               & > a.menu-entry, & > span.menu-entry .sub-menu-entry-main {
+                  padding-right: 2rem;
+                  padding-left: 2rem;
+               }
+               & > span.menu-entry .sub-menu-entry-main {
                   width: 100%;
                }
-               .menu-title {
-                  display: none;
-               }
-               .menu-badge {
-                  display: none;
-               }
-            }
-            & > a.menu-entry, & > span.menu-entry .menu-entry-collapsible-main {
-               padding-right: 2rem;
-               padding-left: 2rem;
-            }
-            & > span.menu-entry .menu-entry-collapsible-main {
-               width: 100%;
-            }
-            &.active {
-               & > a.menu-entry {
-                  padding-left: #{$sidebar-menu-entry-padding-left - 0.5rem};
-               }
-               & > span.menu-entry .menu-entry-collapsible-main {
-                  padding-left: #{$sidebar-menu-entry-padding-left - 0.5rem};
+               &.active {
+                  & > a.menu-entry {
+                     padding-left: #{$sidebar-menu-entry-padding-left - 0.5rem};
+                  }
+                  & > span.menu-entry .menu-entry-collapsible-main {
+                     padding-left: #{$sidebar-menu-entry-padding-left - 0.5rem};
+                  }
                }
             }
          }
