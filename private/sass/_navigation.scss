@@ -335,6 +335,12 @@ a:hover, a:focus {
                width: 15%;
             }
          }
+         & > a.menu-entry:hover,
+         & > span.menu-entry .menu-entry-collapsible-main:hover,
+         & > span.menu-entry .menu-badge:hover {
+            transition: background-color 160ms linear;
+            background-color: lighten($sidebar-bg-color, 2.5%);
+         }
          &.active {
             & > .menu-entry {
                border-left: 0.3rem solid #3ba0ff;
@@ -373,6 +379,7 @@ a:hover, a:focus {
                   }
                }
                &:hover > a:not(.active) {
+                  transition: color 160ms linear;
                   color: #b4b6b4;
                }
 
