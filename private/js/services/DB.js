@@ -8,12 +8,29 @@ angular.module('ProjMngmnt')
         // TODO: remove completely
         var serverOn;
 
+        // Tenant specific data
+        this.getSingleResrcByUri = function (uri) {
+            // Fetch data from DB
+            return $http.get(serverAddress + "/" + uri)
+                .then(function successCallback(response) {
+                    var entry = response.data;
+
+                    // Format data to desired simple array format
+                    var urlParts = entry._links.self.href.split("/");
+                    entry.id = urlParts[urlParts.length - 1];
+                    // Set to undefined, delete not necessary
+                    entry._links = void(0);
+
+                    return entry;
+                });
+        };
+
         // DB entries interface object
         this.getEntriesDAO = function (entryProps) {
             return {
                 // Tenant specific data
                 getAll: function () {
-                    var entriesUriName= entryProps.type + "s";
+                    var entriesUriName = entryProps.type + "s";
                     var uri = (entryProps.uriPrefix ? entryProps.uriPrefix + "/" : "") + entriesUriName;
 
                     // Fetch data from DB

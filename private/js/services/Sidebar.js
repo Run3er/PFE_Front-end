@@ -11,6 +11,17 @@ angular.module('ProjMngmnt')
 
         var sidebarContent = {};
 
+        // Get title
+        function getTitle(parentEntryProps) {
+            var urlParts = parentEntryProps.urlPrefix.split("/");
+            var uriPrefix = urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
+
+            return DB.getSingleResrcByUri(uriPrefix)
+                .then(function (entry) {
+                    return entry.name;
+                });
+        }
+
         // Get collapsible sub-hierarchy entry w/sub-links
         function getEntrySubs(parentEntryProps) {
             var subEntryType;
@@ -29,7 +40,8 @@ angular.module('ProjMngmnt')
             var urlParts = parentEntryProps.urlPrefix.split("/");
             var uriPrefix = urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
 
-            return DB.getEntriesDAO({
+            return DB
+                .getEntriesDAO({
                     type: subEntryType,
                     uriPrefix: uriPrefix
                 })
@@ -100,10 +112,18 @@ angular.module('ProjMngmnt')
             else if (projectLevels.indexOf(pageProperties.type) !== -1) {
                 cloneContent = angular.copy(UI.getProjectLevelBaseContent());
 
+                // Set title
+                var titlePromise = getTitle(pageProperties);
+                if (titlePromise !== void(0)) {
+                    titlePromise.then(function (title) {
+                        sidebarContent.title = title;
+                    });
+                }
+
                 // Add subs if any
-                var promise = getEntrySubs(pageProperties);
-                if (promise !== void(0)) {
-                    promise.then(function (subsEntry) {
+                var subsPromise = getEntrySubs(pageProperties);
+                if (subsPromise !== void(0)) {
+                    subsPromise.then(function (subsEntry) {
                         if (subsEntry !== void(0)){
                             cloneContent.entries.push(subsEntry);
                         }

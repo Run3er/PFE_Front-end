@@ -32,7 +32,7 @@ angular.module("ProjMngmnt", ["ui.router"])
                 projectLevelConfig: {
                     url: urlParts.join("/"),
                     templateUrl: partialsDir + "/nav-sidebar-header.html",
-                    controller: function (Sidebar, Header, $state, $stateParams) {
+                    controller: function (Sidebar, Header, DB, $state, $stateParams) {
                         // Sidebar setup
                         var urlPrefixParts = [];
                         // Header setup
@@ -44,28 +44,43 @@ angular.module("ProjMngmnt", ["ui.router"])
                             || projectLevelSingleName === subProjectString
                             || projectLevelSingleName === constructionSiteString) {
                             urlPrefixParts.push(projectString + "s/" + $stateParams[projectString + "Id"]);
+
+                            var projectEntry = { url: urlPrefixParts.join("/") };
+                            DB.getSingleResrcByUri(urlPrefixParts[0])
+                                .then(function (projectLevelEntry) {
+                                    projectEntry.title = projectLevelEntry.name;
+                                });
                             // Get project name by projectId, from DB
-                            entries.push({ title: "Projet X", url: urlPrefixParts[0] + "/" });
+                            entries.push(projectEntry);
                         }
                         if (projectLevelSingleName === subProjectString
                             || projectLevelSingleName === constructionSiteString) {
                             urlPrefixParts.push(subProjectString + "s/" + $stateParams[subProjectString + "Id"]);
-                            // Get sub-project name by constructionSiteId, from DB
-                            entries.push({ title: "Sous-projet Y", url: urlPrefixParts[0] + "/" + urlPrefixParts[1] + "/" });
+
+                            var subProjectEntry = { url: urlPrefixParts.join("/") };
+                            DB.getSingleResrcByUri(urlPrefixParts[1])
+                                .then(function (projectLevelEntry) {
+                                    subProjectEntry.title = projectLevelEntry.name;
+                                });
+                            // Get project name by projectId, from DB
+                            entries.push(subProjectEntry);
                         }
                         if (projectLevelSingleName === constructionSiteString) {
                             urlPrefixParts.push(constructionSiteString + "s/" + $stateParams[constructionSiteString + "Id"]);
-                            // Get sub-project name by constructionSiteId, from DB
-                            entries.push({ title: "Chantier Z", url: urlPrefixParts[0] + "/" + urlPrefixParts[1] + "/" + urlPrefixParts[2] + "/" });
+
+                            var constructionSiteEntry = { url: urlPrefixParts.join("/") };
+                            DB.getSingleResrcByUri(urlPrefixParts[2])
+                                .then(function (projectLevelEntry) {
+                                    constructionSiteEntry.title = projectLevelEntry.name;
+                                });
+                            // Get project name by projectId, from DB
+                            entries.push(constructionSiteEntry);
                         }
                         entrySpecifics.urlPrefix = urlPrefixParts.join("/");
 
                         // Post-setup
                         Sidebar.setContent({ type: projectLevelSingleName, urlPrefix: entrySpecifics.urlPrefix });
                         Header.setContent({ updateTimeDisplayed:true, entries: entries });
-
-
-                        // TODO: Change sidebar title ...
 
 
                         // Default redirection to base path

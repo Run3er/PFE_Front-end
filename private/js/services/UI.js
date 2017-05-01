@@ -727,7 +727,6 @@ angular.module('ProjMngmnt')
         // Sidebar Data
 
         var projectLevelBaseContent = {
-            title: "Application de gestion de projets en mode SaaS",
             entries: [
                 {
                     url: "dashboard",
