@@ -615,6 +615,7 @@ angular.module('ProjMngmnt')
         var projectLevelCommonViewData = {
             table: {
                 // tenantDataKey_columnName mapping
+                columnKeyLinkable: "name",
                 columnMaps: [
                     // Ordered key-values
                     {

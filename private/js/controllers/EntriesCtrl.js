@@ -245,9 +245,14 @@ angular.module('ProjMngmnt')
                     for (var i = 0; i < rows.length; i++) {
                         rows[i].index = i;
                     }
+                    console.log(entrySpecifics.urlPrefix);
                     $scope.tableEntries = {
                         columnMaps: columnMaps,
-                        rows: rows
+                        rows: rows,
+                        linkable: {
+                            columnKey: viewData.table.columnKeyLinkable,
+                            urlPrefix: (entrySpecifics.urlPrefix ? entrySpecifics.urlPrefix + "/" :"") + entrySpecifics.type + "s"
+                        }
                     };
                 },
                 function () {

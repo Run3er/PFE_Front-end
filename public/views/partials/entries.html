@@ -56,7 +56,9 @@
                     </button>
                 </td>
                 <td ng-repeat="columnMap in tableEntries.columnMaps track by $index">
-                    <span>{{entry[columnMap.key]}}</span>
+                    <span ng-if="columnMap.key !== tableEntries.linkable.columnKey">{{entry[columnMap.key]}}</span>
+                    <a ng-href="{{'./' + tableEntries.linkable.urlPrefix + '/' + entry.id}}"
+                       ng-if="columnMap.key === tableEntries.linkable.columnKey">{{entry[columnMap.key]}}</a>
                 </td>
             </tr>
         </tbody>
