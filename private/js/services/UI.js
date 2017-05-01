@@ -1,11 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .service('UI', function () {
-        // Project levels string
-        var projectString = "project";
-        var subProjectString = "subProject";
-        var constructionSiteString = "constructionSite";
-
+    .service('UI', function (CommonConstants) {
         // Views Data
         var viewsData = {
             action: {
@@ -705,20 +700,20 @@ angular.module('ProjMngmnt')
             }
         };
 
-        viewsData[projectString] = angular.copy(projectLevelCommonViewData);
-        viewsData[projectString].form.title = {
+        viewsData[CommonConstants.PROJECT_STRING] = angular.copy(projectLevelCommonViewData);
+        viewsData[CommonConstants.PROJECT_STRING].form.title = {
             add: "Ajouter un projet",
             edit: "Modifier un projet"
         };
 
-        viewsData[subProjectString] = angular.copy(projectLevelCommonViewData);
-        viewsData[subProjectString].form.title = {
+        viewsData[CommonConstants.SUB_PROJECT_STRING] = angular.copy(projectLevelCommonViewData);
+        viewsData[CommonConstants.SUB_PROJECT_STRING].form.title = {
             add: "Ajouter un sous-projet",
             edit: "Modifier un sous-projet"
         };
 
-        viewsData[constructionSiteString] = angular.copy(projectLevelCommonViewData);
-        viewsData[constructionSiteString].form.title = {
+        viewsData[CommonConstants.CONSTRUCTION_SITE_STRING] = angular.copy(projectLevelCommonViewData);
+        viewsData[CommonConstants.CONSTRUCTION_SITE_STRING].form.title = {
             add: "Ajouter un chantier",
             edit: "Modifier un chantier"
         };

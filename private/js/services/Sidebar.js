@@ -1,14 +1,7 @@
 
 angular.module('ProjMngmnt')
-    .service('Sidebar', function (DB, UI) {
+    .service('Sidebar', function (CommonConstants, DB, UI) {
         var hrefVoid = "javascript:void(0)";
-
-        // Project levels string
-        var projectString = "project";
-        var subProjectString = "subProject";
-        var constructionSiteString = "constructionSite";
-        var projectLevels = [ projectString, subProjectString, constructionSiteString ];
-
         var sidebarContent = {};
 
         // Get title
@@ -27,12 +20,12 @@ angular.module('ProjMngmnt')
             var subEntryType;
             var projectLevelTitle;
 
-            if (parentEntryProps.type === projectString) {
-                subEntryType = subProjectString;
+            if (parentEntryProps.type === CommonConstants.PROJECT_STRING) {
+                subEntryType = CommonConstants.SUB_PROJECT_STRING;
                 projectLevelTitle = "Sous-projets";
             }
-            else if (parentEntryProps.type === subProjectString) {
-                subEntryType = constructionSiteString;
+            else if (parentEntryProps.type === CommonConstants.SUB_PROJECT_STRING) {
+                subEntryType = CommonConstants.CONSTRUCTION_SITE_STRING;
                 projectLevelTitle = "Chantiers";
             }
             else return void(0);
@@ -109,7 +102,7 @@ angular.module('ProjMngmnt')
             if (pageProperties.type === "general") {
                 cloneContent = angular.copy(UI.getPortfolioContent());
             }
-            else if (projectLevels.indexOf(pageProperties.type) !== -1) {
+            else if (CommonConstants.PROJECT_LEVELS.indexOf(pageProperties.type) !== -1) {
                 cloneContent = angular.copy(UI.getProjectLevelBaseContent());
 
                 // Set title
