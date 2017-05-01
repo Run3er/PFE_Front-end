@@ -60,7 +60,7 @@ angular.module('ProjMngmnt')
 
             request("delete", entryID)
                 .then(function () {
-                    // Deleting by swapping places (& indexes) with last row, avoiding array indexes offseting alternative
+                    // Deleting by swapping places (& indexes) with last row, avoiding array indexes offsetting alternative
                     if (entryIdx !== $scope.tableEntries.rows.length - 1) {
                         var updatedEntry;
                         // Delete entry from raw entries data
@@ -132,6 +132,7 @@ angular.module('ProjMngmnt')
             request("update", entry)
                 .then(function () {
                     // Edit entry on raw entries data
+                    entry.id = entries[editingEntryIdx].id;
                     entries[editingEntryIdx] = entry;
 
                     // Update view-only-entry auto generated fields
@@ -157,15 +158,9 @@ angular.module('ProjMngmnt')
             var resultPromise = entriesDAO[operationType](arg);
             resultPromise
                 // Update  alert
-                .then(function () {
-                    $scope.formAlert.msg = operationType + " completed with success.";
-                    $scope.formAlert.didSucceed = true;
-                }, function () {
+                .catch(function () {
                     $scope.formAlert.msg = operationType + " failed. [Try again.]";
                     $scope.formAlert.didSucceed = false;
-                })
-                .finally(function () {
-                    // Set alert on the view ...
                     $scope.formAlert.active = true;
                 });
 
@@ -245,7 +240,7 @@ angular.module('ProjMngmnt')
                     for (var i = 0; i < rows.length; i++) {
                         rows[i].index = i;
                     }
-                    console.log(entrySpecifics.urlPrefix);
+
                     $scope.tableEntries = {
                         columnMaps: columnMaps,
                         rows: rows,
@@ -256,9 +251,9 @@ angular.module('ProjMngmnt')
                     };
                 },
                 function () {
+                    // Set alert on the view
                     $scope.formAlert.msg = "Getting entries failed. [Try refreshing.]";
                     $scope.formAlert.didSucceed = false;
-                    // Set alert on the view ...
                     $scope.formAlert.active = true;
                 });
 

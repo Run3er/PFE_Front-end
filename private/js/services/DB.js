@@ -2,11 +2,9 @@
 angular.module('ProjMngmnt')
     // Database layer mockup
     .service('DB', function ($q, $http) {
+        // API server address
         var serverAddress = "http://localhost:9000";
 
-
-        // TODO: remove completely
-        var serverOn;
 
         // Tenant specific data
         this.getSingleResrcByUri = function (uri) {
@@ -27,15 +25,15 @@ angular.module('ProjMngmnt')
 
         // DB entries interface object
         this.getEntriesDAO = function (entryProps) {
+            var entriesUriName = entryProps.type + "s";
+            var uri = (entryProps.uriPrefix ? entryProps.uriPrefix + "/" : "") + entriesUriName;
+
             return {
                 // Tenant specific data
                 getAll: function () {
-                    var entriesUriName = entryProps.type + "s";
-                    var uri = (entryProps.uriPrefix ? entryProps.uriPrefix + "/" : "") + entriesUriName;
-
                     // Fetch data from DB
                     return $http.get(serverAddress + "/" + uri)
-                        .then(function successCallback(response) {
+                        .then(function (response) {
                             var entries = response.data._embedded[entriesUriName];
 
                             // Format data to desired simple array format
@@ -50,72 +48,27 @@ angular.module('ProjMngmnt')
                         });
                 },
                 add: function (entry) {
-                    // Entry addition logic
-                    console.log("FAKE_SERVER--adding... " + JSON.stringify(entry));
 
-                    // Return promise
-                    return $q(function (resolve, reject) {
-                        // Simulate request timelaps
-                        setTimeout(function () {
-                            // Simulate addition operation result
-                            serverOn = true;
+                    return $http.post(serverAddress + "/" + uri, [ entry ])
+                        .then(function (response) {
+                            var appendedEntryId = response.data[0];
 
-                            if (serverOn) {
-                                // Get unique ID from DB ...
-                                var id = new Date().getTime(); //[mockup]
-                                resolve(id);
-                                console.log('FAKE_SERVER--Success.');
-                            }
-                            else {
-                                reject();
-                                console.log('FAKE_SERVER--Failure.');
-                            }
-                        }, 1500);
-                    });
+                            return appendedEntryId;
+                        });
                 },
                 update: function (entry) {
-                    // Entry updating logic
-                    console.log("FAKE_SERVER--updating... " + JSON.stringify(entry));
 
-                    // Return promise
-                    return $q(function (resolve, reject) {
-                        // Simulate request timelaps
-                        setTimeout(function () {
-                            // Simulate addtion operation result
-                            serverOn = true;
-
-                            if (serverOn) {
-                                resolve();
-                                console.log('FAKE_SERVER--Success.');
-                            }
-                            else {
-                                reject();
-                                console.log('FAKE_SERVER--Failure.');
-                            }
-                        }, 1500);
-                    });
+                    return $http.patch(serverAddress + "/" + entriesUriName + "/" + entry.id, entry)
+                        .then(function (updatedEntry) {
+                            // Nothing to do here
+                        });
                 },
-                delete: function (entry) {
-                    // Entry deletion logic
-                    console.log("FAKE_SERVER--deleting... " + JSON.stringify(entry));
+                delete: function (entryId) {
 
-                    // Return promise
-                    return $q(function (resolve, reject) {
-                        // Simulate request timelaps
-                        setTimeout(function () {
-                            // Simulate addtion operation result
-                            serverOn = true;
-
-                            if (serverOn) {
-                                resolve();
-                                console.log('FAKE_SERVER--Success.');
-                            }
-                            else {
-                                reject();
-                                console.log('FAKE_SERVER--Failure.');
-                            }
-                        }, 1500);
-                    });
+                    return $http.delete(serverAddress + "/" + uri + "/" + entryId)
+                        .then(function () {
+                            // Nothing to do here
+                        });
                 }
             };
         };
