@@ -16,50 +16,60 @@ angular.module('ProjMngmnt')
         }
 
         // Get collapsible sub-hierarchy entry w/sub-links
-        function getEntrySubs(parentEntryProps) {
-            var subEntryType;
-            var projectLevelTitle;
+        function appendEntrySubs(entries2append, parentEntryProps) {
+            var entrySubs = [];
 
             if (parentEntryProps.type === CommonConstants.PROJECT_STRING) {
-                subEntryType = CommonConstants.SUB_PROJECT_STRING;
-                projectLevelTitle = "Sous-projets";
+                entrySubs.push({
+                    type: CommonConstants.SUB_PROJECT_STRING,
+                    title: "Sous-projets"
+                });
             }
-            else if (parentEntryProps.type === CommonConstants.SUB_PROJECT_STRING) {
-                subEntryType = CommonConstants.CONSTRUCTION_SITE_STRING;
-                projectLevelTitle = "Chantiers";
+            if (parentEntryProps.type === CommonConstants.PROJECT_STRING
+                || parentEntryProps.type === CommonConstants.SUB_PROJECT_STRING) {
+                entrySubs.push({
+                    type: CommonConstants.CONSTRUCTION_SITE_STRING,
+                    title: "Chantiers"
+                });
             }
             else return void(0);
 
             var urlParts = parentEntryProps.urlPrefix.split("/");
             var uriPrefix = urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
 
-            return DB
-                .getEntriesDAO({
-                    type: subEntryType,
-                    uriPrefix: uriPrefix
-                })
-                .getAll()
-                .then(function (entries) {
-                    var subsUrlSuffix = subEntryType + "s";
+            entrySubs.forEach(function (entrySub) {
+                var subsUrlSuffix = entrySub.type + "s";
+                var subEntries = [];
+                var sub = {
+                    url: subsUrlSuffix,
+                    iconClass: "fa fa-sitemap",
+                    title: entrySub.title,
+                    entries: subEntries,
+                    fetched: false
+                };
 
-                    var subEntries = [];
-                    for (var i = 0; i < entries.length; i++) {
-                        subEntries.push({
-                            title: entries[i].name,
-                            url: subsUrlSuffix + "/" + entries[i].id
-                        });
-                    }
-                    for (var i = 0; i < subEntries.length; i++) {
-                        subEntries[i].url = prependUrlPrefix(subEntries[i].url, parentEntryProps.urlPrefix);
-                    }
+                entries2append.push(sub);
 
-                    return {
-                        url: prependUrlPrefix(subsUrlSuffix, parentEntryProps.urlPrefix),
-                        iconClass: "fa fa-sitemap",
-                        title: projectLevelTitle,
-                        entries: subEntries
-                    };
-                });
+                DB
+                    .getEntriesDAO({
+                        type: entrySub.type,
+                        uriPrefix: uriPrefix
+                    })
+                    .getAll()
+                    .then(function (entries) {
+                        for (var j = 0; j < entries.length; j++) {
+                            subEntries.push({
+                                title: entries[j].name,
+                                url: subsUrlSuffix + "/" + entries[j].id
+                            });
+                        }
+                        for (var j = 0; j < subEntries.length; j++) {
+                            subEntries[j].url = prependUrlPrefix(subEntries[j].url, parentEntryProps.urlPrefix);
+                        }
+                        sub.fetched = true;
+                    });
+                }
+            );
         }
 
         function prependUrlPrefix(urlSuffix, urlPrefix) {
@@ -114,14 +124,7 @@ angular.module('ProjMngmnt')
                 }
 
                 // Add subs if any
-                var subsPromise = getEntrySubs(pageProperties);
-                if (subsPromise !== void(0)) {
-                    subsPromise.then(function (subsEntry) {
-                        if (subsEntry !== void(0)){
-                            cloneContent.entries.push(subsEntry);
-                        }
-                    });
-                }
+                appendEntrySubs(cloneContent.entries, pageProperties);
             }
             for (var i = 0; i < cloneContent.entries.length; i++) {
                 cloneContent.entries[i].url = prependUrlPrefix(cloneContent.entries[i].url, pageProperties.urlPrefix);

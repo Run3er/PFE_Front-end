@@ -147,6 +147,8 @@ angular.module("ProjMngmnt")
             if (projectLevels[i] === CommonConstants.PROJECT_STRING) {
                 $stateProvider.state(CommonConstants.PROJECT_STRING + "." + CommonConstants.SUB_PROJECT_STRING + "s",
                     projectLevelStatesConfig.getEntryConfig(CommonConstants.SUB_PROJECT_STRING));
+                $stateProvider.state(CommonConstants.PROJECT_STRING + "." + CommonConstants.CONSTRUCTION_SITE_STRING + "s",
+                    projectLevelStatesConfig.getEntryConfig(CommonConstants.CONSTRUCTION_SITE_STRING));
             }
             else if (projectLevels[i] === CommonConstants.SUB_PROJECT_STRING) {
                 $stateProvider.state(CommonConstants.SUB_PROJECT_STRING + "." + CommonConstants.CONSTRUCTION_SITE_STRING + "s",

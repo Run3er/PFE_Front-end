@@ -5,7 +5,8 @@
         <li class="tab-content-header">
             <span title="{{menu.title}}">{{menu.title}}</span>
         </li>
-        <li class="simple-menu {{menu.activeMenuUrl == entry.url ? 'active' : ''}}" ng-if="entry.entries === void(0) || entry.entries.length === 0"
+        <li class="simple-menu {{menu.activeMenuUrl == entry.url ? 'active' : ''}}"
+            ng-if="entry.entries === void(0) || (entry.entries.length === 0 && entry.fetched)"
             ng-repeat-start="(index, entry) in menu.entries" ng-click="menu.menuExpandedIndex = void(0)">
             <a class="menu-entry" ng-href="{{entry.url}}">
                 <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
@@ -25,7 +26,8 @@
                     <span class="menu-title">{{entry.title}}</span>
                 </a>
                 <a class="menu-badge" href="javascript:void(0)"  ng-click="menu.menuExpandedIndex = (menu.menuExpandedIndex == index) ? void(0) : index">
-                    <span><i class="dropdown-arrow fa fa-angle-right" ng-if="entry.entries"></i></span>
+                    <span><i class="dropdown-arrow fa fa-angle-right" ng-if="entry.fetched"></i></span>
+                    <span><i class="dropdown-arrow fa fa-circle-o-notch" ng-if="!entry.fetched"></i></span><!--TODO: animate fetch loading-->
                 </a>
             </span>
             <ul ng-show="menu.menuExpandedIndex == index || menu.activeMenuUrl == entry.url">
