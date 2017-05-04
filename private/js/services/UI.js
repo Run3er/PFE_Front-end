@@ -609,6 +609,54 @@ angular.module('ProjMngmnt')
                         }
                     ]
                 }
+            },
+            milestone: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values,
+                        {
+                            key: "name",
+                            name: "Nom"
+                        },
+                        {
+                            key: "Date prévue",
+                            name: "dueDate"
+                        },
+                        {
+                            key: "description",
+                            name: "Description"
+                        }
+                    ]
+                },
+                form: {
+                    title: {
+                        add: "Ajouter un jalon",
+                        edit: "Modifier un jalon"
+                    },
+                    defaultSortingField: "dueDate",
+                    fields: [
+                        // labels are taken from DB_getAll().keys
+                        {
+                            identifier: "name",
+                            label: "Nom",
+                            placeholder: "Saisir le nom",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "dueDate",
+                            label: "Date d'échéance prévue",
+                            placeholder: "Saisir la date d'échéance prévue",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "description",
+                            label: "Description",
+                            placeholder: "Saisir une description",
+                            type: 'input'
+                        }
+                    ]
+                }
             }
         };
 
@@ -730,6 +778,16 @@ angular.module('ProjMngmnt')
                     title: "Tableau de bord"
                 },
                 {
+                    url: "milestones",
+                    iconClass: "fa fa-calendar-plus-o",
+                    title: "Jalons"
+                },
+                {
+                    url: "planning",
+                    iconClass: "fa fa-calendar",
+                    title: "Planning"
+                },
+                {
                     url: "actions",
                     iconClass: "fa fa-tasks",
                     title: "Actions"
@@ -760,11 +818,6 @@ angular.module('ProjMngmnt')
                     iconClass: "fa fa-file",
                     title: "Documents",
                     notifsNb: 2
-                },
-                {
-                    url: "planning",
-                    iconClass: "fa fa-calendar",
-                    title: "Planning"
                 }
             ]
         };
