@@ -26,13 +26,13 @@ angular.module('ProjMngmnt')
         // DB entries interface object
         this.getEntriesDAO = function (entryProps) {
             var entriesUriName = entryProps.type + "s";
-            var uri = (entryProps.uriPrefix ? entryProps.uriPrefix + "/" : "") + entriesUriName;
+            var uriPrefix = (entryProps.uriPrefix ? entryProps.uriPrefix + "/" : "");
 
             return {
                 // Tenant specific data
                 getAll: function () {
                     // Fetch data from DB
-                    return $http.get(serverAddress + "/" + uri)
+                    return $http.get(serverAddress + "/" + uriPrefix + entriesUriName)
                         .then(function (response) {
                             var entries = response.data._embedded[entriesUriName];
 
@@ -48,8 +48,16 @@ angular.module('ProjMngmnt')
                         });
                 },
                 add: function (entry) {
+                    var postBody;
 
-                    return $http.post(serverAddress + "/" + uri, [ entry ])
+                    if (uriPrefix.length === 0) {
+                        postBody = entry;
+                    }
+                    else {
+                        postBody = [ entry ];
+                    }
+
+                    return $http.post(serverAddress + "/" + uriPrefix + entriesUriName, postBody)
                         .then(function (response) {
                             var appendedEntryId = response.data[0];
 
@@ -65,7 +73,7 @@ angular.module('ProjMngmnt')
                 },
                 delete: function (entryId) {
 
-                    return $http.delete(serverAddress + "/" + uri + "/" + entryId)
+                    return $http.delete(serverAddress + "/" + uriPrefix + entriesUriName + "/" + entryId)
                         .then(function () {
                             // Nothing to do here
                         });
