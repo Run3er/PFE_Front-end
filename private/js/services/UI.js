@@ -29,7 +29,7 @@ angular.module('ProjMngmnt')
                             name: "Création"
                         },
                         {
-                            key: "closingPlannedDate",
+                            key: "closurePlannedDate",
                             name: "Clôture Planifiée"
                         },
                         {
@@ -37,7 +37,7 @@ angular.module('ProjMngmnt')
                             name: "Retard"
                         },
                         {
-                            key: "closingDate",
+                            key: "closureDate",
                             name: "Clôture Effective"
                         },
                         {
@@ -99,7 +99,7 @@ angular.module('ProjMngmnt')
                             type: 'input'
                         },
                         {
-                            identifier: "closingPlannedDate",
+                            identifier: "closurePlannedDate",
                             label: "Date de clôture planifiée",
                             placeholder: "Spécifier la date de clôture planifiée",
                             type: 'input'
@@ -112,7 +112,7 @@ angular.module('ProjMngmnt')
                             type: 'input'
                         },
                         {
-                            identifier: "closingDate",
+                            identifier: "closureDate",
                             label: "Date de clôture",
                             placeholder: "Spécifier la date de clôture réelle",
                             type: 'input'
@@ -164,7 +164,7 @@ angular.module('ProjMngmnt')
                             name: "Date qualification"
                         },
                         {
-                            key: "closingDate",
+                            key: "closureDate",
                             name: "Date de clôture"
                         },
                         {
@@ -296,7 +296,7 @@ angular.module('ProjMngmnt')
                             type: 'input'
                         },
                         {
-                            identifier: "closingDate",
+                            identifier: "closureDate",
                             label: "Date de clôture",
                             placeholder: "Spécifier la date de clôture",
                             type: 'input'
