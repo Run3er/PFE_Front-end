@@ -18,9 +18,9 @@
                     <textarea id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'textarea'" ng-model="formEntry[formField.identifier]"></textarea>
                 </div>
                 <div class="col-sm-10" ng-if="formField.choices !== undefined">
-                    <select id="status" class="form-control" required ng-model="formEntry[formField.identifier]">
+                    <select id="{{formField.identifier}}" class="form-control" required ng-model="formEntry[formField.identifier]"
+                            ng-options="choice.identifier as choice.value for choice in formField.choices">
                         <option class="hidden" value=""  disabled="disabled" selected="selected">{{formField.placeholder}}</option>
-                        <option ng-repeat="choice in formField.choices" value="{{choice.identifier}}">{{choice.value}}</option>
                     </select>
                 </div>
             </div>

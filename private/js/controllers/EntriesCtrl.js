@@ -233,8 +233,18 @@ angular.module('ProjMngmnt')
                     entries = angular.copy(resolveData);
 
                     var rows = angular.copy(entries);
-                    // Add view-only auto generated fields to tableEntries
                     var columnMaps = angular.copy(viewData.table.columnMaps);
+
+                    // Initialize with initial data when available (fetched w/entry)
+                    for (var i = 0; i < columnMaps.length; i++) {
+                        if (columnMaps[i].initialValueKey !== void(0)) {
+                            for (var j = 0; j < rows.length; j++) {
+                                rows[j][columnMaps[i].key] = rows[j][rows[columnMaps[i].initialValueKey]];
+                            }
+                        }
+                    }
+
+                    // Add view-only auto generated fields to tableEntries
                     generateAutoFields(entries, rows, columnMaps);
                     // Add row's array index to each row (for ng-repeat)
                     for (var i = 0; i < rows.length; i++) {
@@ -260,6 +270,39 @@ angular.module('ProjMngmnt')
 
         // Get view layer entries data
         var viewData = UI.getViewData(entrySpecifics.type);
+
+        // Fetch async view data, namely multiple choice inputs
+        viewData.form.fields.forEach(function (formField) {
+            if (formField.asyncChoices !== void(0)) {
+                DB
+                    .getEntriesDAO({
+                        type: formField.asyncChoices.entriesName
+                    })
+                    .getAll()
+                    .then(function (entries) {
+                        formField.choices = [];
+
+                        for (var i = 0; i < entries.length; i++) {
+                            // Filter with specified filters
+                            var keys = Object.keys(formField.asyncChoices.filterBy);
+                            var passedFilter = true;
+                            for (var j = 0; j < keys.length; j++) {
+                                if (entries[i][keys[j]] !== formField.asyncChoices.filterBy[keys[j]]) {
+                                    passedFilter = false;
+                                    break;
+                                }
+                            }
+                            if (!passedFilter) continue;
+
+                            formField.choices.push({
+                                identifier: formField.asyncChoices.entriesName + "s" + "/" + entries[i].id,
+                                value: entries[i][formField.asyncChoices.attachedFieldName]
+                            });
+                        }
+                    });
+            }
+        });
+
 
         // Initialize form
         $scope.formFields = viewData.form.fields;

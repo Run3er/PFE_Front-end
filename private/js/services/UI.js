@@ -18,6 +18,7 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "supervisor",
+                            initialValueKey: "supervisorName", 
                             name: "Responsable"
                         },
                         {
@@ -75,21 +76,22 @@ angular.module('ProjMngmnt')
                             identifier: "supervisor",
                             label: "Responsable",
                             placeholder: "Sélectionner le responsable",
-                            choices: [
-                                { identifier: "1", value: "Mohamed"},
-                                { identifier: "2", value: "Fatma"},
-                                { identifier: "3", value: "Ali"},
-                                { identifier: "4", value: "Salma"}
-                            ]
+                            asyncChoices: {
+                                entriesName: "resource",
+                                attachedFieldName: "name",
+                                filterBy: {
+                                    type: "HUMAN"
+                                }
+                            }
                         },
                         {
                             identifier: "priority",
                             label: "Priorité",
                             placeholder: "Sélectionner la priorité",
                             choices: [
-                                { identifier: "1", value: "Faible"},
-                                { identifier: "2", value: "Moyenne"},
-                                { identifier: "3", value: "Élevée"}
+                                { identifier: 1, value: "Faible"},
+                                { identifier: 2, value: "Moyenne"},
+                                { identifier: 3, value: "Élevée"}
                             ]
                         },
                         {
@@ -240,9 +242,9 @@ angular.module('ProjMngmnt')
                             label: "Probabilité",
                             placeholder: "Sélectionner la probabilité",
                             choices: [
-                                { identifier: "1", value: "Faible"},
-                                { identifier: "2", value: "Moyenne"},
-                                { identifier: "3", value: "Élevée"}
+                                { identifier: 1, value: "Faible"},
+                                { identifier: 2, value: "Moyenne"},
+                                { identifier: 3, value: "Élevée"}
                             ]
                         },
                         {
@@ -250,11 +252,11 @@ angular.module('ProjMngmnt')
                             label: "Impact",
                             placeholder: "Sélectionner l'impact",
                             choices: [
-                                { identifier: "1", value: "Moindre"},
-                                { identifier: "2", value: "Faible"},
-                                { identifier: "3", value: "Moyen"},
-                                { identifier: "4", value: "Élevé"},
-                                { identifier: "5", value: "Extrême"}
+                                { identifier: 1, value: "Moindre"},
+                                { identifier: 2, value: "Faible"},
+                                { identifier: 3, value: "Moyen"},
+                                { identifier: 4, value: "Élevé"},
+                                { identifier: 5, value: "Extrême"}
                             ]
                         },
                         {
@@ -397,6 +399,7 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "supervisor",
+                            initialValueKey: "supervisorName",
                             name: "Responsable"
                         },
                         {
@@ -450,22 +453,23 @@ angular.module('ProjMngmnt')
                             identifier: "supervisor",
                             label: "Responsable",
                             placeholder: "Sélectionner le responsable",
-                            choices: [
-                                { identifier: "1", value: "Mohamed"},
-                                { identifier: "2", value: "Fatma"},
-                                { identifier: "3", value: "Ali"},
-                                { identifier: "4", value: "Salma"}
-                            ]
+                            asyncChoices: {
+                                entriesName: "resource",
+                                attachedFieldName: "name",
+                                filterBy: {
+                                    type: "HUMAN"
+                                }
+                            }
                         },
                         {
                             identifier: "priority",
                             label: "Priorité",
                             placeholder: "Sélectionner la priorité",
                             choices: [
-                                { identifier: "1", value: "Faible"},
-                                { identifier: "2", value: "Moyenne"},
-                                { identifier: "3", value: "Haute"},
-                                { identifier: "4", value: "Critique"}
+                                { identifier: 1, value: "Faible"},
+                                { identifier: 2, value: "Moyenne"},
+                                { identifier: 3, value: "Haute"},
+                                { identifier: 4, value: "Critique"}
                             ]
                         },
                         {
@@ -578,9 +582,9 @@ angular.module('ProjMngmnt')
                             label: "Priorité",
                             placeholder: "Sélectionner la priorité",
                             choices: [
-                                { identifier: "1", value: "Faible"},
-                                { identifier: "2", value: "Moyenne"},
-                                { identifier: "3", value: "Élevée"}
+                                { identifier: 1, value: "Faible"},
+                                { identifier: 2, value: "Moyenne"},
+                                { identifier: 3, value: "Élevée"}
                             ]
                         },
                         {
