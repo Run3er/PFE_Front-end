@@ -3,9 +3,13 @@ angular.module('ProjMngmnt')
     .service('Dashboard', function () {
         // Globals
         var chartHolders = [];
-        var greenHue = '#64CF6F';
-        var redHue = '#FE5B54';
-        var yellowHue = '#FEBD55';
+        // var greenHue = '#64CF6F';
+        // var redHue = '#FE5B54';
+        // var yellowHue = '#FEBD55';
+        var blueScales = d3.scale.category20c().range().slice(0, 4);
+        var greenHue = blueScales[3];
+        var redHue = blueScales[0];
+        var yellowHue = blueScales[1];
 
 
 

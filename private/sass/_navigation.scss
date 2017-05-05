@@ -78,6 +78,7 @@ a:hover, a:focus {
       height: #{$navbar-top-height - 0.0rem};
       width: $sidebar-width;
       padding: 1.5rem;
+      border-right: 1px solid $navbar-border-color;
       font-family: 'Fanwood Text', serif;
       font-size: 3.5rem;
       line-height: 2.2rem;
@@ -87,7 +88,11 @@ a:hover, a:focus {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      background-color: #3ba0ff;
+      //background-color: #3ba0ff;
+      img {
+         height: $navbar-top-height;
+         margin: -1.5rem 0;
+      }
    }
    .navbar-form {
       @media (max-width: 767px) {
@@ -517,6 +522,11 @@ body.mini-sidebar {
          width: $sidebar-width-shrunken;
          padding: 1.5rem 1rem;
          font-size: 2rem;
+         img {
+            height: unset;
+            width: #{$sidebar-width-shrunken - 1rem};;
+            margin: 0 -1rem;
+         }
       }
       #sidebar {
          width: $sidebar-width-shrunken;

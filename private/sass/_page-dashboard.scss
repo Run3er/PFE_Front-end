@@ -30,8 +30,10 @@ $timeline-dot-square-size: 1.6rem;
 $timeline-dot-top-offset: 1.55rem;
 $timeline-dot-left-offset: -1.1rem;
 $timeline-dot-border-width: 0.3rem;
-$timeline-dots-light-color: hsl(126, 53%, 63%);
-$timeline-first-dot-light-color: hsl(37, 99%, 71%);
+//$timeline-dots-light-color: hsl(126, 53%, 63%);
+//$timeline-first-dot-light-color: hsl(37, 99%, 71%);
+$timeline-dots-light-color: #C6DBEF;
+$timeline-first-dot-light-color: #6BAED6;
 $timeline-piping-color: #e7dfcc;
 $timeline-piping-width: 0.6rem;
 // #firstRow properties
@@ -490,10 +492,10 @@ $font-number-indicator: roboto;
                opacity: 1;
             }
             .milestone-dot {
-               background-color: darken($timeline-dots-light-color, 7%);
+               background-color: darken($timeline-first-dot-light-color, 14%);
             }
             &:first-of-type .milestone-dot {
-               background-color: darken($timeline-first-dot-light-color, 6%);
+               background-color: darken($timeline-first-dot-light-color, 16%);
             }
          }
       }
