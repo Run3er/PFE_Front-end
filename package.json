@@ -36,7 +36,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "preinstall": "node private/build-process/getAssetsDependencies.js",
     "postinstall": "node private/build-process/updateLiveServer.js && gulp --production",
-    "lsrv": "live-server --port=8181 --host=0.0.0.0 --entry-file=public/views/index.html --browser=FIREFOX --watch=./private,./public --mount=/:./public/views"
+    "lsrv": "live-server --port=8181 --host=0.0.0.0 --entry-file=public/views/index.html --watch=./private,./public --mount=/:./public/views"
   },
   "pm-assetDependencies": [
     {
