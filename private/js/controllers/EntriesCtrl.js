@@ -269,7 +269,7 @@ angular.module('ProjMngmnt')
 
 
         // Get view layer entries data
-        var viewData = UI.getViewData(entrySpecifics.type);
+        var viewData = UI.getEntryViewData(entrySpecifics.type);
 
         // Fetch async view data, namely multiple choice inputs
         viewData.form.fields.forEach(function (formField) {

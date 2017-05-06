@@ -1,6 +1,26 @@
 
 angular.module('ProjMngmnt')
     .service('UI', function (CommonConstants) {
+        // Dashboard Data
+        var dashboardData = {
+            riskStatusLabelMap: {
+                DETECTED: "Détecté",
+                TO_STUDY: "À l'étude",
+                QUALIFIED: "Qualifié",
+                DECIDED_UPON: "Décision prise",
+                ACTION_PLAN_ONGOING: "Plan d'action en cours",
+                MASTERED: "Maîtrisé",
+                CLOSED: "Clôturé"
+            },
+            actionStatusLabelMap: {
+                ONGOING : "En cours",
+                STANDBY : "En standby",
+                CANCELLED : "Annulée",
+                CLOSED : "Clôturée"
+            }
+        };
+
+
         // Views Data
         var viewsData = {
             action: {
@@ -863,8 +883,11 @@ angular.module('ProjMngmnt')
             return portfolioContent;
         };
 
-
-        this.getViewData = function (viewType) {
+        this.getEntryViewData = function (viewType) {
             return viewsData[viewType];
-        }
+        };
+
+        this.getDashboardViewData = function () {
+            return dashboardData;
+        };
     });

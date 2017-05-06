@@ -17,8 +17,8 @@ angular.module("ProjMngmnt")
                 urlParts.push(CommonConstants.CONSTRUCTION_SITE_STRING + "s/:" + CommonConstants.CONSTRUCTION_SITE_STRING + "Id");
             }
 
-            // Project level API URI prefix
-            var entrySpecifics = {};
+            // Project level controllers-resolve targeted
+            var projectLevelPageSpecifics = {};
 
             return {
                 projectLevelConfig: {
@@ -68,10 +68,10 @@ angular.module("ProjMngmnt")
                             // Get project name by projectId, from DB
                             entries.push(constructionSiteEntry);
                         }
-                        entrySpecifics.urlPrefix = urlPrefixParts.join("/");
+                        projectLevelPageSpecifics.urlPrefix = urlPrefixParts.join("/");
 
                         // Post-setup
-                        Sidebar.setContent({ type: projectLevelSingleName, urlPrefix: entrySpecifics.urlPrefix });
+                        Sidebar.setContent({ type: projectLevelSingleName, urlPrefix: projectLevelPageSpecifics.urlPrefix });
                         Header.setContent({ updateTimeDisplayed:true, entries: entries });
 
 
@@ -89,10 +89,22 @@ angular.module("ProjMngmnt")
                         $state.go("^.dashboard", null, {location: "replace"});
                     }
                 },
-                dashboardConfig: {
-                    url: "/dashboard",
-                    templateUrl: CommonConstants.PARTIALS_DIR + "/dashboard.html",
-                    controller: "DashboardCtrl"
+                getDashboardConfig: function () {
+                    return {
+                        url: "/dashboard",
+                        templateUrl: CommonConstants.PARTIALS_DIR + "/dashboard.html",
+                        controller: "DashboardCtrl",
+                        resolve: {
+                            projectLevelSpecifics: function () {
+                                projectLevelPageSpecifics.type = projectLevelSingleName;
+                                // Just undefine, complete deletion not needed
+                                projectLevelPageSpecifics.menuUrl = void(0);
+                                // projectLevelPageSpecifics.urlPrefix; set in parent state
+
+                                return projectLevelPageSpecifics;
+                            }
+                        }
+                    };
                 },
                 getEntryConfig: function (stateSingleName) {
                     return {
@@ -109,11 +121,11 @@ angular.module("ProjMngmnt")
                             // But this does (function declared outside):
                             //     // entrySpecifics: entriesMap["actions"].resolveFn
                             entrySpecifics: function () {
-                                entrySpecifics.type = stateSingleName;
-                                entrySpecifics.menuUrl = stateSingleName + "s";
-                                // entrySpecifics.urlPrefix; set in parent state
+                                projectLevelPageSpecifics.type = stateSingleName;
+                                projectLevelPageSpecifics.menuUrl = stateSingleName + "s";
+                                // projectLevelPageSpecifics.urlPrefix; set in parent state
 
-                                return entrySpecifics;
+                                return projectLevelPageSpecifics;
                             }
                         }
                     };
@@ -136,7 +148,7 @@ angular.module("ProjMngmnt")
             $stateProvider
                 .state(projectLevels[i], projectLevelStatesConfig.projectLevelConfig)
                 .state(projectLevels[i] + ".default", projectLevelStatesConfig.defaultConfig)
-                .state(projectLevels[i] + ".dashboard", projectLevelStatesConfig.dashboardConfig)
+                .state(projectLevels[i] + ".dashboard", projectLevelStatesConfig.getDashboardConfig())
                 .state(projectLevels[i] + ".planning", projectLevelStatesConfig.planningConfig);
 
             for (var j = 0; j < CommonConstants.PROJECT_LEVEL_ARTIFACTS.length; j++) {
@@ -145,13 +157,12 @@ angular.module("ProjMngmnt")
             }
 
             if (projectLevels[i] === CommonConstants.PROJECT_STRING) {
-                $stateProvider.state(CommonConstants.PROJECT_STRING + "." + CommonConstants.SUB_PROJECT_STRING + "s",
+                $stateProvider.state(projectLevels[i] + "." + CommonConstants.SUB_PROJECT_STRING + "s",
                     projectLevelStatesConfig.getEntryConfig(CommonConstants.SUB_PROJECT_STRING));
-                $stateProvider.state(CommonConstants.PROJECT_STRING + "." + CommonConstants.CONSTRUCTION_SITE_STRING + "s",
-                    projectLevelStatesConfig.getEntryConfig(CommonConstants.CONSTRUCTION_SITE_STRING));
             }
-            else if (projectLevels[i] === CommonConstants.SUB_PROJECT_STRING) {
-                $stateProvider.state(CommonConstants.SUB_PROJECT_STRING + "." + CommonConstants.CONSTRUCTION_SITE_STRING + "s",
+            if (projectLevels[i] === CommonConstants.PROJECT_STRING
+                    || projectLevels[i] === CommonConstants.SUB_PROJECT_STRING) {
+                $stateProvider.state(projectLevels[i] + "." + CommonConstants.CONSTRUCTION_SITE_STRING + "s",
                     projectLevelStatesConfig.getEntryConfig(CommonConstants.CONSTRUCTION_SITE_STRING));
             }
         }

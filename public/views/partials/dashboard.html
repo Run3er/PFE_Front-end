@@ -4,7 +4,7 @@
             <div class="panel panel-default panel-indicator">
               <h3 class="indicator-title">Statut <span>Projet</span></h3>
               <div class="panel-body">
-                  <div id="status-light"></div>
+                  <div id="status-global" class="status-{{data.status}}"></div>
               </div>
             </div>
         </div>
@@ -12,7 +12,7 @@
             <div class="panel panel-default panel-indicator">
               <h3 class="indicator-title">Budget <span>Consommé</span></h3>
               <div class="panel-body">
-                  <span class="indicator-measure">78%</span>
+                  <span class="indicator-measure">{{data.budgetConsumed}}%</span>
                   <span class="text-muted indicator-measure-minor">
                   <!-- <div></div> -->
                    <br/></span>
@@ -23,7 +23,7 @@
             <div class="panel panel-default panel-indicator">
               <h3 class="indicator-title">Charge <span>Consommée</span></h3>
               <div class="panel-body">
-                  <span class="indicator-measure">227</span>
+                  <span class="indicator-measure">{{data.chargeConsumed}}</span>
                   <span class="text-muted indicator-measure-minor">
                   <!-- <div></div> -->
                        <span>H/J</span>
@@ -53,7 +53,7 @@
               <h3 class="indicator-title">Actions en cours</h3>
               <div class="panel-body">
                   <div id="actionsChart">
-                    <span class="glyphicon glyphicon-filter"></span>
+                    <span class="glyphicon glyphicon-filter" ng-if="!data.actionsEmpty"></span>
                     <svg></svg>
                   </div>
               </div>
@@ -64,7 +64,7 @@
               <h3 class="indicator-title">Risques</h3>
               <div class="panel-body">
                   <div id="risksChart">
-                    <span class="glyphicon glyphicon-filter"></span>
+                    <span class="glyphicon glyphicon-filter" ng-if="!data.risksEmpty"></span>
                     <svg></svg>
                   </div>
               </div>
@@ -76,79 +76,31 @@
     <div class="panel panel-default panel-indicator">
         <h3 class="indicator-title">Prochains Jalons</h3>
          <div class="panel-body">
-            <ul id="timeline">
-                <li>
-                    <div class="milestone-date">
-                        <div class="text-muted">
-                            <div class="milestone-text">09/04</div>
-                        </div>
-                    </div>
-                    <div class="milestone-title">
-                        <div class="hyphenate">
-                            <div class="milestone-dot"></div>
-                            <div class="milestone-text">Fête des Martyrs</div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="milestone-date">
-                        <div class="text-muted">
-                            <div class="milestone-text">01/05</div>
-                        </div>
-                    </div>
-                    <div class="milestone-title">
-                        <div class="hyphenate">
-                            <div class="milestone-dot"></div>
-                            <div class="milestone-text">Pas de Travail</div>
-                        </div>
-                    </div>
-                </li>
-                <li>
+            <ul id="timeline" ng-if="data.milestones.length > 0">
+                <li ng-repeat-start="milestone in data.milestones"
+                    ng-if="$first || !$first && differentYearDates(data.milestones[$index - 1].dueDate, milestone.dueDate)">
                     <div class="milestone-date"></div>
                     <div class="milestone-year">
-                        <div>2018</div>
+                        <div>{{milestone.dueDate | date: "yyyy"}}</div>
                     </div>
                 </li>
-                <li>
+                <li ng-repeat-end>
                     <div class="milestone-date">
                         <div class="text-muted">
-                            <div class="milestone-text">01/01</div>
+                            <div class="milestone-text">{{milestone.dueDate | date:  "dd/MM"}}</div>
                         </div>
                     </div>
                     <div class="milestone-title">
                         <div class="hyphenate">
                             <div class="milestone-dot"></div>
-                            <div class="milestone-text">Nouvel An</div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="milestone-date">
-                        <div class="text-muted">
-                            <div class="milestone-text">14/01</div>
-                        </div>
-                    </div>
-                    <div class="milestone-title">
-                        <div class="hyphenate">
-                            <div class="milestone-dot"></div>
-                            <div class="milestone-text">Fête de la Révolution &amp; de la Jeunesse</div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="milestone-date">
-                        <div class="text-muted">
-                            <div class="milestone-text">20/03</div>
-                        </div>
-                    </div>
-                    <div class="milestone-title">
-                        <div class="hyphenate">
-                            <div class="milestone-dot"></div>
-                            <div class="milestone-text">Fête de l'Indépendance</div>
+                            <div class="milestone-text">{{milestone.name}}</div>
                         </div>
                     </div>
                 </li>
             </ul>
+            <div ng-if="data.milestones.length === 0" class="no-data-text">
+                Aucun
+            </div>
          </div>
     </div>
 </div>

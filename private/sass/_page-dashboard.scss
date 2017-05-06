@@ -26,6 +26,7 @@ $advancement-indicators-stacked-max-width: $advancement-indicators-abreast-pos1-
 $advancement-indicators-abreast-pos2-min-width: $advancement-indicators-abreast-pos1-max-width + 1;
 $advancement-indicators-abreast-pos2-max-width: $bootstrap-sm-max-width;
 // Timeline dot properties
+$timeline-date-block-width: 4.8rem;
 $timeline-dot-square-size: 1.6rem;
 $timeline-dot-top-offset: 1.55rem;
 $timeline-dot-left-offset: -1.1rem;
@@ -124,6 +125,17 @@ $font-number-indicator: roboto;
    }
 }
 
+.nvd3.nv-noData, .no-data-text {
+   font-size: 120%;
+   font-weight: 500;
+}
+.no-data-text {
+   color: #bbb;
+}
+.nvd3.nv-noData {
+   fill: #bbb;
+}
+
 //*=============== First Row & Measures ===============*/
 #firstRow {
    padding: 0;
@@ -175,11 +187,10 @@ $font-number-indicator: roboto;
          font-size: 4.3rem;
       }
    }
-   #status-light {
+   #status-global {
       width: 5.0rem;
       height: 5.0rem;
       border-radius: 50%;
-      background-color: #64CF6F;
       margin: 0.8rem auto 0;
       opacity: 0.87;
       transition: opacity 250ms linear;
@@ -190,6 +201,18 @@ $font-number-indicator: roboto;
          width: 4.7rem;
          height: 4.7rem;
       }
+      &.status {
+         &-GOOD {
+            background-color: #64CF6F;
+         }
+         &-UNCERTAIN {
+            background-color: #a8a8a8;
+         }
+         &-BAD {
+            background-color: #dc5050;
+         }
+      }
+
    }
 
    .indicator-measure-minor {
@@ -387,7 +410,8 @@ $font-number-indicator: roboto;
    }
    ul#timeline {
       display: table;
-      margin: auto;
+      width: 100%;
+      margin: auto 0;
       padding-left: 0.0rem;
       list-style: none;
       text-align: left;
@@ -401,6 +425,7 @@ $font-number-indicator: roboto;
          &-title,
          &-year {
             display: table-cell;
+            position: relative;
          }
          &-date,
          &-title {
@@ -408,11 +433,16 @@ $font-number-indicator: roboto;
             font-size: 1.8rem;
          }
          &-date {
+            // Little hack in case the right cell (timeline-title) text is very short
+            width: 0.1rem;
             padding-right: 1.5rem;
+            border-right: $timeline-piping-width solid $timeline-piping-color;
+            div {
+               display: block;
+               width: $timeline-date-block-width;
+            }
          }
          &-title {
-            position: relative;
-            border-left: $timeline-piping-width solid $timeline-piping-color;
             color: #444;
             @media (min-width: $custom-xlg-min-width) {
                font-size: 2.0rem;
@@ -423,13 +453,12 @@ $font-number-indicator: roboto;
             }
          }
          &-year {
-            border-left: $timeline-piping-width solid $timeline-piping-color;
             div {
                display: block;
                width: 3.6rem;
                margin-top: 0.5rem;
                // margin-bottom: 0.1rem;
-               margin-left: -2.1rem;
+               margin-left: -2.2rem;
                border: 0.1rem solid $timeline-piping-color;
                border-radius: 16%;
                line-height: 1.4rem;
@@ -459,23 +488,23 @@ $font-number-indicator: roboto;
       }
       // Dynamic decoration
       & > li {
-         &:first-of-type .milestone-dot {
+         &:nth-child(2) .milestone-dot {
             background-color: $timeline-first-dot-light-color;
          }
          // Timeline start & end Dots' linking-excess pruning
-         &:first-of-type .milestone-title::before,
-         &:last-of-type .milestone-title::before {
+         &:first-of-type .milestone-date::before,
+         &:last-of-type .milestone-date::before {
             content: "";
             position: absolute;
-            left: $timeline-dot-left-offset;
+            left: #{$timeline-date-block-width + 1rem};
             width: $timeline-dot-square-size;
             background-color: white;
          }
-         &:first-of-type .milestone-title::before {
+         &:first-of-type .milestone-date::before {
             top: 0;
-            height: $timeline-dot-top-offset + $timeline-dot-border-width;
+            height: $timeline-dot-top-offset;
          }
-         &:last-of-type .milestone-title::before {
+         &:last-of-type .milestone-date::before {
             bottom: 0;
             height: calc(100% - #{$timeline-dot-square-size + $timeline-dot-top-offset - $timeline-dot-border-width});
          }
@@ -484,7 +513,7 @@ $font-number-indicator: roboto;
             opacity: 0.8;
             transition: opacity 250ms linear;
          }
-         &:first-of-type .milestone-text {
+         &:nth-child(2) .milestone-text {
             opacity: 1;
          }
          &:hover {
@@ -494,7 +523,7 @@ $font-number-indicator: roboto;
             .milestone-dot {
                background-color: darken($timeline-first-dot-light-color, 14%);
             }
-            &:first-of-type .milestone-dot {
+            &:nth-child(2) .milestone-dot {
                background-color: darken($timeline-first-dot-light-color, 16%);
             }
          }

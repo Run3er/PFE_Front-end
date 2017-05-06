@@ -11,7 +11,6 @@ angular.module('ProjMngmnt')
         var nonTransactionallyPersistedEntries = [ "action", "pendingIssue" ];
 
 
-        // Tenant specific data
         this.getSingleResrcByUri = function (uri) {
             // Fetch data from DB
             return $http.get(serverAddress + "/" + uri)
@@ -28,13 +27,23 @@ angular.module('ProjMngmnt')
                 });
         };
 
+        this.getDashboard = function (projectLevelUri) {
+            // Fetch data from DB
+            return $http.get(serverAddress + "/" + projectLevelUri + "?projection=dashboard")
+                .then(function successCallback(response) {
+                    // Set to undefined, delete not necessary
+                    response.data._links = void(0);
+
+                    return response.data;
+                });
+        };
+
         // DB entries interface object
         this.getEntriesDAO = function (entryProps) {
             var entriesUriName = entryProps.type + "s";
             var uriPrefix = (entryProps.uriPrefix ? entryProps.uriPrefix + "/" : "");
 
             return {
-                // Tenant specific data
                 getAll: function () {
                     // Fetch data from DB
                     return $http.get(serverAddress + "/" + uriPrefix + entriesUriName)
