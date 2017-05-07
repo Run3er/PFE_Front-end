@@ -21,6 +21,7 @@ angular.module("ProjMngmnt")
             var projectLevelPageSpecifics = {};
 
             return {
+                projectLevelPageSpecifics: projectLevelPageSpecifics,
                 projectLevelConfig: {
                     url: urlParts.join("/"),
                     templateUrl: CommonConstants.PARTIALS_DIR + "/nav-sidebar-header.html",
@@ -166,4 +167,66 @@ angular.module("ProjMngmnt")
                     projectLevelStatesConfig.getEntryConfig(CommonConstants.CONSTRUCTION_SITE_STRING));
             }
         }
+
+        // Project direct sub construction site routing
+        (function () {
+            var projectConstructionSiteStateName = CommonConstants.PROJECT_STRING + "W" + CommonConstants.CONSTRUCTION_SITE_STRING;
+            projectLevelStatesConfig = getProjectLevelStatesConfig(CommonConstants.CONSTRUCTION_SITE_STRING);
+            var projectConstructionSiteConfig = {
+                url: "/" + CommonConstants.PROJECT_STRING + "s/:" + CommonConstants.PROJECT_STRING + "Id/" +
+                        CommonConstants.CONSTRUCTION_SITE_STRING + "s/:" + CommonConstants.CONSTRUCTION_SITE_STRING + "Id",
+                templateUrl: CommonConstants.PARTIALS_DIR + "/nav-sidebar-header.html",
+                controller: function (Sidebar, Header, DB, $state, $stateParams) {
+                    // Sidebar setup
+                    var urlPrefixParts = [];
+                    // Header setup
+                    var entries = [];
+                    entries.push({ title: "Portefeuille", url: $state.href("general.portfolio", null, {absolute: true}) });
+
+                    // Project title
+                    urlPrefixParts.push(CommonConstants.PROJECT_STRING + "s/" + $stateParams[CommonConstants.PROJECT_STRING + "Id"]);
+                    var projectEntry = { url: urlPrefixParts.join("/") };
+                    DB.getSingleResrcByUri(urlPrefixParts[0])
+                        .then(function (projectLevelEntry) {
+                            projectEntry.title = projectLevelEntry.name;
+                        });
+                    // Get project name by projectId, from DB
+                    entries.push(projectEntry);
+
+                    // ConstructionSite title
+                    urlPrefixParts.push(CommonConstants.CONSTRUCTION_SITE_STRING + "s/" + $stateParams[CommonConstants.CONSTRUCTION_SITE_STRING + "Id"]);
+                    var constructionSiteEntry = { url: urlPrefixParts.join("/") };
+                    DB.getSingleResrcByUri(urlPrefixParts[1])
+                        .then(function (projectLevelEntry) {
+                            constructionSiteEntry.title = projectLevelEntry.name;
+                        });
+                    // Get project name by projectId, from DB
+                    entries.push(constructionSiteEntry);
+
+                    projectLevelStatesConfig.projectLevelPageSpecifics.urlPrefix = urlPrefixParts.join("/");
+
+                    // Post-setup
+                    Sidebar.setContent({ type: CommonConstants.CONSTRUCTION_SITE_STRING, urlPrefix: projectLevelStatesConfig.projectLevelPageSpecifics.urlPrefix });
+                    Header.setContent({ updateTimeDisplayed:true, entries: entries });
+
+
+                    // Default redirection to base path
+                    // $state.current; returns child state (if detected through url), instead of this hereby state
+                    if ($state.current.name === projectConstructionSiteStateName) {
+                        $state.go(".default", null, {location: "replace"});
+                    }
+                }
+            };
+
+            $stateProvider
+                .state(projectConstructionSiteStateName, projectConstructionSiteConfig)
+                .state(projectConstructionSiteStateName + ".default", projectLevelStatesConfig.defaultConfig)
+                .state(projectConstructionSiteStateName + ".dashboard", projectLevelStatesConfig.getDashboardConfig())
+                .state(projectConstructionSiteStateName + ".planning", projectLevelStatesConfig.planningConfig);
+
+            for (var j = 0; j < CommonConstants.PROJECT_LEVEL_ARTIFACTS.length; j++) {
+                $stateProvider.state(projectConstructionSiteStateName + "." + CommonConstants.PROJECT_LEVEL_ARTIFACTS[j] + "s",
+                    projectLevelStatesConfig.getEntryConfig(CommonConstants.PROJECT_LEVEL_ARTIFACTS[j]));
+            }
+        })();
     });
