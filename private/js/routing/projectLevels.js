@@ -38,7 +38,7 @@ angular.module("ProjMngmnt")
                             || projectLevelSingleName === CommonConstants.CONSTRUCTION_SITE_STRING) {
                             urlPrefixParts.push(CommonConstants.PROJECT_STRING + "s/" + $stateParams[CommonConstants.PROJECT_STRING + "Id"]);
 
-                            var projectEntry = { url: urlPrefixParts.join("/") };
+                            var projectEntry = { url: urlPrefixParts.join("/") + "/"  };
                             DB.getSingleResrcByUri(urlPrefixParts[0])
                                 .then(function (projectLevelEntry) {
                                     projectEntry.title = projectLevelEntry.name;
@@ -50,7 +50,7 @@ angular.module("ProjMngmnt")
                             || projectLevelSingleName === CommonConstants.CONSTRUCTION_SITE_STRING) {
                             urlPrefixParts.push(CommonConstants.SUB_PROJECT_STRING + "s/" + $stateParams[CommonConstants.SUB_PROJECT_STRING + "Id"]);
 
-                            var subProjectEntry = { url: urlPrefixParts.join("/") };
+                            var subProjectEntry = { url: urlPrefixParts.join("/") + "/"  };
                             DB.getSingleResrcByUri(urlPrefixParts[1])
                                 .then(function (projectLevelEntry) {
                                     subProjectEntry.title = projectLevelEntry.name;
@@ -61,7 +61,7 @@ angular.module("ProjMngmnt")
                         if (projectLevelSingleName === CommonConstants.CONSTRUCTION_SITE_STRING) {
                             urlPrefixParts.push(CommonConstants.CONSTRUCTION_SITE_STRING + "s/" + $stateParams[CommonConstants.CONSTRUCTION_SITE_STRING + "Id"]);
 
-                            var constructionSiteEntry = { url: urlPrefixParts.join("/") };
+                            var constructionSiteEntry = { url: urlPrefixParts.join("/") + "/" };
                             DB.getSingleResrcByUri(urlPrefixParts[2])
                                 .then(function (projectLevelEntry) {
                                     constructionSiteEntry.title = projectLevelEntry.name;
@@ -195,7 +195,7 @@ angular.module("ProjMngmnt")
 
                     // ConstructionSite title
                     urlPrefixParts.push(CommonConstants.CONSTRUCTION_SITE_STRING + "s/" + $stateParams[CommonConstants.CONSTRUCTION_SITE_STRING + "Id"]);
-                    var constructionSiteEntry = { url: urlPrefixParts.join("/") };
+                    var constructionSiteEntry = { url: urlPrefixParts.join("/") + "/"  };
                     DB.getSingleResrcByUri(urlPrefixParts[1])
                         .then(function (projectLevelEntry) {
                             constructionSiteEntry.title = projectLevelEntry.name;

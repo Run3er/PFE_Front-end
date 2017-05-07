@@ -450,13 +450,21 @@ a:hover, a:focus {
                   color: darken(#9CA4A4, 14%);
                }
             }
+            &:nth-last-child(2) {
+               a {
+                  color: lighten($color-primary, 5%);
+                  &:hover {
+                     color: darken($color-primary, 3%);
+                  }
+               }
+            }
             &:last-of-type {
                max-width: unset;
                a {
                   padding-right: 1.5rem;
-                  color: lighten($color-primary, 5%);
+                  color: lighten(#9CA4A4, 10%);
                   &:hover {
-                     color: darken($color-primary, 3%);
+                     color: lighten(#9CA4A4, 5%);
                   }
                }
             }
