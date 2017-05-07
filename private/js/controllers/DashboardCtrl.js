@@ -243,6 +243,7 @@ angular.module('ProjMngmnt')
         }
         DB.getDashboard(uri)
             .then(function (dashboardData) {
+                console.log(uri)
                 dashboardInit(dashboardData);
             });
 

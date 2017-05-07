@@ -2,7 +2,7 @@
 angular.module('ProjMngmnt')
     .service('Sidebar', function (CommonConstants, DB, UI) {
         var hrefVoid = "javascript:void(0)";
-        var sidebarContent = {};
+        var sidebarContent = { entries: [] };
 
         // Get title
         function getTitle(parentEntryProps) {
