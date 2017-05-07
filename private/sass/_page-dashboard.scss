@@ -101,7 +101,7 @@ $font-number-indicator: roboto;
    text-align: center;
    border-radius: 0;
    margin-bottom: 2.5rem;
-   box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, .05);
+   box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.05);
    border-top: 0.2rem solid lighten($color-primary, 10%);;
    .panel-body {
       margin-bottom: 2.0rem;
@@ -150,10 +150,10 @@ $font-number-indicator: roboto;
          height: 9.5rem;
       }
       .panel-body {
-         margin-top: -0.5rem;
+         margin-top: -0.2rem;
          margin-bottom: 1.5rem;
          @media (max-width: $bootstrap-xs-max-width) {
-            margin-top: -0.1rem;
+            margin-top: 0rem;
          }
          @media (max-width: $bootstrap-sm-max-width) {
             margin-bottom: 0;
@@ -166,7 +166,7 @@ $font-number-indicator: roboto;
    #last-update-indicator, #charge-consumed-indicator {
       @media (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
          .panel.panel-indicator .panel-body {
-            margin-top: -.4rem;
+            margin-top: -0.4rem;
          }
       }
    }
@@ -315,7 +315,7 @@ $font-number-indicator: roboto;
       svg {
          height: 18.5rem;
          margin-left: 2.0rem;
-         margin-top: -.8rem;
+         margin-top: -0.8rem;
          @media (max-width: $custom-smr-lv2-max-width) {
             margin-top: -4.4rem;
          }
@@ -372,14 +372,14 @@ $font-number-indicator: roboto;
       position: absolute;
       top: calc(100% - 3rem);
       color: #d9d9d9;
-      opacity: .9;
+      opacity: 0.9;
       font-size: 1.2rem;
       right: 10%;
    }
    .nvd3.nv-pieChart {
       .nv-slice path {
          stroke: none;
-         fill-opacity: .87;
+         fill-opacity: 0.87;
          &.hover path {
             fill-opacity: 1;
          }

@@ -6,9 +6,10 @@
 @import "http://fonts.googleapis.com/css?family=Fanwood+Text:400,400italic";
 
 $navbar-top-height: 5.6rem;
+$navbar-top-item-hover-color: #fafafa;
 $navbar-border-color: #E9EAEB;
 $sidebar-menu-entry-padding-left: 2.2rem;
-$sidebar-width: 27rem;
+$sidebar-width: 28rem;
 $sidebar-width-shrunken: 6rem;
 $sidebar-bg-color: #253341;
 $header-height: 4.6rem;
@@ -39,7 +40,7 @@ a:hover, a:focus {
 }
 
 .form-control:focus {
-   border-color: #3ba0ff;
+   border-color: $color-primary;
    -webkit-box-shadow: none;
    box-shadow: none;
 }
@@ -53,7 +54,7 @@ a:hover, a:focus {
    border-left: none;
    border-right: none;
    box-sizing: content-box;
-   background-color: #3ba0ff;
+   background-color: $color-primary;
    @media (max-width: 767px) {
       position: fixed;
       top: 0;
@@ -64,7 +65,7 @@ a:hover, a:focus {
    }
    @media (min-width: 768px) {
       //margin-left: $sidebar-width;
-      background-color: #fff;
+      background-color: #fefefe;
       border-bottom: 1px solid $navbar-border-color;
    }
    ul {
@@ -77,7 +78,6 @@ a:hover, a:focus {
       display: block;
       height: #{$navbar-top-height - 0.0rem};
       width: $sidebar-width;
-      padding: 1.5rem;
       border-right: 1px solid $navbar-border-color;
       font-family: 'Fanwood Text', serif;
       font-size: 3.5rem;
@@ -88,10 +88,9 @@ a:hover, a:focus {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      //background-color: #3ba0ff;
+      //background-color: $color-primary;
       img {
          height: $navbar-top-height;
-         margin: -1.5rem 0;
       }
    }
    .navbar-form {
@@ -106,7 +105,8 @@ a:hover, a:focus {
       line-height: 3.4rem;
       color: #7D8282;
       &:hover {
-         background-color: #FCFCFC; // darken TODO:..more
+         background-color: $navbar-top-item-hover-color;
+         transition: background-color 100ms linear;
       }
       &:not(:hover):focus {
          background-color: unset;
@@ -156,11 +156,13 @@ a:hover, a:focus {
                font-size: 1.6rem;
                line-height: 2.8rem;
                &:hover {
-                  background-color: #FCFCFC; // darken TODO:..more
+                  background-color: $navbar-top-item-hover-color;
+                  transition: background-color 100ms linear;
                }
             }
             &.open > a {
-               background-color: #FCFCFC; // darken TODO:..more
+               background-color: $navbar-top-item-hover-color;
+               transition: background-color 100ms linear;
             }
             ul.dropdown-menu > li > a {
                padding: 0.3rem 2rem;
@@ -168,7 +170,7 @@ a:hover, a:focus {
                line-height: 3rem;
                &:focus, &:hover {
                   color: #fff;
-                  background-color: #3ba0ff;
+                  background-color: mix($color-primary, #000, 85%);
                }
                .dropdown-icon {
                   display: inline-block;
@@ -222,8 +224,8 @@ a:hover, a:focus {
          }
          &.active {
             & > a {
-               color: #3ba0ff;
-               border-bottom: 1px solid #3ba0ff;
+               color: $color-primary;
+               border-bottom: 1px solid $color-primary;
             }
          }
       }
@@ -245,7 +247,7 @@ a:hover, a:focus {
    ul.nav-menu > li {
       &.tab-content-header {
          height: $header-height;
-         background-color: #294c70;
+         background-color: #3d5874;
          margin-bottom: 2rem;
          color: #ccc;
          padding: 1.5rem 1.7rem;
@@ -347,7 +349,7 @@ a:hover, a:focus {
          }
          &.active {
             & > .menu-entry {
-               border-left: 0.3rem solid #3ba0ff;
+               border-left: 0.3rem solid $color-primary;
                color: #b4b6b4;
                background-color: #2e3f50; //lighten
                &:focus {
