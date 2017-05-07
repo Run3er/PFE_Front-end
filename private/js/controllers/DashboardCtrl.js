@@ -183,6 +183,8 @@ angular.module('ProjMngmnt')
                 setSubProjectLevelAdvancement(CommonConstants.CONSTRUCTION_SITE_STRING);
             }
 
+            $scope.data.subAdvancementsEmpty = subAdvancementsData[0].values.length === 0;
+
             // Create SubAdvancements chart & Feed it data
             nv.addGraph(function() {
                 subAdvancementsChartHolder.chart = nv.models.multiBarHorizontalChart()

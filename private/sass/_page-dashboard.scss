@@ -15,9 +15,9 @@ $custom-smr-lv3-max-width: $bootstrap-xs-max-width;
 $custom-xlg-min-width: 1605px;
 // -Minor 
 $indicator-title-shorten-min1-width: $custom-smr-lv1-min-width;
-$indicator-title-shorten-max1-width: 500px;
-$indicator-title-shorten-min2-width: $bootstrap-md-min-width;
-$indicator-title-shorten-max2-width: 1150px;
+$indicator-title-shorten-max1-width: 650px;
+$indicator-title-shorten-min2-width: $bootstrap-sm-min-width;
+$indicator-title-shorten-max2-width: 1330px;
 $indicator-measure-minor-full-line-min-width: $indicator-title-shorten-min1-width;
 $indicator-measure-minor-full-line-max-width: 475px;
 $advancement-indicators-abreast-pos1-min-width: $custom-smr-lv2-min-width;
@@ -133,6 +133,7 @@ $font-number-indicator: roboto;
    color: #bbb;
 }
 .nvd3.nv-noData {
+   user-select: text;
    fill: #bbb;
 }
 
@@ -248,6 +249,20 @@ $font-number-indicator: roboto;
          margin-bottom: 0;
          @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos1-max-width) {
             margin-left: 1%;
+         }
+      }
+   }
+   &.no-sub-advancements {
+      .panel.panel-indicator {
+         @media (max-width: $custom-smr-lv2-min-width) {
+            height: 21.0rem;
+         }
+      }
+      #advancement-chart {
+         display: none;
+         @media (min-width: $custom-smr-lv2-min-width) {
+            display: block;
+            margin-left: -7rem;
          }
       }
    }
@@ -410,13 +425,11 @@ $font-number-indicator: roboto;
    }
    ul#timeline {
       display: table;
-      width: 100%;
-      margin: auto 0;
+      margin: auto;
       padding-left: 0.0rem;
       list-style: none;
       text-align: left;
       transition: background-color 250ms linear;
-
       & > li {
          display: table-row;
       }
