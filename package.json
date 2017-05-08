@@ -16,6 +16,8 @@
   "homepage": "https://github.com/Run3er/Proj-Mngmt-SaaS#readme",
   "dependencies": {
     "angular": "1.6.3",
+    "angular-animate": "1.6.3",
+    "angular-ui-bootstrap": "2.5.0",
     "angular-ui-router": "0.4.2",
     "nvd3": "git+https://github.com/novus/nvd3.git#164ce3a"
   },

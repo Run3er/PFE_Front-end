@@ -1,4 +1,4 @@
-angular.module("ProjMngmnt", ["ui.router"])
+angular.module("ProjMngmnt", ["ui.router", "ui.bootstrap", "ngAnimate"])
     .config(function ($compileProvider) {
 
         // Allow javascript:void(0) href
