@@ -269,24 +269,24 @@ $font-number-indicator: roboto;
    #advancement-measure {
       height: 20.0rem;
       /*width: 20.0rem !important;*/
-      margin-top: -3.0rem;
+      margin-top: -2.5rem;
       @media (max-width: $advancement-indicators-abreast-pos2-max-width) {
          margin-top: -2.6rem;
       }
       @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos1-max-width) {
-         margin-left: -2.4rem;
+         margin-left: -2.1rem;
          margin-right: 1.5rem;
          padding: 0;
       }
       @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos2-max-width) {
-         margin-top: -2.4rem;
+         margin-top: -2.1rem;
       }
       @media (min-width: $custom-xlg-min-width) {
          margin-top: -1.0rem;
       }
       svg {
-         width: 19.0rem;
-         height: 19.0rem;
+         width: 18.3rem;
+         height: 18.3rem;
          overflow: visible;
          display: inline;
          text-align: center;
@@ -361,16 +361,16 @@ $font-number-indicator: roboto;
    }
    svg {
       position: relative;
-      bottom: 0.9rem;
+      bottom: 1.6rem;
       width: 28.0rem;
-      height: 17.0rem;
+      height: 17.5rem;
       @media(min-width: $custom-xlg-min-width) {
-         height: 21rem;
+         height: 20.5rem;
       }
    }
    .glyphicon.glyphicon-filter {
       position: absolute;
-      top: calc(100% - 3rem);
+      top: calc(100% - 3.1rem);
       color: #d9d9d9;
       opacity: 0.9;
       font-size: 1.2rem;
@@ -393,9 +393,20 @@ $font-number-indicator: roboto;
             font-size: 2.3rem;
          }
       }
-      .nv-legend-text {
-         font-size: 100%;
-         fill: rgb(65, 65, 65);
+      .nv-legendWrap {
+         transform: translate(0, 11.9rem);
+         .nv-legend-text {
+            font-size: 100%;
+            fill: rgb(65, 65, 65);
+         }
+      }
+   }
+   .no-chart-data {
+      svg {
+         bottom: 0.6rem;
+      }
+      .glyphicon.glyphicon-filter {
+         display: none;
       }
    }
 }

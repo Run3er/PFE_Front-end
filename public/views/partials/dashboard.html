@@ -52,8 +52,8 @@
             <div class="panel panel-default panel-indicator">
               <h3 class="indicator-title">Actions en cours</h3>
               <div class="panel-body">
-                  <div id="actionsChart">
-                    <span class="glyphicon glyphicon-filter" ng-if="!data.actionsEmpty"></span>
+                  <div id="actionsChart" class="{{data.risksEmpty ? 'no-chart-data' : ''}}">
+                    <span class="glyphicon glyphicon-filter"></span>
                     <svg></svg>
                   </div>
               </div>
@@ -63,8 +63,8 @@
             <div class="panel panel-default panel-indicator">
               <h3 class="indicator-title">Risques</h3>
               <div class="panel-body">
-                  <div id="risksChart">
-                    <span class="glyphicon glyphicon-filter" ng-if="!data.risksEmpty"></span>
+                  <div id="risksChart" class="{{data.risksEmpty ? 'no-chart-data' : ''}}">
+                    <span class="glyphicon glyphicon-filter"></span>
                     <svg></svg>
                   </div>
               </div>

@@ -16,8 +16,7 @@
   "homepage": "https://github.com/Run3er/Proj-Mngmt-SaaS#readme",
   "dependencies": {
     "angular": "1.6.3",
-    "angular-ui-router": "0.4.2",
-    "nvd3": "git+https://github.com/novus/nvd3.git#164ce3a"
+    "angular-ui-router": "0.4.2"
   },
   "devDependencies": {
     "bootstrap": "3.3.7",
@@ -47,7 +46,8 @@
       "assetsPath": "public/CDN-ress/js/",
       "assetsURL": [
         "https://code.jquery.com/jquery-3.2.1.js",
-        "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"
+        "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.5/nv.d3.min.js"
       ]
     }
   ]
