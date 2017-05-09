@@ -21,7 +21,7 @@ angular.module("ProjMngmnt")
                 url: "/",
                 controller: function ($state) {
                     // Default redirection to designated entry (instead of blank)
-                    $state.go("^.dashboard", null, {location: "replace"});
+                    $state.go("^.portfolio", null, {location: "replace"});
                 }
             })
             .state("general.dashboard", {
