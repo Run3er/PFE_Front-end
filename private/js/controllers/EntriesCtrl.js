@@ -22,8 +22,7 @@ angular.module('ProjMngmnt')
             if ($scope.formAction.submit !== add) {
                 $scope.formAction = {
                     submit: add,
-                    submitBtnText: "Ajouter",
-                    title: viewData.form.title.add
+                    submitBtnText: "Ajouter"
                 };
             }
             // Cancel current entry editing
@@ -43,7 +42,6 @@ angular.module('ProjMngmnt')
             }
             editingEntryIdx = entryIdx;
             $scope.tableEntries.rows[entryIdx].onEdit = true;
-            $scope.formAction.title = viewData.form.title.edit;
             $scope.formAction.submitBtnText = "Mettre à jour";
             $scope.formEntry = angular.copy(entries[entryIdx]);
 
@@ -311,7 +309,6 @@ angular.module('ProjMngmnt')
         $scope.formAlert = {};
         $scope.formSubmitEnabled = true;
         $scope.formAction = {
-            title: viewData.form.title.add,
             submit: add,
             submitBtnText: "Ajouter"
         };

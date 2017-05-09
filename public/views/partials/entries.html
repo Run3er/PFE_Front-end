@@ -4,11 +4,6 @@
     <strong>{{formAlert.didSucceed ? 'Success' : 'Failure'}}.&nbsp;</strong>{{formAlert.msg}}
 </div>
 <div class="collapse in form-collapse" id="form-add-entry">
-    <div class="form-title">
-        <div class="col-sm-offset-2 col-sm-10">
-            <h3>{{formAction.title}}</h3>
-        </div>
-    </div>
     <form class="form-horizontal" name="form" novalidate ng-submit="formAction.submit()">
         <div ng-repeat="formField in formFields">
             <div class="form-group">

@@ -68,10 +68,6 @@ angular.module('ProjMngmnt')
                     ]
                 },
                 form: {
-                    title: {
-                        add: "Ajouter une action",
-                        edit: "Modifier une action"
-                    },
                     defaultSortingField: "creationDate",
                     fields: [
                         // labels are taken from DB_getAll().keys
@@ -245,10 +241,6 @@ angular.module('ProjMngmnt')
                     ]
                 },
                 form: {
-                    title: {
-                        add: "Ajouter un risque",
-                        edit: "Modifier un risque"
-                    },
                     defaultSortingField: "detectionDate",
                     fields: [
                         {
@@ -348,10 +340,6 @@ angular.module('ProjMngmnt')
                     ]
                 },
                 form: {
-                    title: {
-                        add: "Ajouter une ressource",
-                        edit: "Modifier une ressource"
-                    },
                     defaultSortingField: "type",
                     fields: [
                         {
@@ -385,10 +373,6 @@ angular.module('ProjMngmnt')
                     ]
                 },
                 form: {
-                    title: {
-                        add: "Ajouter un document",
-                        edit: "Modifier un document"
-                    },
                     defaultSortingField: "name",
                     fields: [
                         {
@@ -445,10 +429,6 @@ angular.module('ProjMngmnt')
                     ]
                 },
                 form: {
-                    title: {
-                        add: "Ajouter un point en suspens",
-                        edit: "Modifier un point en suspens"
-                    },
                     defaultSortingField: "creationDate",
                     fields: [
                         // labels are taken from DB_getAll().keys
@@ -565,10 +545,6 @@ angular.module('ProjMngmnt')
                     ]
                 },
                 form: {
-                    title: {
-                        add: "Ajouter une demande de changement",
-                        edit: "Modifier une demande de changement"
-                    },
                     defaultSortingField: "requestDate",
                     fields: [
                         // labels are taken from DB_getAll().keys
@@ -654,10 +630,6 @@ angular.module('ProjMngmnt')
                     ]
                 },
                 form: {
-                    title: {
-                        add: "Ajouter un jalon",
-                        edit: "Modifier un jalon"
-                    },
                     defaultSortingField: "dueDate",
                     fields: [
                         // labels are taken from DB_getAll().keys
@@ -774,22 +746,10 @@ angular.module('ProjMngmnt')
         };
 
         viewsData[CommonConstants.PROJECT_STRING] = angular.copy(projectLevelCommonViewData);
-        viewsData[CommonConstants.PROJECT_STRING].form.title = {
-            add: "Ajouter un projet",
-            edit: "Modifier un projet"
-        };
 
         viewsData[CommonConstants.SUB_PROJECT_STRING] = angular.copy(projectLevelCommonViewData);
-        viewsData[CommonConstants.SUB_PROJECT_STRING].form.title = {
-            add: "Ajouter un sous-projet",
-            edit: "Modifier un sous-projet"
-        };
 
         viewsData[CommonConstants.CONSTRUCTION_SITE_STRING] = angular.copy(projectLevelCommonViewData);
-        viewsData[CommonConstants.CONSTRUCTION_SITE_STRING].form.title = {
-            add: "Ajouter un chantier",
-            edit: "Modifier un chantier"
-        };
 
 
         // Sidebar Data
