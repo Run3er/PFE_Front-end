@@ -118,13 +118,13 @@ angular.module('ProjMngmnt')
                             identifier: "creationDate",
                             label: "Date de création",
                             placeholder: "Spécifier la date de création",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "closurePlannedDate",
                             label: "Date de clôture planifiée",
                             placeholder: "Spécifier la date de clôture planifiée",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "delay",
@@ -137,7 +137,7 @@ angular.module('ProjMngmnt')
                             identifier: "closureDate",
                             label: "Date de clôture",
                             placeholder: "Spécifier la date de clôture réelle",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "comment",
@@ -309,19 +309,19 @@ angular.module('ProjMngmnt')
                             identifier: "detectionDate",
                             label: "Date de détection",
                             placeholder: "Spécifier la date de détection",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "qualificationDate",
                             label: "Date de qualification",
                             placeholder: "Spécifier la date de qualification",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "closureDate",
                             label: "Date de clôture",
                             placeholder: "Spécifier la date de clôture",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "comment",
@@ -496,19 +496,19 @@ angular.module('ProjMngmnt')
                             identifier: "creationDate",
                             label: "Date de création",
                             placeholder: "Spécifier la date de création",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "resolutionPlannedDate",
                             label: "Date de résolution planifiée",
                             placeholder: "Spécifier la date de clôture planifiée",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "resolutionDate",
                             label: "Date de clôture",
                             placeholder: "Spécifier la date de résolution réelle",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "impacts",
@@ -611,19 +611,19 @@ angular.module('ProjMngmnt')
                             identifier: "requestDate",
                             label: "Date de création",
                             placeholder: "Spécifier la date de demande",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "decisionPlannedDate",
                             label: "Date de clôture planifiée",
                             placeholder: "Spécifier la date de prise de décision planifiée",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "decisionDate",
                             label: "Date de prise de décision",
                             placeholder: "Spécifier la date de prise de décision réelle",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "impacts",
@@ -671,7 +671,7 @@ angular.module('ProjMngmnt')
                             identifier: "dueDate",
                             label: "Date d'échéance prévue",
                             placeholder: "Saisir la date d'échéance prévue",
-                            type: 'input'
+                            type: 'date'
                         },
                         {
                             identifier: "description",

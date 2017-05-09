@@ -14,12 +14,14 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="{{formField.identifier}}">{{formField.label}}:</label>
                 <div class="col-sm-10" ng-if="formField.choices === undefined">
-                    <input id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'input'" ng-model="formEntry[formField.identifier]">
-                    <textarea id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'textarea'" ng-model="formEntry[formField.identifier]"></textarea>
+                    <input id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'input'" ng-focus="formFocusElt(formField.identifier)" ng-model="formEntry[formField.identifier]">
+                    <textarea id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'textarea'"  ng-focus="formFocusElt(formField.identifier)" ng-model="formEntry[formField.identifier]"></textarea>
+                    <div class="{{datePopups.formFocusedElt === formField.identifier ? '' : 'date-input-blurred'}}">
+                        <input id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'date'" uib-datepicker-popup="{{datePopups.format}}"  is-open="datePopups.formFocusedElt" datepicker-options="datePopups.dateOptions" alt-input-formats="datePopups.altInputFormats" show-button-bar="false" ng-focus="formFocusElt(formField.identifier); datePopups.popups[formField.identifier].opened = true" ng-model-options="{ timezone: 'UTC' }" ng-model="formEntry[formField.identifier]" ng-init="datePopups.popups[formField.identifier] = { opened: false }">
+                    </div>
                 </div>
                 <div class="col-sm-10" ng-if="formField.choices !== undefined">
-                    <select id="{{formField.identifier}}" class="form-control" required ng-model="formEntry[formField.identifier]"
-                            ng-options="choice.identifier as choice.value for choice in formField.choices">
+                    <select id="{{formField.identifier}}" class="form-control" required ng-focus="formFocusElt(formField.identifier)" ng-options="choice.identifier as choice.value for choice in formField.choices" ng-model="formEntry[formField.identifier]">
                         <option class="hidden" value=""  disabled="disabled" selected="selected">{{formField.placeholder}}</option>
                     </select>
                 </div>
@@ -34,8 +36,9 @@
     </form>
 </div>
 <div class="table-responsive">
-    <table class="main-table table table-striped table-hover"><div>
-        <thead>
+    <table class="main-table table table-striped table-hover">
+        <div>
+         <thead>
             <tr>
                 <th>
                     <button class="btn btn-default" data-toggle="collapse" data-target="#form-add-entry">
@@ -44,7 +47,8 @@
                 </th>
                 <th ng-repeat="columnMap in tableEntries.columnMaps">{{columnMap.name}}</th>
             </tr>
-        </thead></div>
+         </thead>
+        </div>
         <tbody>
             <tr id="{{entry.onEdit ? 'on-edit-entry' : ''}}" ng-repeat="entry in tableEntries.rows | orderBy:defaultSortingField track by entry.id">
                 <td>

@@ -315,6 +315,31 @@ angular.module('ProjMngmnt')
             submit: add,
             submitBtnText: "Ajouter"
         };
+
+        // Configure uib dates
+        $scope.datePopups = {
+            popups: {},
+            open: function(popupId) {
+                $scope.datePopups.popups[popupId].opened = true
+            },
+            dateOptions: {
+                formatYear: 'yy',
+                startingDay: 1
+            },
+            format: 'dd/MM/yyyy',
+            altInputFormats: ['d!/M!/yyyy'],
+            // Useful for hiding popup on other non-related field focus
+            // Object property (instead of direct $scope var) because of
+            // uib datepicker's non-assignable errors
+            formFocusedElt: void(0)
+        };
+        // Created because same statement didn't work in used-at ng-focus
+        $scope.formFocusElt = function (formFieldId) {
+            $scope.datePopups.formFocusedElt = formFieldId;
+        };
+        // TODO: ensure timezone independence in date display
+
+
         // On view content fully loaded
         // $scope.$on('$viewContentLoaded', function(){
         // 	formReset();
