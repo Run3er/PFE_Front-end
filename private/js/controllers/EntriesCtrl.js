@@ -15,6 +15,7 @@ angular.module('ProjMngmnt')
 
         // On form reset
         $scope.formCancel = function() {
+            $scope.formCollapsed = true;
             formReset();
             // Reset specific variables
             $scope.formEntry = {};
@@ -44,6 +45,7 @@ angular.module('ProjMngmnt')
             $scope.tableEntries.rows[entryIdx].onEdit = true;
             $scope.formAction.submitBtnText = "Mettre à jour";
             $scope.formEntry = angular.copy(entries[entryIdx]);
+            $scope.formCollapsed = false;
 
             //collapse form in
             //color corresponding entry in table
@@ -116,6 +118,7 @@ angular.module('ProjMngmnt')
 
                     // Finish, reset form to initial state
                     $scope.formCancel();
+                    $scope.formCollapsed = true;
                 })
                 .finally(function () {
                     $scope.formSubmitEnabled = true;
@@ -155,7 +158,7 @@ angular.module('ProjMngmnt')
             // Request operation to DB asynchronously
             var resultPromise = entriesDAO[operationType](arg);
             resultPromise
-                // Update  alert
+            // Update  alert
                 .catch(function () {
                     $scope.formAlert.msg = operationType + " failed. [Try again.]";
                     $scope.formAlert.didSucceed = false;
@@ -303,6 +306,7 @@ angular.module('ProjMngmnt')
 
 
         // Initialize form
+        $scope.formCollapsed = true;
         $scope.formFields = viewData.form.fields;
         $scope.defaultSortingField = viewData.form.defaultSortingField;
         $scope.formEntry = {};
@@ -344,4 +348,4 @@ angular.module('ProjMngmnt')
         var editingEntryIdx;
     });
 
-    //TODO: show notification only on request failure
+//TODO: show notification only on request failure

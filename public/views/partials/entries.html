@@ -3,7 +3,8 @@
     <a class="close" href="#" data-dismiss="alert" aria-label="close" ng-click="alertDismiss()">&times;</a>
     <strong>{{formAlert.didSucceed ? 'Success' : 'Failure'}}.&nbsp;</strong>{{formAlert.msg}}
 </div>
-<div class="collapse in form-collapse" id="form-add-entry">
+
+<div class="form-collapse" uib-collapse="formCollapsed">
     <form class="form-horizontal" name="form" novalidate ng-submit="formAction.submit()">
         <div ng-repeat="formField in formFields">
             <div class="form-group">
@@ -30,36 +31,44 @@
         </div>
     </form>
 </div>
+
 <div class="table-responsive">
     <table class="main-table table table-striped table-hover">
         <div>
-         <thead>
+            <thead>
             <tr>
                 <th>
-                    <button class="btn btn-default" data-toggle="collapse" data-target="#form-add-entry">
+                    <button class="btn btn-default" ng-click="formCollapsed = false">
                         <i class="fa fa-plus"></i>
                     </button>
                 </th>
                 <th ng-repeat="columnMap in tableEntries.columnMaps">{{columnMap.name}}</th>
             </tr>
-         </thead>
+            </thead>
         </div>
         <tbody>
-            <tr id="{{entry.onEdit ? 'on-edit-entry' : ''}}" ng-repeat="entry in tableEntries.rows | orderBy:defaultSortingField track by entry.id">
-                <td>
-                    <button class="btn btn-default" ng-click="edit(entry.index)">
+        <tr id="{{entry.onEdit ? 'on-edit-entry' : ''}}" ng-repeat="entry in tableEntries.rows | orderBy:defaultSortingField track by entry.id">
+            <td>
+                <div class="entry-edit-menu" uib-dropdown dropdown-append-to-body on-toggle="toggled(open)">
+                    <button class="btn btn-default" uib-dropdown-toggle>
                         <i class="fa fa-pencil"></i>
                     </button>
-                    <button ng-disabled="entry.onDelete" class="btn btn-danger" ng-click="delete(entry.index)">
-                        <i class="fa fa-remove"></i>
-                    </button>
-                </td>
-                <td ng-repeat="columnMap in tableEntries.columnMaps track by $index">
-                    <span ng-if="columnMap.key !== tableEntries.linkable.columnKey">{{entry[columnMap.key]}}</span>
-                    <a ng-href="{{'./' + tableEntries.linkable.urlPrefix + '/' + entry.id}}"
-                       ng-if="columnMap.key === tableEntries.linkable.columnKey">{{entry[columnMap.key]}}</a>
-                </td>
-            </tr>
+                    <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                        <li>
+                            <a href="javascript:void(0)" ng-click="edit(entry.index)">Modifier</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" ng-click="delete(entry.index)">Supprimer</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+            <td ng-repeat="columnMap in tableEntries.columnMaps track by $index">
+                <span ng-if="columnMap.key !== tableEntries.linkable.columnKey">{{entry[columnMap.key]}}</span>
+                <a ng-href="{{'./' + tableEntries.linkable.urlPrefix + '/' + entry.id}}"
+                   ng-if="columnMap.key === tableEntries.linkable.columnKey">{{entry[columnMap.key]}}</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
@@ -68,7 +77,6 @@
 <!--
         TODO:
     - Let table's header always be visible, even on scroll
-    - Tweak or replace bootstrap collapse animation
     - Dynamically resizing textarea (http://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize)
 
     - Take a look at scattered TODOs

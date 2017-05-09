@@ -93,6 +93,9 @@
 
 table.main-table {
    color: $font-color-dark;
+   thead > tr > th:first-child, tbody > tr > td:first-child {
+      width: 4rem;
+   }
    tr > td, tr > th {
       & > button.btn {
          padding: 0.1rem 0.6rem;
@@ -119,14 +122,18 @@ table.main-table {
       }
    }
    tr > td {
-      & > button.btn-default {
-         background-color: #eee;
-         color: #777;
-         &:hover {
-            color: darken(#777, 25%);
-         }
-         &:not(:hover):focus {
+      .entry-edit-menu {
+         & > button.btn-default {
+            padding: 1px 5px;
+            background-color: #eee;
             color: #777;
+            &:hover {
+               color: darken(#777, 25%);
+            }
+            &:not(:hover):focus {
+               color: #777;
+            }
+
          }
       }
    }
@@ -139,4 +146,9 @@ table.main-table {
          }
       }
    }
+}
+// uib body appended table entry edit button dropdown
+ul[uib-dropdown-menu] > li:last-of-type > a:hover {
+   background-color: #fd7e72;
+   color: #fff;
 }

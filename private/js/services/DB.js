@@ -91,7 +91,10 @@ angular.module('ProjMngmnt')
 
                     return $http.patch(serverAddress + "/" + entriesUriName + "/" + entry.id, entry)
                         .then(function (updatedEntry) {
+                            // TODO: correct update failure behavior (failure promise must be triggered)
+                            console.log(updatedEntry);
                             // Nothing to do here
+                            console.log(updatedEntry);
                         });
                 },
                 delete: function (entryId) {
