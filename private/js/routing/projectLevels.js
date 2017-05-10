@@ -141,9 +141,17 @@ angular.module("ProjMngmnt")
                         }
                     };
                 },
+                charterConfig: {
+                    url: "/charter",
+                    template: "<p>Charte projet.</p>"
+                },
                 planningConfig: {
                     url: "/planning",
-                    template: "<p>Planning</p>"
+                    template: "<p>Planning.</p>"
+                },
+                budgetConfig: {
+                    url: "/budget",
+                    template: "<p>Gestion du budget.</p>"
                 }
             };
         }
@@ -157,7 +165,9 @@ angular.module("ProjMngmnt")
                 .state(projectLevels[i], projectLevelStatesConfig.projectLevelConfig)
                 .state(projectLevels[i] + ".default", projectLevelStatesConfig.defaultConfig)
                 .state(projectLevels[i] + ".dashboard", projectLevelStatesConfig.getDashboardConfig())
-                .state(projectLevels[i] + ".planning", projectLevelStatesConfig.planningConfig);
+                .state(projectLevels[i] + ".charter", projectLevelStatesConfig.charterConfig)
+                .state(projectLevels[i] + ".planning", projectLevelStatesConfig.planningConfig)
+                .state(projectLevels[i] + ".budget", projectLevelStatesConfig.budgetConfig);
 
             for (var j = 0; j < CommonConstants.PROJECT_LEVEL_ARTIFACTS.length; j++) {
                 $stateProvider.state(projectLevels[i] + "." + CommonConstants.PROJECT_LEVEL_ARTIFACTS[j] + "s",
@@ -229,7 +239,9 @@ angular.module("ProjMngmnt")
                 .state(projectConstructionSiteStateName, projectConstructionSiteConfig)
                 .state(projectConstructionSiteStateName + ".default", projectLevelStatesConfig.defaultConfig)
                 .state(projectConstructionSiteStateName + ".dashboard", projectLevelStatesConfig.getDashboardConfig())
-                .state(projectConstructionSiteStateName + ".planning", projectLevelStatesConfig.planningConfig);
+                .state(projectConstructionSiteStateName + ".charter", projectLevelStatesConfig.charterConfig)
+                .state(projectConstructionSiteStateName + ".planning", projectLevelStatesConfig.planningConfig)
+                .state(projectConstructionSiteStateName + ".budget", projectLevelStatesConfig.budgetConfig);
 
             for (var j = 0; j < CommonConstants.PROJECT_LEVEL_ARTIFACTS.length; j++) {
                 $stateProvider.state(projectConstructionSiteStateName + "." + CommonConstants.PROJECT_LEVEL_ARTIFACTS[j] + "s",

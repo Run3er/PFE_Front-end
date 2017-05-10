@@ -120,7 +120,7 @@ angular.module('ProjMngmnt')
                 cloneContent = angular.copy(UI.getProjectsSidebarContent());
             }
             else if (CommonConstants.PROJECT_LEVELS.indexOf(pageProperties.type) !== -1) {
-                cloneContent = angular.copy(UI.getProjectLevelSidebarContent());
+                cloneContent = angular.copy(UI.getProjectLevelSidebarContent(pageProperties.urlPrefix));
 
                 // Set title
                 var titlePromise = getTitle(pageProperties);
@@ -131,7 +131,8 @@ angular.module('ProjMngmnt')
                 }
 
                 // Add subs if any
-                appendEntrySubs(cloneContent.entries, pageProperties);
+                // TODO: completely remove functionality if never to be used
+                // appendEntrySubs(cloneContent.entries, pageProperties);
             }
             for (var i = 0; i < cloneContent.entries.length; i++) {
                 cloneContent.entries[i].url = prependUrlPrefix(cloneContent.entries[i].url, pageProperties.urlPrefix);

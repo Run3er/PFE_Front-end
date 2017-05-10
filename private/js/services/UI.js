@@ -669,6 +669,189 @@ angular.module('ProjMngmnt')
                         }
                     ]
                 }
+            },
+            todo: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values
+                        {
+                            key: "description",
+                            name: "Description"
+                        },
+                        {
+                            key: "charge",
+                            name: "Charge"
+                        }
+                    ]
+                },
+                form: {
+                    defaultSortingField: "charge",
+                    fields: [
+                        {
+                            identifier: "description",
+                            label: "Description",
+                            placeholder: "Saisir une description",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "charge",
+                            label: "Charge",
+                            placeholder: "Saisir la charge",
+                            type: 'input'
+                        }
+                    ]
+                }
+            },
+            humanResource: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values
+                        {
+                            key: "name",
+                            name: "Nom"
+                        }
+                    ]
+                },
+                form: {
+                    defaultSortingField: "name",
+                    fields: [
+                        {
+                            identifier: "name",
+                            label: "Nom",
+                            placeholder: "Saisir un nom",
+                            type: 'input'
+                        }
+                    ]
+                }
+            },
+            communicationPlan: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values
+                        {
+                            key: "description",
+                            name: "Description"
+                        },
+                        {
+                            key: "supervisor",
+                            name: "Responsable"
+                        }
+                    ]
+                },
+                form: {
+                    defaultSortingField: "supervisor",
+                    fields: [
+                        {
+                            identifier: "description",
+                            label: "Description",
+                            placeholder: "Saisir une description",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "supervisor",
+                            label: "Responsable",
+                            placeholder: "Sélectionner le responsable",
+                            asyncChoices: {
+                                entriesName: "resource",
+                                attachedFieldName: "name",
+                                filterBy: {
+                                    type: "HUMAN"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            writeup: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values
+                        {
+                            key: "nom",
+                            name: "Nom"
+                        },
+                        {
+                            key: "description",
+                            name: "Description"
+                        }
+                    ]
+                },
+                form: {
+                    defaultSortingField: "charge",
+                    fields: [
+                        {
+                            identifier: "nom",
+                            label: "Nom",
+                            placeholder: "Saisir le nom",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "description",
+                            label: "Description",
+                            placeholder: "Saisir une description",
+                            type: 'input'
+                        }
+                    ]
+                }
+            },
+            reunionPlanning: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values,
+                        {
+                            key: "name",
+                            name: "Nom"
+                        },
+                        {
+                            key: "Date",
+                            type: "date",
+                            name: "date"
+                        },
+                        {
+                            key: "location",
+                            name: "Lieu"
+                        },
+                        {
+                            key: "status",
+                            name: "statut"
+                        }
+                    ]
+                },
+                form: {
+                    defaultSortingField: "date",
+                    fields: [
+                        // labels are taken from DB_getAll().keys
+                        {
+                            identifier: "name",
+                            label: "Nom",
+                            placeholder: "Saisir le nom",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "date",
+                            label: "Date",
+                            placeholder: "Saisir la date",
+                            type: 'date'
+                        },
+                        {
+                            identifier: "location",
+                            label: "Lieu",
+                            placeholder: "Saisir le lieu",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "status",
+                            label: "Statut",
+                            placeholder: "Saisir un statut",
+                            type: 'input'
+                        }
+                    ]
+                }
             }
         };
 
@@ -862,10 +1045,128 @@ angular.module('ProjMngmnt')
             ]
         };
 
-
-
-        this.getProjectLevelSidebarContent = function () {
-            return projectLevelSidebarContent;
+        this.getProjectLevelSidebarContent = function (urlPrefix) {
+            return {
+                entries: [
+                    {
+                        url: "charter",
+                        iconClass: "fa fa-thumb-tack",
+                        title: "Charte du projet"
+                    },
+                    {
+                        url: "javascript:void(0)",
+                        iconClass: "fa fa-eye",
+                        title: "État des lieux",
+                        entries: [
+                            {
+                                url: "./" + urlPrefix + "/dashboard",
+                                title: "Tableau de bord"
+                            },
+                            {
+                                url: "./" + urlPrefix + "/actions",
+                                title: "Plan d'action"
+                            },
+                            {
+                                url: "./" + urlPrefix + "/todos",
+                                title: "Reste à faire"
+                            }
+                        ]
+                    },
+                    {
+                        url: "javascript:void(0)",
+                        iconClass: "fa fa-calendar-times-o",
+                        title: "Planification",
+                        entries: [
+                            {
+                                url: "./" + urlPrefix + "/milestones",
+                                title: "Principaux jalons"
+                            },
+                            {
+                                url: "./" + urlPrefix + "/planning",
+                                title: "Planning"
+                            }
+                        ]
+                    },
+                    {
+                        url: "javascript:void(0)",
+                        iconClass: "fa fa-sticky-note",
+                        title: "Gestion du scope",
+                        entries: [
+                            {
+                                url: "./" + urlPrefix + "/documents",
+                                title: "Documentations"
+                            },
+                            {
+                                url: "./" + urlPrefix + "/pendingIssues",
+                                title: "Points en suspens"
+                            },
+                            {
+                                url: "./" + urlPrefix + "/changeRequests",
+                                title: "Demandes de changement"
+                            }
+                        ]
+                    },
+                    {
+                        url: "javascript:void(0)",
+                        iconClass: "fa fa-sitemap",
+                        title: "Gestion d'intégration",
+                        entries: [
+                            {
+                                url: "./" + urlPrefix + "/subProjects",
+                                title: "Sous-projets"
+                            },
+                            {
+                                url: "./" + urlPrefix + "/constructionSites",
+                                title: "Chantiers"
+                            }
+                        ]
+                    },
+                    {
+                        url: "javascript:void(0)",
+                        iconClass: "fa fa-user-times",
+                        title: "Gestion des ressources",
+                        entries: [
+                            {
+                                url: "./" + urlPrefix + "/humanResources",
+                                title: "Ressources humaines"
+                            },
+                            {
+                                url: "./" + urlPrefix + "/resources",
+                                title: "Autres ressources"
+                            }
+                        ]
+                    },
+                    {
+                        url: "budget",
+                        iconClass: "fa fa-eur",
+                        title: "Gestion des coûts"
+                    },
+                    {
+                        url: "risks",
+                        iconClass: "fa fa-exclamation-circle",
+                        title: "Gestion des risques"
+                    },
+                    {
+                        url: "javascript:void(0)",
+                        iconClass: "fa fa-comments",
+                        title: "Gestion de la communication",
+                        entries: [
+                            {
+                                url: "./" + urlPrefix + "/communicationPlans",
+                                title: "Plan de communication"
+                            },
+                            {
+                                url: "./" + urlPrefix + "/writeups",
+                                title: "Comptes rendus de réunions"
+                            },
+                            {
+                                url: "./" + urlPrefix + "/reunionPlannings",
+                                title: "Planning des réunions"
+                            }
+                        ]
+                    }
+                ]
+            };
         };
 
         this.getProjectsSidebarContent = function () {
