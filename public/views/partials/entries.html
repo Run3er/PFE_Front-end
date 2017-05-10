@@ -64,7 +64,14 @@
                 </div>
             </td>
             <td ng-repeat="columnMap in tableEntries.columnMaps track by $index">
-                <span ng-if="columnMap.key !== tableEntries.linkable.columnKey">{{entry[columnMap.key]}}</span>
+                <span ng-if="columnMap.key !== tableEntries.linkable.columnKey">
+                    <!--apply different filters to data view-type-->
+                    <span ng-if="!columnMap.type">{{entry[columnMap.key]}}</span>
+                    <span ng-if="columnMap.type === 'nbToString'">{{entry[columnMap.key].slice(4)}} ({{entry[columnMap.key][0]}})</span>
+                    <span ng-if="columnMap.type === 'percentage'">{{entry[columnMap.key]*100 | number:0}}%</span>
+                    <span ng-if="columnMap.type === 'days'">{{entry[columnMap.key] ? entry[columnMap.key] + 'j' : ''}}</span>
+                    <span ng-if="columnMap.type === 'date'">{{entry[columnMap.key] | date: 'dd/MM/yyyy'}}</span>
+                </span>
                 <a ng-href="{{'./' + tableEntries.linkable.urlPrefix + '/' + entry.id}}"
                    ng-if="columnMap.key === tableEntries.linkable.columnKey">{{entry[columnMap.key]}}</a>
             </td>

@@ -47,18 +47,22 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "creationDate",
+                            type: "date",
                             name: "Création"
                         },
                         {
                             key: "closurePlannedDate",
+                            type: "date",
                             name: "Clôture Planifiée"
                         },
                         {
                             key: "delay",
+                            type: "days",
                             name: "Retard"
                         },
                         {
                             key: "closureDate",
+                            type: "date",
                             name: "Clôture Effective"
                         },
                         {
@@ -155,10 +159,12 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "probability",
+                            type: "nbToString",
                             name: "Probabilité"
                         },
                         {
                             key: "impact",
+                            type: "nbToString",
                             name: "Impact"
                         },
                         {
@@ -175,14 +181,17 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "detectionDate",
+                            type: "date",
                             name: "Date détection"
                         },
                         {
                             key: "qualificationDate",
+                            type: "date",
                             name: "Date qualification"
                         },
                         {
                             key: "closureDate",
+                            type: "date",
                             name: "Date de clôture"
                         },
                         {
@@ -254,9 +263,9 @@ angular.module('ProjMngmnt')
                             label: "Probabilité",
                             placeholder: "Sélectionner la probabilité",
                             choices: [
-                                { identifier: 1, value: "Faible"},
-                                { identifier: 2, value: "Moyenne"},
-                                { identifier: 3, value: "Élevée"}
+                                { identifier: 1, value: "1 - Faible"},
+                                { identifier: 2, value: "2 - Moyenne"},
+                                { identifier: 3, value: "3 - Élevée"}
                             ]
                         },
                         {
@@ -264,11 +273,11 @@ angular.module('ProjMngmnt')
                             label: "Impact",
                             placeholder: "Sélectionner l'impact",
                             choices: [
-                                { identifier: 1, value: "Moindre"},
-                                { identifier: 2, value: "Faible"},
-                                { identifier: 3, value: "Moyen"},
-                                { identifier: 4, value: "Élevé"},
-                                { identifier: 5, value: "Extrême"}
+                                { identifier: 1, value: "1 - Moindre"},
+                                { identifier: 2, value: "2 - Faible"},
+                                { identifier: 3, value: "3 - Moyen"},
+                                { identifier: 4, value: "4 - Élevé"},
+                                { identifier: 5, value: "5 - Extrême"}
                             ]
                         },
                         {
@@ -408,14 +417,17 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "creationDate",
+                            type: "date",
                             name: "Création"
                         },
                         {
                             key: "resolutionPlannedDate",
+                            type: "date",
                             name: "Résolution Planifiée"
                         },
                         {
                             key: "resolutionDate",
+                            type: "date",
                             name: "Résolution Effective"
                         },
                         {
@@ -528,14 +540,17 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "requestDate",
+                            type: "date",
                             name: "Soumission"
                         },
                         {
                             key: "decisionPlannedDate",
+                            type: "date",
                             name: "Décision Planifiée"
                         },
                         {
                             key: "decisionDate",
+                            type: "date",
                             name: "Décision Effective"
                         },
                         {
@@ -621,6 +636,7 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "Date prévue",
+                            type: "date",
                             name: "dueDate"
                         },
                         {
@@ -668,6 +684,7 @@ angular.module('ProjMngmnt')
                     },
                     {
                         key: "advancement",
+                        type: "percentage",
                         name: "Avancement"
                     },
                     {
