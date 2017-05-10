@@ -5,9 +5,10 @@
         <li class="tab-content-header">
             <span title="{{menu.title}}">{{menu.title}}</span>
         </li>
-        <li class="simple-menu {{menu.activeMenuUrl == entry.url ? 'active' : ''}}"
+
+        <li class="simple-menu {{menu.activeMenuUrl === entry.url ? 'active' : ''}}"
             ng-if="entry.entries === void(0) || (entry.entries.length === 0 && entry.fetched)"
-            ng-repeat-start="(index, entry) in menu.entries" ng-click="menu.menuExpandedIndex = void(0)">
+            ng-repeat-start="(index, entry) in menu.entries" ng-click="menu.menuExpandedIndex = void(0); menu.activeMenuUrl = entry.url">
             <a class="menu-entry" ng-href="{{entry.url}}">
                 <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
                 <span class="menu-title">{{entry.title}}</span>
@@ -18,22 +19,32 @@
                 </span>
             </a>
         </li>
-        <li class="collapsible-menu {{menu.activeMenuUrl == entry.url ? 'active' : ''}}"
-            ng-if="entry.entries !== void(0) && entry.entries.length > 0" ng-repeat-end>
-            <span class="menu-entry">
-                <a class="menu-entry-collapsible-main" ng-href="{{entry.url}}">
+        <!--TODO: don't trigger ng-click for new tab (ctrl/cmd + click & mouse middle btn click) clicks-->
+        <li class="collapsible-menu {{(menu.activeMenuUrl === entry.url || subMenuActiveUrlIn(entry.entries)) ? 'active' : ''}}" ng-if="entry.entries !== void(0) && entry.entries.length > 0" ng-repeat-end>
+            <!--Concrete menu entry (w/ concrete url)-->
+            <span class="menu-entry" ng-if="entry.url !== 'javascript:void(0)'">
+                <a class="menu-entry-collapsible-main" ng-href="{{entry.url}}" ng-click="menu.menuExpandedIndex = menu.menuExpandedIndex === index ? void(0) : index; menu.activeMenuUrl = entry.url" ng-init="menu.menuExpandedIndex = menu.activeMenuUrl === entry.url ? index : void(0)">
                     <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
                     <span class="menu-title">{{entry.title}}</span>
                 </a>
-                <a class="menu-badge" href="javascript:void(0)"  ng-click="menu.menuExpandedIndex = (menu.menuExpandedIndex == index) ? void(0) : index">
+                <a class="menu-badge" href="javascript:void(0)"  ng-click="menu.menuExpandedIndex = (menu.menuExpandedIndex === index) ? void(0) : index">
                     <span><i class="dropdown-arrow fa fa-angle-right" ng-if="entry.fetched"></i></span>
                     <span><i class="dropdown-arrow fa fa-circle-o-notch" ng-if="!entry.fetched"></i></span><!--TODO: animate fetch loading-->
                 </a>
             </span>
-            <ul ng-show="menu.menuExpandedIndex == index || menu.activeMenuUrl == entry.url">
-                <li ng-repeat="(subIndex, subEntry) in entry.entries">
-                    <a ng-href="{{subEntry.url}}" class="{{menu.activeMenuUrl == entry.url && menu.subMenuActiveIndex == subIndex ? 'active' : ''}}"
-                       ng-click="menu.subMenuActiveIndex = subIndex; menu.activeMenuUrl = entry.url">{{subEntry.title}}</a>
+            <!--Shell menu entry (simple dropdown)-->
+            <a class="menu-entry" ng-if="entry.url === 'javascript:void(0)'"  ng-href="{{entry.url}}" ng-click="menu.menuExpandedIndex = menu.menuExpandedIndex === index ? void(0) : index">
+                <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
+                <span class="menu-title">{{entry.title}}</span>
+                <span class="menu-badge">
+                    <span><i class="dropdown-arrow fa fa-angle-right"></i></span>
+                </span>
+            </a>
+            <!--Common sub entries-->
+            <ul ng-show="menu.menuExpandedIndex === index || subMenuActiveUrlIn(entry.entries)">
+                <li ng-repeat="subEntry in entry.entries">
+                    <a ng-href="{{subEntry.url}}" class="{{menu.activeMenuUrl === subEntry.url ? 'active' : ''}}"
+                       ng-click="menu.activeMenuUrl = subEntry.url">{{subEntry.title}}</a>
                 </li>
             </ul>
         </li>

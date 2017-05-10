@@ -1,7 +1,7 @@
 
 angular.module('ProjMngmnt')
     .service('UI', function (CommonConstants) {
-        // Dashboard Data
+        // Dashboard View Data
         var dashboardData = {
             riskStatusLabelMap: {
                 DETECTED: "Détecté",
@@ -21,7 +21,7 @@ angular.module('ProjMngmnt')
         };
 
 
-        // Views Data
+        // Entries View Data
         var viewsData = {
             action: {
                 table: {
@@ -752,9 +752,9 @@ angular.module('ProjMngmnt')
         viewsData[CommonConstants.CONSTRUCTION_SITE_STRING] = angular.copy(projectLevelCommonViewData);
 
 
-        // Sidebar Data
+        // Sidebar View Data
 
-        var projectLevelBaseContent = {
+        var projectLevelSidebarContent = {
             entries: [
                 {
                     url: "dashboard",
@@ -806,41 +806,53 @@ angular.module('ProjMngmnt')
             ]
         };
 
-        var portfolioContent  = {
+        var projectsSidebarContent  = {
             title: "Général",
             entries: [
+                {
+                    url: "projects",
+                    iconClass: "fa fa-th",
+                    title: "Portefeuille"
+                },
                 {
                     url: "dashboard",
                     iconClass: "fa fa-dashboard",
                     title: "Tableau de bord"
-                },{
-                    url: "projects",
-                    iconClass: "fa fa-th",
-                    title: "Portefeuille"
-                },{
-                    url: "resources",
-                    iconClass: "fa fa-user-times",
-                    title: "Ressources"
-                },{
-                    url: "internal",
-                    iconClass: "fa fa-bullseye",
-                    title: "Interne"
-                },{
-                    url: "external",
-                    iconClass: "fa fa-external-link",
-                    title: "Externe"
+                },
+                {
+                    url: CommonConstants.EMPTY_HREF_URL,
+                    iconClass: "fa fa-tasks",
+                    title: "Administration",
+                    entries: [
+                        {
+                            url: "." + CommonConstants.GENERAL_BASE_URL + "/resources",
+                            title: "Ressources"
+                        },
+                        {
+                            url: "." + CommonConstants.GENERAL_BASE_URL + "/providers",
+                            title: "Fournisseurs"
+                        },
+                        {
+                            url: "." + CommonConstants.GENERAL_BASE_URL + "/partners",
+                            title: "Partenaires"
+                        },
+                        {
+                            url: "." + CommonConstants.GENERAL_BASE_URL + "/accounts",
+                            title: "Gestion de comptes"
+                        }
+                    ]
                 }
             ]
         };
 
 
 
-        this.getProjectLevelBaseContent = function () {
-            return projectLevelBaseContent;
+        this.getProjectLevelSidebarContent = function () {
+            return projectLevelSidebarContent;
         };
 
-        this.getPortfolioContent = function () {
-            return portfolioContent;
+        this.getProjectsSidebarContent = function () {
+            return projectsSidebarContent;
         };
 
         this.getEntryViewData = function (viewType) {

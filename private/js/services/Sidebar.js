@@ -1,7 +1,6 @@
 
 angular.module('ProjMngmnt')
     .service('Sidebar', function (CommonConstants, DB, UI) {
-        var hrefVoid = "javascript:void(0)";
         var sidebarContent = {};
 
         // Get title
@@ -74,7 +73,7 @@ angular.module('ProjMngmnt')
 
         function prependUrlPrefix(urlSuffix, urlPrefix) {
             // Avoid prefixing for collapsible entry links [javascript:void(0)]
-            if (urlSuffix === hrefVoid) {
+            if (urlSuffix === CommonConstants.EMPTY_HREF_URL) {
                 return urlSuffix;
             }
             return "./" + (urlPrefix ? urlPrefix + "/" : "") + urlSuffix;
@@ -87,7 +86,15 @@ angular.module('ProjMngmnt')
                 if (sidebarContent.entries[i].url === entryUrl) {
                     return sidebarContent.entries[i];
                 }
+                else if (sidebarContent.entries[i].entries) {
+                    for (var j = 0; j < sidebarContent.entries[i].entries.length; j++) {
+                        if (sidebarContent.entries[i].entries[j].url === entryUrl) {
+                            return sidebarContent.entries[i].entries[j] ;
+                        }
+                    }
+                }
             }
+            return void(0);
         };
 
         // Set active menu link corresponding to URL path
@@ -110,10 +117,10 @@ angular.module('ProjMngmnt')
 
             // Set page [type] content
             if (pageProperties.type === "general") {
-                cloneContent = angular.copy(UI.getPortfolioContent());
+                cloneContent = angular.copy(UI.getProjectsSidebarContent());
             }
             else if (CommonConstants.PROJECT_LEVELS.indexOf(pageProperties.type) !== -1) {
-                cloneContent = angular.copy(UI.getProjectLevelBaseContent());
+                cloneContent = angular.copy(UI.getProjectLevelSidebarContent());
 
                 // Set title
                 var titlePromise = getTitle(pageProperties);

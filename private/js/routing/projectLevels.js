@@ -30,7 +30,7 @@ angular.module("ProjMngmnt")
                         var urlPrefixParts = [];
                         // Header setup
                         var entries = [];
-                        entries.push({ title: "Portefeuille", url: $state.href("general.portfolio", null, {absolute: true}) });
+                        entries.push({ title: "Portefeuille", url: $state.href("general.projects", null, {absolute: true}) });
 
                         // Common conditions
                         if (projectLevelSingleName === CommonConstants.PROJECT_STRING
@@ -71,8 +71,16 @@ angular.module("ProjMngmnt")
                         }
                         projectLevelPageSpecifics.urlPrefix = urlPrefixParts.join("/");
 
+
                         // Post-setup
+
                         Sidebar.setContent({ type: projectLevelSingleName, urlPrefix: projectLevelPageSpecifics.urlPrefix });
+                        // On direct access, corresponding child state menu entry
+                        if ($state.current.name !== projectLevelSingleName) {
+                            // Get suffix by removing leading slash
+                            Sidebar.setActiveMenuUrlBySuffix($state.current.url.slice(1));
+                        }
+
                         Header.setContent({ updateTimeDisplayed:true, entries: entries });
 
 
@@ -85,7 +93,9 @@ angular.module("ProjMngmnt")
                 },
                 defaultConfig: {
                     url: "/",
-                    controller: function ($state) {
+                    controller: function ($state, Sidebar) {
+                        Sidebar.setActiveMenuUrlBySuffix("dashboard");
+
                         // Default redirection to designated entry (instead of blank)
                         $state.go("^.dashboard", null, {location: "replace"});
                     }
@@ -133,10 +143,7 @@ angular.module("ProjMngmnt")
                 },
                 planningConfig: {
                     url: "/planning",
-                    template: "<p>Planning</p>",
-                    controller: function (Sidebar) {
-                        Sidebar.setActiveMenuUrlBySuffix("planning");
-                    }
+                    template: "<p>Planning</p>"
                 }
             };
         }
@@ -181,7 +188,7 @@ angular.module("ProjMngmnt")
                     var urlPrefixParts = [];
                     // Header setup
                     var entries = [];
-                    entries.push({ title: "Portefeuille", url: $state.href("general.portfolio", null, {absolute: true}) });
+                    entries.push({ title: "Portefeuille", url: $state.href("general.projects", null, {absolute: true}) });
 
                     // Project title
                     urlPrefixParts.push(CommonConstants.PROJECT_STRING + "s/" + $stateParams[CommonConstants.PROJECT_STRING + "Id"]);

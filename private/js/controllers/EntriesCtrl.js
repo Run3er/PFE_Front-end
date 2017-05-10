@@ -1,9 +1,6 @@
 
 angular.module('ProjMngmnt')
     .controller('EntriesCtrl', function (Sidebar, DB, UI, $scope, entrySpecifics) {
-        // Navigation setup (not using onEnter because it's triggered before parent controller execution)
-        Sidebar.setActiveMenuUrlBySuffix(entrySpecifics.type + "s");
-
 
         // Functions definition
 
