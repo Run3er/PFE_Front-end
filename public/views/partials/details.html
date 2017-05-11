@@ -9,7 +9,7 @@
     <i class="fa fa-pencil"></i>
 </button>
 
-<form class="table-responsive" name="form" novalidate ng-submit="formSubmit()">
+<form class="table-responsive form-horizontal" name="form" novalidate ng-submit="formSubmit()">
     <div ng-if="mode !== MODES.view">
         <button class="btn btn-primary" type="submit" ng-click="mode = MODES.view" ng-disabled="!formSubmitEnabled">
             <i class="fa fa-save"></i>
@@ -20,12 +20,11 @@
     </div>
 
     <table class="main-table table table-striped table-hover">
-        <tr ng-repeat="entry in entries">
+        <tr ng-repeat-start="entry in entries" ng-if="mode === MODES.view">
             <th>
                 <span>{{entry.name}}</span>
             </th>
-
-            <td ng-if="mode === MODES.view">
+            <td>
                 <div ng-if="!entry.link">
                     <!--apply different filters to data view-type-->
                     <span ng-if="!entry.type">{{entry.value}}</span>
@@ -36,16 +35,18 @@
                 </div>
                 <a ng-href="{{'./' + entry.link}}" ng-if="entry.link">{{entry.value}}</a>
             </td>
-
-            <td ng-if="mode === MODES.edit">
-                <div ng-if="entry.formField.choices === undefined">
+        </tr>
+        <tr ng-repeat-end ng-if="mode === MODES.edit">
+            <td class="form-group">
+                <label class="control-label col-sm-2" for="{{entry.formField.identifier}}">{{entry.formField.label}}:</label>
+                <div class="col-sm-10" ng-if="entry.formField.choices === undefined">
                     <input id="{{entry.formField.identifier}}" class="form-control" type="text" placeholder=" {{entry.formField.placeholder}}" required ng-if="entry.formField.type === 'input'" ng-focus="formFocusElt(entry.formField.identifier)" ng-model="formEntry[entry.formField.identifier]">
                     <textarea id="{{entry.formField.identifier}}" class="form-control" type="text" placeholder=" {{entry.formField.placeholder}}" required ng-if="entry.formField.type === 'textarea'"  ng-focus="formFocusElt(entry.formField.identifier)" ng-model="formEntry[entry.formField.identifier]"></textarea>
                     <div class="{{datePopups.formFocusedElt === entry.formField.identifier ? '' : 'date-input-blurred'}}">
                         <input id="{{entry.formField.identifier}}" class="form-control" type="text" placeholder=" {{entry.formField.placeholder}}" required ng-if="entry.formField.type === 'date'" uib-datepicker-popup="{{datePopups.format}}"  is-open="datePopups.formFocusedElt" datepicker-options="datePopups.dateOptions" alt-input-formats="datePopups.altInputFormats" show-button-bar="false" ng-focus="formFocusElt(entry.formField.identifier); datePopups.popups[entry.formField.identifier].opened = true" ng-model-options="{ timezone: 'UTC' }" ng-model="formEntry[entry.formField.identifier]" ng-init="datePopups.popups[entry.formField.identifier] = { opened: false }">
                     </div>
                 </div>
-                <div ng-if="entry.formField.choices !== undefined">
+                <div class="col-sm-10" ng-if="entry.formField.choices !== undefined">
                     <select id="{{entry.formField.identifier}}" class="form-control" required ng-focus="formFocusElt(entry.formField.identifier)" ng-options="choice.name as choice.value for choice in entry.formField.choices" ng-model="formEntry[entry.formField.identifier]">
                         <option class="hidden" value=""  disabled="disabled" selected="selected">{{entry.formField.placeholder}}</option>
                     </select>
