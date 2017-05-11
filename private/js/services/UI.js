@@ -866,80 +866,130 @@ angular.module('ProjMngmnt')
                         name: "Nom"
                     },
                     {
-                        key: "advancement",
-                        type: "percentage",
-                        name: "Avancement"
+                        key: "mainContact",
+                        name: "Contact principal"
                     },
                     {
-                        key: "status",
-                        name: "Statut"
+                        key: "sponsors",
+                        name: "Sponsors"
                     },
                     {
-                        key: "chargeConsumed",
-                        name: "Charge Consommée"
+                        key: "finalClient",
+                        name: "Client final"
                     },
                     {
-                        key: "budgetConsumed",
-                        name: "Budget Consommé"
+                        key: "goal",
+                        name: "Objectif du projet"
                     },
                     {
-                        key: "budgetTotal",
-                        name: "Budget Total"
+                        key: "initialBudget",
+                        name: "Budget initial"
                     },
                     {
-                        key: "budgetPlanned",
-                        name: "Budget Planifié"
+                        key: "chargePrevision",
+                        name: "Charge prévisionnelle"
+                    },
+                    {
+                        key: "startDate",
+                        name: "Date début"
+                    },
+                    {
+                        key: "endDate",
+                        name: "Date fin"
+                    },
+                    {
+                        key: "hypotheses_constraints",
+                        name: "Hypothèses & Contraintes"
+                    },
+                    {
+                        key: "history_decisions",
+                        name: "Historique & Décisions"
+                    },
+                    {
+                        key: "comment",
+                        name: "Commentaire"
                     }
                 ]
             },
             form: {
                 defaultSortingField: "name",
-                fields: [
+                fields: [{
+                    identifier: "name",
+                    label: "Nom",
+                    placeholder: "Sasir le nom",
+                    type: "input"
+                },
                     {
-                        identifier: "name",
-                        label: "Nom",
-                        placeholder: "Saisir un nom",
-                        type: 'input'
+                        identifier: "mainContact",
+                        label: "Contact principal",
+                        placeholder: "Sasir le nom du contact principal",
+                        type: "input"
                     },
                     {
-                        identifier: "advancement",
-                        label: "Avancement",
-                        placeholder: "Saisir l'avancement",
-                        type: 'input'
+                        identifier: "sponsors",
+                        label: "Sponsors",
+                        placeholder: "Sasir un sponsor par ligne",
+                        type: "textarea"
                     },
                     {
-                        identifier: "status",
-                        label: "Statut",
-                        placeholder: "Sélectionner le statut",
-                        choices: [
-                            { identifier: "BAD", value: "Mauvais"},
-                            { identifier: "UNCERTAIN", value: "Incertain"},
-                            { identifier: "GOOD", value: "Bon"}
-                        ]
+                        identifier: "finalClient",
+                        label: "Client final",
+                        placeholder: "Sasir le nom du client final",
+                        type: "input"
                     },
                     {
-                        identifier: "chargeConsumed",
-                        label: "Charge consommée",
-                        placeholder: "Saisir la charge consommée",
-                        type: 'input'
+                        identifier: "goal",
+                        label: "Objectif du projet",
+                        placeholder: "Sasir l'objectif du projet",
+                        type: "input"
                     },
                     {
-                        identifier: "budgetConsumed",
-                        label: "Budget consommé",
-                        placeholder: "Saisir le budget consommé",
-                        type: 'input'
+                        identifier: "initialBudget",
+                        label: "Budget initial",
+                        placeholder: "Entrer le budget initial",
+                        type: "input"
                     },
                     {
-                        identifier: "budgetPlanned",
-                        label: "Budget planifié",
-                        placeholder: "Saisir le budget planifié",
-                        type: 'input'
+                        identifier: "chargePrevision",
+                        label: "Charge prévisionnelle",
+                        placeholder: "Entrer la charge prévisionnelle",
+                        type: "input"
                     },
                     {
-                        identifier: "budgetTotal",
-                        label: "Budget total",
-                        placeholder: "Saisir le budget total",
-                        type: 'input'
+                        identifier: "startDate",
+                        label: "Date début",
+                        placeholder: "Choisir la date de début",
+                        type: "date"
+                    },
+                    {
+                        identifier: "endDate",
+                        label: "Date fin",
+                        placeholder: "Choisir la date de fin",
+                        type: "date"
+                    },
+                    {
+                        identifier: "hypotheses_constraints",
+                        label: "Hypothèses & Contraintes",
+                        placeholder: "Sasir les hypothèses et les contraintes",
+                        type: "textarea"
+                    },
+                    {
+                        identifier: "history_decisions",
+                        label: "Historique & Décisions",
+                        placeholder: "Sasir l'historique et les décisions",
+                        type: "textarea"
+                    },
+                    {
+                        identifier: "comment",
+                        label: "Commentaire",
+                        placeholder: "Sasir un commentaire",
+                        type: "input"
+                    },
+                    {
+                        identifier: "files",
+                        label: "Documents en pièce jointe",
+                        placeholder: "Attacher des fichiers en pièces jointes",
+                        type: "input"
                     }
                 ]
             }
