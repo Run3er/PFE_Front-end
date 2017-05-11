@@ -39,5 +39,37 @@ _:-ms-lang(x), _::-webkit-meter-bar,
    word-break: break-all;
 }
 
+
+//* Bootstrap overrides *//
+.btn {
+   &:focus, &:active, &:active:focus {
+      outline: 0;
+   }
+}
+
+@mixin btn-define($btn-class, $base-color) {
+   .#{$btn-class} {
+      border: none;
+      // font-weight: 600;
+      &, &:not(:hover):focus {
+         background-color: $base-color;
+      }
+      &:hover {
+         background-color: lighten($base-color, 2%);
+      }
+      &:active, &:active:focus {
+         background-color: darken($base-color, 4%);
+      }
+   }
+}
+
+@include btn-define("btn-default", #e5e5e5);
+@include btn-define("btn-primary", $color-primary);
+@include btn-define("btn-success", #57BE85);
+@include btn-define("btn-info", #65b4ff); //cyan-#54D1F1
+@include btn-define("btn-warning", #FDB813);
+@include btn-define("btn-danger", #fd7e72);
+
+
 //* Navbar & Sidebar *//
 @import 'navigation';

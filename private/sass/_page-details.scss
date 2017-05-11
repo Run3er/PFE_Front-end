@@ -1,0 +1,22 @@
+// 
+//	Entries page styling 
+//
+//
+
+/*=============== Details page ===============*/
+/* Main content */
+button.btn {
+   padding: 0.3rem 0.7rem;
+   border: 0;
+   user-select: none;
+   &, &:hover, &:focus, &:active {
+      outline: 0;
+   }
+   &:active {
+      // box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+   }
+}
+table.main-table {
+   margin-top: 1.5rem;
+   color: $font-color-dark;
+}

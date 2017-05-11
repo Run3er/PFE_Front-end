@@ -1,0 +1,64 @@
+
+<div class="alert alert-{{formAlert.didSucceed ? 'success' : 'danger'}} alert-dismissable" ng-if="formAlert && formAlert.active">
+    <a class="close" href="#" data-dismiss="alert" aria-label="close" ng-click="alertDismiss()">&times;</a>
+    <strong>{{formAlert.didSucceed ? 'Success' : 'Failure'}}.&nbsp;</strong>{{formAlert.msg}}
+</div>
+
+
+<button class="btn btn-default" ng-click="edit()" ng-show="mode !== MODES.edit">
+    <i class="fa fa-pencil"></i>
+</button>
+
+<form class="table-responsive" name="form" novalidate ng-submit="formSubmit()">
+    <div ng-if="mode !== MODES.view">
+        <button class="btn btn-primary" type="submit" ng-click="mode = MODES.view" ng-disabled="!formSubmitEnabled">
+            <i class="fa fa-save"></i>
+        </button>
+        <button class="btn btn-default" type="reset" ng-click="formCancel()" ng-disabled="!formSubmitEnabled">
+            <i class="fa fa-remove"></i>
+        </button>
+    </div>
+
+    <table class="main-table table table-striped table-hover">
+        <tr ng-repeat="entry in entries">
+            <th>
+                <span>{{entry.name}}</span>
+            </th>
+
+            <td ng-if="mode === MODES.view">
+                <div ng-if="!entry.link">
+                    <!--apply different filters to data view-type-->
+                    <span ng-if="!entry.type">{{entry.value}}</span>
+                    <span ng-if="entry.type === 'nbToString'">{{entry.value.slice(4)}} ({{entry.value[0]}})</span>
+                    <span ng-if="entry.type === 'percentage'">{{entry.value*100 | number:0}}%</span>
+                    <span ng-if="entry.type === 'days'">{{entry.value ? entry.value + 'j' : ''}}</span>
+                    <span ng-if="entry.type === 'date'">{{entry.value | date: 'dd/MM/yyyy'}}</span>
+                </div>
+                <a ng-href="{{'./' + entry.link}}" ng-if="entry.link">{{entry.value}}</a>
+            </td>
+
+            <td ng-if="mode === MODES.edit">
+                <div ng-if="entry.formField.choices === undefined">
+                    <input id="{{entry.formField.identifier}}" class="form-control" type="text" placeholder=" {{entry.formField.placeholder}}" required ng-if="entry.formField.type === 'input'" ng-focus="formFocusElt(entry.formField.identifier)" ng-model="formEntry[entry.formField.identifier]">
+                    <textarea id="{{entry.formField.identifier}}" class="form-control" type="text" placeholder=" {{entry.formField.placeholder}}" required ng-if="entry.formField.type === 'textarea'"  ng-focus="formFocusElt(entry.formField.identifier)" ng-model="formEntry[entry.formField.identifier]"></textarea>
+                    <div class="{{datePopups.formFocusedElt === entry.formField.identifier ? '' : 'date-input-blurred'}}">
+                        <input id="{{entry.formField.identifier}}" class="form-control" type="text" placeholder=" {{entry.formField.placeholder}}" required ng-if="entry.formField.type === 'date'" uib-datepicker-popup="{{datePopups.format}}"  is-open="datePopups.formFocusedElt" datepicker-options="datePopups.dateOptions" alt-input-formats="datePopups.altInputFormats" show-button-bar="false" ng-focus="formFocusElt(entry.formField.identifier); datePopups.popups[entry.formField.identifier].opened = true" ng-model-options="{ timezone: 'UTC' }" ng-model="formEntry[entry.formField.identifier]" ng-init="datePopups.popups[entry.formField.identifier] = { opened: false }">
+                    </div>
+                </div>
+                <div ng-if="entry.formField.choices !== undefined">
+                    <select id="{{entry.formField.identifier}}" class="form-control" required ng-focus="formFocusElt(entry.formField.identifier)" ng-options="choice.name as choice.value for choice in entry.formField.choices" ng-model="formEntry[entry.formField.identifier]">
+                        <option class="hidden" value=""  disabled="disabled" selected="selected">{{entry.formField.placeholder}}</option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+<!--
+        TODO:
+    - Dynamically resizing textarea (http://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize)
+
+    - Take a look at scattered TODOs
+ -->

@@ -131,6 +131,7 @@ angular.module("ProjMngmnt")
                             //	following's alternative inline function declaration.
                             // But this does (function declared outside):
                             //     // entrySpecifics: entriesMap["actions"].resolveFn
+                            // TODO: find out why...
                             entrySpecifics: function () {
                                 projectLevelPageSpecifics.type = stateSingleName;
                                 projectLevelPageSpecifics.menuUrl = stateSingleName + "s";
@@ -143,7 +144,17 @@ angular.module("ProjMngmnt")
                 },
                 charterConfig: {
                     url: "/charter",
-                    template: "<p>Charte projet.</p>"
+                    templateUrl: CommonConstants.PARTIALS_DIR + "/details.html",
+                    controller: "DetailsCtrl",
+                    resolve: {
+                        entrySpecifics: function () {
+                            projectLevelPageSpecifics.type = "charter";
+                            projectLevelPageSpecifics.menuUrl = "charter";
+                            // projectLevelPageSpecifics.urlPrefix; set in parent state
+
+                            return projectLevelPageSpecifics;
+                        }
+                    }
                 },
                 planningConfig: {
                     url: "/planning",
