@@ -858,7 +858,6 @@ angular.module('ProjMngmnt')
         var projectLevelCommonViewData = {
             table: {
                 // tenantDataKey_columnName mapping
-                columnKeyLinkable: "name",
                 columnMaps: [
                     // Ordered key-values
                     {
@@ -996,8 +995,10 @@ angular.module('ProjMngmnt')
         };
 
         viewsData[CommonConstants.PROJECT_STRING] = angular.copy(projectLevelCommonViewData);
+        viewsData[CommonConstants.PROJECT_STRING].table.columnKeyLinkable = "name";
 
         viewsData[CommonConstants.SUB_PROJECT_STRING] = angular.copy(projectLevelCommonViewData);
+        viewsData[CommonConstants.SUB_PROJECT_STRING].table.columnKeyLinkable = "name";
 
         viewsData[CommonConstants.CONSTRUCTION_SITE_STRING] = angular.copy(projectLevelCommonViewData);
 
@@ -1095,127 +1096,145 @@ angular.module('ProjMngmnt')
             ]
         };
 
-        this.getProjectLevelSidebarContent = function (urlPrefix) {
-            return {
-                entries: [
-                    {
-                        url: "charter",
-                        iconClass: "fa fa-thumb-tack",
-                        title: "Charte du projet"
-                    },
-                    {
-                        url: "javascript:void(0)",
-                        iconClass: "fa fa-eye",
-                        title: "État des lieux",
-                        entries: [
-                            {
-                                url: "./" + urlPrefix + "/dashboard",
-                                title: "Tableau de bord"
-                            },
-                            {
-                                url: "./" + urlPrefix + "/actions",
-                                title: "Plan d'action"
-                            },
-                            {
-                                url: "./" + urlPrefix + "/todos",
-                                title: "Reste à faire"
-                            }
-                        ]
-                    },
-                    {
-                        url: "javascript:void(0)",
-                        iconClass: "fa fa-calendar-times-o",
-                        title: "Planification",
-                        entries: [
-                            {
-                                url: "./" + urlPrefix + "/milestones",
-                                title: "Principaux jalons"
-                            },
-                            {
-                                url: "./" + urlPrefix + "/planning",
-                                title: "Planning"
-                            }
-                        ]
-                    },
-                    {
-                        url: "javascript:void(0)",
-                        iconClass: "fa fa-sticky-note",
-                        title: "Gestion du scope",
-                        entries: [
-                            {
-                                url: "./" + urlPrefix + "/documents",
-                                title: "Documentations"
-                            },
-                            {
-                                url: "./" + urlPrefix + "/pendingIssues",
-                                title: "Points en suspens"
-                            },
-                            {
-                                url: "./" + urlPrefix + "/changeRequests",
-                                title: "Demandes de changement"
-                            }
-                        ]
-                    },
-                    {
-                        url: "javascript:void(0)",
-                        iconClass: "fa fa-sitemap",
-                        title: "Gestion d'intégration",
-                        entries: [
-                            {
-                                url: "./" + urlPrefix + "/subProjects",
-                                title: "Sous-projets"
-                            },
-                            {
-                                url: "./" + urlPrefix + "/constructionSites",
-                                title: "Chantiers"
-                            }
-                        ]
-                    },
-                    {
-                        url: "javascript:void(0)",
-                        iconClass: "fa fa-user-times",
-                        title: "Gestion des ressources",
-                        entries: [
-                            {
-                                url: "./" + urlPrefix + "/humanResources",
-                                title: "Ressources humaines"
-                            },
-                            {
-                                url: "./" + urlPrefix + "/resources",
-                                title: "Autres ressources"
-                            }
-                        ]
-                    },
-                    {
-                        url: "budget",
-                        iconClass: "fa fa-eur",
-                        title: "Gestion des coûts"
-                    },
-                    {
-                        url: "risks",
-                        iconClass: "fa fa-exclamation-circle",
-                        title: "Gestion des risques"
-                    },
-                    {
+        this.getProjectLevelSidebarContent = function (projectLevelProperties) {
+            var entries = [
+                {
+                    url: "charter",
+                    iconClass: "fa fa-thumb-tack",
+                    title: "Charte du projet"
+                },
+                {
+                    url: "javascript:void(0)",
+                    iconClass: "fa fa-eye",
+                    title: "État des lieux",
+                    entries: [
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/dashboard",
+                            title: "Tableau de bord"
+                        },
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/actions",
+                            title: "Plan d'action"
+                        },
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/todos",
+                            title: "Reste à faire"
+                        }
+                    ]
+                },
+                {
+                    url: "javascript:void(0)",
+                    iconClass: "fa fa-calendar-times-o",
+                    title: "Planification",
+                    entries: [
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/milestones",
+                            title: "Principaux jalons"
+                        },
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/planning",
+                            title: "Planning"
+                        }
+                    ]
+                },
+                {
+                    url: "javascript:void(0)",
+                    iconClass: "fa fa-sticky-note",
+                    title: "Gestion du scope",
+                    entries: [
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/documents",
+                            title: "Documentations"
+                        },
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/pendingIssues",
+                            title: "Points en suspens"
+                        },
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/changeRequests",
+                            title: "Demandes de changement"
+                        }
+                    ]
+                }
+            ];
+
+            if (projectLevelProperties.type === CommonConstants.PROJECT_STRING) {
+                entries.push({
+                    url: "javascript:void(0)",
+                    iconClass: "fa fa-sitemap",
+                    title: "Gestion d'intégration",
+                    entries: [
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/subProjects",
+                            title: "Sous-projets"
+                        },
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/constructionSites",
+                            title: "Chantiers"
+                        }
+                    ]
+                });
+            }
+            else if (projectLevelProperties.type === CommonConstants.SUB_PROJECT_STRING) {
+                entries.push({
+                    url: "constructionSites",
+                    iconClass: "fa fa-sitemap",
+                    title: "Chantiers"
+                });
+            }
+
+            entries = entries.concat([
+                {
+                    url: "javascript:void(0)",
+                    iconClass: "fa fa-user-times",
+                    title: "Gestion des ressources",
+                    entries: [
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/humanResources",
+                            title: "Ressources humaines"
+                        },
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/resources",
+                            title: "Autres ressources"
+                        }
+                    ]
+                },
+                {
+                    url: "budget",
+                    iconClass: "fa fa-eur",
+                    title: "Gestion des coûts"
+                },
+                {
+                    url: "risks",
+                    iconClass: "fa fa-exclamation-circle",
+                    title: "Gestion des risques"
+                }
+            ]);
+            
+            if (projectLevelProperties.type === CommonConstants.PROJECT_STRING) {
+                entries.push({
                         url: "javascript:void(0)",
                         iconClass: "fa fa-comments",
                         title: "Gestion de la communication",
                         entries: [
                             {
-                                url: "./" + urlPrefix + "/communicationPlans",
+                                url: "./" + projectLevelProperties.urlPrefix + "/communicationPlans",
                                 title: "Plan de communication"
                             },
                             {
-                                url: "./" + urlPrefix + "/writeups",
+                                url: "./" + projectLevelProperties.urlPrefix + "/writeups",
                                 title: "Comptes rendus de réunions"
                             },
                             {
-                                url: "./" + urlPrefix + "/reunionPlannings",
+                                url: "./" + projectLevelProperties.urlPrefix + "/reunionPlannings",
                                 title: "Planning des réunions"
                             }
                         ]
-                    }
-                ]
+                    });
+            }
+
+            return {
+                entries: entries
             };
         };
 

@@ -14,63 +14,6 @@ angular.module('ProjMngmnt')
                 });
         }
 
-        // Get collapsible sub-hierarchy entry w/sub-links
-        function appendEntrySubs(entries2append, parentEntryProps) {
-            var entrySubs = [];
-
-            if (parentEntryProps.type === CommonConstants.PROJECT_STRING) {
-                entrySubs.push({
-                    type: CommonConstants.SUB_PROJECT_STRING,
-                    title: "Sous-projets"
-                });
-            }
-            if (parentEntryProps.type === CommonConstants.PROJECT_STRING
-                || parentEntryProps.type === CommonConstants.SUB_PROJECT_STRING) {
-                entrySubs.push({
-                    type: CommonConstants.CONSTRUCTION_SITE_STRING,
-                    title: "Chantiers"
-                });
-            }
-            else return void(0);
-
-            var urlParts = parentEntryProps.urlPrefix.split("/");
-            var uriPrefix = urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
-
-            entrySubs.forEach(function (entrySub) {
-                var subsUrlSuffix = entrySub.type + "s";
-                var subEntries = [];
-                var sub = {
-                    url: subsUrlSuffix,
-                    iconClass: "fa fa-sitemap",
-                    title: entrySub.title,
-                    entries: subEntries,
-                    fetched: false
-                };
-
-                entries2append.push(sub);
-
-                DB
-                    .getEntriesDAO({
-                        type: entrySub.type,
-                        uriPrefix: uriPrefix
-                    })
-                    .getAll()
-                    .then(function (entries) {
-                        for (var j = 0; j < entries.length; j++) {
-                            subEntries.push({
-                                title: entries[j].name,
-                                url: subsUrlSuffix + "/" + entries[j].id
-                            });
-                        }
-                        for (var j = 0; j < subEntries.length; j++) {
-                            subEntries[j].url = prependUrlPrefix(subEntries[j].url, parentEntryProps.urlPrefix);
-                        }
-                        sub.fetched = true;
-                    });
-                }
-            );
-        }
-
         function prependUrlPrefix(urlSuffix, urlPrefix) {
             // Avoid prefixing for collapsible entry links [javascript:void(0)]
             if (urlSuffix === CommonConstants.EMPTY_HREF_URL) {
@@ -120,7 +63,7 @@ angular.module('ProjMngmnt')
                 cloneContent = angular.copy(UI.getProjectsSidebarContent());
             }
             else if (CommonConstants.PROJECT_LEVELS.indexOf(pageProperties.type) !== -1) {
-                cloneContent = angular.copy(UI.getProjectLevelSidebarContent(pageProperties.urlPrefix));
+                cloneContent = angular.copy(UI.getProjectLevelSidebarContent(pageProperties));
 
                 // Set title
                 var titlePromise = getTitle(pageProperties);
