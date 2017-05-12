@@ -1,6 +1,6 @@
 
 <!-- Sidebar -->
-<div id="sidebar" ng-controller="SidebarCtrl" ng-cloak>
+<div id="sidebar" class="{{sidebarOverlayOn ? 'sidebar-overlay' : 'sidebar-hide-overlay'}}" ng-controller="SidebarCtrl" ng-cloak>
     <ul class="nav nav-menu">
         <li class="tab-content-header">
             <span title="{{menu.title}}">{{menu.title}}</span>
@@ -8,7 +8,7 @@
 
         <li class="simple-menu {{menu.activeMenuUrl === entry.url ? 'active' : ''}}"
             ng-if="entry.entries === void(0) || (entry.entries.length === 0 && entry.fetched)"
-            ng-repeat-start="(index, entry) in menu.entries" ng-click="menu.menuExpandedIndex = void(0); menu.activeMenuUrl = entry.url">
+            ng-repeat-start="(index, entry) in menu.entries" ng-click="sidebarOverlayOn = false; menu.menuExpandedIndex = void(0); menu.activeMenuUrl = entry.url">
             <a class="menu-entry" ng-href="{{entry.url}}">
                 <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
                 <span class="menu-title">{{entry.title}}</span>
@@ -23,7 +23,7 @@
         <li class="collapsible-menu {{(menu.activeMenuUrl === entry.url || subMenuActiveUrlIn(entry.entries)) ? 'active' : ''}}" ng-if="entry.entries !== void(0) && entry.entries.length > 0" ng-repeat-end>
             <!--Concrete menu entry (w/ concrete url)-->
             <span class="menu-entry" ng-if="entry.url !== 'javascript:void(0)'">
-                <a class="menu-entry-collapsible-main" ng-href="{{entry.url}}" ng-click="menu.menuExpandedIndex = menu.menuExpandedIndex === index ? void(0) : index; menu.activeMenuUrl = entry.url" ng-init="menu.menuExpandedIndex = menu.activeMenuUrl === entry.url ? index : void(0)">
+                <a class="menu-entry-collapsible-main" ng-href="{{entry.url}}" ng-click="sidebarOverlayOn = false; menu.menuExpandedIndex = menu.menuExpandedIndex === index ? void(0) : index; menu.activeMenuUrl = entry.url" ng-init="menu.menuExpandedIndex = menu.activeMenuUrl === entry.url ? index : void(0)">
                     <span class="menu-icon"><i class="{{entry.iconClass}}"></i></span>
                     <span class="menu-title">{{entry.title}}</span>
                 </a>
@@ -44,7 +44,7 @@
             <ul ng-show="menu.menuExpandedIndex === index || subMenuActiveUrlIn(entry.entries)">
                 <li ng-repeat="subEntry in entry.entries">
                     <a ng-href="{{subEntry.url}}" class="{{menu.activeMenuUrl === subEntry.url ? 'active' : ''}}"
-                       ng-click="menu.activeMenuUrl = subEntry.url">{{subEntry.title}}</a>
+                       ng-click="sidebarOverlayOn = false; menu.activeMenuUrl = subEntry.url">{{subEntry.title}}</a>
                 </li>
             </ul>
         </li>
