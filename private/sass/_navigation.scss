@@ -206,32 +206,30 @@ a:hover, a:focus {
    // overflow-y: auto;
    @media (max-width: 767px) {
       &.sidebar-overlay {
-         display: initial;
-         position: fixed;
-         top: 0;
-         bottom: 0;
-         left: 0;
-         z-index: 1200;
-         animation-name: sidebar-overlay-slide;
-         animation-duration: 250ms;
-      }
-      &.sidebar-hide-overlay {
-         display: initial;
-         position: fixed;
-         top: 0;
-         bottom: 0;
-         left: #{$sidebar-width * -1};
-         z-index: 1200;
-         animation-name: sidebar-overlay-hide-slide;
-         animation-duration: 250ms;
-      }
-      @keyframes sidebar-overlay-slide {
-         from {left: #{$sidebar-width * -1};}
-         to {left: 0;}
-      }
-      @keyframes sidebar-overlay-hide-slide {
-         to {left: #{$sidebar-width * -1};}
-         from {left: 0;}
+         &-show, &-hide {
+            display: initial;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            z-index: 1200;
+            animation-duration: 250ms;
+         }
+         &-show {
+            left: 0;
+            animation-name: sidebar-overlay-show-slide;
+         }
+         &-hide {
+            left: #{$sidebar-width * -1};
+            animation-name: sidebar-overlay-hide-slide;
+         }
+         @keyframes sidebar-overlay-show-slide {
+            from {left: #{$sidebar-width * -1};}
+            to {left: 0;}
+         }
+         @keyframes sidebar-overlay-hide-slide {
+            to {left: #{$sidebar-width * -1};}
+            from {left: 0;}
+         }
       }
    }
    @media (min-width: 768px) {

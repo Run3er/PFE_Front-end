@@ -13,10 +13,11 @@ angular.module('ProjMngmnt')
                 CLOSED: "Clôturé"
             },
             actionStatusLabelMap: {
-                ONGOING : "En cours",
-                STANDBY : "En standby",
-                CANCELLED : "Annulée",
-                CLOSED : "Clôturée"
+                ONGOING : "Dans les temps"
+                // ONGOING : "En cours",
+                // STANDBY : "En standby",
+                // CANCELLED : "Annulée",
+                // CLOSED : "Clôturée"
             }
         };
 
@@ -57,11 +58,6 @@ angular.module('ProjMngmnt')
                             name: "Clôture Planifiée"
                         },
                         {
-                            key: "delay",
-                            type: "days",
-                            name: "Retard"
-                        },
-                        {
                             key: "closureDate",
                             type: "date",
                             name: "Clôture Effective"
@@ -69,6 +65,56 @@ angular.module('ProjMngmnt')
                         {
                             key: "comment",
                             name: "Commentaire"
+                        }
+                    ],
+                    generatedFields: [
+                        // Must be ordered by ascending position
+                        {
+                            position: 6,
+                            key: "delay",
+                            type: "days",
+                            columnName: "Retard",
+                            // extract values from current entry
+                            formula: function (entry) {
+                                // return probability * impact
+                                return entry["closurePlannedDate"] - entry["creationDate"];
+                            }
+                        },
+                        {
+                            position: 4,
+                            key: "disposition",
+                            columnName: "Disposition à prendre",
+                            formula: function (entry) {
+                                var probability = entry["probability"];
+                                var impact = entry["impact"];
+
+                                var plan = [
+                                    "Monitoring",
+                                    "Plan B",
+                                    "Plan d'urgence"
+                                ];
+
+                                switch (impact) {
+                                    case "1":
+                                        return plan[0];
+                                    case "2":
+                                        if (probability < "3")
+                                            return plan[0];
+                                        return plan[1];
+                                    case "3":
+                                        if (probability < "2")
+                                            return plan[0];
+                                        return plan[1];
+                                    case "4":
+                                        if (probability < "3")
+                                            return plan[1];
+                                        return plan[2];
+                                    case "5":
+                                        if (probability < "2")
+                                            return plan[1];
+                                        return plan[2];
+                                }
+                            }
                         }
                     ]
                 },
@@ -884,9 +930,9 @@ angular.module('ProjMngmnt')
                             // extract values from current entry
                             formula: function (entry) {
                                 // return budgetConsumed and budgetToConsume sum
-                                var budgetTotalPrevision = parseInt(entry["budgetConsumed"]) + parseInt(entry["budgetToConsume"])
+                                var budgetTotalPrevision = parseInt(entry["budgetConsumed"]) + parseInt(entry["budgetToConsume"]);
 
-                                return budgetTotalPrevision ? budgetTotalPrevision : "";
+                                return budgetTotalPrevision ? budgetTotalPrevision : 0;
                             }
                         }
                     ]

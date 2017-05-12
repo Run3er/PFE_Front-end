@@ -23,13 +23,13 @@
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 
-<body class="{{miniSidebarToggle ? 'mini-sidebar' : ''}}">
+<body class="{{global.miniSidebarToggle ? 'mini-sidebar' : ''}}" ng-controller="GlobalCtrl">
 <!-- Navbar top -->
 <nav id="navbar-top" class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
         <ul class="nav navbar-left">
             <li class="visible-xs pull-left">
-                <a class="nav-icon" href="javascript:void(0)" ng-click="sidebarOverlayOn = !sidebarOverlayOn" ng-init="sidebarOverlayOn = false">
+                <a class="nav-icon" href="javascript:void(0)" ng-click="navbar.sidebarOverlayOn = !navbar.sidebarOverlayOn">
                     <i class="fa fa-bars"></i>
                 </a>
             </li>
@@ -49,8 +49,8 @@
             <img src="public/img/logo-itserv.png" alt="Logo IT SERV" />
         </a>
         <div id="navbar">
-            <a href="javascript:void(0)" class="hidden-xs nav-icon navbar-left" ng-init="miniSidebarToggle = false" ng-click="miniSidebarToggle = !miniSidebarToggle">
-                <i class="fa fa-{{miniSidebarToggle ? 'indent' : 'outdent'}}"></i>
+            <a href="javascript:void(0)" class="hidden-xs nav-icon navbar-left" ng-click="global.miniSidebarToggle = !global.miniSidebarToggle">
+                <i class="fa fa-{{global.miniSidebarToggle ? 'indent' : 'outdent'}}"></i>
             </a>
             <form class="navbar-form navbar-left">
                 <input type="text" class="form-control navbar-search" placeholder="Rechercher">
