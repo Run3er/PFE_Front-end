@@ -102,7 +102,7 @@ angular.module('ProjMngmnt')
 
             request("add", entry)
                 .then(function (addedEntryID) {
-                    // Add entry to raw entries data
+// Add entry to raw entries data
                     entry.id = addedEntryID;
                     entries.push(entry);
 
@@ -111,6 +111,7 @@ angular.module('ProjMngmnt')
                     generateAutoFields([entry], [tableRow]);
                     // Add row's array index as a field
                     tableRow.index = $scope.tableEntries.rows.length;
+                    tableRow.id = addedEntryID;
                     $scope.tableEntries.rows.push(tableRow);
 
                     // Finish, reset form to initial state
@@ -154,13 +155,13 @@ angular.module('ProjMngmnt')
 
             // Request operation to DB asynchronously
             var resultPromise = entriesDAO[operationType](arg);
-            resultPromise
-            // Update  alert
-                .catch(function () {
-                    $scope.formAlert.msg = operationType + " failed. [Try again.]";
-                    $scope.formAlert.didSucceed = false;
-                    $scope.formAlert.active = true;
-                });
+            // resultPromise
+            // // Update  alert
+            //     .catch(function () {
+            //         $scope.formAlert.msg = operationType + " failed. [Try again.]";
+            //         $scope.formAlert.didSucceed = false;
+            //         $scope.formAlert.active = true;
+            //     });
 
             return resultPromise;
         };

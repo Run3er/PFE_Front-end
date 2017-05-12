@@ -63,12 +63,20 @@ angular.module('ProjMngmnt')
                 },
                 add: function (entry) {
                     if (nonTransactionallyPersistedEntries.indexOf(entryProps.type) === -1) {
-                        // Use transactional bulk entry add-n-associate API (via nested path)
                         var postBody = uriPrefix.length === 0 ? entry : [ entry ];
 
                         return $http.post(serverAddress + "/" + uriPrefix + entriesUriName, postBody)
                             .then(function (response) {
-                                var appendedEntryId = response.data[0];
+                                var appendedEntryId;
+
+                                if (uriPrefix.length === 0) {
+                                    var urlParts = response.data._links.self.href.split("/");
+                                    appendedEntryId = urlParts[urlParts.length - 1];
+                                }
+                                else {
+                                    // Use transactional bulk entry add-n-associate API (via nested path)
+                                    appendedEntryId = response.data[0];
+                                }
 
                                 return appendedEntryId;
                             });
@@ -93,8 +101,8 @@ angular.module('ProjMngmnt')
                             .then(function (updatedEntry) {
                                 // TODO: correct update failure behavior (failure promise must be triggered)
                                 console.log(updatedEntry);
+
                                 // Nothing to do here
-                                console.log(updatedEntry);
                             });
                     }
                     return $q.reject();
