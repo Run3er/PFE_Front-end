@@ -140,11 +140,21 @@ angular.module("ProjMngmnt")
                 },
                 planningConfig: {
                     url: "/planning",
-                    template: "<p>Planning.</p>"
+                    template: "<p>Diagramme de Gantt.</p>"
                 },
                 budgetConfig: {
                     url: "/budget",
-                    template: "<p>Gestion du budget.</p>"
+                    templateUrl: CommonConstants.PARTIALS_DIR + "/details.html",
+                    controller: "DetailsCtrl",
+                    resolve: {
+                        entrySpecifics: function () {
+                            projectLevelPageSpecifics.type = "budget";
+                            projectLevelPageSpecifics.menuUrl = "budget";
+                            // projectLevelPageSpecifics.urlPrefix; set in parent state
+
+                            return projectLevelPageSpecifics;
+                        }
+                    }
                 }
             };
         }

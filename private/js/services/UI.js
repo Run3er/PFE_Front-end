@@ -21,8 +21,9 @@ angular.module('ProjMngmnt')
         };
 
 
-        // Entries View Data
+        // Entries & Details View Data
         var viewsData = {
+            // Entries View Data
             action: {
                 table: {
                     // tenantDataKey_columnName mapping
@@ -852,6 +853,226 @@ angular.module('ProjMngmnt')
                         }
                     ]
                 }
+            },
+
+            // Details View Data
+            budget: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values
+                        {
+                            key: "budgetInitial",
+                            // link: '#',
+                            name: "Budget initial"
+                        },
+                        {
+                            key: "budgetConsumed",
+                            name: "Budget consommé"
+                        },
+                        {
+                            key: "budgetToConsume",
+                            name: "Estimation du budget qui reste à consommer"
+                        }
+                    ],
+                    generatedFields: [
+                        // Must be ordered by ascending position
+                        {
+                            position: 3,
+                            key: "budgetTotalPrevision",
+                            columnName: "Budget total prévisionnel",
+                            // extract values from current entry
+                            formula: function (entry) {
+                                // return probability * impact
+                                return entry["budgetConsumed"] + entry["budgetToConsume"];
+                            }
+                        }
+                    ]
+                },
+                form: {
+                    fields: [
+                        {
+                            identifier: "budgetInitial",
+                            label: "Budget initial",
+                            placeholder: "Entrer le montant du budget initial",
+                            type: "input"
+                        },
+                        {
+                            identifier: "budgetConsumed",
+                            label: "Budget consommé",
+                            placeholder: "Entrer le montant du budget consommé",
+                            type: "input"
+                        },
+                        {
+                            identifier: "budgetToConsume",
+                            label: "Estimation du budget qui reste à consommer",
+                            placeholder: "Entrer le montant du budget qui reste à consommer",
+                            type: "input"
+                        }
+                    ]
+                }
+            },
+            charter: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values
+                        {
+                            key: "name",
+                            name: "Nom"
+                        },
+                        {
+                            key: "status",
+                            name: "Statut"
+                        },
+                        {
+                            key: "advancement",
+                            name: "Avancement"
+                        },
+                        {
+                            key: "mainContact",
+                            name: "Contact principal"
+                        },
+                        {
+                            key: "sponsors",
+                            name: "Sponsors"
+                        },
+                        {
+                            key: "finalClient",
+                            name: "Client final"
+                        },
+                        {
+                            key: "goal",
+                            name: "Objectif du projet"
+                        },
+                        {
+                            key: "budgetInitial",
+                            name: "Budget initial"
+                        },
+                        {
+                            key: "chargePrevision",
+                            name: "Charge prévisionnelle"
+                        },
+                        {
+                            key: "startDate",
+                            name: "Date début"
+                        },
+                        {
+                            key: "endDate",
+                            name: "Date fin"
+                        },
+                        {
+                            key: "hypotheses_constraints",
+                            name: "Hypothèses & Contraintes"
+                        },
+                        {
+                            key: "history_decisions",
+                            name: "Historique & Décisions"
+                        },
+                        {
+                            key: "comment",
+                            name: "Commentaire"
+                        }
+                    ]
+                },
+                form: {
+                    fields: [
+                        {
+                            identifier: "name",
+                            label: "Nom",
+                            placeholder: "Sasir le nom",
+                            type: "input"
+                        },
+                        {
+                            identifier: "status",
+                            label: "Statut",
+                            placeholder: "Sélectionner le statut",
+                            choices: [
+                                { identifier: "GREEN", value: "VERT"},
+                                { identifier: "ORANGE", value: "ORANGE"},
+                                { identifier: "RED", value: "ROUGE"}
+                            ]
+                        },
+                        {
+                            identifier: "advancement",
+                            label: "Avancement",
+                            placeholder: "Entrer l'avancement",
+                            type: "input"
+                        },
+                        {
+                            identifier: "mainContact",
+                            label: "Contact principal",
+                            placeholder: "Sasir le nom du contact principal",
+                            type: "input"
+                        },
+                        {
+                            identifier: "sponsors",
+                            label: "Sponsors",
+                            placeholder: "Sasir un sponsor par ligne",
+                            type: "textarea"
+                        },
+                        {
+                            identifier: "finalClient",
+                            label: "Client final",
+                            placeholder: "Sasir le nom du client final",
+                            type: "input"
+                        },
+                        {
+                            identifier: "goal",
+                            label: "Objectif du projet",
+                            placeholder: "Sasir l'objectif du projet",
+                            type: "input"
+                        },
+                        {
+                            identifier: "budgetInitial",
+                            label: "Budget initial",
+                            placeholder: "Entrer le budget initial",
+                            type: "input"
+                        },
+                        {
+                            identifier: "chargePrevision",
+                            label: "Charge prévisionnelle",
+                            placeholder: "Entrer la charge prévisionnelle",
+                            type: "input"
+                        },
+                        {
+                            identifier: "startDate",
+                            label: "Date début",
+                            placeholder: "Choisir la date de début",
+                            type: "date"
+                        },
+                        {
+                            identifier: "endDate",
+                            label: "Date fin",
+                            placeholder: "Choisir la date de fin",
+                            type: "date"
+                        },
+                        {
+                            identifier: "hypotheses_constraints",
+                            label: "Hypothèses & Contraintes",
+                            placeholder: "Sasir les hypothèses et les contraintes",
+                            type: "textarea"
+                        },
+                        {
+                            identifier: "history_decisions",
+                            label: "Historique & Décisions",
+                            placeholder: "Sasir l'historique et les décisions",
+                            type: "textarea"
+                        },
+                        {
+                            identifier: "comment",
+                            label: "Commentaire",
+                            placeholder: "Sasir un commentaire",
+                            type: "textarea"
+                        },
+                        {
+                            identifier: "files",
+                            label: "Documents en pièce jointe",
+                            placeholder: "Attacher des fichiers en pièces jointes",
+                            type: "input"
+                        }
+                    ]
+                }
             }
         };
 
@@ -881,7 +1102,7 @@ angular.module('ProjMngmnt')
                         name: "Objectif du projet"
                     },
                     {
-                        key: "initialBudget",
+                        key: "budgetInitial",
                         name: "Budget initial"
                     },
                     {
@@ -943,7 +1164,7 @@ angular.module('ProjMngmnt')
                         type: "input"
                     },
                     {
-                        identifier: "initialBudget",
+                        identifier: "budgetInitial",
                         label: "Budget initial",
                         placeholder: "Entrer le budget initial",
                         type: "input"
@@ -982,7 +1203,7 @@ angular.module('ProjMngmnt')
                         identifier: "comment",
                         label: "Commentaire",
                         placeholder: "Sasir un commentaire",
-                        type: "input"
+                        type: "textarea"
                     },
                     {
                         identifier: "files",
@@ -1003,59 +1224,8 @@ angular.module('ProjMngmnt')
         viewsData[CommonConstants.CONSTRUCTION_SITE_STRING] = angular.copy(projectLevelCommonViewData);
 
 
-        // Sidebar View Data
 
-        var projectLevelSidebarContent = {
-            entries: [
-                {
-                    url: "dashboard",
-                    iconClass: "fa fa-dashboard",
-                    title: "Tableau de bord"
-                },
-                {
-                    url: "milestones",
-                    iconClass: "fa fa-calendar-plus-o",
-                    title: "Jalons"
-                },
-                {
-                    url: "planning",
-                    iconClass: "fa fa-calendar",
-                    title: "Planning"
-                },
-                {
-                    url: "actions",
-                    iconClass: "fa fa-tasks",
-                    title: "Actions"
-                },
-                {
-                    url: "risks",
-                    iconClass: "fa fa-warning",
-                    title: "Risques"
-                },
-                {
-                    url: "pendingIssues",
-                    iconClass: "fa fa-pause-circle-o",
-                    title: "Points en suspens"
-                },
-                {
-                    url: "changeRequests",
-                    iconClass: "fa fa-exchange",
-                    title: "Demandes de changement",
-                    notifsNb: 1
-                },
-                {
-                    url: "resources",
-                    iconClass: "fa fa-user-times",
-                    title: "Ressources"
-                },
-                {
-                    url: "documents",
-                    iconClass: "fa fa-file",
-                    title: "Documents",
-                    notifsNb: 2
-                }
-            ]
-        };
+        // Sidebar View Data
 
         var projectsSidebarContent  = {
             title: "Général",

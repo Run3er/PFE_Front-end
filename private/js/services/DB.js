@@ -1,7 +1,7 @@
 
 angular.module('ProjMngmnt')
 // Database layer mockup
-    .service('DB', function (DBConstants, $http) {
+    .service('DB', function ($q, $http, DBConstants) {
         // API server address
         var serverAddress = DBConstants.SERVER_ADDRESS;
 
@@ -88,14 +88,16 @@ angular.module('ProjMngmnt')
                     }
                 },
                 update: function (entry) {
-
-                    return $http.patch(serverAddress + "/" + entriesUriName + "/" + entry.id, entry)
-                        .then(function (updatedEntry) {
-                            // TODO: correct update failure behavior (failure promise must be triggered)
-                            console.log(updatedEntry);
-                            // Nothing to do here
-                            console.log(updatedEntry);
-                        });
+                    if (entry && entry.id) {
+                        return $http.patch(serverAddress + "/" + entriesUriName + "/" + entry.id, entry)
+                            .then(function (updatedEntry) {
+                                // TODO: correct update failure behavior (failure promise must be triggered)
+                                console.log(updatedEntry);
+                                // Nothing to do here
+                                console.log(updatedEntry);
+                            });
+                    }
+                    return $q.reject();
                 },
                 delete: function (entryId) {
 

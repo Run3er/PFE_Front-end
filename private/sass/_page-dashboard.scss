@@ -203,13 +203,13 @@ $font-number-indicator: roboto;
          height: 4.7rem;
       }
       &.status {
-         &-GOOD {
+         &-GREEN {
             background-color: #64CF6F;
          }
-         &-UNCERTAIN {
-            background-color: #a8a8a8;
+         &-ORANGE {
+            background-color: #d47e19;
          }
-         &-BAD {
+         &-RED {
             background-color: #dc5050;
          }
       }
