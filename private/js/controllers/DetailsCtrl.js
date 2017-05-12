@@ -22,7 +22,7 @@ angular.module('ProjMngmnt')
         // On entry edit
         $scope.edit = function () {
             formReset();
-            $scope.formEntry = angular.copy(details);
+            $scope.formEntry = angular.copy($scope.tableEntries.details);
             $scope.mode = $scope.MODES.edit;
         };
 
@@ -35,8 +35,10 @@ angular.module('ProjMngmnt')
             // Request operation to DB asynchronously
             entryDAO["update"](entry)
                 .then(function () {
-                    // Update view-entry
-                    $scope.tableEntries.details = entry;
+                    $scope.tableEntries.details = angular.copy(entry);
+
+                    // Update view-only-entry's auto generated fields
+                    generateAutoFields(entry, $scope.tableEntries.details, angular.copy(viewData.table.columnMaps));
 
                     // Finish, reset form & table to inactive state
                     $scope.formCancel();
@@ -81,7 +83,7 @@ angular.module('ProjMngmnt')
                 if (viewData.form.fields[i].choices !== void(0)) {
                     for (var k = 0; k < viewData.form.fields[i].choices.length; k++) {
                         if (viewData.form.fields[i].choices[k].identifier === _details[viewData.form.fields[i].identifier]) {
-                            _fields[j][viewData.form.fields[i].identifier] = viewData.form.fields[i].choices[k].value;
+                            _fields[viewData.form.fields[i].identifier] = viewData.form.fields[i].choices[k].value;
                             break;
                         }
                     }
@@ -101,14 +103,14 @@ angular.module('ProjMngmnt')
                 uriPrefix = urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
             }
         }
-        var entryDAO = DB.getEntriesDAO({
+        var entryDAO = DB.getEntryDAO({
             type: entrySpecifics.type,
             uriPrefix: uriPrefix
         });
 
         // Get details from DB
         var details;
-        DB.getSingleResrcByUri(uriPrefix + "/" + entrySpecifics.type)
+        DB.getSingleResrcByUri(uriPrefix + "?projection=" + entrySpecifics.type)
             .then(function (resolveData) {
                 // Get the requested data
                 details = angular.copy(resolveData);

@@ -38,6 +38,26 @@ angular.module('ProjMngmnt')
                 });
         };
 
+        this.getEntryDAO = function (entryProps) {
+            // Request base resource, as entry is supposedly an artificial entry from an API projection
+            // TODO: restrict to that behavior, or else extend DAO functionality
+            return {
+                update: function (entry) {
+                    console.log(entryProps.uriPrefix)
+                    if (entry && entry.id) {
+                        return $http.patch(serverAddress + "/" + entryProps.uriPrefix, entry)
+                            .then(function (updatedEntry) {
+                                // TODO: correct update failure behavior (failure promise must be triggered)
+                                console.log(updatedEntry);
+
+                                // Nothing to do here
+                            });
+                    }
+                    return $q.reject();
+                }
+            };
+        };
+
         // DB entries interface object
         this.getEntriesDAO = function (entryProps) {
             var entriesUriName = entryProps.type + "s";

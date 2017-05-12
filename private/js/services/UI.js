@@ -883,8 +883,10 @@ angular.module('ProjMngmnt')
                             columnName: "Budget total prévisionnel",
                             // extract values from current entry
                             formula: function (entry) {
-                                // return probability * impact
-                                return entry["budgetConsumed"] + entry["budgetToConsume"];
+                                // return budgetConsumed and budgetToConsume sum
+                                var budgetTotalPrevision = parseInt(entry["budgetConsumed"]) + parseInt(entry["budgetToConsume"])
+
+                                return budgetTotalPrevision ? budgetTotalPrevision : "";
                             }
                         }
                     ]
