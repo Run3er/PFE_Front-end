@@ -682,9 +682,9 @@ angular.module('ProjMngmnt')
                             name: "Nom"
                         },
                         {
-                            key: "Date prévue",
+                            key: "dueDate",
                             type: "date",
-                            name: "dueDate"
+                            name: "Date d'échéance prévue"
                         },
                         {
                             key: "description",
@@ -855,9 +855,9 @@ angular.module('ProjMngmnt')
                             name: "Nom"
                         },
                         {
-                            key: "Date",
+                            key: "date",
                             type: "date",
-                            name: "date"
+                            name: "Date"
                         },
                         {
                             key: "location",
