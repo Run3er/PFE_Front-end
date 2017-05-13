@@ -34,11 +34,11 @@ angular.module('ProjMngmnt')
             // Risks & Actions count charts
 
             // Set data
-            function setCountData(statusesCount, statusLabelMap, resultData) {
-                Object.keys(statusesCount).forEach(function (statusCountKey) {
+            function setCountData(counts, labelsMap, resultData) {
+                Object.keys(counts).forEach(function (labeledCountKey) {
                     resultData.push({
-                        label: statusLabelMap[statusCountKey],
-                        value: statusesCount[statusCountKey]
+                        label: labelsMap[labeledCountKey],
+                        value: counts[labeledCountKey]
                     });
                 });
             }
@@ -46,7 +46,7 @@ angular.module('ProjMngmnt')
             setCountData(dashboardData.riskStatusesCount, viewData.riskStatusLabelMap, risksData);
             $scope.data.risksEmpty = risksData.length === 0;
             var actionsData = [];
-            setCountData(dashboardData.actionStatusesCount, viewData.actionStatusLabelMap, actionsData);
+            setCountData(dashboardData.actionsOngoingInTimeOrNotCount, viewData.actionInTimeOrNotLabelMap, actionsData);
             $scope.data.actionsEmpty = actionsData.length === 0;
 
             // Chart generation function

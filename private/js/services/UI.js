@@ -12,12 +12,9 @@ angular.module('ProjMngmnt')
                 MASTERED: "Maîtrisé",
                 CLOSED: "Clôturé"
             },
-            actionStatusLabelMap: {
-                ONGOING : "Dans les temps"
-                // ONGOING : "En cours",
-                // STANDBY : "En standby",
-                // CANCELLED : "Annulée",
-                // CLOSED : "Clôturée"
+            actionInTimeOrNotLabelMap: {
+                "true" : "Dans les temps",
+                "false" : "En retard"
             }
         };
 
