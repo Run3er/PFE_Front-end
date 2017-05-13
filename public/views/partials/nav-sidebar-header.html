@@ -41,7 +41,7 @@
                 </span>
             </a>
             <!--Common sub entries-->
-            <ul ng-show="menu.menuExpandedIndex === index || subMenuActiveUrlIn(entry.entries)">
+            <ul class="{{(menu.menuExpandedIndex === index || subMenuActiveUrlIn(entry.entries)) ? '' : 'menu-hide'}}">
                 <li ng-repeat="subEntry in entry.entries">
                     <a ng-href="{{subEntry.url}}" class="{{menu.activeMenuUrl === subEntry.url ? 'active' : ''}}"
                        ng-click="global.sidebarOverlayOn = false; menu.activeMenuUrl = subEntry.url">{{subEntry.title}}</a>

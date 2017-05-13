@@ -402,6 +402,9 @@ a:hover, a:focus {
             // padding: 0.1rem 0 0.2rem 4rem;
             padding-left: 4rem;
             padding-right: 0;
+            &.menu-hide {
+               display: none;
+            }
             & > li {
                & > a {
                   display: inline-block;
@@ -418,7 +421,6 @@ a:hover, a:focus {
                   transition: color 160ms linear;
                   color: #b4b6b4;
                }
-
                &:first-of-type > a {
                   padding-top: 0.7rem;
                }
@@ -602,6 +604,26 @@ body.mini-sidebar {
                   }
                   & > span.menu-entry .menu-entry-collapsible-main {
                      padding-left: #{$sidebar-menu-entry-padding-left - 0.5rem};
+                  }
+               }
+               &.collapsible-menu {
+                  position: relative;
+                  &:hover {
+                     & > ul {
+                        display: initial;
+                        position: absolute;
+                        left: 60px;
+                        top: 0;
+                        width: 16.5rem;
+                        padding-left: 0;
+                        background-color: lighten($sidebar-bg-color, 2%);
+                        & > li > a {
+                           border-left: none;
+                        }
+                     }
+                  }
+                  & > ul {
+                     display: none;
                   }
                }
             }
