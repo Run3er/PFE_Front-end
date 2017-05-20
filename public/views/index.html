@@ -23,72 +23,11 @@
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 
-<body class="{{global.miniSidebarToggle ? 'mini-sidebar' : ''}}" ng-controller="GlobalCtrl">
-<!-- Navbar top -->
-<nav id="navbar-top" class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-header">
-        <ul class="nav navbar-left">
-            <li class="visible-xs pull-left">
-                <a class="nav-icon" href="javascript:void(0)" ng-click="navbar.sidebarOverlayOn = !navbar.sidebarOverlayOn">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </li>
-            <li class="visible-xs pull-right">
-                <a class="nav-icon" href="javascript:void(0)" class="collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
-                    <i class="fa fa-chevron-down"></i>
-                </a>
-            </li>
-            <li class="visible-xs navbar-title">
-                <a href="./"><span title="Projectify">Projectify</span></a>
-            </li>
-        </ul>
-    </div>
+<body>
 
-    <div id="navbar-collapse" class="navbar-collapse collapse">
-        <a id="nav-brand" href="./" class="hidden-xs navbar-left">
-            <img src="public/img/logo-itserv.png" alt="Logo IT SERV" />
-        </a>
-        <div id="navbar">
-            <a href="javascript:void(0)" class="hidden-xs nav-icon navbar-left" ng-click="global.miniSidebarToggle = !global.miniSidebarToggle">
-                <i class="fa fa-{{global.miniSidebarToggle ? 'indent' : 'outdent'}}"></i>
-            </a>
-            <form class="navbar-form navbar-left">
-                <input type="text" class="form-control navbar-search" placeholder="Rechercher">
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="profile-menu dropdown-toggle" data-toggle="dropdown">
-                        <span>Amine</span>
-                        <img class="img-circle" src="public/img/avatar-m.png" alt="avatar" />
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="javascript:void(0)"><i class="dropdown-icon fa fa-globe"></i> Notifications &nbsp;<span class="label label-danger">5</span></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="dropdown-icon fa fa-user"></i> Profil</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="dropdown-icon fa fa-share"></i> Déconnexion</a>
-                        </li>
-                    </ul>
-                </li><!--
-                <li>
-                  <a href="javascript:void(0)"><i class="nav-icon fa fa-question-circle-o"></i></a>
-                </li> -->
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="nav-icon fa fa-gear"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0)">Thème</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
-<div ui-view ng-cloak></div>
+    <div ui-view ng-cloak></div>
+
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -122,24 +61,3 @@
 <script src="public/js/app.js"></script>
 </body>
 </html>
-
-
-
-<!--
-        TODO:
-    - Show sidebar on hamburger bars button click or swipe left
-        in mobile view
-    - Change default scroll bar in desktop view (breadcrumbs)
-    - Switch between out-dent & in-dent icons
-    - Add breadcrumbs caret right dropdown sub-hierarchy navigation
-    - Rotate sidebar expandable menu carets on collapsing
-        and similarly for navbar-top expandable menu arrow
-    - Polyfill for CSS3 (like calc, transform, rem ...)
-    - hyphens X-browser
-        ° find existing js solution (Hyphenator.js)
-        ° or/then make specific js solution
-        (hyphen long overflowing  words only)
-    - Themes? (colors..)
-
-    - Take a look at scattered TODOs
- -->

@@ -1,5 +1,5 @@
 
 angular.module('ProjMngmnt')
     .constant('DBConstants', {
-        SERVER_ADDRESS: "http://localhost:9000"
+        SERVER_ADDRESS: "http://127.0.0.1:9000"
     });

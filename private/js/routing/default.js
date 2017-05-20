@@ -1,3 +1,4 @@
+
 angular.module("ProjMngmnt")
     .config(function (CommonConstants, $stateProvider, $urlRouterProvider, $locationProvider) {
 

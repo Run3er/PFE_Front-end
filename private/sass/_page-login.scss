@@ -1,0 +1,30 @@
+// 
+//	Dashboard styling 
+//
+// 
+/*=============== Login page ===============*/
+.login-page {
+   .vertical-offset-top-100 {
+      padding-top: 100px;
+   }
+   .panel-info {
+      border-color: lighten($color-primary, 15%);
+      .panel-heading {
+         color: #fff;
+         background-color: lighten($color-primary, 7%);
+      }
+      .panel {
+         border-color: #fff;
+      }
+      .btn-primary {
+         background-color: lighten($color-primary, 6%);
+      }
+   }
+   .has-error .form-control {
+      border: 1px solid #eeabab;
+      box-shadow: unset;
+      //&:focus {
+      //   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 3px #ce8483;
+      //}
+   }
+}

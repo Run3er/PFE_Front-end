@@ -550,7 +550,7 @@ a:hover, a:focus {
 }
 
 // Shrunken sidebar adjustments
-body.mini-sidebar {
+.mini-sidebar {
    @media (min-width: $bootstrap-sm-min-width) {
       #main {
          #main-content {
