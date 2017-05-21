@@ -8,19 +8,16 @@ angular.module('ProjMngmnt')
             tenantPseudo = "tenant_a";
         }
 
-        this.login = function (login, password) {
-            return $http.post(apiAddress + "/tenants/" + tenantPseudo + "/login", { user: login, password: password })
+        this.login = function (credentials) {
+            return $http.post(apiAddress + "/tenants/" + tenantPseudo + "/login", { user: credentials.login, password: credentials.password, persistent: credentials.persistent })
                 .then(function (response) {
-                    // store username and token in local storage to keep user logged in between page refreshes
-                    $window.localStorage.setItem('state', JSON.stringify({ username: login, token: response.data.jwt }));
-
+                    AuthenticationFuncs.setLocalState($window.localStorage, {login: credentials.login}, response.data.jwt);
                     AuthenticationFuncs.authenticateRequests($window.localStorage, $http);
                 });
         };
 
         this.logout = function () {
             // remove user from local storage and clear http auth header
-            // $window.localStorage.currentUser = void(0);
             $window.localStorage.removeItem("state");
             $http.defaults.headers.common.Authorization = "";
             $state.go("login");
@@ -28,5 +25,9 @@ angular.module('ProjMngmnt')
 
         this.isUserAuthenticated = function () {
             return AuthenticationFuncs.isUserAuthenticated($window.localStorage);
+        };
+
+        this.getLocalStateInfo = function () {
+            return AuthenticationFuncs.getLocalStateInfo($window.localStorage);
         }
     });

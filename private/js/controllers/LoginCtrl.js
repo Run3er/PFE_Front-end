@@ -13,8 +13,8 @@ angular.module('ProjMngmnt')
         $scope.formSubmit = function () {
             $scope.submitEnabled = false;
             $scope.invalidCredential = void(0);
-            Authentication.login($scope.credentials.login, $scope.credentials.password)
-                .then(function (response) {
+            Authentication.login($scope.credentials)
+                .then(function () {
                     redirect();
                 }, function (response) {
                     if (response.status === 401) {
@@ -46,7 +46,8 @@ angular.module('ProjMngmnt')
 
         $scope.credentials = {
             login: "",
-            password: ""
+            password: "",
+            persistent: false
         };
         $scope.submitEnabled = true;
         $scope.invalidCredential = void(0);
