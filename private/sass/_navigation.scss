@@ -442,7 +442,7 @@ a:hover, a:focus {
          margin-left: $sidebar-width;
       }
    }
-   .header {
+   .nav-header-top {
       position: fixed;
       top: $navbar-top-height;
       width: 100%;
@@ -556,7 +556,7 @@ a:hover, a:focus {
          #main-content {
             margin-left: $sidebar-width-shrunken;
          }
-         .header {
+         .nav-header-top {
             width: calc(100% - #{$sidebar-width-shrunken});
          }
       }

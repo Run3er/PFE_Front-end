@@ -33,21 +33,16 @@
     </div>
 
     <div class="table-responsive">
-        <table class="main-table table table-striped table-hover">
-            <div>
-                <thead>
-                <tr>
-                    <th>
-                        <button class="btn btn-default" ng-click="formCancel(); formCollapsed = false">
-                            <i class="fa fa-plus"></i>
-                        </button>
-                    </th>
-                    <th ng-repeat="columnMap in tableEntries.columnMaps">{{columnMap.name}}</th>
-                </tr>
-                </thead>
-            </div>
-            <tbody>
-            <tr id="{{entry.onEdit ? 'on-edit-entry' : ''}}" ng-repeat="entry in tableEntries.rows | orderBy:defaultSortingField track by entry.id">
+        <script type="text/ng-template" id="header-btn-add.html">
+            <button class="btn btn-default" ng-click="formCancel(); setFormCollapsedToFalse()">
+                <i class="fa fa-plus"></i>
+            </button>
+        </script>
+        <script type="text/ng-template" id="ng-table/filters/filter-icon.html">
+            <span class="table-header-icon glyphicon glyphicon-filter"></span>
+        </script>
+        <table class="main-table table table-striped table-hover" ng-table-dynamic="tableParams with tableEntries.columnMaps">
+            <tr id="{{row.onEdit ? 'on-edit-entry' : ''}}" ng-repeat="row in $data | orderBy:defaultSortingField track by row.id">
                 <td>
                     <div class="entry-edit-menu" uib-dropdown dropdown-append-to-body on-toggle="toggled(open)">
                         <button class="btn btn-default" uib-dropdown-toggle>
@@ -55,30 +50,30 @@
                         </button>
                         <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
                             <li>
-                                <a href="javascript:void(0)" ng-click="edit(entry.index)">Modifier</a>
+                                <a href="javascript:void(0)" ng-click="edit(row.index)">Modifier</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" ng-click="delete(entry.index)">Supprimer</a>
+                                <a href="javascript:void(0)" ng-click="delete(row.index)">Supprimer</a>
                             </li>
                         </ul>
                     </div>
                 </td>
-                <td ng-repeat="columnMap in tableEntries.columnMaps track by $index">
-                    <span ng-if="columnMap.key !== tableEntries.linkable.columnKey">
+                <td ng-repeat="col in $columns | limitTo:1 - $columns.length track by $index">
+                    <span ng-if="col.key !== tableEntries.linkable.columnKey">
                         <!--apply different filters to data view-type-->
-                        <span ng-if="!columnMap.type">{{entry[columnMap.key]}}</span>
-                        <span ng-if="columnMap.type === 'nbToString'">{{entry[columnMap.key].slice(4)}} ({{entry[columnMap.key][0]}})</span>
-                        <span ng-if="columnMap.type === 'percentage'">{{entry[columnMap.key]*100 | number:0}}%</span>
-                        <span ng-if="columnMap.type === 'days'">{{entry[columnMap.key] ? entry[columnMap.key] + 'j' : ''}}</span>
-                        <span ng-if="columnMap.type === 'date'">{{entry[columnMap.key] | date: 'dd/MM/yyyy'}}</span>
+                        <span ng-if="!col.type">{{row[col.key]}}</span>
+                        <span ng-if="col.type === 'nbWithLiteral'">{{row[col.key].slice(4)}} ({{row[col.key][0]}})</span>
+                        <span ng-if="col.type === 'percentage'">{{row[col.key]*100 | number:0}}%</span>
+                        <span ng-if="col.type === 'days'">{{row[col.key] ? row[col.key] + 'j' : ''}}</span>
+                        <span ng-if="col.type === 'date'">{{row[col.key] | date: 'dd/MM/yyyy'}}</span>
                     </span>
-                    <a ng-href="{{'./' + tableEntries.linkable.urlPrefix + '/' + entry.id}}"
-                       ng-if="columnMap.key === tableEntries.linkable.columnKey">{{entry[columnMap.key]}}</a>
+                    <a ng-href="{{'./' + tableEntries.linkable.urlPrefix + '/' + row.id}}"
+                       ng-if="col.key === tableEntries.linkable.columnKey">{{row[col.key]}}</a>
                 </td>
             </tr>
-            </tbody>
         </table>
     </div>
+
 </div>
 
 

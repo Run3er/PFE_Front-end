@@ -203,12 +203,12 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "probability",
-                            type: "nbToString",
+                            type: "nbWithLiteral",
                             name: "Probabilité"
                         },
                         {
                             key: "impact",
-                            type: "nbToString",
+                            type: "nbWithLiteral",
                             name: "Impact"
                         },
                         {

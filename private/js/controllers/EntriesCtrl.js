@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .controller('EntriesCtrl', function (Sidebar, DB, UI, $scope, entrySpecifics) {
+    .controller('EntriesCtrl', function ($scope, Sidebar, DB, UI, NgTableParams, entrySpecifics) {
 
         // Functions definition
 
@@ -37,6 +37,7 @@ angular.module('ProjMngmnt')
             // Cancel current entry editing
             if (editingEntryIdx !== void(0)) {
                 $scope.tableEntries.rows[editingEntryIdx].onEdit = false;
+                $scope.tableParams.settings().dataset[editingEntryIdx].onEdit = false;
             }
             editingEntryIdx = entryIdx;
             $scope.tableEntries.rows[entryIdx].onEdit = true;
@@ -207,6 +208,10 @@ angular.module('ProjMngmnt')
             }
         };
 
+        // Defined because using ng-template, scope is nested (parent is a copy, original not directly modifiable)
+        $scope.setFormCollapsedToFalse = function () {
+            $scope.formCollapsed = false;
+        };
 
         // Controller init. code, Prepare table entries for display
 
@@ -249,6 +254,54 @@ angular.module('ProjMngmnt')
                     for (var i = 0; i < rows.length; i++) {
                         rows[i].index = i;
                     }
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    // TODO: fully integrate ngTable (code wise)
+
+                    // Add row's array index to each row (for ng-repeat)
+                    var filterObj, columnMap, choices;
+                    for (var i = 0; i < columnMaps.length; i++) {
+                        columnMap = columnMaps[i];
+                        columnMap.field = columnMap.key;
+                        columnMap.sortable = columnMap.field;
+                        columnMap.title = columnMap.name;
+                        choices = [];
+                        for (var x = 0; x < viewData.form.fields.length; x++) {
+                            if (viewData.form.fields[x].choices !== void(0) && viewData.form.fields[x].identifier === columnMap.field) {
+                                for (var k = 0; k < viewData.form.fields[x].choices.length; k++) {
+                                    var choice = {
+                                        id: viewData.form.fields[x].choices[k].value,
+                                        title: viewData.form.fields[x].choices[k].value
+                                    };
+                                    choices.push(choice);
+                                }
+                            }
+                        }
+                        filterObj = {};
+                        if (choices.length > 0) {
+                            columnMap.filterData = choices;
+                            filterObj[columnMap.field] = "select";
+                        } else {
+                            filterObj[columnMap.field] = "text";
+                        }
+                        columnMap.filter = filterObj;
+                        columnMap.show = true;
+                    }
+                    columnMaps.splice(0, 0,  { field: "command", title: "", filter: {command: "ng-table/filters/filter-icon.html"}, headerTemplateURL: "header-btn-add.html", show: true });
+
+                    $scope.tableParams = new NgTableParams({}, {
+                        getData: function (params) {
+                            return $scope.tableEntries.rows;
+                        },
+                        // TODO: filtering & sorting work on static data, but not with the getData ..fix
+                        // dataset: rows,
+                        counts: [ 1, 2 ]
+                    });
+                    // rows = $scope.tableParams.settings().dataset;
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
                     $scope.tableEntries = {
                         columnMaps: columnMaps,

@@ -61,10 +61,10 @@
    table.main-table {
       color: $font-color-dark;
       thead > tr > th:first-child, tbody > tr > td:first-child {
-         width: 4rem;
+         width: 3.9rem;
       }
       tr > td, tr > th {
-         & > button.btn {
+         button.btn {
             padding: 0.1rem 0.6rem;
             border: 0;
             user-select: none;
@@ -77,7 +77,7 @@
          }
       }
       tr > th {
-         & > button.btn-default {
+         button.btn-default {
             background-color: #eee;
             color: lighten($color-primary, 5%);
             &:hover {
@@ -90,7 +90,7 @@
       }
       tr > td {
          .entry-edit-menu {
-            & > button.btn-default {
+            button.btn-default {
                padding: 1px 5px;
                background-color: #eee;
                color: #777;
@@ -100,7 +100,6 @@
                &:not(:hover):focus {
                   color: #777;
                }
-
             }
          }
       }
@@ -113,6 +112,30 @@
             }
          }
       }
+      & > thead > tr {
+         th {
+            border-bottom-width: 0.1rem;
+         }
+         &:first-of-type th {
+            border-bottom-width: 0.2rem;
+         }
+      }
+      .table-header-icon {
+         margin-right: 0.1rem;
+         margin-bottom: 0.6rem;
+         color: lighten(#777, 1%);
+      }
+   }
+   .ng-table th.filter .input-filter {
+      height: auto;
+      min-height: 2.5rem;
+      padding: 0.4rem;
+   }
+   .ng-table th.sortable .sort-indicator {
+      display: block;
+   }
+   .ng-table-counts.btn-group .btn+.btn {
+      border-left: 0.1rem solid #b9b9b9;
    }
 }
 

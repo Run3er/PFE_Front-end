@@ -51,7 +51,7 @@
                     <span ng-if="!columnMap.link">
                         <!--apply different filters to data view-type-->
                         <span ng-if="!columnMap.type">{{tableEntries.details[columnMap.key]}}</span>
-                        <span ng-if="columnMap.type === 'nbToString'">{{tableEntries.details[columnMap.key].slice(4)}} ({{tableEntries.details[columnMap.key][0]}})</span>
+                        <span ng-if="columnMap.type === 'nbWithLiteral'">{{tableEntries.details[columnMap.key].slice(4)}} ({{tableEntries.details[columnMap.key][0]}})</span>
                         <span ng-if="columnMap.type === 'percentage'">{{tableEntries.details[columnMap.key]*100 | number:0}}%</span>
                         <span ng-if="columnMap.type === 'days'">{{tableEntries.details[columnMap.key] ? tableEntries.details[columnMap.key] + 'j' : ''}}</span>
                         <span ng-if="columnMap.type === 'date'">{{tableEntries.details[columnMap.key] | date: 'dd/MM/yyyy'}}</span>
