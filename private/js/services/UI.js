@@ -897,6 +897,56 @@ angular.module('ProjMngmnt')
                     ]
                 }
             },
+            user: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values
+                        {
+                            key: "firstName",
+                            name: "Prénom"
+                        },
+                        {
+                            key: "lastName",
+                            name: "Nom"
+                        },
+                        {
+                            key: "login",
+                            name: "Login"
+                        }
+                    ]
+                },
+                form: {
+                    defaultSortingField: "firstName",
+                    fields: [
+                        {
+                            identifier: "firstName",
+                            label: "Prénom",
+                            placeholder: "Saisir le prénom",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "lastName",
+                            label: "Nom",
+                            placeholder: "Saisir le nom",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "login",
+                            label: "Login",
+                            placeholder: "Saisir le login",
+                            type: 'input'
+                        },
+                        {
+                            identifier: "password",
+                            label: "Mot de passe",
+                            placeholder: "Saisir le mot de passe",
+                            type: 'input'
+                        }
+                    ]
+                }
+            },
+
 
             // Details View Data
             budget: {
@@ -1303,7 +1353,7 @@ angular.module('ProjMngmnt')
                             title: "Partenaires"
                         },
                         {
-                            url: "." + CommonConstants.GENERAL_BASE_URL + "/accounts",
+                            url: "." + CommonConstants.GENERAL_BASE_URL + "/users",
                             title: "Gestion de comptes"
                         }
                     ]

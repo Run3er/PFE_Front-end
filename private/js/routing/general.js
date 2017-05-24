@@ -65,7 +65,13 @@ angular.module("ProjMngmnt")
                 template: "<p>Partenaires.</p>"
             })
             .state("general.accounts", {
-                url: "/accounts",
-                template: "<p>Gestion de comptes.</p>"
+                url: "/users",
+                templateUrl: CommonConstants.PARTIALS_DIR + "/entries.html",
+                controller: "EntriesCtrl",
+                resolve: {
+                    entrySpecifics: function () {
+                        return { type: "user" };
+                    }
+                }
             });
     });
