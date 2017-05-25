@@ -6,11 +6,6 @@ angular.module('ProjMngmnt')
         var serverAddress = DBConstants.SERVER_ADDRESS;
 
 
-        // TODO: make transactional
-        // Transaction-unhandled entries (due to inter association with other entries)
-        var nonTransactionallyPersistedEntries = [ "action", "pendingIssue", "communicationPlan" ];
-
-
         this.getSingleResrcByUri = function (uri) {
             // Fetch data from DB
             return $http.get(serverAddress + "/" + uri)
@@ -88,38 +83,23 @@ angular.module('ProjMngmnt')
                         });
                 },
                 add: function (entry) {
-                    if (nonTransactionallyPersistedEntries.indexOf(entryProps.type) === -1) {
-                        var postBody = uriPrefix.length === 0 ? entry : [ entry ];
+                    var postBody = uriPrefix.length === 0 ? entry : [ entry ];
 
-                        return $http.post(serverAddress + "/" + uriPrefix + entriesUriName, postBody)
-                            .then(function (response) {
-                                var appendedEntryId;
+                    return $http.post(serverAddress + "/" + uriPrefix + entriesUriName, postBody)
+                        .then(function (response) {
+                            var appendedEntryId;
 
-                                if (uriPrefix.length === 0) {
-                                    var urlParts = response.data._links.self.href.split("/");
-                                    appendedEntryId = urlParts[urlParts.length - 1];
-                                }
-                                else {
-                                    // Use transactional bulk entry add-n-associate API (via nested path)
-                                    appendedEntryId = response.data[0];
-                                }
-
-                                return appendedEntryId;
-                            });
-                    }
-                    else {
-                        // Two times (non-transactional) operation; first persist the entry itself
-                        return $http.post(serverAddress + "/" + entriesUriName, entry)
-                            .then(function (response) {
+                            if (uriPrefix.length === 0) {
                                 var urlParts = response.data._links.self.href.split("/");
-                                var appendedEntryId = urlParts[urlParts.length - 1];
-                                var uriList = entriesUriName + "/" + appendedEntryId;
+                                appendedEntryId = urlParts[urlParts.length - 1];
+                            }
+                            else {
+                                // Use transactional bulk entry add-n-associate API (via nested path)
+                                appendedEntryId = response.data[0];
+                            }
 
-                                // Now, associate the persisted entry with its parent resource
-                                return $http.post(serverAddress + "/" + uriPrefix + entriesUriName, uriList,
-                                        { headers: { "Content-Type": "text/uri-list" } });
-                            });
-                    }
+                            return appendedEntryId;
+                        });
                 },
                 update: function (entry) {
                     if (entry && entry.id) {
