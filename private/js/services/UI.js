@@ -37,7 +37,8 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "advancement",
-                            name: "Avancement"
+                            name: "Avancement",
+                            type: "percentage"
                         },
                         {
                             key: "supervisor",
@@ -1071,7 +1072,8 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "advancement",
-                            name: "Avancement"
+                            name: "Avancement",
+                            type: "percentage"
                         },
                         {
                             key: "mainContact",
