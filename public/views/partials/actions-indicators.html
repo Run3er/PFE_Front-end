@@ -1,0 +1,19 @@
+<div>
+    <div class="panel panel-default panel-indicator">
+        <div class="panel-body">
+            <div id="actionsChart" class="col-xs-12 col-sm-3">
+                <svg></svg>
+            </div>
+            <div class="indicator-measure col-xs-12 col-sm-9">
+                <div class="indicator-block indicator-hue-{{indicator.hue}} col-xs-12 col-sm-3" ng-repeat="indicator in indicators">
+                    <div class="indicator-value">
+                        {{indicator.value}}
+                    </div>
+                    <div class="indicator-label">
+                        {{indicator.label}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

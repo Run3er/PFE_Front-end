@@ -24,9 +24,9 @@ angular.module('ProjMngmnt')
                 });
         };
 
-        this.getDashboard = function (projectLevelUri) {
+        this.getByUri = function (uri) {
             // Fetch data from DB
-            return $http.get(serverAddress + "/" + projectLevelUri + "?projection=dashboard")
+            return $http.get(serverAddress + "/" + uri)
                 .then(function successCallback(response) {
                     // Set to undefined, delete not necessary
                     response.data._links = void(0);
