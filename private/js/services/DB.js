@@ -24,6 +24,8 @@ angular.module('ProjMngmnt')
                     entry._links = void(0);
 
                     return entry;
+                }, function (response) {
+                    return $q.reject(response);
                 });
         };
 
@@ -35,6 +37,8 @@ angular.module('ProjMngmnt')
                     response.data._links = void(0);
 
                     return response.data;
+                }, function (response) {
+                    return $q.reject(response);
                 });
         };
 
@@ -79,6 +83,8 @@ angular.module('ProjMngmnt')
                             }
 
                             return entries;
+                        }, function (response) {
+                            return $q.reject(response);
                         });
                 },
                 add: function (entry) {

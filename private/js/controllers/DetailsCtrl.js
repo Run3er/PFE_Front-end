@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .controller('DetailsCtrl', function ($scope, UI, DB, entrySpecifics) {
+    .controller('DetailsCtrl', function ($scope, $state, UI, DB, entrySpecifics) {
 
         // Functions definition
 
@@ -137,11 +137,16 @@ angular.module('ProjMngmnt')
                     // }
                 };
             },
-            function () {
-                // Set alert on the view
-                $scope.formAlert.msg = "Getting details failed. [Try refreshing.]";
-                $scope.formAlert.didSucceed = false;
-                $scope.formAlert.active = true;
+            function (response) {
+                if (response.status === 404) {
+                    $state.go("404");
+                }
+                else {
+                    // Set alert on the view
+                    $scope.formAlert.msg = "Getting details failed. [Try refreshing.]";
+                    $scope.formAlert.didSucceed = false;
+                    $scope.formAlert.active = true;
+                }
             });
 
 

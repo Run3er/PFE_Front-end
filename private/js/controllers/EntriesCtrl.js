@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .controller('EntriesCtrl', function ($scope, Sidebar, DB, UI, NgTableParams, entrySpecifics) {
+    .controller('EntriesCtrl', function ($scope, $state, Sidebar, DB, UI, NgTableParams, entrySpecifics) {
 
         // Functions definition
 
@@ -213,6 +213,7 @@ angular.module('ProjMngmnt')
             $scope.formCollapsed = false;
         };
 
+
         // Controller init. code, Prepare table entries for display
 
         // Get DAO
@@ -312,11 +313,16 @@ angular.module('ProjMngmnt')
                         }
                     };
                 },
-                function () {
-                    // Set alert on the view
-                    $scope.formAlert.msg = "Getting entries failed. [Try refreshing.]";
-                    $scope.formAlert.didSucceed = false;
-                    $scope.formAlert.active = true;
+                function (response) {
+                    if (response.status === 404) {
+                        $state.go("404");
+                    }
+                    else {
+                        // Set alert on the view
+                        $scope.formAlert.msg = "Getting details failed. [Try refreshing.]";
+                        $scope.formAlert.didSucceed = false;
+                        $scope.formAlert.active = true;
+                    }
                 });
 
 

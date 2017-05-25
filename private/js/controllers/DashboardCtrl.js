@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .controller('DashboardCtrl', function ($scope, $filter, CommonConstants, UI, Sidebar, DB, projectLevelSpecifics) {
+    .controller('DashboardCtrl', function ($scope, $state, $filter, CommonConstants, UI, Sidebar, DB, projectLevelSpecifics) {
         // Navigation setup (not using onEnter because it's triggered before parent controller execution)
         Sidebar.setActiveMenuUrlBySuffix("dashboard");
 
@@ -246,6 +246,14 @@ angular.module('ProjMngmnt')
         DB.getDashboard(uri)
             .then(function (dashboardData) {
                 dashboardInit(dashboardData);
+            },
+            function (response) {
+                if (response.status === 404) {
+                    $state.go("404");
+                }
+                else {
+                    // Set alert on the view
+                }
             });
 
         $scope.differentYearDates = function(date1, date2) {
