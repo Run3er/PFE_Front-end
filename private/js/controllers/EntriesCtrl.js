@@ -336,6 +336,15 @@ angular.module('ProjMngmnt')
         // Fetch async view data, namely multiple choice inputs
         viewData.form.fields.forEach(function (formField) {
             if (formField.asyncChoices !== void(0)) {
+                var uriPrefix = void(0);
+                if (entrySpecifics.urlPrefix !== void(0)) {
+                    var urlParts = entrySpecifics.urlPrefix.split("/");
+                    if (urlParts.length > 1) {
+                        // URI resource name + id
+                        uriPrefix = urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
+                    }
+                }
+
                 DB
                     .getEntriesDAO({
                         type: formField.asyncChoices.entriesName
@@ -345,16 +354,18 @@ angular.module('ProjMngmnt')
                         formField.choices = [];
 
                         for (var i = 0; i < entries.length; i++) {
-                            // Filter with specified filters
-                            var keys = Object.keys(formField.asyncChoices.filterBy);
-                            var passedFilter = true;
-                            for (var j = 0; j < keys.length; j++) {
-                                if (entries[i][keys[j]] !== formField.asyncChoices.filterBy[keys[j]]) {
-                                    passedFilter = false;
-                                    break;
+                            if (formField.asyncChoices.filterBy !== void(0)) {
+                                // Filter with specified filters
+                                var keys = Object.keys(formField.asyncChoices.filterBy);
+                                var passedFilter = true;
+                                for (var j = 0; j < keys.length; j++) {
+                                    if (entries[i][keys[j]] !== formField.asyncChoices.filterBy[keys[j]]) {
+                                        passedFilter = false;
+                                        break;
+                                    }
                                 }
+                                if (!passedFilter) continue;
                             }
-                            if (!passedFilter) continue;
 
                             formField.choices.push({
                                 identifier: formField.asyncChoices.entriesName + "s" + "/" + entries[i].id,

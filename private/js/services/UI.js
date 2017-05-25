@@ -152,11 +152,11 @@ angular.module('ProjMngmnt')
                             label: "Responsable",
                             placeholder: "Sélectionner le responsable",
                             asyncChoices: {
-                                entriesName: "resource",
-                                attachedFieldName: "name",
-                                filterBy: {
-                                    type: "HUMAN"
-                                }
+                                entriesName: "humanResource",
+                                attachedFieldName: "name"
+                                // ,filterBy: {
+                                //     type: "HUMAN"
+                                // }
                             }
                         },
                         {
@@ -541,11 +541,11 @@ angular.module('ProjMngmnt')
                             label: "Responsable",
                             placeholder: "Sélectionner le responsable",
                             asyncChoices: {
-                                entriesName: "resource",
-                                attachedFieldName: "name",
-                                filterBy: {
-                                    type: "HUMAN"
-                                }
+                                entriesName: "humanResource",
+                                attachedFieldName: "name"
+                                // ,filterBy: {
+                                //     type: "HUMAN"
+                                // }
                             }
                         },
                         {
@@ -840,11 +840,11 @@ angular.module('ProjMngmnt')
                             label: "Responsable",
                             placeholder: "Sélectionner le responsable",
                             asyncChoices: {
-                                entriesName: "resource",
-                                attachedFieldName: "name",
-                                filterBy: {
-                                    type: "HUMAN"
-                                }
+                                entriesName: "humanResource",
+                                attachedFieldName: "name"
+                                // ,filterBy: {
+                                //     type: "HUMAN"
+                                // }
                             }
                         }
                     ]
