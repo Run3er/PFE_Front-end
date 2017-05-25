@@ -1,9 +1,6 @@
 
 angular.module('ProjMngmnt')
     .controller('DashboardCtrl', function ($scope, $state, $filter, CommonConstants, UI, Sidebar, DB, projectLevelSpecifics) {
-        // Navigation setup (not using onEnter because it's triggered before parent controller execution)
-        Sidebar.setActiveMenuUrlBySuffix("dashboard");
-
 
         // Globals
 
@@ -24,10 +21,10 @@ angular.module('ProjMngmnt')
             $scope.data.status = dashboardData.status;
 
             // Budget & charge indicators
-            $scope.data.budgetConsumed = dashboardData.budgetConsumed ? dashboardData.budgetConsumed : 0;
-            $scope.data.budgetPrevisionGap = dashboardData.budgetPrevisionGap ? dashboardData.budgetPrevisionGap : 0;
-            $scope.data.chargeConsumed = dashboardData.chargeConsumed ? dashboardData.chargeConsumed : 0;
-            $scope.data.chargePrevisionGap = dashboardData.chargePrevisionGap ? dashboardData.chargePrevisionGap : 0;
+            $scope.data.budgetConsumed = dashboardData.budgetConsumed;
+            $scope.data.budgetPrevisionGap = dashboardData.budgetPrevisionGap;
+            $scope.data.chargeConsumed = dashboardData.chargeConsumed;
+            $scope.data.chargePrevisionGap = dashboardData.chargePrevisionGap;
 
             // Milestones timeline
             $scope.data.milestones = $filter("orderBy")(dashboardData.milestones, "dueDate");

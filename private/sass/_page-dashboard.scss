@@ -130,6 +130,7 @@ $font-number-indicator: roboto;
    font-weight: 500;
 }
 .no-data-text {
+   margin-top: 2.5rem;
    color: #bbb;
 }
 .nvd3.nv-noData {
@@ -150,7 +151,7 @@ $font-number-indicator: roboto;
          height: 9.5rem;
       }
       .panel-body {
-         margin-top: -0.2rem;
+         margin-top: 0.8rem;
          margin-bottom: 1.5rem;
          @media (max-width: $bootstrap-xs-max-width) {
             margin-top: 0rem;
@@ -160,40 +161,6 @@ $font-number-indicator: roboto;
          }
          @media (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
             margin-top: 0;
-         }
-         &.mirror-indicators {
-            margin-top: -1.5rem;
-            .mirror-indicator-title {
-               color: #b0b0b0;
-               font-size: 1.6rem;
-            }
-            .mirror-indicator {
-               margin-top: -1.5rem;
-               .indicator-title {
-                  font-size: 4.5rem;
-               }
-               .indicator-measure-percentage {
-                  font-size: 3rem;
-               }
-            }
-            & > div:first-of-type {
-               .mirror-indicator:first-of-type:after {
-                  content: "";
-                  position: absolute;
-                  display: block;
-                  top: 1.3rem;
-                  right: 0;
-                  height: 7rem;
-                  border-right: 2px solid lightgray;
-               }
-            }
-         }
-      }
-   }
-   #last-update-indicator, #charge-consumed-indicator {
-      @media (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
-         .panel.panel-indicator .panel-body {
-            margin-top: -0.4rem;
          }
       }
    }
@@ -206,13 +173,50 @@ $font-number-indicator: roboto;
          margin-bottom: 0.2rem;
       }
    }
-   .indicator-measure {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      // font-family: $font-number-indicator;
-      font-size: 4.9rem;
-      color: $font-color-dark;
-      @media (max-width: $bootstrap-xs-max-width) {
-         font-size: 4.3rem;
+   .mirror-indicators {
+      margin-top: -1.4rem;
+      .mirror-indicator-title {
+         color: #b0b0b0;
+         font-size: 1.53rem;
+      }
+      .mirror-indicator-measure {
+         margin-top: -1rem;
+         .indicator-measure {
+            margin-top: 1rem;
+            font-size: 4rem;
+         }
+         .indicator-measure-percentage {
+            margin-right: -2rem;
+            font-size: 2.6rem;
+         }
+      }
+      .indicator-measure {
+         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+         // font-family: $font-number-indicator;
+         font-size: 4rem;
+         @media (max-width: $bootstrap-xs-max-width) {
+            font-size: 3.5rem;
+         }
+         &-neutral {
+            color: $font-color-dark;
+         }
+         &-good {
+            color: #49914a;
+         }
+         &-bad {
+            color: #a94442;
+         }
+      }
+      & > div:first-of-type {
+         .mirror-indicator-measure:first-of-type:after {
+            content: "";
+            position: absolute;
+            display: block;
+            top: 1.6rem;
+            right: 0;
+            height: 5.5rem;
+            border-right: 2px solid #e5e5e5;
+         }
       }
    }
    #status-global {
@@ -234,7 +238,7 @@ $font-number-indicator: roboto;
             background-color: #64CF6F;
          }
          &-ORANGE {
-            background-color: #d47e19;
+            background-color: #f4953b;
          }
          &-RED {
             background-color: #dc5050;
