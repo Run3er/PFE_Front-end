@@ -25,7 +25,9 @@ angular.module('ProjMngmnt')
 
             // Budget & charge indicators
             $scope.data.budgetConsumed = dashboardData.budgetConsumed ? dashboardData.budgetConsumed : 0;
+            $scope.data.budgetPrevisionGap = dashboardData.budgetPrevisionGap ? dashboardData.budgetPrevisionGap : 0;
             $scope.data.chargeConsumed = dashboardData.chargeConsumed ? dashboardData.chargeConsumed : 0;
+            $scope.data.chargePrevisionGap = dashboardData.chargePrevisionGap ? dashboardData.chargePrevisionGap : 0;
 
             // Milestones timeline
             $scope.data.milestones = $filter("orderBy")(dashboardData.milestones, "dueDate");
