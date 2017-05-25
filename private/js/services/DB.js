@@ -8,7 +8,7 @@ angular.module('ProjMngmnt')
 
         // TODO: make transactional
         // Transaction-unhandled entries (due to inter association with other entries)
-        var nonTransactionallyPersistedEntries = [ "action", "pendingIssue" ];
+        var nonTransactionallyPersistedEntries = [ "action", "pendingIssue", "communicationPlan" ];
 
 
         this.getSingleResrcByUri = function (uri) {
