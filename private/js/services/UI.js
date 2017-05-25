@@ -36,6 +36,10 @@ angular.module('ProjMngmnt')
                             name: "Statut"
                         },
                         {
+                            key: "advancement",
+                            name: "Avancement"
+                        },
+                        {
                             key: "supervisor",
                             initialValueKey: "supervisorName", 
                             name: "Responsable"
@@ -137,6 +141,12 @@ angular.module('ProjMngmnt')
                             ]
                         },
                         {
+                            identifier: "advancement",
+                            label: "Avancement",
+                            placeholder: "Entrer l'avancement",
+                            type: 'input'
+                        },
+                        {
                             identifier: "supervisor",
                             label: "Responsable",
                             placeholder: "Sélectionner le responsable",
@@ -212,6 +222,10 @@ angular.module('ProjMngmnt')
                             name: "Impact"
                         },
                         {
+                            key: "cause",
+                            name: "Cause"
+                        },
+                        {
                             key: "actionPlan",
                             name: "Plan d'action"
                         },
@@ -237,6 +251,10 @@ angular.module('ProjMngmnt')
                             key: "closureDate",
                             type: "date",
                             name: "Date de clôture"
+                        },
+                        {
+                            key: "category",
+                            name: "Catégorie"
                         },
                         {
                             key: "comment",
@@ -325,6 +343,12 @@ angular.module('ProjMngmnt')
                             ]
                         },
                         {
+                            identifier: "cause",
+                            label: "Cause",
+                            placeholder: "Saisir la cause",
+                            type: 'input'
+                        },
+                        {
                             identifier: "actionPlan",
                             label: "Plan d'action",
                             placeholder: "Saisir le plan d'action",
@@ -342,6 +366,19 @@ angular.module('ProjMngmnt')
                                 { identifier: "ACTION_PLAN_ONGOING", value: "Plan d'action en cours"},
                                 { identifier: "MASTERED", value: "Maîtrisé"},
                                 { identifier: "CLOSED", value: "Clôturé"}
+                            ]
+                        },
+                        {
+                            identifier: "category",
+                            label: "Catégorie",
+                            placeholder: "Sélectionner la catégorie",
+                            choices: [
+                                { identifier: "STRATEGIC", value: "Stratégique"},
+                                { identifier: "ECONOMIC", value: "Éonomique"},
+                                { identifier: "TECHNICAL", value: "Technique"},
+                                { identifier: "HUMAN", value: "Humain"},
+                                { identifier: "LEGAL", value: "Réglementaire"},
+                                { identifier: "ORGANIZATIONAL", value: "Organisationnel"}
                             ]
                         },
                         {
@@ -726,6 +763,10 @@ angular.module('ProjMngmnt')
                         {
                             key: "charge",
                             name: "Charge"
+                        },
+                        {
+                            key: "estimationDate",
+                            name: "Date d'estimation"
                         }
                     ]
                 },
@@ -743,6 +784,12 @@ angular.module('ProjMngmnt')
                             label: "Charge",
                             placeholder: "Saisir la charge",
                             type: 'input'
+                        },
+                        {
+                            identifier: "estimationDate",
+                            label: "Date d'estimation",
+                            placeholder: "Saisir la date d'estimation",
+                            type: 'date'
                         }
                     ]
                 }
