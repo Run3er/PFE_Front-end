@@ -154,7 +154,7 @@ ul[uib-dropdown-menu] > li:last-of-type > a:hover {
    .form-jumbotron-header {
       margin-bottom: 1.5rem;
    }
-   button.btn {
+   & > button.btn, .form-jumbotron-header > button.btn {
       padding: 0.3rem 0.7rem;
       border: 0;
       user-select: none;

@@ -71,6 +71,10 @@ angular.module('ProjMngmnt')
                             key: viewData.table.generatedFields[j].key,
                             name: viewData.table.generatedFields[j].columnName
                         });
+                        var type = viewData.table.generatedFields[j].type;
+                        if (type !== void(0)) {
+                            _columnMaps[position].type = type;
+                        }
                     }
 
                     // Add to each row
