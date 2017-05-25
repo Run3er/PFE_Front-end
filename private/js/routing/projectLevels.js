@@ -15,7 +15,7 @@ angular.module("ProjMngmnt")
             // Project level controllers-resolve targeted
             var projectLevelPageSpecifics = {};
 
-            return {
+            var projectLevelRouting = {
                 projectLevelPageSpecifics: projectLevelPageSpecifics,
                 projectLevelConfig: {
                     url: urlParts.join("/"),
@@ -124,6 +124,25 @@ angular.module("ProjMngmnt")
                         }
                     };
                 },
+                getActionsConfig: function () {
+                    var views = {
+                        "": {
+                            templateUrl: CommonConstants.PARTIALS_DIR + "/actions.html"
+                        }
+                    };
+                    views["topIndicators@" + projectLevelSingleName + "." + "actions"] = {
+                        templateUrl: CommonConstants.PARTIALS_DIR + "/actions-top-indicators.html",
+                        controller: function($scope){
+                            console.log("indicTop")
+                        }
+                    };
+                    views["entries@" + projectLevelSingleName + "." + "actions"] =
+                        projectLevelRouting.getEntryConfig("action");
+                    return {
+                        url: "/actions",
+                        views: views
+                    }
+                },
                 charterConfig: {
                     url: "/charter",
                     templateUrl: CommonConstants.PARTIALS_DIR + "/details.html",
@@ -157,6 +176,8 @@ angular.module("ProjMngmnt")
                     }
                 }
             };
+
+            return projectLevelRouting;
         }
 
         // Project level similar routing
@@ -165,15 +186,20 @@ angular.module("ProjMngmnt")
 
             $stateProvider
                 .state(CommonConstants.PROJECT_LEVELS[i], projectLevelStatesConfig.projectLevelConfig)
-                .state(CommonConstants.PROJECT_LEVELS[i] + ".default", projectLevelStatesConfig.defaultConfig)
                 .state(CommonConstants.PROJECT_LEVELS[i] + ".dashboard", projectLevelStatesConfig.getDashboardConfig())
                 .state(CommonConstants.PROJECT_LEVELS[i] + ".charter", projectLevelStatesConfig.charterConfig)
                 .state(CommonConstants.PROJECT_LEVELS[i] + ".planning", projectLevelStatesConfig.planningConfig)
-                .state(CommonConstants.PROJECT_LEVELS[i] + ".budget", projectLevelStatesConfig.budgetConfig);
+                .state(CommonConstants.PROJECT_LEVELS[i] + ".budget", projectLevelStatesConfig.budgetConfig)
 
-            for (var j = 0; j < CommonConstants.PROJECT_LEVEL_ARTIFACTS[CommonConstants.PROJECT_LEVELS[i]].length; j++) {
-                $stateProvider.state(CommonConstants.PROJECT_LEVELS[i] + "." + CommonConstants.PROJECT_LEVEL_ARTIFACTS[CommonConstants.PROJECT_LEVELS[i]][j] + "s",
-                    projectLevelStatesConfig.getEntryConfig(CommonConstants.PROJECT_LEVEL_ARTIFACTS[CommonConstants.PROJECT_LEVELS[i]][j]));
+                .state(CommonConstants.PROJECT_LEVELS[i] + ".actions", projectLevelStatesConfig.getActionsConfig())
+
+                .state(CommonConstants.PROJECT_LEVELS[i] + ".default", projectLevelStatesConfig.defaultConfig);
+
+            var projectLevelArtifacts = CommonConstants.PROJECT_LEVEL_ARTIFACTS;
+            projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].splice(projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].indexOf("action"), 1);
+            for (var j = 0; j < projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].length; j++) {
+                $stateProvider.state(CommonConstants.PROJECT_LEVELS[i] + "." + projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]][j] + "s",
+                    projectLevelStatesConfig.getEntryConfig(projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]][j]));
             }
 
             if (CommonConstants.PROJECT_LEVELS[i] === CommonConstants.PROJECT_STRING) {
