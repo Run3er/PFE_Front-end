@@ -126,16 +126,17 @@
          color: lighten(#777, 1%);
       }
    }
-   .ng-table th.filter .input-filter {
-      height: auto;
-      min-height: 2.5rem;
-      padding: 0.4rem;
-   }
-   .ng-table th.sortable .sort-indicator {
-      display: block;
-   }
-   .ng-table-counts.btn-group .btn+.btn {
-      border-left: 0.1rem solid #b9b9b9;
+   .ng-table {
+      .input-filter, .filter-select {
+         height: 2.9rem;
+         padding: 0.4rem 0.4rem 0.4rem 0.6rem;
+      }
+      th.sortable .sort-indicator {
+         display: block;
+      }
+      .ng-table-counts.btn-group .btn+.btn {
+         border-left: 0.1rem solid #b9b9b9;
+      }
    }
 }
 
@@ -154,7 +155,7 @@ ul[uib-dropdown-menu] > li:last-of-type > a:hover {
    .form-jumbotron-header {
       margin-bottom: 1.5rem;
    }
-   button.btn {
+   & > button.btn, .form-jumbotron-header > button.btn {
       padding: 0.3rem 0.7rem;
       border: 0;
       user-select: none;

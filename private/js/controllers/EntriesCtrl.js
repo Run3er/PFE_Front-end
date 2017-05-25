@@ -184,6 +184,10 @@ angular.module('ProjMngmnt')
                             key: viewData.table.generatedFields[j].key,
                             name: viewData.table.generatedFields[j].columnName
                         });
+                        var type = viewData.table.generatedFields[j].type;
+                        if (type !== void(0)) {
+                            _columnMaps[position].type = type;
+                        }
                     }
 
                     // Add to each row
@@ -297,7 +301,7 @@ angular.module('ProjMngmnt')
                         },
                         // TODO: filtering & sorting work on static data, but not with the getData ..fix
                         // dataset: rows,
-                        counts: [ 1, 2 ]
+                        counts: [ 15, 40 ]
                     });
                     // rows = $scope.tableParams.settings().dataset;
 

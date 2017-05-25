@@ -25,6 +25,18 @@
                         <label class="control-label col-sm-2" for="{{formField.identifier}}">{{formField.label}}:</label>
                         <div class="col-sm-10" ng-if="formField.choices === undefined">
                             <input id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'input'" ng-focus="formFocusElt(formField.identifier)" ng-click="formFocusElt(formField.identifier)" ng-model="formEntry[formField.identifier]">
+                            <div class="input-group" ng-if="formField.type == 'percentage'">
+                                <input id="{{formField.identifier}}" class="form-control" type="number" min="0" max="100" placeholder=" {{formField.placeholder}}" required ng-focus="formFocusElt(formField.identifier)" ng-click="formFocusElt(formField.identifier)" ng-model="formEntry[formField.identifier]">
+                                <span class="input-group-addon">%</span>
+                            </div>
+                            <div class="input-group" ng-if="formField.type == 'currency'">
+                                <input id="{{formField.identifier}}" class="form-control" type="number" min="0" placeholder=" {{formField.placeholder}}" required ng-focus="formFocusElt(formField.identifier)" ng-click="formFocusElt(formField.identifier)" ng-model="formEntry[formField.identifier]">
+                                <span class="input-group-addon">TND</span>
+                            </div>
+                            <div class="input-group" ng-if="formField.type == 'charge'">
+                                <input id="{{formField.identifier}}" class="form-control" type="number" min="0" placeholder=" {{formField.placeholder}}" required ng-focus="formFocusElt(formField.identifier)" ng-click="formFocusElt(formField.identifier)" ng-model="formEntry[formField.identifier]">
+                                <span class="input-group-addon">H/ J</span>
+                            </div>
                             <textarea id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'textarea'"  ng-focus="formFocusElt(formField.identifier)" ng-model="formEntry[formField.identifier]"></textarea>
                             <div class="{{datePopups.formFocusedElt === formField.identifier ? '' : 'date-input-blurred'}}">
                                 <input id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'date'" uib-datepicker-popup="{{datePopups.format}}"  is-open="datePopups.formFocusedElt" datepicker-options="datePopups.dateOptions" alt-input-formats="datePopups.altInputFormats" show-button-bar="false" ng-focus="formFocusElt(formField.identifier); datePopups.popups[formField.identifier].opened = true" ng-model-options="{ timezone: 'UTC' }" ng-model="formEntry[formField.identifier]" ng-init="datePopups.popups[formField.identifier] = { opened: false }">
@@ -37,12 +49,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-primary" type="submit" ng-disabled="!formSubmitEnabled">Mettre à jour</button>
+                        <button class="btn btn-default" type="reset" ng-click="formCancel()" ng-disabled="!formSubmitEnabled">Annuler</button>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
 
     <div class="table-responsive" ng-if="mode === MODES.view">
         <table class="main-table table table-striped table-hover">
+            <colgroup>
+                <col width="30%" />
+                <col width="70%" />
+            </colgroup>
             <tr ng-repeat="columnMap in tableEntries.columnMaps track by $index">
                 <th>
                     <span>{{tableEntries.columnMaps[$index].name}}</span>
@@ -52,9 +74,11 @@
                         <!--apply different filters to data view-type-->
                         <span ng-if="!columnMap.type">{{tableEntries.details[columnMap.key]}}</span>
                         <span ng-if="columnMap.type === 'nbWithLiteral'">{{tableEntries.details[columnMap.key].slice(4)}} ({{tableEntries.details[columnMap.key][0]}})</span>
-                        <span ng-if="columnMap.type === 'percentage'">{{tableEntries.details[columnMap.key]*100 | number:0}}%</span>
+                        <span ng-if="columnMap.type === 'percentage'">{{tableEntries.details[columnMap.key]}}%</span>
                         <span ng-if="columnMap.type === 'days'">{{tableEntries.details[columnMap.key] ? tableEntries.details[columnMap.key] + 'j' : ''}}</span>
                         <span ng-if="columnMap.type === 'date'">{{tableEntries.details[columnMap.key] | date: 'dd/MM/yyyy'}}</span>
+                        <span ng-if="columnMap.type === 'currency'">{{tableEntries.details[columnMap.key]}} TND</span>
+                        <span ng-if="columnMap.type === 'charge'">{{tableEntries.details[columnMap.key]}} H/ J</span>
                     </span>
                     <a ng-href="{{'./' + columnMap.link}}"
                        ng-if="columnMap.link">{{tableEntries.details[columnMap.key]}}</a>

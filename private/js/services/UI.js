@@ -37,7 +37,8 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "advancement",
-                            name: "Avancement"
+                            name: "Avancement",
+                            type: "percentage"
                         },
                         {
                             key: "supervisor",
@@ -77,8 +78,9 @@ angular.module('ProjMngmnt')
                             columnName: "Retard",
                             // extract values from current entry
                             formula: function (entry) {
-                                // return probability * impact
-                                return entry["closurePlannedDate"] - entry["creationDate"];
+                                // closurePlannedDate - today's date
+                                var difference = new Date().getTime() - entry["closurePlannedDate"];
+                                return difference < 0 ? void(0) : Math.floor(difference / 1000 / (3600 * 24));
                             }
                         },
                         {
@@ -144,7 +146,7 @@ angular.module('ProjMngmnt')
                             identifier: "advancement",
                             label: "Avancement",
                             placeholder: "Entrer l'avancement",
-                            type: 'input'
+                            type: 'percentage'
                         },
                         {
                             identifier: "supervisor",
@@ -179,13 +181,6 @@ angular.module('ProjMngmnt')
                             label: "Date de clôture planifiée",
                             placeholder: "Spécifier la date de clôture planifiée",
                             type: 'date'
-                        },
-                        {
-                            identifier: "delay",
-                            label: "Retard",
-                            //default: 0,
-                            placeholder: "Saisir le retard",
-                            type: 'input'
                         },
                         {
                             identifier: "closureDate",
@@ -321,6 +316,12 @@ angular.module('ProjMngmnt')
                             type: 'input'
                         },
                         {
+                            identifier: "cause",
+                            label: "Cause",
+                            placeholder: "Saisir la cause",
+                            type: 'textarea'
+                        },
+                        {
                             identifier: "probability",
                             label: "Probabilité",
                             placeholder: "Sélectionner la probabilité",
@@ -341,18 +342,6 @@ angular.module('ProjMngmnt')
                                 { identifier: 4, value: "4 - Élevé"},
                                 { identifier: 5, value: "5 - Extrême"}
                             ]
-                        },
-                        {
-                            identifier: "cause",
-                            label: "Cause",
-                            placeholder: "Saisir la cause",
-                            type: 'input'
-                        },
-                        {
-                            identifier: "actionPlan",
-                            label: "Plan d'action",
-                            placeholder: "Saisir le plan d'action",
-                            type: 'textarea'
                         },
                         {
                             identifier: "status",
@@ -382,10 +371,10 @@ angular.module('ProjMngmnt')
                             ]
                         },
                         {
-                            identifier: "decision",
-                            label: "Décision",
-                            placeholder: "Saisir la décision",
-                            type: 'input'
+                            identifier: "actionPlan",
+                            label: "Plan d'action",
+                            placeholder: "Saisir le plan d'action",
+                            type: 'textarea'
                         },
                         {
                             identifier: "detectionDate",
@@ -404,6 +393,12 @@ angular.module('ProjMngmnt')
                             label: "Date de clôture",
                             placeholder: "Spécifier la date de clôture",
                             type: 'date'
+                        },
+                        {
+                            identifier: "decision",
+                            label: "Décision",
+                            placeholder: "Saisir la décision",
+                            type: 'input'
                         },
                         {
                             identifier: "comment",
@@ -762,11 +757,12 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "charge",
-                            name: "Charge"
+                            name: "Charge (H/J)"
                         },
                         {
                             key: "estimationDate",
-                            name: "Date d'estimation"
+                            name: "Date d'estimation",
+                            type: "date"
                         }
                     ]
                 },
@@ -783,7 +779,7 @@ angular.module('ProjMngmnt')
                             identifier: "charge",
                             label: "Charge",
                             placeholder: "Saisir la charge",
-                            type: 'input'
+                            type: 'charge'
                         },
                         {
                             identifier: "estimationDate",
@@ -909,7 +905,7 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "status",
-                            name: "statut"
+                            name: "Statut"
                         }
                     ]
                 },
@@ -939,7 +935,11 @@ angular.module('ProjMngmnt')
                             identifier: "status",
                             label: "Statut",
                             placeholder: "Saisir un statut",
-                            type: 'input'
+                            choices: [
+                                { identifier: "PLANNED", value: "Plannifiée"},
+                                { identifier: "CANCELLED", value: "Annulée"},
+                                { identifier: "CLOSED", value: "Clôturée"}
+                            ]
                         }
                     ]
                 }
@@ -1004,15 +1004,18 @@ angular.module('ProjMngmnt')
                         {
                             key: "budgetInitial",
                             // link: '#',
-                            name: "Budget initial"
+                            name: "Budget initial",
+                            type: "currency"
                         },
                         {
                             key: "budgetConsumed",
-                            name: "Budget consommé"
+                            name: "Budget consommé",
+                            type: "currency"
                         },
                         {
                             key: "budgetToConsume",
-                            name: "Estimation du budget qui reste à consommer"
+                            name: "Estimation du budget qui reste à consommer",
+                            type: "currency"
                         }
                     ],
                     generatedFields: [
@@ -1021,6 +1024,7 @@ angular.module('ProjMngmnt')
                             position: 3,
                             key: "budgetTotalPrevision",
                             columnName: "Budget total prévisionnel",
+                            type: "currency",
                             // extract values from current entry
                             formula: function (entry) {
                                 // return budgetConsumed and budgetToConsume sum
@@ -1037,19 +1041,19 @@ angular.module('ProjMngmnt')
                             identifier: "budgetInitial",
                             label: "Budget initial",
                             placeholder: "Entrer le montant du budget initial",
-                            type: "input"
+                            type: "currency"
                         },
                         {
                             identifier: "budgetConsumed",
                             label: "Budget consommé",
                             placeholder: "Entrer le montant du budget consommé",
-                            type: "input"
+                            type: "currency"
                         },
                         {
                             identifier: "budgetToConsume",
                             label: "Estimation du budget qui reste à consommer",
                             placeholder: "Entrer le montant du budget qui reste à consommer",
-                            type: "input"
+                            type: "currency"
                         }
                     ]
                 }
@@ -1069,7 +1073,8 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "advancement",
-                            name: "Avancement"
+                            name: "Avancement",
+                            type: "percentage"
                         },
                         {
                             key: "mainContact",
@@ -1089,19 +1094,23 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "budgetInitial",
-                            name: "Budget initial"
+                            name: "Budget initial",
+                            type: "currency"
                         },
                         {
                             key: "chargePrevision",
-                            name: "Charge prévisionnelle"
+                            name: "Charge prévisionnelle",
+                            type: "charge"
                         },
                         {
                             key: "startDate",
-                            name: "Date début"
+                            name: "Date début",
+                            type: "date"
                         },
                         {
                             key: "endDate",
-                            name: "Date fin"
+                            name: "Date fin",
+                            type: "date"
                         },
                         {
                             key: "hypotheses_constraints",
@@ -1139,7 +1148,7 @@ angular.module('ProjMngmnt')
                             identifier: "advancement",
                             label: "Avancement",
                             placeholder: "Entrer l'avancement",
-                            type: "input"
+                            type: "percentage"
                         },
                         {
                             identifier: "mainContact",
@@ -1169,13 +1178,13 @@ angular.module('ProjMngmnt')
                             identifier: "budgetInitial",
                             label: "Budget initial",
                             placeholder: "Entrer le budget initial",
-                            type: "input"
+                            type: "currency"
                         },
                         {
                             identifier: "chargePrevision",
                             label: "Charge prévisionnelle",
                             placeholder: "Entrer la charge prévisionnelle",
-                            type: "input"
+                            type: "charge"
                         },
                         {
                             identifier: "startDate",
@@ -1245,19 +1254,21 @@ angular.module('ProjMngmnt')
                     },
                     {
                         key: "budgetInitial",
-                        name: "Budget initial"
+                        name: "Budget initial (TND)"
                     },
                     {
                         key: "chargePrevision",
-                        name: "Charge prévisionnelle"
+                        name: "Charge prévisionnelle (H/J)"
                     },
                     {
                         key: "startDate",
-                        name: "Date début"
+                        name: "Date début",
+                        type: "date"
                     },
                     {
                         key: "endDate",
-                        name: "Date fin"
+                        name: "Date fin",
+                        type: "date"
                     },
                     {
                         key: "hypotheses_constraints",
@@ -1309,13 +1320,13 @@ angular.module('ProjMngmnt')
                         identifier: "budgetInitial",
                         label: "Budget initial",
                         placeholder: "Entrer le budget initial",
-                        type: "input"
+                        type: "currency"
                     },
                     {
                         identifier: "chargePrevision",
                         label: "Charge prévisionnelle",
                         placeholder: "Entrer la charge prévisionnelle",
-                        type: "input"
+                        type: "charge"
                     },
                     {
                         identifier: "startDate",
