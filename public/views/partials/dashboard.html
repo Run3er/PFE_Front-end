@@ -1,81 +1,120 @@
-<div id="measure-chart-indicators-col" class="col-md-8 col-xlg-9">	
-    <div id="firstRow" class="col-xlg-8">
-        <div class="col-xs-12 col-smr-lv1-4 col-sm-4">
+<div id="measure-chart-indicators-col" class="col-md-8">
+    <div id="firstRow" class="">
+        <div class="col-xs-12 col-smr-lv1-4 col-sm-2">
             <div class="panel panel-default panel-indicator">
-              <h3 class="indicator-title">Statut <span>Projet</span></h3>
-              <div class="panel-body">
-                  <div id="status-global" class="status-{{data.status}}"></div>
-              </div>
+                <h3 class="indicator-title">Statut</h3>
+                <div class="panel-body">
+                    <div id="status-global" class="status-{{data.status}}"></div>
+                </div>
             </div>
         </div>
-        <div class="col-xs-12 col-smr-lv1-4 col-sm-4">
+        <div class="col-xs-12 col-smr-lv1-4 col-sm-5">
             <div class="panel panel-default panel-indicator">
-              <h3 class="indicator-title">Budget <span>Consommé</span></h3>
-              <div class="panel-body">
-                  <span class="indicator-measure">{{data.budgetConsumed}}%</span>
-                  <span class="text-muted indicator-measure-minor">
-                  <!-- <div></div> -->
-                   <br/></span>
-              </div>
+                <h3 class="indicator-title">Budget</h3>
+                <div class="panel-body">
+                    <div class="mirror-indicators">
+                        <div class="col-xs-6">
+                            <h4 class="mirror-indicator-title">Consommé</h4>
+                            <div class="mirror-indicator-measure indicator-hue-neutral" ng-if="data.budgetConsumed !== null && data.budgetConsumed < 1000">
+                                <span class="indicator-measure">{{data.budgetConsumed}}</span>
+                                <span class="indicator-measure-percentage">%</span>
+                            </div>
+                            <div class="mirror-indicator-measure indicator-hue-neutral" ng-if="!(data.budgetConsumed !== null && data.budgetConsumed < 1000)">
+                                <span class="indicator-measure">&infin;</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <h4 class="mirror-indicator-title">Écart Prévu</h4>
+                            <div class="mirror-indicator-measure indicator-hue-{{data.budgetPrevisionGap < 0 ? 'good' : data.budgetPrevisionGap > 0 ? 'bad' : 'neutral'}}" ng-if="data.budgetPrevisionGap !== null && data.budgetPrevisionGap < 1000">
+                                <span class="indicator-measure">{{data.budgetPrevisionGap < 0 ? data.budgetPrevisionGap * -1 : data.budgetPrevisionGap}}</span>
+                                <span class="indicator-measure-percentage">%</span>
+                            </div>
+                            <div class="mirror-indicator-measure indicator-hue-{{data.budgetPrevisionGap >= 1000 ? 'bad' : 'neutral'}}" ng-if="!(data.budgetPrevisionGap !== null && data.budgetPrevisionGap < 1000)">
+                                <span class="indicator-measure">&infin;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-xs-12 col-smr-lv1-4 col-sm-4" id="charge-consumed-indicator">
+        <div class="col-xs-12 col-smr-lv1-4 col-sm-5" id="charge-consumed-indicator">
             <div class="panel panel-default panel-indicator">
-              <h3 class="indicator-title">Charge <span>Consommée</span></h3>
-              <div class="panel-body">
-                  <span class="indicator-measure">{{data.chargeConsumed}}</span>
-                  <span class="text-muted indicator-measure-minor">
-                  <!-- <div></div> -->
-                       <span>H/J</span>
-                       <div>H/J</div>
-                   </span>
-              </div>
+                <h3 class="indicator-title">Charge</h3>
+                <div class="panel-body">
+                    <div class="mirror-indicators">
+                        <div class="col-xs-6">
+                            <h4 class="mirror-indicator-title">Consommée</h4>
+                            <div class="mirror-indicator-measure indicator-hue-neutral" ng-if="data.chargeConsumed !== null && data.chargeConsumed < 1000">
+                                <span class="indicator-measure">{{data.chargeConsumed}}</span>
+                                <span class="indicator-measure-percentage">%</span>
+                                <!--<span class="text-muted indicator-measure-minor">-->
+                                <!--&lt;!&ndash; <div></div> &ndash;&gt;-->
+                                <!--<span>H/J</span>-->
+                                <!--<div>H/J</div>-->
+                                <!--</span>-->
+                            </div>
+                            <div class="mirror-indicator-measure indicator-hue-neutral" ng-if="!(data.chargeConsumed !== null && data.chargeConsumed < 1000)">
+                                <span class="indicator-measure">&infin;</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <h4 class="mirror-indicator-title">Écart Prévu</h4>
+                            <div class="mirror-indicator-measure indicator-hue-{{data.chargePrevisionGap < 0 ? 'good' : data.chargePrevisionGap > 0 ? 'bad' : 'neutral'}}" ng-if="data.chargePrevisionGap !== null && data.chargePrevisionGap < 1000">
+                                <span class="indicator-measure">{{data.chargePrevisionGap < 0 ? data.chargePrevisionGap * -1 : data.chargePrevisionGap}}</span>
+                                <span class="indicator-measure-percentage">%</span>
+                            </div>
+                            <div class="mirror-indicator-measure indicator-hue-{{data.chargePrevisionGap >= 1000 ? 'bad' : 'neutral'}}" ng-if="!(data.chargePrevisionGap !== null && data.chargePrevisionGap < 1000)">
+                                <span class="indicator-measure">&infin;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="advancement-indicators" class="col-xs-12 col-xlg-8 {{data.subAdvancementsEmpty ? 'no-sub-advancements' : ''}}">
+    <div id="advancement-indicators" class="col-xs-12 {{data.subAdvancementsEmpty ? 'no-sub-advancements' : ''}}">
         <div class="panel panel-default panel-indicator">
-          <h3 class="indicator-title">Avancement Global</h3>
-          <div class="panel-body">
-              <div id="advancement-measure" class="col-xs-12 col-sm-4 col-smr-lv2-4 col-xlg-12">
+            <h3 class="indicator-title">Avancement Global</h3>
+            <div class="panel-body">
+                <div id="advancement-measure" class="col-xs-12 col-sm-4 col-smr-lv2-4">
                     <svg></svg>
-              </div>
-              <div id="advancement-chart" class="col-xs-12 col-sm-8 col-smr-lv2-8 col-xlg-12">
+                </div>
+                <div id="advancement-chart" class="col-xs-12 col-sm-8 col-smr-lv2-8">
                     <svg></svg>
-              </div>
-          </div>
-        </div>
-    </div>
-    <div id="piesRow" class="col-xlg-4">
-        <div class="col-xs-12 col-smr-lv3-6 col-sm-6 col-md-6 col-xlg-12">
-            <div class="panel panel-default panel-indicator">
-              <h3 class="indicator-title">Actions en cours</h3>
-              <div class="panel-body">
-                  <div id="actionsChart">
-                    <span class="glyphicon glyphicon-filter" ng-if="!data.actionsEmpty"></span>
-                    <svg></svg>
-                  </div>
-              </div>
+                </div>
             </div>
         </div>
-        <div class="col-xs-12 col-smr-lv3-6 col-sm-6 col-md-6 col-xlg-12">
+    </div>
+    <div id="piesRow" class="">
+        <div class="col-xs-12 col-smr-lv3-6 col-sm-6 col-md-6">
             <div class="panel panel-default panel-indicator">
-              <h3 class="indicator-title">Risques</h3>
-              <div class="panel-body">
-                  <div id="risksChart">
-                    <span class="glyphicon glyphicon-filter" ng-if="!data.risksEmpty"></span>
-                    <svg></svg>
-                  </div>
-              </div>
+                <h3 class="indicator-title">Actions en cours</h3>
+                <div class="panel-body">
+                    <div id="actionsChart">
+                        <span class="glyphicon glyphicon-filter" ng-if="!data.actionsEmpty"></span>
+                        <svg></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-smr-lv3-6 col-sm-6 col-md-6">
+            <div class="panel panel-default panel-indicator">
+                <h3 class="indicator-title">Risques</h3>
+                <div class="panel-body">
+                    <div id="risksChart">
+                        <span class="glyphicon glyphicon-filter" ng-if="!data.risksEmpty"></span>
+                        <svg></svg>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div id="milestones-col" class="col-xs-12 col-sm-12 col-md-4 col-xlg-3">
+<div id="milestones-col" class="col-xs-12 col-sm-12 col-md-4">
     <div class="panel panel-default panel-indicator">
         <h3 class="indicator-title">Prochains Jalons</h3>
-         <div class="panel-body">
+        <div class="panel-body">
             <ul id="timeline" ng-if="data.milestones.length > 0">
                 <li ng-repeat-start="milestone in data.milestones"
                     ng-if="$first || !$first && differentYearDates(data.milestones[$index - 1].dueDate, milestone.dueDate)">
@@ -101,7 +140,7 @@
             <div ng-if="data.milestones.length === 0" class="no-data-text">
                 Aucun
             </div>
-         </div>
+        </div>
     </div>
 </div>
 

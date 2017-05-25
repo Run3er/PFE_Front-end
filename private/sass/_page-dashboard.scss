@@ -12,7 +12,7 @@ $custom-smr-lv2-min-width: 460px;
 $custom-smr-lv2-max-width: $bootstrap-xs-max-width;
 $custom-smr-lv3-min-width: 590px;
 $custom-smr-lv3-max-width: $bootstrap-xs-max-width;
-$custom-xlg-min-width: 1605px;
+//$custom-xlg-min-width: 1605px;
 // -Minor 
 $indicator-title-shorten-min1-width: $custom-smr-lv1-min-width;
 $indicator-title-shorten-max1-width: 650px;
@@ -85,16 +85,16 @@ $font-number-indicator: roboto;
    @include breakpoint-custom("col-smr-lv3-6", 50%);
 }
 
-@media (min-width: $custom-xlg-min-width) {
-   @include breakpoint-custom("col-xlg-2", 16.66666666%);
-   @include breakpoint-custom("col-xlg-3", 25%);
-   @include breakpoint-custom("col-xlg-4", 33.33333333%);
-   @include breakpoint-custom("col-xlg-5", 41.66666666%);
-   @include breakpoint-custom("col-xlg-6", 50%);
-   @include breakpoint-custom("col-xlg-8", 66.66666666%);
-   @include breakpoint-custom("col-xlg-9", 75%);
-   @include breakpoint-custom("col-xlg-12", 100%);
-}
+//@media (min-width: $custom-xlg-min-width) {
+//   @include breakpoint-custom("col-xlg-2", 16.66666666%);
+//   @include breakpoint-custom("col-xlg-3", 25%);
+//   @include breakpoint-custom("col-xlg-4", 33.33333333%);
+//   @include breakpoint-custom("col-xlg-5", 41.66666666%);
+//   @include breakpoint-custom("col-xlg-6", 50%);
+//   @include breakpoint-custom("col-xlg-8", 66.66666666%);
+//   @include breakpoint-custom("col-xlg-9", 75%);
+//   @include breakpoint-custom("col-xlg-12", 100%);
+//}
 
 //* Panel Indicators *//
 .panel.panel-indicator {
@@ -111,8 +111,8 @@ $font-number-indicator: roboto;
 }
 
 .indicator-title {
-   font-size: 1.9rem;
-   margin-top: 1.5rem;
+   font-size: 1.7rem;
+   margin: 0.5rem 0 1.5rem;
    color: #899198;
    @media (max-width: $bootstrap-sm-min-width) {
       font-size: 1.7rem;
@@ -130,6 +130,7 @@ $font-number-indicator: roboto;
    font-weight: 500;
 }
 .no-data-text {
+   margin-top: 2.5rem;
    color: #bbb;
 }
 .nvd3.nv-noData {
@@ -150,7 +151,7 @@ $font-number-indicator: roboto;
          height: 9.5rem;
       }
       .panel-body {
-         margin-top: -0.2rem;
+         margin-top: 0.8rem;
          margin-bottom: 1.5rem;
          @media (max-width: $bootstrap-xs-max-width) {
             margin-top: 0rem;
@@ -163,13 +164,6 @@ $font-number-indicator: roboto;
          }
       }
    }
-   #last-update-indicator, #charge-consumed-indicator {
-      @media (min-width: $indicator-measure-minor-full-line-min-width) and (max-width: $indicator-measure-minor-full-line-max-width) {
-         .panel.panel-indicator .panel-body {
-            margin-top: -0.4rem;
-         }
-      }
-   }
    .indicator-title {
       @media (max-width: $bootstrap-xs-max-width) {
          margin-top: 0.7rem;
@@ -179,13 +173,48 @@ $font-number-indicator: roboto;
          margin-bottom: 0.2rem;
       }
    }
-   .indicator-measure {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      // font-family: $font-number-indicator;
-      font-size: 4.9rem;
-      color: $font-color-dark;
-      @media (max-width: $bootstrap-xs-max-width) {
-         font-size: 4.3rem;
+   .mirror-indicators {
+      margin-top: -1.5rem;
+      .mirror-indicator-title {
+         color: #b0b0b0;
+         font-size: 1.33rem;
+      }
+      .mirror-indicator-measure {
+         margin-top: -1.7rem;
+         .indicator-measure {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            // font-family: $font-number-indicator;
+            font-size: 5.3rem;
+            @media (max-width: $bootstrap-xs-max-width) {
+               font-size: 3.5rem;
+            }
+         }
+         .indicator-measure-percentage {
+            margin-right: -2rem;
+            font-size: 2.6rem;
+         }
+      }
+      .indicator-hue {
+         &-neutral {
+            color: $font-color-dark;
+         }
+         &-good {
+            color: #49914a;
+         }
+         &-bad {
+            color: #a94442;
+         }
+      }
+      & > div:first-of-type {
+         .mirror-indicator-measure:first-of-type:after {
+            content: "";
+            position: absolute;
+            display: block;
+            top: 1.6rem;
+            right: 0;
+            height: 6rem;
+            border-right: 2px solid #e5e5e5;
+         }
       }
    }
    #status-global {
@@ -204,13 +233,13 @@ $font-number-indicator: roboto;
       }
       &.status {
          &-GREEN {
-            background-color: #64CF6F;
+            background-color: $dot-color-green;
          }
          &-ORANGE {
-            background-color: #d47e19;
+            background-color: $dot-color-orange;
          }
          &-RED {
-            background-color: #dc5050;
+            background-color: $dot-color-red;
          }
       }
 
@@ -242,9 +271,9 @@ $font-number-indicator: roboto;
       @media (max-width: $advancement-indicators-stacked-max-width) {
          height: 34.6rem;
       }
-      @media (min-width: $custom-xlg-min-width) {
-         height: 41.6rem;
-      }
+      //@media (min-width: $custom-xlg-min-width) {
+      //   height: 41.6rem;
+      //}
       .panel-body {
          margin-bottom: 0;
          @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos1-max-width) {
@@ -281,9 +310,9 @@ $font-number-indicator: roboto;
       @media (min-width: $advancement-indicators-abreast-pos1-min-width) and (max-width: $advancement-indicators-abreast-pos2-max-width) {
          margin-top: -2.4rem;
       }
-      @media (min-width: $custom-xlg-min-width) {
-         margin-top: -1.0rem;
-      }
+      //@media (min-width: $custom-xlg-min-width) {
+      //   margin-top: -1.0rem;
+      //}
       svg {
          width: 19.0rem;
          height: 19.0rem;
@@ -322,9 +351,6 @@ $font-number-indicator: roboto;
          @media (min-width: $custom-smr-lv2-min-width) and (max-width: $custom-smr-lv2-max-width) {
             margin-top: -0.8rem;
          }
-         @media (min-width: $custom-xlg-min-width) {
-            /*margin-top: px;*/
-         }
       }
       .nvd3 .nv-axis {
          pointer-events: auto;
@@ -343,15 +369,15 @@ $font-number-indicator: roboto;
 //*=============== Pies' Row ===============*/
 #piesRow {
    padding: 0;
-   @media(min-width: $custom-xlg-min-width) {
-      margin-top: #{- ($firstRow-xlg-height + $firstRow-xlg-margin-bottom)};
-   }
+   //@media(min-width: $custom-xlg-min-width) {
+   //   margin-top: #{- ($firstRow-xlg-height + $firstRow-xlg-margin-bottom)};
+   //}
    .panel.panel-indicator .panel-body {
       height: 12.6rem;
       position: relative;
-      @media(min-width: $custom-xlg-min-width) {
-         height: 19.9rem;
-      }
+      //@media(min-width: $custom-xlg-min-width) {
+      //   height: 19.9rem;
+      //}
       & > div {
          position: absolute;
          top: 50%;
@@ -364,9 +390,9 @@ $font-number-indicator: roboto;
       bottom: 0.9rem;
       width: 28.0rem;
       height: 17.0rem;
-      @media(min-width: $custom-xlg-min-width) {
-         height: 21rem;
-      }
+      //@media(min-width: $custom-xlg-min-width) {
+      //   height: 21rem;
+      //}
    }
    .glyphicon.glyphicon-filter {
       position: absolute;
@@ -389,9 +415,9 @@ $font-number-indicator: roboto;
          font-family: $font-number-indicator;
          font-size: 1.9rem;
          fill: rgb(60, 60, 60) !important;
-         @media (min-width: $custom-xlg-min-width) {
-            font-size: 2.3rem;
-         }
+         //@media (min-width: $custom-xlg-min-width) {
+         //   font-size: 2.3rem;
+         //}
       }
       .nv-legend-text {
          font-size: 100%;
@@ -418,10 +444,10 @@ $font-number-indicator: roboto;
          height: #{35.5rem + ($firstRow-xlg-height + $firstRow-xlg-margin-bottom)};
          max-height: unset;
       }
-      @media (min-width: $custom-xlg-min-width) {
-         height: 48.5rem;
-         max-height: unset;
-      }
+      //@media (min-width: $custom-xlg-min-width) {
+      //   height: 48.5rem;
+      //   max-height: unset;
+      //}
    }
    ul#timeline {
       display: table;
@@ -457,9 +483,9 @@ $font-number-indicator: roboto;
          }
          &-title {
             color: #444;
-            @media (min-width: $custom-xlg-min-width) {
-               font-size: 2.0rem;
-            }
+            //@media (min-width: $custom-xlg-min-width) {
+            //   font-size: 2.0rem;
+            //}
             & > * {
                margin-top: 0.2rem;
                margin-left: 1.4rem;
@@ -494,9 +520,9 @@ $font-number-indicator: roboto;
             border-radius: 50%;
             background-color: $timeline-dots-light-color;
             transition: background-color 200ms linear;
-            @media (min-width: $custom-xlg-min-width) {
-               top: #{$timeline-dot-top-offset + 0.2rem};
-            }
+            //@media (min-width: $custom-xlg-min-width) {
+            //   top: #{$timeline-dot-top-offset + 0.2rem};
+            //}
          }
       }
       // Dynamic decoration
