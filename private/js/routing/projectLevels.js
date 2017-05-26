@@ -124,22 +124,36 @@ angular.module("ProjMngmnt")
                         }
                     };
                 },
-                getActionsConfig: function () {
+                getEntriesWithIndicatorsConfig: function (entryType) {
+                    // Global view
                     var views = {
                         "": {
-                            templateUrl: CommonConstants.PARTIALS_DIR + "/actions.html"
+                            templateUrl: CommonConstants.PARTIALS_DIR + "/" + entryType + "s.html"
                         }
                     };
-                    views["topIndicators@" + projectLevelSingleName + "." + "actions"] = {
-                        templateUrl: CommonConstants.PARTIALS_DIR + "/actions-top-indicators.html",
-                        controller: function($scope){
-                            console.log("indicTop")
+                    // Indicators view
+                    var controllerPrefix = entryType.slice(0, 1).toUpperCase() + entryType.slice(1) + "s";
+                    views["indicators@" + projectLevelSingleName + "." + entryType + "s"] = {
+                        templateUrl: CommonConstants.PARTIALS_DIR + "/" + entryType + "s-indicators.html",
+                        controller: controllerPrefix + "IndicatorsCtrl",
+                        resolve: {
+                            entrySpecifics: function () {
+                                projectLevelPageSpecifics.type = entryType;
+                                // Just undefine, complete deletion not needed
+                                projectLevelPageSpecifics.menuUrl = void(0);
+                                // projectLevelPageSpecifics.urlPrefix; set in parent state
+
+                                return projectLevelPageSpecifics;
+                            }
                         }
                     };
-                    views["entries@" + projectLevelSingleName + "." + "actions"] =
-                        projectLevelRouting.getEntryConfig("action");
+                    // Entries table-form view
+                    var entriesConfig = projectLevelRouting.getEntryConfig(entryType);
+                    entriesConfig.url = void(0);
+                    views["entries@" + projectLevelSingleName + "." + entryType + "s"] = entriesConfig;
+
                     return {
-                        url: "/actions",
+                        url: "/" + entryType + "s",
                         views: views
                     }
                 },
@@ -191,12 +205,14 @@ angular.module("ProjMngmnt")
                 .state(CommonConstants.PROJECT_LEVELS[i] + ".planning", projectLevelStatesConfig.planningConfig)
                 .state(CommonConstants.PROJECT_LEVELS[i] + ".budget", projectLevelStatesConfig.budgetConfig)
 
-                .state(CommonConstants.PROJECT_LEVELS[i] + ".actions", projectLevelStatesConfig.getActionsConfig())
+                .state(CommonConstants.PROJECT_LEVELS[i] + ".actions", projectLevelStatesConfig.getEntriesWithIndicatorsConfig("action"))
+                .state(CommonConstants.PROJECT_LEVELS[i] + ".risks", projectLevelStatesConfig.getEntriesWithIndicatorsConfig("risk"))
 
                 .state(CommonConstants.PROJECT_LEVELS[i] + ".default", projectLevelStatesConfig.defaultConfig);
 
             var projectLevelArtifacts = CommonConstants.PROJECT_LEVEL_ARTIFACTS;
             projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].splice(projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].indexOf("action"), 1);
+            projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].splice(projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].indexOf("risk"), 1);
             for (var j = 0; j < projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].length; j++) {
                 $stateProvider.state(CommonConstants.PROJECT_LEVELS[i] + "." + projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]][j] + "s",
                     projectLevelStatesConfig.getEntryConfig(projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]][j]));

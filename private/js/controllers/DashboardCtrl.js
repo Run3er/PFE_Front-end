@@ -1,6 +1,7 @@
 
 angular.module('ProjMngmnt')
     .controller('DashboardCtrl', function ($scope, $state, $filter, CommonConstants, UI, Sidebar, DB, projectLevelSpecifics) {
+        var DASHBOARD_URI_SUFFIX = "?projection=dashboard";
 
         // Globals
 
@@ -242,7 +243,7 @@ angular.module('ProjMngmnt')
             uri = urlParts[urlParts.length - 4] + "/" + urlParts[urlParts.length - 3] + "/" +
                 urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
         }
-        DB.getDashboard(uri)
+        DB.getByUri(uri + DASHBOARD_URI_SUFFIX)
             .then(function (dashboardData) {
                 dashboardInit(dashboardData);
             },

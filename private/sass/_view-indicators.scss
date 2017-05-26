@@ -1,0 +1,71 @@
+// 
+//	Indicators measures & stats styling
+//
+//
+$breakpoint-indicators-full-width: 1550px;
+
+/*=============== Indicators ===============*/
+//* Miscellaneous *//
+.view-indicators {
+   .indicator-measure {
+      margin-top: 2rem;
+      //@media (min-width: $breakpoint-indicators-full-width) {
+         .indicator-block+.indicator-block:after {
+            content: "";
+            position: absolute;
+            top: 2rem;
+            left: 0;
+            height: 9rem;
+            border-left: 2px solid #dee2e5;
+         }
+      //}
+      .indicator-value {
+         font-size: 6.7rem;
+      }
+      .indicator-label {
+         font-size: 1.7rem;
+      }
+      .indicator-hue {
+         &-neutral {
+            color: $font-color-dark;
+         }
+         &-good {
+            color: #568656;
+         }
+         &-bad {
+            color: #d0403b;
+         }
+         &-muted {
+            color: #777777;
+         }
+      }
+   }
+   #actionsChart {
+      height: 17rem;
+      margin-top: -2rem;
+      svg {
+         width: 30rem;
+      }
+   }
+   .panel-indicator {
+      @media (min-width: $breakpoint-indicators-full-width) {
+         height: 16rem;
+      }
+   }
+   .nvd3.nv-pie path {
+         stroke-width: 0;
+   }
+   .nv-pieLabels text {
+      transform: translate(0, 0.8rem);
+      font-family: $font-number-indicator;
+      font-size: 1.6rem;
+      fill: rgb(60, 60, 60) !important;
+      //@media (min-width: $custom-xlg-min-width) {
+      //   font-size: 2.3rem;
+      //}
+   }
+   .nv-legend-text {
+      font-size: 100%;
+      fill: rgb(65, 65, 65);
+   }
+}
