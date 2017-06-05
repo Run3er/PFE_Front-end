@@ -957,6 +957,10 @@ angular.module('ProjMngmnt')
                             name: "Nom"
                         },
                         {
+                            key: "type",
+                            name: "Type"
+                        },
+                        {
                             key: "login",
                             name: "Login"
                         }
@@ -976,6 +980,16 @@ angular.module('ProjMngmnt')
                             label: "Nom",
                             placeholder: "Saisir le nom",
                             type: 'input'
+                        },
+                        {
+                            identifier: "type",
+                            label: "Type de compte",
+                            placeholder: "Sélectionner le type de compte",
+                            choices: [
+                                { identifier: "Dirigeant", value: "RED"},
+                                { identifier: "Chef de projet", value: "ORANGE"},
+                                { identifier: "Administrateur", value: "VERT"}
+                            ]
                         },
                         {
                             identifier: "login",
