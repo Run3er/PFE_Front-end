@@ -121,17 +121,17 @@ angular.module('ProjMngmnt')
                     },
                     {
                         value: statsData.actionsOngoingLateCount,
-                        label: "Actions en cours en retard",
+                        label: "En cours en retard",
                         hue: "bad"
                     },
                     {
                         value: statsData.actionsOngoingInTimeCount,
-                        label: "Actions dans les temps",
+                        label: "Dans les temps",
                         hue: "good"
                     },
                     {
                         value: statsData.actionsStandbyCount,
-                        label: "Actions en standby",
+                        label: "En standby",
                         hue: "muted"
                     }
                 ];

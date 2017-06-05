@@ -65,8 +65,10 @@ angular.module('ProjMngmnt')
             return {
                 getAll: function () {
                     // Fetch data from DB
+                    console.log(serverAddress + "/" + uriPrefix + entriesUriName)
                     return $http.get(serverAddress + "/" + uriPrefix + entriesUriName)
                         .then(function (response) {
+                            console.log(response)
                             var entries = response.data._embedded[entriesUriName];
 
                             // Format data to desired simple array format
@@ -83,7 +85,9 @@ angular.module('ProjMngmnt')
                         });
                 },
                 add: function (entry) {
+                    console.log(serverAddress + "/" + uriPrefix + entriesUriName)
                     var postBody = uriPrefix.length === 0 ? entry : [ entry ];
+                    console.log(postBody)
 
                     return $http.post(serverAddress + "/" + uriPrefix + entriesUriName, postBody)
                         .then(function (response) {
@@ -102,6 +106,8 @@ angular.module('ProjMngmnt')
                         });
                 },
                 update: function (entry) {
+                    console.log(serverAddress + "/" + entriesUriName + "/" + entry.id)
+                    console.log(entry)
                     if (entry && entry.id) {
                         return $http.patch(serverAddress + "/" + entriesUriName + "/" + entry.id, entry)
                             .then(function (updatedEntry) {
@@ -114,6 +120,8 @@ angular.module('ProjMngmnt')
                     return $q.reject();
                 },
                 delete: function (entryId) {
+                    console.log(serverAddress + "/" + uriPrefix + entriesUriName + "/" + entryId)
+                    console.log(entryId)
 
                     return $http.delete(serverAddress + "/" + uriPrefix + entriesUriName + "/" + entryId)
                         .then(function () {

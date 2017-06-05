@@ -206,13 +206,13 @@ angular.module("ProjMngmnt")
                 .state(CommonConstants.PROJECT_LEVELS[i] + ".budget", projectLevelStatesConfig.budgetConfig)
 
                 .state(CommonConstants.PROJECT_LEVELS[i] + ".actions", projectLevelStatesConfig.getEntriesWithIndicatorsConfig("action"))
-                .state(CommonConstants.PROJECT_LEVELS[i] + ".risks", projectLevelStatesConfig.getEntriesWithIndicatorsConfig("risk"))
+                // .state(CommonConstants.PROJECT_LEVELS[i] + ".risks", projectLevelStatesConfig.getEntriesWithIndicatorsConfig("risk"))
 
                 .state(CommonConstants.PROJECT_LEVELS[i] + ".default", projectLevelStatesConfig.defaultConfig);
 
             var projectLevelArtifacts = CommonConstants.PROJECT_LEVEL_ARTIFACTS;
             projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].splice(projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].indexOf("action"), 1);
-            projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].splice(projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].indexOf("risk"), 1);
+            // projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].splice(projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].indexOf("risk"), 1);
             for (var j = 0; j < projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]].length; j++) {
                 $stateProvider.state(CommonConstants.PROJECT_LEVELS[i] + "." + projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]][j] + "s",
                     projectLevelStatesConfig.getEntryConfig(projectLevelArtifacts[CommonConstants.PROJECT_LEVELS[i]][j]));

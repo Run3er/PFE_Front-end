@@ -15,21 +15,21 @@
                   <div class="mirror-indicators">
                       <div class="col-xs-6">
                           <h4 class="mirror-indicator-title">Consommé</h4>
-                          <div class="mirror-indicator-measure indicator-measure-neutral" ng-if="data.budgetConsumed !== null && data.budgetConsumed < 1000">
+                          <div class="mirror-indicator-measure indicator-hue-neutral" ng-if="data.budgetConsumed !== null && data.budgetConsumed < 1000">
                               <span class="indicator-measure">{{data.budgetConsumed}}</span>
                               <span class="indicator-measure-percentage">%</span>
                           </div>
-                          <div class="mirror-indicator-measure indicator-measure-neutral" ng-if="!(data.budgetConsumed !== null && data.budgetConsumed < 1000)">
+                          <div class="mirror-indicator-measure indicator-hue-neutral" ng-if="!(data.budgetConsumed !== null && data.budgetConsumed < 1000)">
                               <span class="indicator-measure">&infin;</span>
                           </div>
                       </div>
                       <div class="col-xs-6">
                           <h4 class="mirror-indicator-title">Écart Prévu</h4>
-                          <div class="mirror-indicator-measure indicator-measure-{{data.budgetPrevisionGap < 0 ? 'good' : data.budgetPrevisionGap > 0 ? 'bad' : 'neutral'}}" ng-if="data.budgetPrevisionGap !== null && data.budgetPrevisionGap < 1000">
+                          <div class="mirror-indicator-measure indicator-hue-{{data.budgetPrevisionGap < 0 ? 'good' : data.budgetPrevisionGap > 0 ? 'bad' : 'neutral'}}" ng-if="data.budgetPrevisionGap !== null && data.budgetPrevisionGap < 1000">
                               <span class="indicator-measure">{{data.budgetPrevisionGap < 0 ? data.budgetPrevisionGap * -1 : data.budgetPrevisionGap}}</span>
                               <span class="indicator-measure-percentage">%</span>
                           </div>
-                          <div class="mirror-indicator-measure indicator-measure-{{data.budgetPrevisionGap >= 1000 ? 'bad' : 'neutral'}}" ng-if="!(data.budgetPrevisionGap !== null && data.budgetPrevisionGap < 1000)">
+                          <div class="mirror-indicator-measure indicator-hue-{{data.budgetPrevisionGap >= 1000 ? 'bad' : 'neutral'}}" ng-if="!(data.budgetPrevisionGap !== null && data.budgetPrevisionGap < 1000)">
                               <span class="indicator-measure">&infin;</span>
                           </div>
                       </div>
@@ -44,7 +44,7 @@
                     <div class="mirror-indicators">
                         <div class="col-xs-6">
                             <h4 class="mirror-indicator-title">Consommée</h4>
-                            <div class="mirror-indicator-measure indicator-measure-neutral" ng-if="data.chargeConsumed !== null && data.chargeConsumed < 1000">
+                            <div class="mirror-indicator-measure indicator-hue-neutral" ng-if="data.chargeConsumed !== null && data.chargeConsumed < 1000">
                                 <span class="indicator-measure">{{data.chargeConsumed}}</span>
                                 <span class="indicator-measure-percentage">%</span>
                                 <!--<span class="text-muted indicator-measure-minor">-->
@@ -53,17 +53,17 @@
                                 <!--<div>H/J</div>-->
                                 <!--</span>-->
                             </div>
-                            <div class="mirror-indicator-measure indicator-measure-neutral" ng-if="!(data.chargeConsumed !== null && data.chargeConsumed < 1000)">
+                            <div class="mirror-indicator-measure indicator-hue-neutral" ng-if="!(data.chargeConsumed !== null && data.chargeConsumed < 1000)">
                                 <span class="indicator-measure">&infin;</span>
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <h4 class="mirror-indicator-title">Écart Prévu</h4>
-                            <div class="mirror-indicator-measure indicator-measure-{{data.chargePrevisionGap < 0 ? 'good' : data.chargePrevisionGap > 0 ? 'bad' : 'neutral'}}" ng-if="data.chargePrevisionGap !== null && data.chargePrevisionGap < 1000">
+                            <div class="mirror-indicator-measure indicator-hue-{{data.chargePrevisionGap < 0 ? 'good' : data.chargePrevisionGap > 0 ? 'bad' : 'neutral'}}" ng-if="data.chargePrevisionGap !== null && data.chargePrevisionGap < 1000">
                                 <span class="indicator-measure">{{data.chargePrevisionGap < 0 ? data.chargePrevisionGap * -1 : data.chargePrevisionGap}}</span>
                                 <span class="indicator-measure-percentage">%</span>
                             </div>
-                            <div class="mirror-indicator-measure indicator-measure-{{data.chargePrevisionGap >= 1000 ? 'bad' : 'neutral'}}" ng-if="!(data.chargePrevisionGap !== null && data.chargePrevisionGap < 1000)">
+                            <div class="mirror-indicator-measure indicator-hue-{{data.chargePrevisionGap >= 1000 ? 'bad' : 'neutral'}}" ng-if="!(data.chargePrevisionGap !== null && data.chargePrevisionGap < 1000)">
                                 <span class="indicator-measure">&infin;</span>
                             </div>
                         </div>

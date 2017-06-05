@@ -75,6 +75,7 @@
                         <span ng-if="!columnMap.type">{{tableEntries.details[columnMap.key]}}</span>
                         <span ng-if="columnMap.type === 'nbWithLiteral'">{{tableEntries.details[columnMap.key].slice(4)}} ({{tableEntries.details[columnMap.key][0]}})</span>
                         <span ng-if="columnMap.type === 'percentage'">{{tableEntries.details[columnMap.key]}}%</span>
+                        <span ng-if="col.type === 'coloredDot'"><span class="fa fa-circle" style="color: {{row[col.key] === 'GREEN' ? 'green' : ''}}"></span></span>
                         <span ng-if="columnMap.type === 'days'">{{tableEntries.details[columnMap.key] ? tableEntries.details[columnMap.key] + 'j' : ''}}</span>
                         <span ng-if="columnMap.type === 'date'">{{tableEntries.details[columnMap.key] | date: 'dd/MM/yyyy'}}</span>
                         <span ng-if="columnMap.type === 'currency'">{{tableEntries.details[columnMap.key]}} TND</span>

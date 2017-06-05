@@ -950,15 +950,35 @@ angular.module('ProjMngmnt')
                         // Ordered key-values
                         {
                             key: "firstName",
-                            name: "Prénom"
-                        },
-                        {
-                            key: "lastName",
                             name: "Nom"
                         },
                         {
+                            key: "code",
+                            name: "Code client"
+                        },
+                        {
+                            key: "lastName",
+                            name: "Email"
+                        },
+                        {
                             key: "login",
-                            name: "Login"
+                            name: "Nums° Téléphone"
+                        },
+                        {
+                            key: "login2",
+                            name: "Nums° Fax"
+                        },
+                        {
+                            key: "login3",
+                            name: "Contact principal"
+                        },
+                        {
+                            key: "logsin",
+                            name: "Email contact principal"
+                        },
+                        {
+                            key: "logidn",
+                            name: "Nums° Téléphone contact principal"
                         }
                     ]
                 },
@@ -967,27 +987,45 @@ angular.module('ProjMngmnt')
                     fields: [
                         {
                             identifier: "firstName",
-                            label: "Prénom",
-                            placeholder: "Saisir le prénom",
-                            type: 'input'
-                        },
-                        {
-                            identifier: "lastName",
                             label: "Nom",
                             placeholder: "Saisir le nom",
                             type: 'input'
                         },
                         {
+                            identifier: "lastName",
+                            label: "Email",
+                            placeholder: "Saisir l'email",
+                            type: 'input'
+                        },
+                        {
                             identifier: "login",
-                            label: "Login",
-                            placeholder: "Saisir le login",
+                            label: "Numéros de téléphone",
+                            placeholder: "Saisir un numéro de téléphone par ligne",
+                            type: 'textarea'
+                        },
+                        {
+                            identifier: "password",
+                            label: "Numéros de Fax",
+                            placeholder: "Saisir un numéro de Fax par ligne",
+                            type: 'textarea'
+                        },
+                        {
+                            identifier: "password",
+                            label: "Contact principal",
+                            placeholder: "Saisir le nom du contact princpal",
                             type: 'input'
                         },
                         {
                             identifier: "password",
-                            label: "Mot de passe",
-                            placeholder: "Saisir le mot de passe",
-                            type: 'input'
+                            label: "Numéros de téléphone",
+                            placeholder: "Saisir un numéro de téléphone par ligne",
+                            type: 'textarea'
+                        },
+                        {
+                            identifier: "password",
+                            label: "Numéros de Fax",
+                            placeholder: "Saisir un numéro de Fax par ligne",
+                            type: 'textarea'
                         }
                     ]
                 }
@@ -1137,6 +1175,7 @@ angular.module('ProjMngmnt')
                             identifier: "status",
                             label: "Statut",
                             placeholder: "Sélectionner le statut",
+                            type: "coloredDot",
                             choices: [
                                 { identifier: "GREEN", value: "VERT"},
                                 { identifier: "ORANGE", value: "ORANGE"},

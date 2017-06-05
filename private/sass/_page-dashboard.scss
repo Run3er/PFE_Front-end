@@ -172,29 +172,27 @@ $firstRow-xlg-margin-bottom: 2.5rem;
       }
    }
    .mirror-indicators {
-      margin-top: -1.4rem;
+      margin-top: -1.5rem;
       .mirror-indicator-title {
          color: #b0b0b0;
-         font-size: 1.53rem;
+         font-size: 1.33rem;
       }
       .mirror-indicator-measure {
-         margin-top: -1rem;
+         margin-top: -1.7rem;
          .indicator-measure {
-            margin-top: 1rem;
-            font-size: 4rem;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            // font-family: $font-number-indicator;
+            font-size: 5.3rem;
+            @media (max-width: $bootstrap-xs-max-width) {
+               font-size: 3.5rem;
+            }
          }
          .indicator-measure-percentage {
             margin-right: -2rem;
             font-size: 2.6rem;
          }
       }
-      .indicator-measure {
-         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-         // font-family: $font-number-indicator;
-         font-size: 4rem;
-         @media (max-width: $bootstrap-xs-max-width) {
-            font-size: 3.5rem;
-         }
+      .indicator-hue {
          &-neutral {
             color: $font-color-dark;
          }

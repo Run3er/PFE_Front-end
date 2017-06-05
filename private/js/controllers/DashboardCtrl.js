@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .controller('DashboardCtrl', function ($scope, $state, $filter, CommonConstants, UI, Sidebar, DB, projectLevelSpecifics) {
+    .controller('DashboardCtrl', function ($scope, $state, $filter, CommonConstants, UI, DB, projectLevelSpecifics) {
         var DASHBOARD_URI_SUFFIX = "?projection=dashboard";
 
         // Globals
@@ -108,7 +108,7 @@ angular.module('ProjMngmnt')
                     "value": advancementRatioValue
                 },
                 {
-                    "value": 1 - advancementRatioValue
+                    "value": 100 - advancementRatioValue
                 }
             ];
 
@@ -123,7 +123,7 @@ angular.module('ProjMngmnt')
                     .growOnHover(false)
                     .color([advancementRatio_color, advancementRatio_bgColor]);
 
-                advancementRatioChartHolder.chart.title(advancementRatioValue * 100+"%")
+                advancementRatioChartHolder.chart.title(advancementRatioValue +"%")
                     .tooltip.enabled(false);
 
                 d3.select("#advancement-measure svg")
@@ -171,7 +171,7 @@ angular.module('ProjMngmnt')
                 dashboardData[projectLevelSingleName + "sAdvancement"].forEach(function (subProjectLevelAdvancement) {
                     subAdvancementsData[0].values.push({
                         label: subProjectLevelAdvancement.name,
-                        value: subProjectLevelAdvancement.advancement
+                        value: subProjectLevelAdvancement.advancement / 100
                     });
                 });
             }
