@@ -43,8 +43,12 @@
                             </div>
                         </div>
                         <div class="col-sm-10" ng-if="formField.choices !== undefined">
-                            <select id="{{formField.identifier}}" class="form-control" required ng-focus="formFocusElt(formField.identifier)" ng-options="choice.identifier as choice.value for choice in formField.choices" ng-model="formEntry[formField.identifier]">
+                            <select id="{{formField.identifier}}" class="form-control" ng-if="formField.type === void(0)" required ng-focus="formFocusElt(formField.identifier)" ng-options="choice.identifier as choice.value for choice in formField.choices" ng-model="formEntry[formField.identifier]">
                                 <option class="hidden" value=""  disabled="disabled" selected="selected">{{formField.placeholder}}</option>
+                            </select>
+                            <select id="{{formField.identifier}}" class="form-control select-dot dot-{{formEntry[formField.identifier]}}" ng-if="formField.type === 'coloredDot'" required ng-focus="formFocusElt(formField.identifier)" ng-model="formEntry[formField.identifier]">
+                                <option class="hidden" value=""  disabled="disabled" selected="selected">{{formField.placeholder}}</option>
+                                <option class="dot-{{choice.value}}" ng-repeat="choice in formField.choices" value="{{choice.value}}" label="●"></option>
                             </select>
                         </div>
                     </div>
@@ -75,8 +79,10 @@
                         <span ng-if="!columnMap.type">{{tableEntries.details[columnMap.key]}}</span>
                         <span ng-if="columnMap.type === 'nbWithLiteral'">{{tableEntries.details[columnMap.key].slice(4)}} ({{tableEntries.details[columnMap.key][0]}})</span>
                         <span ng-if="columnMap.type === 'percentage'">{{tableEntries.details[columnMap.key]}}%</span>
+                        <span ng-if="columnMap.type === 'coloredDot'" class="fa fa-circle dot-{{tableEntries.details[columnMap.key]}}"></span>
                         <span ng-if="columnMap.type === 'days'">{{tableEntries.details[columnMap.key] ? tableEntries.details[columnMap.key] + 'j' : ''}}</span>
                         <span ng-if="columnMap.type === 'date'">{{tableEntries.details[columnMap.key] | date: 'dd/MM/yyyy'}}</span>
+                        <span ng-if="columnMap.type === 'textarea'" class="linefed">{{tableEntries.details[columnMap.key]}}</span>
                         <span ng-if="columnMap.type === 'currency'">{{tableEntries.details[columnMap.key]}} TND</span>
                         <span ng-if="columnMap.type === 'charge'">{{tableEntries.details[columnMap.key]}} H/ J</span>
                     </span>

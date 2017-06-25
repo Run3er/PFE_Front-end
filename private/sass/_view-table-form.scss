@@ -58,6 +58,21 @@
       display: none;
    }
 
+   .linefed {
+      white-space: pre-wrap;
+   }
+   .dot {
+      &-GREEN {
+         color: $dot-color-green;
+      }
+      &-ORANGE {
+         color: $dot-color-orange;
+      }
+      &-RED {
+         color: $dot-color-red;
+      }
+   }
+
    table.main-table {
       color: $font-color-dark;
       thead > tr > th:first-child, tbody > tr > td:first-child {
@@ -154,6 +169,12 @@ ul[uib-dropdown-menu] > li:last-of-type > a:hover {
    }
    .form-jumbotron-header {
       margin-bottom: 1.5rem;
+   }
+   .form-jumbotron-body {
+      .select-dot {
+         font-size: 21px;
+         padding: 0 0 0 8px;
+      }
    }
    & > button.btn, .form-jumbotron-header > button.btn {
       padding: 0.3rem 0.7rem;

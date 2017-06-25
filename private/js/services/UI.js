@@ -66,7 +66,8 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "comment",
-                            name: "Commentaire"
+                            name: "Commentaire",
+                            type: "textarea"
                         }
                     ],
                     generatedFields: [
@@ -218,11 +219,13 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "cause",
-                            name: "Cause"
+                            name: "Cause",
+                            type: "textarea"
                         },
                         {
                             key: "actionPlan",
-                            name: "Plan d'action"
+                            name: "Plan d'action",
+                            type: "textarea"
                         },
                         {
                             key: "status",
@@ -253,7 +256,8 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "comment",
-                            name: "Commentaire"
+                            name: "Commentaire",
+                            type: "textarea"
                         }
                     ],
                     generatedFields: [
@@ -512,7 +516,8 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "decisions",
-                            name: "Décisions"
+                            name: "Décisions",
+                            type: "textarea"
                         }
                     ]
                 },
@@ -1069,7 +1074,8 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "status",
-                            name: "Statut"
+                            name: "Statut",
+                            type: "coloredDot"
                         },
                         {
                             key: "advancement",
@@ -1082,7 +1088,8 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "sponsors",
-                            name: "Sponsors"
+                            name: "Sponsors",
+                            type: "textarea"
                         },
                         {
                             key: "finalClient",
@@ -1114,15 +1121,18 @@ angular.module('ProjMngmnt')
                         },
                         {
                             key: "hypotheses_constraints",
-                            name: "Hypothèses & Contraintes"
+                            name: "Hypothèses & Contraintes",
+                            type: "textarea"
                         },
                         {
                             key: "history_decisions",
-                            name: "Historique & Décisions"
+                            name: "Historique & Décisions",
+                            type: "textarea"
                         },
                         {
                             key: "comment",
-                            name: "Commentaire"
+                            name: "Commentaire",
+                            type: "textarea"
                         }
                     ]
                 },
@@ -1138,10 +1148,11 @@ angular.module('ProjMngmnt')
                             identifier: "status",
                             label: "Statut",
                             placeholder: "Sélectionner le statut",
+                            type: "coloredDot",
                             choices: [
-                                { identifier: "GREEN", value: "VERT"},
+                                { identifier: "GREEN", value: "GREEN"},
                                 { identifier: "ORANGE", value: "ORANGE"},
-                                { identifier: "RED", value: "ROUGE"}
+                                { identifier: "RED", value: "RED"}
                             ]
                         },
                         {
@@ -1242,7 +1253,8 @@ angular.module('ProjMngmnt')
                     },
                     {
                         key: "sponsors",
-                        name: "Sponsors"
+                        name: "Sponsors",
+                        type: "textarea"
                     },
                     {
                         key: "finalClient",
@@ -1272,15 +1284,18 @@ angular.module('ProjMngmnt')
                     },
                     {
                         key: "hypotheses_constraints",
-                        name: "Hypothèses & Contraintes"
+                        name: "Hypothèses & Contraintes",
+                        type: "textarea"
                     },
                     {
                         key: "history_decisions",
-                        name: "Historique & Décisions"
+                        name: "Historique & Décisions",
+                        type: "textarea"
                     },
                     {
                         key: "comment",
-                        name: "Commentaire"
+                        name: "Commentaire",
+                        type: "textarea"
                     }
                 ]
             },

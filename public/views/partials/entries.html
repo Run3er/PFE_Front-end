@@ -78,6 +78,7 @@
                         <span ng-if="col.type === 'percentage'">{{row[col.key]}}%</span>
                         <span ng-if="col.type === 'days'">{{row[col.key] ? row[col.key] + ' j' : ''}}</span>
                         <span ng-if="col.type === 'date'">{{row[col.key] | date: 'dd/MM/yyyy'}}</span>
+                        <span ng-if="columnMap.type === 'textarea'" class="linefed">{{tableEntries.details[columnMap.key]}}</span>
                     </span>
                     <a ng-href="{{'./' + tableEntries.linkable.urlPrefix + '/' + row.id}}"
                        ng-if="col.key === tableEntries.linkable.columnKey">{{row[col.key]}}</a>
