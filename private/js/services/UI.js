@@ -1008,7 +1008,6 @@ angular.module('ProjMngmnt')
                         // Ordered key-values
                         {
                             key: "budgetInitial",
-                            // link: '#',
                             name: "Budget initial",
                             type: "currency"
                         },
@@ -1063,15 +1062,11 @@ angular.module('ProjMngmnt')
                     ]
                 }
             },
-            charter: {
+            advancementState: {
                 table: {
                     // tenantDataKey_columnName mapping
                     columnMaps: [
                         // Ordered key-values
-                        {
-                            key: "name",
-                            name: "Nom"
-                        },
                         {
                             key: "status",
                             name: "Statut",
@@ -1081,6 +1076,50 @@ angular.module('ProjMngmnt')
                             key: "advancement",
                             name: "Avancement",
                             type: "percentage"
+                        },
+                        {
+                            key: "chargeConsumed",
+                            name: "Charge consommé",
+                            type: "charge"
+                        }
+                    ]
+                },
+                form: {
+                    fields: [
+                        {
+                            identifier: "status",
+                            label: "Statut",
+                            placeholder: "Sélectionner le statut",
+                            type: "coloredDot",
+                            choices: [
+                                { identifier: "GREEN", value: "GREEN"},
+                                { identifier: "ORANGE", value: "ORANGE"},
+                                { identifier: "RED", value: "RED"}
+                            ]
+                        },
+                        {
+                            identifier: "advancement",
+                            label: "Avancement",
+                            placeholder: "Entrer l'avancement",
+                            type: "percentage"
+                        },
+                        {
+                            identifier: "chargeConsumed",
+                            label: "Charge consommée",
+                            placeholder: "Entrer la charge prévisionnelle",
+                            type: "charge"
+                        }
+                    ]
+                }
+            },
+            charter: {
+                table: {
+                    // tenantDataKey_columnName mapping
+                    columnMaps: [
+                        // Ordered key-values
+                        {
+                            key: "name",
+                            name: "Nom"
                         },
                         {
                             key: "mainContact",
@@ -1143,23 +1182,6 @@ angular.module('ProjMngmnt')
                             label: "Nom",
                             placeholder: "Sasir le nom",
                             type: "input"
-                        },
-                        {
-                            identifier: "status",
-                            label: "Statut",
-                            placeholder: "Sélectionner le statut",
-                            type: "coloredDot",
-                            choices: [
-                                { identifier: "GREEN", value: "GREEN"},
-                                { identifier: "ORANGE", value: "ORANGE"},
-                                { identifier: "RED", value: "RED"}
-                            ]
-                        },
-                        {
-                            identifier: "advancement",
-                            label: "Avancement",
-                            placeholder: "Entrer l'avancement",
-                            type: "percentage"
                         },
                         {
                             identifier: "mainContact",
@@ -1404,11 +1426,6 @@ angular.module('ProjMngmnt')
                     title: "Portefeuille"
                 },
                 {
-                    url: "dashboard",
-                    iconClass: "fa fa-dashboard",
-                    title: "Tableau de bord"
-                },
-                {
                     url: CommonConstants.EMPTY_HREF_URL,
                     iconClass: "fa fa-tasks",
                     title: "Administration",
@@ -1416,14 +1433,6 @@ angular.module('ProjMngmnt')
                         {
                             url: "." + CommonConstants.GENERAL_BASE_URL + "/resources",
                             title: "Ressources"
-                        },
-                        {
-                            url: "." + CommonConstants.GENERAL_BASE_URL + "/providers",
-                            title: "Fournisseurs"
-                        },
-                        {
-                            url: "." + CommonConstants.GENERAL_BASE_URL + "/partners",
-                            title: "Partenaires"
                         },
                         {
                             url: "." + CommonConstants.GENERAL_BASE_URL + "/users",
@@ -1439,7 +1448,7 @@ angular.module('ProjMngmnt')
                 {
                     url: "charter",
                     iconClass: "fa fa-thumb-tack",
-                    title: "Charte du projet"
+                    title: "Charte"
                 },
                 {
                     url: "javascript:void(0)",
@@ -1449,6 +1458,10 @@ angular.module('ProjMngmnt')
                         {
                             url: "./" + projectLevelProperties.urlPrefix + "/dashboard",
                             title: "Tableau de bord"
+                        },
+                        {
+                            url: "./" + projectLevelProperties.urlPrefix + "/advancementState",
+                            title: "État d'avancement"
                         },
                         {
                             url: "./" + projectLevelProperties.urlPrefix + "/actions",
@@ -1461,19 +1474,9 @@ angular.module('ProjMngmnt')
                     ]
                 },
                 {
-                    url: "javascript:void(0)",
+                    url: "milestones",
                     iconClass: "fa fa-calendar-times-o",
-                    title: "Planification",
-                    entries: [
-                        {
-                            url: "./" + projectLevelProperties.urlPrefix + "/milestones",
-                            title: "Principaux jalons"
-                        },
-                        {
-                            url: "./" + projectLevelProperties.urlPrefix + "/planning",
-                            title: "Planning"
-                        }
-                    ]
+                    title: "Principaux jalons"
                 },
                 {
                     url: "javascript:void(0)",

@@ -157,35 +157,19 @@ angular.module("ProjMngmnt")
                         views: views
                     }
                 },
-                charterConfig: {
-                    url: "/charter",
-                    templateUrl: CommonConstants.PARTIALS_DIR + "/details.html",
-                    controller: "DetailsCtrl",
-                    resolve: {
-                        entrySpecifics: function () {
-                            projectLevelPageSpecifics.type = "charter";
-                            projectLevelPageSpecifics.menuUrl = "charter";
-                            // projectLevelPageSpecifics.urlPrefix; set in parent state
+                getDetailsConfig: function(entryType) {
+                    return {
+                        url: "/" + entryType,
+                        templateUrl: CommonConstants.PARTIALS_DIR + "/details.html",
+                        controller: "DetailsCtrl",
+                        resolve: {
+                            entrySpecifics: function () {
+                                projectLevelPageSpecifics.type = entryType;
+                                projectLevelPageSpecifics.menuUrl = entryType;
+                                // projectLevelPageSpecifics.urlPrefix; set in parent state
 
-                            return projectLevelPageSpecifics;
-                        }
-                    }
-                },
-                planningConfig: {
-                    url: "/planning",
-                    template: "<p>Diagramme de Gantt.</p>"
-                },
-                budgetConfig: {
-                    url: "/budget",
-                    templateUrl: CommonConstants.PARTIALS_DIR + "/details.html",
-                    controller: "DetailsCtrl",
-                    resolve: {
-                        entrySpecifics: function () {
-                            projectLevelPageSpecifics.type = "budget";
-                            projectLevelPageSpecifics.menuUrl = "budget";
-                            // projectLevelPageSpecifics.urlPrefix; set in parent state
-
-                            return projectLevelPageSpecifics;
+                                return projectLevelPageSpecifics;
+                            }
                         }
                     }
                 }
@@ -201,9 +185,9 @@ angular.module("ProjMngmnt")
             $stateProvider
                 .state(CommonConstants.PROJECT_LEVELS[i], projectLevelStatesConfig.projectLevelConfig)
                 .state(CommonConstants.PROJECT_LEVELS[i] + ".dashboard", projectLevelStatesConfig.getDashboardConfig())
-                .state(CommonConstants.PROJECT_LEVELS[i] + ".charter", projectLevelStatesConfig.charterConfig)
-                .state(CommonConstants.PROJECT_LEVELS[i] + ".planning", projectLevelStatesConfig.planningConfig)
-                .state(CommonConstants.PROJECT_LEVELS[i] + ".budget", projectLevelStatesConfig.budgetConfig)
+                .state(CommonConstants.PROJECT_LEVELS[i] + ".charter", projectLevelStatesConfig.getDetailsConfig("charter"))
+                .state(CommonConstants.PROJECT_LEVELS[i] + ".advancementState", projectLevelStatesConfig.getDetailsConfig("advancementState"))
+                .state(CommonConstants.PROJECT_LEVELS[i] + ".budget", projectLevelStatesConfig.getDetailsConfig("budget"))
 
                 .state(CommonConstants.PROJECT_LEVELS[i] + ".actions", projectLevelStatesConfig.getEntriesWithIndicatorsConfig("action"))
                 // .state(CommonConstants.PROJECT_LEVELS[i] + ".risks", projectLevelStatesConfig.getEntriesWithIndicatorsConfig("risk"))
