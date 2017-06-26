@@ -4,7 +4,7 @@
 angular.module("ProjMngmnt")
     .config(function ($httpProvider) {
 
-        $httpProvider.interceptors.push(function($q, $window, DBConstants, AuthenticationFuncs) {
+        $httpProvider.interceptors.push(function($q, $window, APIConstants, AuthenticationFuncs) {
             return {
                 'response': function(response) {
                     // If host != API host, ignore
@@ -15,7 +15,7 @@ angular.module("ProjMngmnt")
                         var baseAddress = urlParts[0];
                         urlParts = urlParts[1].split("/");
                         baseAddress += "://" + urlParts[0];
-                        if (baseAddress !== DBConstants.SERVER_ADDRESS) {
+                        if (baseAddress !== APIConstants.SERVER_ADDRESS) {
                             return $q.resolve(response);
                         }
                     }

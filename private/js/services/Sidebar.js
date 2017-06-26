@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .service('Sidebar', function (CommonConstants, DB, UI) {
+    .service('Sidebar', function (CommonConstants, API, UI) {
         var sidebarContent = {};
 
         // Get title
@@ -8,7 +8,7 @@ angular.module('ProjMngmnt')
             var urlParts = parentEntryProps.urlPrefix.split("/");
             var uriPrefix = urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
 
-            return DB.getSingleResrcByUri(uriPrefix)
+            return API.getSingleResrcByUri(uriPrefix)
                 .then(function (entry) {
                     return entry.name;
                 });

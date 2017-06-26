@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .controller('ActionsIndicatorsCtrl', function ($scope, $state, UI, DB, entrySpecifics) {
+    .controller('ActionsIndicatorsCtrl', function ($scope, $state, UI, API, entrySpecifics) {
         var STATS_URI_SUFFIX = "/stats";
 
         // Globals
@@ -102,7 +102,7 @@ angular.module('ProjMngmnt')
 
         // Initialize controller behavior
 
-        // Get DB layer data
+        // Get API layer data
         var uri = entrySpecifics.urlPrefix;
         // Adapt to API resource uri nesting limit (1-level)
         var urlParts = uri.split("/");
@@ -110,7 +110,7 @@ angular.module('ProjMngmnt')
             uri = urlParts[urlParts.length - 4] + "/" + urlParts[urlParts.length - 3] + "/" +
                 urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
         }
-        DB.getByUri(uri + "/" + entrySpecifics.type + "s" + STATS_URI_SUFFIX)
+        API.getByUri(uri + "/" + entrySpecifics.type + "s" + STATS_URI_SUFFIX)
             .then(function (statsData) {
                 indicatorsInit(statsData);
                 $scope.indicators = [

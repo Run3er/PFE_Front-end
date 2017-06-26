@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .controller('DashboardCtrl', function ($scope, $state, $filter, CommonConstants, UI, DB, projectLevelSpecifics) {
+    .controller('DashboardCtrl', function ($scope, $state, $filter, CommonConstants, UI, API, projectLevelSpecifics) {
         var DASHBOARD_URI_SUFFIX = "?projection=dashboard";
 
         // Globals
@@ -235,7 +235,7 @@ angular.module('ProjMngmnt')
 
         // Initialize controller behavior
 
-        // Get DB layer data
+        // Get API layer data
         var uri = projectLevelSpecifics.urlPrefix;
         // Adapt to API resource uri nesting limit (1-level)
         var urlParts = uri.split("/");
@@ -243,7 +243,7 @@ angular.module('ProjMngmnt')
             uri = urlParts[urlParts.length - 4] + "/" + urlParts[urlParts.length - 3] + "/" +
                 urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
         }
-        DB.getByUri(uri + DASHBOARD_URI_SUFFIX)
+        API.getByUri(uri + DASHBOARD_URI_SUFFIX)
             .then(function (dashboardData) {
                 dashboardInit(dashboardData);
             },

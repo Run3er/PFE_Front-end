@@ -125,7 +125,7 @@ angular.module('ProjMngmnt')
                 form: {
                     defaultSortingField: "creationDate",
                     fields: [
-                        // labels are taken from DB_getAll().keys
+                        // labels are taken from API_getAll().keys
                         {
                             identifier: "description",
                             label: "Description",
@@ -524,7 +524,7 @@ angular.module('ProjMngmnt')
                 form: {
                     defaultSortingField: "creationDate",
                     fields: [
-                        // labels are taken from DB_getAll().keys
+                        // labels are taken from API_getAll().keys
                         {
                             identifier: "description",
                             label: "Description",
@@ -643,7 +643,7 @@ angular.module('ProjMngmnt')
                 form: {
                     defaultSortingField: "requestDate",
                     fields: [
-                        // labels are taken from DB_getAll().keys
+                        // labels are taken from API_getAll().keys
                         {
                             identifier: "description",
                             label: "Description",
@@ -729,7 +729,7 @@ angular.module('ProjMngmnt')
                 form: {
                     defaultSortingField: "dueDate",
                     fields: [
-                        // labels are taken from DB_getAll().keys
+                        // labels are taken from API_getAll().keys
                         {
                             identifier: "name",
                             label: "Nom",
@@ -917,7 +917,7 @@ angular.module('ProjMngmnt')
                 form: {
                     defaultSortingField: "date",
                     fields: [
-                        // labels are taken from DB_getAll().keys
+                        // labels are taken from API_getAll().keys
                         {
                             identifier: "name",
                             label: "Nom",

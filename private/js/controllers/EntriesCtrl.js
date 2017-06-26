@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .controller('EntriesCtrl', function ($scope, $state, Sidebar, DB, UI, NgTableParams, entrySpecifics) {
+    .controller('EntriesCtrl', function ($scope, $state, Sidebar, API, UI, NgTableParams, entrySpecifics) {
 
         // Functions definition
 
@@ -154,7 +154,7 @@ angular.module('ProjMngmnt')
             // Set local copy of argument
             var arg = angular.copy(argument);
 
-            // Request operation to DB asynchronously
+            // Request operation to API asynchronously
             var resultPromise = entriesDAO[operationType](arg);
             // resultPromise
             // // Update  alert
@@ -229,12 +229,12 @@ angular.module('ProjMngmnt')
                 uriPrefix = urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
             }
         }
-        var entriesDAO = DB.getEntriesDAO({
+        var entriesDAO = API.getEntriesDAO({
             type: entrySpecifics.type,
             uriPrefix: uriPrefix
         });
 
-        // Get DB layer entries data
+        // Get API layer entries data
         var entries;
         request("getAll")
             .then(function (resolveData) {
@@ -345,7 +345,7 @@ angular.module('ProjMngmnt')
                     }
                 }
 
-                DB
+                API
                     .getEntriesDAO({
                         type: formField.asyncChoices.entriesName
                     })

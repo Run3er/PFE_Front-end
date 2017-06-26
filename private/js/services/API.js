@@ -1,13 +1,13 @@
 
 angular.module('ProjMngmnt')
 // Database layer mockup
-    .service('DB', function ($q, $http, DBConstants) {
+    .service('API', function ($q, $http, APIConstants) {
         // API server address
-        var serverAddress = DBConstants.SERVER_ADDRESS;
+        var serverAddress = APIConstants.SERVER_ADDRESS;
 
 
         this.getSingleResrcByUri = function (uri) {
-            // Fetch data from DB
+            // Fetch data from API
             return $http.get(serverAddress + "/" + uri)
                 .then(function successCallback(response) {
                     var entry = response.data;
@@ -25,7 +25,7 @@ angular.module('ProjMngmnt')
         };
 
         this.getByUri = function (uri) {
-            // Fetch data from DB
+            // Fetch data from API
             return $http.get(serverAddress + "/" + uri)
                 .then(function successCallback(response) {
                     // Set to undefined, delete not necessary
@@ -57,14 +57,14 @@ angular.module('ProjMngmnt')
             };
         };
 
-        // DB entries interface object
+        // API entries interface object
         this.getEntriesDAO = function (entryProps) {
             var entriesUriName = entryProps.type + "s";
             var uriPrefix = (entryProps.uriPrefix ? entryProps.uriPrefix + "/" : "");
 
             return {
                 getAll: function () {
-                    // Fetch data from DB
+                    // Fetch data from API
                     return $http.get(serverAddress + "/" + uriPrefix + entriesUriName)
                         .then(function (response) {
                             var entries = response.data._embedded[entriesUriName];

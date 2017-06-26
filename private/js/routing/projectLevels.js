@@ -20,7 +20,7 @@ angular.module("ProjMngmnt")
                 projectLevelConfig: {
                     url: urlParts.join("/"),
                     templateUrl: CommonConstants.PARTIALS_DIR + "/nav-sidebar-header.html",
-                    controller: function (Sidebar, Header, DB, $state, $stateParams) {
+                    controller: function (Sidebar, Header, API, $state, $stateParams) {
                         // Sidebar setup
                         var urlPrefixParts = [];
                         // Header setup
@@ -33,22 +33,22 @@ angular.module("ProjMngmnt")
                             urlPrefixParts.push(CommonConstants.PROJECT_STRING + "s/" + $stateParams[CommonConstants.PROJECT_STRING + "Id"]);
 
                             var projectEntry = { url: urlPrefixParts.join("/") + "/"  };
-                            DB.getSingleResrcByUri(urlPrefixParts[0])
+                            API.getSingleResrcByUri(urlPrefixParts[0])
                                 .then(function (projectLevelEntry) {
                                     projectEntry.title = projectLevelEntry.name;
                                 });
-                            // Get project name by projectId, from DB
+                            // Get project name by projectId, from API
                             entries.push(projectEntry);
                         }
                         if (projectLevelSingleName === CommonConstants.SUB_PROJECT_STRING) {
                             urlPrefixParts.push(CommonConstants.SUB_PROJECT_STRING + "s/" + $stateParams[CommonConstants.SUB_PROJECT_STRING + "Id"]);
 
                             var subProjectEntry = { url: urlPrefixParts.join("/") + "/"  };
-                            DB.getSingleResrcByUri(urlPrefixParts[1])
+                            API.getSingleResrcByUri(urlPrefixParts[1])
                                 .then(function (projectLevelEntry) {
                                     subProjectEntry.title = projectLevelEntry.name;
                                 });
-                            // Get project name by projectId, from DB
+                            // Get project name by projectId, from API
                             entries.push(subProjectEntry);
                         }
                         projectLevelPageSpecifics.urlPrefix = urlPrefixParts.join("/");

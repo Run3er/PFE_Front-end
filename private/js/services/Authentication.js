@@ -1,7 +1,7 @@
 
 angular.module('ProjMngmnt')
-    .service('Authentication', function ($http, $window, $location, $state, AuthenticationFuncs, DBConstants) {
-        var apiAddress = DBConstants.SERVER_ADDRESS;
+    .service('Authentication', function ($http, $window, $location, $state, AuthenticationFuncs, APIConstants) {
+        var apiAddress = APIConstants.SERVER_ADDRESS;
         var tenantPseudo = $location.host().split(".")[0];
         // TODO: remove from production (default tenant for dev. purposes only)
         if ($location.host() === "127.0.0.1" || $location.host() === "localhost") {

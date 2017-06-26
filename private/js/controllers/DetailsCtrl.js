@@ -1,6 +1,6 @@
 
 angular.module('ProjMngmnt')
-    .controller('DetailsCtrl', function ($scope, $state, UI, DB, entrySpecifics) {
+    .controller('DetailsCtrl', function ($scope, $state, UI, API, entrySpecifics) {
 
         // Functions definition
 
@@ -32,7 +32,7 @@ angular.module('ProjMngmnt')
             var entry = angular.copy($scope.formEntry);
 
 
-            // Request operation to DB asynchronously
+            // Request operation to API asynchronously
             entryDAO["update"](entry)
                 .then(function () {
                     $scope.tableEntries.details = angular.copy(entry);
@@ -107,14 +107,14 @@ angular.module('ProjMngmnt')
                 uriPrefix = urlParts[urlParts.length - 2] + "/" + urlParts[urlParts.length - 1];
             }
         }
-        var entryDAO = DB.getEntryDAO({
+        var entryDAO = API.getEntryDAO({
             type: entrySpecifics.type,
             uriPrefix: uriPrefix
         });
 
-        // Get details from DB
+        // Get details from API
         var details;
-        DB.getSingleResrcByUri(uriPrefix + "?projection=" + entrySpecifics.type)
+        API.getSingleResrcByUri(uriPrefix + "?projection=" + entrySpecifics.type)
             .then(function (resolveData) {
                 // Get the requested data
                 details = angular.copy(resolveData);
@@ -160,7 +160,7 @@ angular.module('ProjMngmnt')
         // Fetch async view data, namely multiple choice inputs
         viewData.form.fields.forEach(function (formField) {
             if (formField.asyncChoices !== void(0)) {
-                DB
+                API
                     .getEntriesDAO({
                         type: formField.asyncChoices.entriesName
                     })
