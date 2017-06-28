@@ -70,13 +70,23 @@ angular.module('ProjMngmnt')
                             var entries = response.data._embedded[entriesUriName];
 
                             // Format data to desired simple array format
-                            for (var i = 0; i < entries.length; i++) {
-                                var urlParts = entries[i]._links.self.href.split("/");
-                                entries[i].id = urlParts[urlParts.length - 1];
-                                // Set to undefined, delete not necessary
-                                entries[i]._links = void(0);
+                            if (response.data._embedded.orderedProjectLevels === void(0)) {
+                                for (var i = 0; i < entries.length; i++) {
+                                    var urlParts = entries[i]._links.self.href.split("/");
+                                    entries[i].id = urlParts[urlParts.length - 1];
+                                    // Set to undefined, delete not necessary
+                                    entries[i]._links = void(0);
+                                }
                             }
-
+                            else {
+                                if (entries.length === 0) {
+                                    // null means empty array received, but w/ projectLevels
+                                    return null;
+                                }
+                                for (var i = 0; i < entries.length; i++) {
+                                    entries[i].projectLevel = response.data._embedded.orderedProjectLevels[i];
+                                }
+                            }
                             return entries;
                         }, function (response) {
                             return $q.reject(response);
@@ -113,9 +123,9 @@ angular.module('ProjMngmnt')
                     }
                     return $q.reject();
                 },
-                delete: function (entryId) {
+                delete: function (entry) {
 
-                    return $http.delete(serverAddress + "/" + uriPrefix + entriesUriName + "/" + entryId)
+                    return $http.delete(serverAddress + "/" + uriPrefix + entriesUriName + "/" + entry.id)
                         .then(function () {
                             // Nothing to do here
                         });

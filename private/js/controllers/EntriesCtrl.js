@@ -54,9 +54,9 @@ angular.module('ProjMngmnt')
         // On entry delete
         $scope.delete = function (entryIdx) {
             $scope.tableEntries.rows[entryIdx].onDelete = true;
-            var entryID = entries[entryIdx].id;
+            var entry = entries[entryIdx];
 
-            request("delete", entryID)
+            request("delete", entry)
                 .then(function () {
                     // Deleting by swapping places (& indexes) with last row, avoiding array indexes offsetting alternative
                     if (entryIdx !== $scope.tableEntries.rows.length - 1) {
@@ -239,7 +239,8 @@ angular.module('ProjMngmnt')
         request("getAll")
             .then(function (resolveData) {
                     // Get the requested data
-                    entries = angular.copy(resolveData);
+                    entries = resolveData === null ? [] : angular.copy(resolveData);
+                    var entriesWithProjectLevels = resolveData === null ? true : entries.length > 0 && entries[0].projectLevel !== void(0);
 
                     var rows = angular.copy(entries);
                     var columnMaps = angular.copy(viewData.table.columnMaps);
@@ -294,8 +295,16 @@ angular.module('ProjMngmnt')
                         columnMap.show = true;
                     }
                     columnMaps.splice(0, 0,  { field: "command", title: "", filter: {command: "ng-table/filters/filter-icon.html"}, headerTemplateURL: "header-btn-add.html", show: true });
+                    var initialParams = {};
 
-                    $scope.tableParams = new NgTableParams({}, {
+                    // Add project level (eventual) data
+                    if (rows.length > 0 && rows[0].projectLevel !== void(0)) {
+                        columnMaps.push({ field: "level", sortable: "level", filter: {"level": "text"}, show: true,
+                            title: uriPrefix.split("/")[0] === "subProjects" ? "Chantier" : "Sous-projet / Chantier"});
+                        initialParams = { sorting: {level: "desc"} };
+                    }
+
+                    $scope.tableParams = new NgTableParams(initialParams, {
                         getData: function (params) {
                             return $scope.tableEntries.rows;
                         },
@@ -316,6 +325,32 @@ angular.module('ProjMngmnt')
                             urlPrefix: (entrySpecifics.urlPrefix ? entrySpecifics.urlPrefix + "/" :"") + entrySpecifics.type + "s"
                         }
                     };
+
+                    // Add project level (eventual) view data
+                    if (entriesWithProjectLevels) {
+                        API
+                            .getEntriesDAO({
+                                type: "constructionSite",
+                                uriPrefix: uriPrefix
+                            })
+                            .getAll()
+                            .then(function (entries) {
+                                $scope.formConstructionSitesChoices = [];
+
+                                $scope.formConstructionSitesChoices.push({
+                                    identifier: null,
+                                    value: "-"
+                                });
+                                for (var i = 0; i < entries.length; i++) {
+                                    $scope.formConstructionSitesChoices.push({
+                                        identifier: entries[i].id,
+                                        value: (uriPrefix.split("/")[0] === "subProjects" ? "" :
+                                            entries[i].projectLevel.subProjectName === null ? "- / " : entries[i].projectLevel.subProjectName + " / ")
+                                            + entries[i].name
+                                    });
+                                }
+                            });
+                    }
                 },
                 function (response) {
                     if (response.status === 404) {

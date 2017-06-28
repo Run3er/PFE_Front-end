@@ -35,6 +35,16 @@
                     </div>
                 </div>
             </div>
+            <div ng-if="true">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="constructionSite">Sous-projet / Chantier:</label>
+                    <div class="col-sm-10">
+                        <select id="constructionSite" class="form-control" required ng-focus="formFocusElt('constructionSite')" ng-options="choice.identifier as choice.value for choice in formConstructionSitesChoices" ng-model="formEntry.projectLevel.constructionSiteId">
+                            <option class="hidden" value=""  disabled="disabled" selected="selected">Sélectionner le niveau</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button class="btn btn-primary" type="submit" ng-disabled="!formSubmitEnabled">{{formAction.submitBtnText}}</button>
@@ -71,17 +81,23 @@
                     </div>
                 </td>
                 <td ng-repeat="col in $columns | limitTo:1 - $columns.length track by $index">
+                    <span ng-if="col.field === 'level'">
+                        {{row.projectLevel.subProjectName ? row.projectLevel.subProjectName : ''}}
+                        {{row.projectLevel.subProjectName === null || row.projectLevel.subProjectName === void(0) && !row.projectLevel.constructionSiteName ? '-' : ''}}
+                        {{row.projectLevel.subProjectName !== void(0) && row.projectLevel.constructionSiteName ? ' / ' : ''}}
+                        {{row.projectLevel.constructionSiteName ? row.projectLevel.constructionSiteName : ''}}
+                    </span>
                     <span ng-if="col.key !== tableEntries.linkable.columnKey">
                         <!--apply different filters to data view-type-->
-                        <span ng-if="!col.type">{{row[col.key]}}</span>
+                        <span ng-if="col.type === void(0)">{{row[col.key]}}</span>
                         <span ng-if="col.type === 'nbWithLiteral'">{{row[col.key].slice(4)}} ({{row[col.key][0]}})</span>
                         <span ng-if="col.type === 'percentage'">{{row[col.key]}}%</span>
                         <span ng-if="col.type === 'days'">{{row[col.key] ? row[col.key] + ' j' : ''}}</span>
                         <span ng-if="col.type === 'date'">{{row[col.key] | date: 'dd/MM/yyyy'}}</span>
-                        <span ng-if="columnMap.type === 'textarea'" class="linefed">{{tableEntries.details[columnMap.key]}}</span>
+                        <span ng-if="col.type === 'textarea'" class="linefed">{{tableEntries.details[columnMap.key]}}</span>
                     </span>
                     <a ng-href="{{'./' + tableEntries.linkable.urlPrefix + '/' + row.id}}"
-                       ng-if="col.key === tableEntries.linkable.columnKey">{{row[col.key]}}</a>
+                    ng-if="col.key === tableEntries.linkable.columnKey">{{row[col.key]}}</a>
                 </td>
             </tr>
         </table>
