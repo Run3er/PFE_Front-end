@@ -37,12 +37,30 @@ angular.module('ProjMngmnt')
             // Cancel current entry editing
             if (editingEntryIdx !== void(0)) {
                 $scope.tableEntries.rows[editingEntryIdx].onEdit = false;
-                $scope.tableParams.settings().dataset[editingEntryIdx].onEdit = false;
+                if ($scope.tableParams.settings().dataset) {
+                    $scope.tableParams.settings().dataset[editingEntryIdx].onEdit = false;
+                }
             }
             editingEntryIdx = entryIdx;
             $scope.tableEntries.rows[entryIdx].onEdit = true;
             $scope.formAction.submitBtnText = "Mettre à jour";
             $scope.formEntry = angular.copy(entries[entryIdx]);
+            if ($scope.entriesWithProjectLevels) {
+                // Assign exact correspondent choice object (since object comparison doesn't work well with select inputs)
+                $scope.formProjectLevelChoices.forEach(function (formProjectLevelChoice) {
+                    var projectLevelChoice = formProjectLevelChoice.identifier;
+                    var keys = Object.keys(formProjectLevelChoice.identifier);
+                    keys.splice(keys.indexOf("$$hashKey"), 1);
+                    keys.forEach(function (key) {
+                        if (formProjectLevelChoice.identifier[key] !== entries[entryIdx].projectLevel[key]) {
+                            projectLevelChoice = void(0);
+                        }
+                    });
+                    if (projectLevelChoice !== void(0)) {
+                        $scope.formEntry.projectLevelFormInput = projectLevelChoice;
+                    }
+                });
+            }
             $scope.formCollapsed = false;
 
             //collapse form in
@@ -56,7 +74,7 @@ angular.module('ProjMngmnt')
             $scope.tableEntries.rows[entryIdx].onDelete = true;
             var entry = entries[entryIdx];
 
-            request("delete", entry)
+            return request("delete", entry)
                 .then(function () {
                     // Deleting by swapping places (& indexes) with last row, avoiding array indexes offsetting alternative
                     if (entryIdx !== $scope.tableEntries.rows.length - 1) {
@@ -105,6 +123,10 @@ angular.module('ProjMngmnt')
                 .then(function (addedEntryID) {
 // Add entry to raw entries data
                     entry.id = addedEntryID;
+                    if ($scope.entriesWithProjectLevels) {
+                        entry.projectLevel = entry.projectLevelFormInput;
+                        delete entry.projectLevelFormInput;
+                    }
                     entries.push(entry);
 
                     var tableRow = angular.copy(entry);
@@ -129,40 +151,78 @@ angular.module('ProjMngmnt')
             $scope.formSubmitEnabled = false;
             var entry = angular.copy($scope.formEntry);
 
-            request("update", entry)
-                .then(function () {
-                    // Edit entry on raw entries data
-                    entry.id = entries[editingEntryIdx].id;
-                    entries[editingEntryIdx] = entry;
-
-                    // Update view-only-entry auto generated fields
-                    var tableRow = angular.copy(entry);
-                    generateAutoFields([entry], [tableRow]);
-                    tableRow.index = editingEntryIdx;
-                    $scope.tableEntries.rows[editingEntryIdx] = tableRow;
-
-                    // Finish, reset form & table to inactive state
-                    $scope.formCancel();
-                })
-                .finally(function () {
-                    $scope.formSubmitEnabled = true;
+            if ($scope.entriesWithProjectLevels
+                    && (entry.projectLevel.constructionSiteId !== entry.projectLevelFormInput.constructionSiteId
+                    || entry.projectLevel.subProjectId !== entry.projectLevelFormInput.subProjectId)) {
+                var originalDAO = API.getEntriesDAO({
+                    type: entrySpecifics.type,
+                    uriPrefix: entry.projectLevelFormInput.constructionSiteId ?
+                        "constructionSites/" + entry.projectLevelFormInput.constructionSiteId :
+                        "subProjects/" + entry.projectLevelFormInput.subProjectId
                 });
+                // TODO: make transactional on back-end side ! ('replace' operation instead of 'delete' & 'add')
+                $scope.delete(editingEntryIdx).then(function () {
+                    entry.projectLevel = entry.projectLevelFormInput;
+                    delete entry.id;
+                    $scope.formEntry = entry;
+                    add();
+                    return true; // analogous to resolved promise
+                });
+            }
+            else {
+                request("update", entry)
+                    .then(function () {
+                        // Edit entry on raw entries data
+                        entry.id = entries[editingEntryIdx].id;
+                        entries[editingEntryIdx] = entry;
+
+                        // Update view-only-entry auto generated fields
+                        var tableRow = angular.copy(entry);
+                        generateAutoFields([entry], [tableRow]);
+                        tableRow.index = editingEntryIdx;
+                        $scope.tableEntries.rows[editingEntryIdx] = tableRow;
+
+                        // Finish, reset form & table to inactive state
+                        $scope.formCancel();
+                    })
+                    .finally(function () {
+                        $scope.formSubmitEnabled = true;
+                    });
+            }
         };
 
         // Async. request operation
         var request = function (operationType, argument) {
             // Set local copy of argument
             var arg = angular.copy(argument);
+            var resultPromise;
 
-            // Request operation to API asynchronously
-            var resultPromise = entriesDAO[operationType](arg);
-            // resultPromise
-            // // Update  alert
-            //     .catch(function () {
-            //         $scope.formAlert.msg = operationType + " failed. [Try again.]";
-            //         $scope.formAlert.didSucceed = false;
-            //         $scope.formAlert.active = true;
-            //     });
+            if (operationType === "add") {
+                arg.projectLevel = arg.projectLevelFormInput;
+            }
+            // Adjust request body
+            if (operationType !== "getAll" && arg.projectLevel && (arg.projectLevel.constructionSiteId || arg.projectLevel.subProjectId)) {
+                //  API operation asynchronous request
+                var projectLevel = arg.projectLevel.constructionSiteId ?
+                    "constructionSites/" + arg.projectLevel.constructionSiteId :
+                    "subProjects/" + arg.projectLevel.subProjectId;
+                var projectLevelSpecificDAO = API.getEntriesDAO({
+                    type: entrySpecifics.type,
+                    uriPrefix: projectLevel
+                });
+                delete arg.projectLevel;
+                delete arg.projectLevelFormInput;
+                resultPromise = projectLevelSpecificDAO[operationType](arg);
+            }
+            else {
+                // delete if present
+                if (arg !== void(0)) {
+                    delete arg.projectLevel;
+                    delete arg.projectLevelFormInput;
+                }
+                //  API operation asynchronous request
+                resultPromise = entriesDAO[operationType](arg);
+            }
 
             return resultPromise;
         };
@@ -217,6 +277,15 @@ angular.module('ProjMngmnt')
             $scope.formCollapsed = false;
         };
 
+        $scope.generateProjectLevelString = function (subProjectName, constructionSiteName) {
+            var resultString = "";
+            resultString += subProjectName ? subProjectName : "";
+            resultString += subProjectName === null || subProjectName === void(0) && !constructionSiteName ? "-" : "";
+            resultString += subProjectName !== void(0) && constructionSiteName ? " / " : "";
+            resultString += constructionSiteName ? constructionSiteName : "";
+            return resultString;
+        };
+
 
         // Controller init. code, Prepare table entries for display
 
@@ -233,6 +302,7 @@ angular.module('ProjMngmnt')
             type: entrySpecifics.type,
             uriPrefix: uriPrefix
         });
+        $scope.isSubProjectLevel = uriPrefix === void(0) ? false : uriPrefix.split("/")[0] === "subProjects";
 
         // Get API layer entries data
         var entries;
@@ -240,7 +310,7 @@ angular.module('ProjMngmnt')
             .then(function (resolveData) {
                     // Get the requested data
                     entries = resolveData === null ? [] : angular.copy(resolveData);
-                    var entriesWithProjectLevels = resolveData === null ? true : entries.length > 0 && entries[0].projectLevel !== void(0);
+                    $scope.entriesWithProjectLevels = resolveData === null ? true : entries.length > 0 && entries[0].projectLevel !== void(0);
 
                     var rows = angular.copy(entries);
                     var columnMaps = angular.copy(viewData.table.columnMaps);
@@ -298,9 +368,9 @@ angular.module('ProjMngmnt')
                     var initialParams = {};
 
                     // Add project level (eventual) data
-                    if (rows.length > 0 && rows[0].projectLevel !== void(0)) {
+                    if ($scope.entriesWithProjectLevels) {
                         columnMaps.push({ field: "level", sortable: "level", filter: {"level": "text"}, show: true,
-                            title: uriPrefix.split("/")[0] === "subProjects" ? "Chantier" : "Sous-projet / Chantier"});
+                            title: $scope.isSubProjectLevel ? "Chantier" : "Sous-projet / Chantier"});
                         initialParams = { sorting: {level: "desc"} };
                     }
 
@@ -327,29 +397,75 @@ angular.module('ProjMngmnt')
                     };
 
                     // Add project level (eventual) view data
-                    if (entriesWithProjectLevels) {
+                    if ($scope.entriesWithProjectLevels) {
+                        $scope.formProjectLevelChoices = [];
                         API
                             .getEntriesDAO({
                                 type: "constructionSite",
                                 uriPrefix: uriPrefix
                             })
                             .getAll()
-                            .then(function (entries) {
-                                $scope.formConstructionSitesChoices = [];
-
-                                $scope.formConstructionSitesChoices.push({
-                                    identifier: null,
+                            .then(function (constructionSites) {
+                                var identifier;
+                                if ($scope.isSubProjectLevel) {
+                                    identifier = {
+                                        constructionSiteId: null,
+                                        constructionSiteName: null
+                                    };
+                                }
+                                else {
+                                    identifier = {
+                                        subProjectId: null,
+                                        subProjectName: null,
+                                        constructionSiteId: null,
+                                        constructionSiteName: null
+                                    };
+                                }
+                                $scope.formProjectLevelChoices.push({
+                                    identifier: identifier,
                                     value: "-"
                                 });
-                                for (var i = 0; i < entries.length; i++) {
-                                    $scope.formConstructionSitesChoices.push({
-                                        identifier: entries[i].id,
-                                        value: (uriPrefix.split("/")[0] === "subProjects" ? "" :
-                                            entries[i].projectLevel.subProjectName === null ? "- / " : entries[i].projectLevel.subProjectName + " / ")
-                                            + entries[i].name
+                                for (var i = 0; i < constructionSites.length; i++) {
+                                    if ($scope.isSubProjectLevel) {
+                                        identifier = {
+                                            constructionSiteId: constructionSites[i].id,
+                                            constructionSiteName: constructionSites[i].name
+                                        };
+                                    }
+                                    else {
+                                        identifier = {
+                                            subProjectId: constructionSites[i].projectLevel.subProjectId,
+                                            subProjectName: constructionSites[i].projectLevel.subProjectName,
+                                            constructionSiteId: constructionSites[i].id,
+                                            constructionSiteName: constructionSites[i].name
+                                        };
+                                    }
+                                    $scope.formProjectLevelChoices.push({
+                                        identifier: identifier,
+                                        value: $scope.generateProjectLevelString(identifier.subProjectName, identifier.constructionSiteName)
                                     });
                                 }
                             });
+                        if (!$scope.isSubProjectLevel) {
+                            API
+                                .getEntriesDAO({
+                                    type: "subProject",
+                                    uriPrefix: uriPrefix
+                                })
+                                .getAll()
+                                .then(function (subProjects) {
+                                    for (var i = 0; i < subProjects.length; i++) {
+                                        var identifier = {
+                                            subProjectId: subProjects[i].id,
+                                            subProjectName: subProjects[i].name
+                                        };
+                                        $scope.formProjectLevelChoices.push({
+                                            identifier: identifier,
+                                            value: $scope.generateProjectLevelString(identifier.subProjectName, identifier.constructionSiteName)
+                                        });
+                                    }
+                                });
+                        }
                     }
                 },
                 function (response) {

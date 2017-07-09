@@ -35,11 +35,11 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="true">
+            <div ng-if="entriesWithProjectLevels">
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="constructionSite">Sous-projet / Chantier:</label>
+                    <label class="control-label col-sm-2" for="level">{{isSubProjectLevel ? '' : 'Sous-projet /'}} Chantier:</label>
                     <div class="col-sm-10">
-                        <select id="constructionSite" class="form-control" required ng-focus="formFocusElt('constructionSite')" ng-options="choice.identifier as choice.value for choice in formConstructionSitesChoices" ng-model="formEntry.projectLevel.constructionSiteId">
+                        <select id="level" class="form-control" required ng-focus="formFocusElt('level')" ng-options="choice.identifier as choice.value for choice in formProjectLevelChoices" ng-model="formEntry.projectLevelFormInput">
                             <option class="hidden" value=""  disabled="disabled" selected="selected">Sélectionner le niveau</option>
                         </select>
                     </div>
@@ -81,12 +81,7 @@
                     </div>
                 </td>
                 <td ng-repeat="col in $columns | limitTo:1 - $columns.length track by $index">
-                    <span ng-if="col.field === 'level'">
-                        {{row.projectLevel.subProjectName ? row.projectLevel.subProjectName : ''}}
-                        {{row.projectLevel.subProjectName === null || row.projectLevel.subProjectName === void(0) && !row.projectLevel.constructionSiteName ? '-' : ''}}
-                        {{row.projectLevel.subProjectName !== void(0) && row.projectLevel.constructionSiteName ? ' / ' : ''}}
-                        {{row.projectLevel.constructionSiteName ? row.projectLevel.constructionSiteName : ''}}
-                    </span>
+                    <span ng-if="col.field === 'level'">{{generateProjectLevelString(row.projectLevel.subProjectName, row.projectLevel.constructionSiteName)}}</span>
                     <span ng-if="col.key !== tableEntries.linkable.columnKey">
                         <!--apply different filters to data view-type-->
                         <span ng-if="col.type === void(0)">{{row[col.key]}}</span>
