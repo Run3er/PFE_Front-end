@@ -161,8 +161,49 @@ ul[uib-dropdown-menu] > li:last-of-type > a:hover {
    background-color: #fd7e72;
    color: #fff;
 }
+.input-file {
+   width: 0.1px;
+   height: 0.1px;
+   opacity: 0;
+   overflow: hidden;
+   position: absolute;
+   z-index: -1;
+   & + label {
+      width: 100%;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      padding: 0;
+      font-weight: initial;
+      background-color: white;
+      color: $font-color-dark;
+      & > div:first-of-type {
+         display: inline-block;
+         width: calc(100% - 34px);
+         padding: 5px 16px 6px;
+         color: #7d8282;
+      }
+      & > div:last-of-type {
+         display: inline-block;
+         position: relative;
+         top: 0;
+         width: 30px;
+         height: 33px;
+         padding: 8px 8px 9px;
+         border: solid lightgray;
+         border-radius: 0 5px 5px 0;
+         border-width: 0 0 0 1px;
+         background-color: #eee;
+      }
+   //   background-color: $color-primary;
+   //   text-overflow: ellipsis;
+   //   white-space: nowrap;
+   //   cursor: pointer;
+   //   display: inline-block;
+   //   overflow: hidden;
+   }
+}
 
-/* Details page */
+   /* Details page */
 .details-view {
    table.main-table {
       margin-top: 1.5rem;

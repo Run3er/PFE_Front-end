@@ -24,6 +24,20 @@ angular.module('ProjMngmnt')
                 });
         };
 
+        this.getFileByUri = function (uri) {
+            // Fetch data from API
+            return $http.get(serverAddress + "/" + uri)
+                .then(function successCallback(response) {
+                    return {
+                        data: response.data,
+                        name: response.headers('X-File-Name'),
+                        contentType: response.headers('Content-Type')
+                    };
+                }, function (response) {
+                    return $q.reject(response);
+                });
+        };
+
         this.getByUri = function (uri) {
             // Fetch data from API
             return $http.get(serverAddress + "/" + uri)
@@ -92,10 +106,34 @@ angular.module('ProjMngmnt')
                             return $q.reject(response);
                         });
                 },
-                add: function (entry) {
+                add: function (entry, fileKeysArray) {
+                    var config;
+                    if (fileKeysArray.length > 0) {
+                        // TODO: use an alternative to 'FormData' (to support more browsers)
+                        var formData = new FormData();
+                        fileKeysArray.forEach(function (fileKeys) {
+                            formData.set(fileKeys.objectKey, entry[fileKeys.objectKey], entry[fileKeys.nameKey]);
+                            delete entry[fileKeys.objectKey];
+                        });
+                        Object.keys(entry).forEach(function (key) {
+                            formData.set(key, entry[key]);
+                        });
+
+                        // entry = formData;
+                        config = {
+                            headers: {
+                                // Assign content-type as undefined, the
+                                // browser will assign the correct boundary
+                                "Content-Type": undefined
+                            },
+                            // Prevents serializing payload
+                            transformRequest: angular.identity
+                        };
+                        console.log(entry)
+                    }
                     var postBody = uriPrefix.length === 0 ? entry : [ entry ];
 
-                    return $http.post(serverAddress + "/" + uriPrefix + entriesUriName, postBody)
+                    return $http.post(serverAddress + "/" + uriPrefix + entriesUriName, formData, config)
                         .then(function (response) {
                             var appendedEntryId;
 
@@ -111,9 +149,28 @@ angular.module('ProjMngmnt')
                             return appendedEntryId;
                         });
                 },
-                update: function (entry) {
+                update: function (entry, fileNamesArray) {
+                    var headers;
+                    if (fileNamesArray.length > 0) {
+                        // TODO: use an alternative to 'FormData' (to support more browsers)
+                        var formData = new FormData();
+                        Object.keys(fileNamesArray).forEach(function (key) {
+                            if (fileNamesArray.indexOf(key) === -1) {
+                                formData[key] = entry[key];
+                            }
+                        });
+                        fileNamesArray.forEach(function (fileName) {
+                            formData.append(fileName, entry[fileName]);
+                        });
+
+                        entry = formData;
+                        headers = {
+                            "Content-Type": "multipart/form-data"
+                        }
+                    }
+
                     if (entry && entry.id) {
-                        return $http.patch(serverAddress + "/" + entriesUriName + "/" + entry.id, entry)
+                        return $http.patch(serverAddress + "/" + entriesUriName + "/" + entry.id, entry, headers)
                             .then(function (updatedEntry) {
                                 // TODO: correct update failure behavior (failure promise must be triggered)
                                 console.log(updatedEntry);

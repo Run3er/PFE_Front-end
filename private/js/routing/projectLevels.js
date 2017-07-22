@@ -1,5 +1,5 @@
 angular.module("ProjMngmnt")
-    .config(function (CommonConstants, $stateProvider) {
+    .config(function ($stateProvider, CommonConstants) {
 
         // Common project level states, parametrized, config
         function getProjectLevelStatesConfig(projectLevelSingleName) {
@@ -207,4 +207,28 @@ angular.module("ProjMngmnt")
                     projectLevelStatesConfig.getEntryConfig(CommonConstants.SUB_PROJECT_STRING));
             }
         }
+
+        // Document file download by URI
+        var regexUUID = "(?:[a-f]|\\d){8}-(?:[a-f]|\\d){4}-(?:[a-f]|\\d){4}-(?:[a-f]|\\d){4}-(?:[a-f]|\\d){12}";
+        $stateProvider
+            .state("documentDownload", {
+                url: "/{prm0:(?:" + CommonConstants.PROJECT_STRING + "s|" + CommonConstants.SUB_PROJECT_STRING + "s|" + CommonConstants.CONSTRUCTION_SITE_STRING + "s)}/{prm1:" + regexUUID + "}/documents/{prm2:" + regexUUID + "}",
+                controller: function ($location, $window, API) {
+                    // Fetch from actual back-end download URI
+                    API.getFileByUri($location.path()).then(function (file) {
+                        var fileName = file.name;
+                        var blob = new Blob([file.data], { type: file.contentType });
+
+                        if ($window.navigator.msSaveOrOpenBlob) { // For IE:
+                            navigator.msSaveBlob(blob, fileName);
+                        } else { // For other browsers:
+                            var link = document.createElement('a');
+                            link.href = window.URL.createObjectURL(blob);
+                            link.download = fileName;
+                            link.click();
+                            $window.URL.revokeObjectURL(link.href);
+                        }
+                    });
+                }
+            })
     });

@@ -117,9 +117,11 @@ angular.module('ProjMngmnt')
         // Add entry
         var add = function () {
             $scope.formSubmitEnabled = false;
-            var entry = angular.copy($scope.formEntry);
+            //// angular.copy doesnt cope with File objects !
+            // var entry = angular.copy($scope.formEntry);
+            var entry = angular.extend({}, $scope.formEntry);
 
-            request("add", entry)
+            request("add", entry, $scope.fileKeysArray)
                 .then(function (addedEntryID) {
 // Add entry to raw entries data
                     entry.id = addedEntryID;
@@ -192,9 +194,11 @@ angular.module('ProjMngmnt')
         };
 
         // Async. request operation
-        var request = function (operationType, argument) {
+        var request = function (operationType, argument, fileKeysArray) {
             // Set local copy of argument
-            var arg = angular.copy(argument);
+            //// angular.copy doesnt cope with File objects !
+            // var arg = angular.copy(argument);
+            var arg = angular.extend({}, argument);
             var resultPromise;
 
             if (operationType === "add") {
@@ -212,7 +216,7 @@ angular.module('ProjMngmnt')
                 });
                 delete arg.projectLevel;
                 delete arg.projectLevelFormInput;
-                resultPromise = projectLevelSpecificDAO[operationType](arg);
+                resultPromise = projectLevelSpecificDAO[operationType](arg, fileKeysArray);
             }
             else {
                 // delete if present
@@ -221,7 +225,7 @@ angular.module('ProjMngmnt')
                     delete arg.projectLevelFormInput;
                 }
                 //  API operation asynchronous request
-                resultPromise = entriesDAO[operationType](arg);
+                resultPromise = entriesDAO[operationType](arg, fileKeysArray);
             }
 
             return resultPromise;
@@ -530,6 +534,8 @@ angular.module('ProjMngmnt')
 
         // Initialize form
         $scope.formCollapsed = true;
+        $scope.fileKeysArray = [];
+        // $scope.fileFormData = new FormData();
         $scope.formFields = viewData.form.fields;
         $scope.defaultSortingField = viewData.form.defaultSortingField;
         $scope.formEntry = {};

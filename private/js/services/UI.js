@@ -452,6 +452,7 @@ angular.module('ProjMngmnt')
             },
             document: {
                 table: {
+                    columnKeyLinkable: "name",
                     // tenantDataKey_columnName mapping
                     columnMaps: [
                         // Ordered key-values
@@ -469,6 +470,12 @@ angular.module('ProjMngmnt')
                             label: "Nom",
                             placeholder: "Saisir un nom",
                             type: 'input'
+                        },
+                        {
+                            identifier: "file",
+                            label: "Fichier",
+                            placeholder: "Choisir le fichier",
+                            type: "file"
                         }
                     ]
                 }

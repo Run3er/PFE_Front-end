@@ -23,7 +23,15 @@
                             <input id="{{formField.identifier}}" class="form-control" type="number" min="0" placeholder=" {{formField.placeholder}}" required ng-focus="formFocusElt(formField.identifier)" ng-click="formFocusElt(formField.identifier)" ng-model="formEntry[formField.identifier]">
                             <span class="input-group-addon">H/ J</span>
                         </div>
-                        <textarea id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'textarea'"  ng-focus="formFocusElt(formField.identifier)" ng-model="formEntry[formField.identifier]"></textarea>
+                        <div ng-if="formField.type == 'file'">
+                            <input id="{{formField.identifier}}" class="input-file " type="file" name="file" placeholder=" {{formField.placeholder}}" required ng-focus="formFocusElt(formField.identifier)" ng-click="formFocusElt(formField.identifier)" file-model="formEntry[formField.identifier]" ng-init="fileKeysArray.push({objectKey: formField.identifier, nameKey: 'name'})">
+                            <label for="{{formField.identifier}}">
+                            <!--<label for="{{formEntry[formField.identifier] ? formEntry[formField.identifier].name() : formField.identifier}}">-->
+                                <div>{{formField.placeholder}}</div>
+                                <div class="glyphicon glyphicon-file"></div>
+                            </label>
+                        </div>
+                        <textarea id="{{formField.identifier}}" class="form-control" ng-if="formField.type == 'textarea'" type="text" placeholder=" {{formField.placeholder}}" required ng-focus="formFocusElt(formField.identifier)" ng-model="formEntry[formField.identifier]"></textarea>
                         <div class="{{datePopups.formFocusedElt === formField.identifier ? '' : 'date-input-blurred'}}">
                             <input id="{{formField.identifier}}" class="form-control" type="text" placeholder=" {{formField.placeholder}}" required ng-if="formField.type == 'date'" uib-datepicker-popup="{{datePopups.format}}"  is-open="datePopups.formFocusedElt" datepicker-options="datePopups.dateOptions" alt-input-formats="datePopups.altInputFormats" show-button-bar="false" ng-focus="formFocusElt(formField.identifier); datePopups.popups[formField.identifier].opened = true" ng-model-options="{ timezone: 'UTC' }" ng-model="formEntry[formField.identifier]" ng-init="datePopups.popups[formField.identifier] = { opened: false }">
                         </div>
